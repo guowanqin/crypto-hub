@@ -173,6 +173,30 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "filetime",
+    name: { zh: "文件时间", en: "File Time" },
+    intro: {
+      zh: "相机时钟设错、照片传错日期、补打卡差几个小时——照片的时间写在两个地方：文件系统的创建/修改时间，和照片内嵌的 EXIF 时间。这一页的站内工具免费修改照片的 EXIF 拍摄时间、创建时间与修改时间（批量统一设置、整体平移、按张递增），相册排序与打卡补传认的正是它；要直接改电脑里文件的系统时间，同标签还收录了桌面版 NewFileTime。",
+      en: "A photo's date lives in two places: the file system's created/modified timestamps, and the EXIF times embedded in the photo itself. The built-in tool on this page edits a photo's EXIF date-taken, digitized and modified times in bulk — set one time for all, shift everything by an offset, or step photo by photo — which is exactly what album sorting and attendance back-fills read. To change the system timestamps of files on your disk instead, the desktop NewFileTime is listed under this tag too.",
+    },
+    seoDescription: {
+      zh: "照片/文件时间修改工具（网页版）：批量修改 JPEG 照片内嵌的 EXIF 拍摄时间、创建时间与修改时间，支持统一设置、整体平移与按张递增三种模式，改前改后逐张对照，单张或 ZIP 打包下载；全程浏览器本地处理，文件不上传。另收录桌面版 NewFileTime，可直接修改本地文件的系统创建/修改/访问时间。",
+      en: "Photo & file time editor (web edition): batch-edit the EXIF date taken, digitized and modified times embedded in JPEG photos — set a single time, shift by an offset, or step photo by photo — with a before/after check per photo and single or ZIP downloads. Everything runs locally in your browser; nothing is uploaded. Also lists the desktop NewFileTime for changing system created/modified/accessed timestamps of local files.",
+    },
+    keywords: [
+      "文件时间修改",
+      "照片时间修改",
+      "EXIF时间修改",
+      "修改照片拍摄时间",
+      "NewFileTime网页版",
+      "文件创建时间修改",
+      "照片日期修改",
+      "EXIF date editor",
+      "photo time changer",
+      "NewFileTime online",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {

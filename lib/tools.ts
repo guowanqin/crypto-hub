@@ -438,6 +438,53 @@ export const TOOLS: ToolDef[] = [
       en: "Check the score before the order: the three layer bars lay out cheap-or-not, panic-or-not and fundamentals in one view. It is a discipline tool only — and mind the as-of dates on the financial figures.",
     },
   },
+  {
+    slug: "filetime",
+    name: { zh: "照片/文件时间修改", en: "Photo & File Time Editor" },
+    url: "https://18btc.cc/tag/filetime",
+    tags: ["filetime"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "批量修改照片内嵌的 EXIF 拍摄/创建/修改时间：统一设置、整体平移、按张递增，本地处理不上传。",
+      en: "Batch-edit the EXIF date taken, digitized and modified times inside your photos — set, shift or step — processed locally, never uploaded.",
+    },
+    detail: {
+      zh: "照片的时间分两处：电脑里文件的系统时间，和照片文件内嵌的 EXIF 时间。这个站内工具改后一处：把 JPEG 照片的拍摄时间（DateTimeOriginal）、创建时间（DateTimeDigitized）、修改时间（ModifyDate）三者同步改掉，GPS、设备等其余 EXIF 原样保留。三种批量模式——统一设为某一时刻、按 ±天/时/分整体平移、从起始时间按张递增（批量补打卡序列用）；改前改后逐张对照核对，再单张下载或打包 ZIP。全部处理在浏览器本地完成，照片不上传任何服务器。边界要讲清：网页改不了你硬盘上已有文件的系统创建时间/修改时间，下载回去的文件其系统修改时间会是下载时刻——相册排序、打卡补传读的是 EXIF 时间，所以多数照片场景本工具就够；确需改本地文件系统时间，用同标签收录的桌面版 NewFileTime。",
+      en: "A photo's date lives in two places: the system timestamps of the file on disk, and the EXIF times embedded in the photo. This on-site tool edits the second: it rewrites a JPEG's date taken (DateTimeOriginal), digitized (DateTimeDigitized) and modified (ModifyDate) times together, leaving GPS, device info and all other EXIF untouched. Three batch modes — set one moment for all, shift everything by ±days/hours/minutes, or step from a start time photo by photo (for back-filling a check-in sequence) — with a before/after comparison per photo, then single downloads or one ZIP. All processing happens locally in your browser; photos are never uploaded. The boundary, stated plainly: a web page cannot change the system created/modified times of files already on your disk, and a downloaded file's system modified time will be the download moment — but album sorting and attendance back-fills read the EXIF time, so most photo scenarios are covered here. If you truly need to change local files' system timestamps, use the desktop NewFileTime listed under the same tag.",
+    },
+    audience: {
+      zh: "相机时间设错需要批量纠正、整理扫描照片日期、按 EXIF 时间补打卡序列的人。",
+      en: "Anyone fixing a wrong camera clock in bulk, tidying scanned-photo dates, or back-filling a check-in sequence by EXIF time.",
+    },
+    take: {
+      zh: "先分清改的是哪种时间：相册和打卡认 EXIF，这个网页版当场就能改；资源管理器里那个系统时间得靠桌面版，别下错工具。",
+      en: "Be clear which clock you're changing: albums and check-ins read EXIF, which this web tool edits on the spot; the system timestamps in your file manager need the desktop app — don't grab the wrong tool.",
+    },
+  },
+  {
+    slug: "newfiletime",
+    name: { zh: "NewFileTime（桌面版）", en: "NewFileTime (Desktop)" },
+    url: "https://www.softwareok.com/?seite=Freeware/NewFileTime",
+    tags: ["filetime"],
+    type: "third-party",
+    oneLiner: {
+      zh: "Windows 便携小工具：直接修改本地文件与文件夹的创建、修改、访问时间，免安装、免费。",
+      en: "A portable Windows utility that directly changes the created, modified and accessed timestamps of local files and folders — no install, free.",
+    },
+    detail: {
+      zh: "SoftwareOK 出品的老牌 Windows 小工具（当前 8.33 版），绿色便携、免安装、免费。它调用系统接口，直接修改你电脑上文件与文件夹的创建时间、修改时间与访问时间——正是网页版做不到的那件事。支持拖放批量添加、按文件夹（含子目录）导入、把文件批量变「年轻」或「变老」（整体平移）、按文件名生成时间戳、夏令时/冬令时一小时纠偏，还能通过资源管理器右键菜单调用。需要纠正相机导出的文件系统时间、整理下载文件的日期时，用它在本地改最直接。",
+      en: "A long-standing Windows utility from SoftwareOK (currently v8.33): portable, no install, free. It talks to the OS directly and changes the created, modified and accessed timestamps of files and folders on your own machine — exactly the thing a web page cannot do. It supports drag-and-drop batch adding, importing whole folders (including subfolders), making files proportionally younger or older (bulk shift), generating timestamps from file names, one-hour daylight-saving corrections, and invocation from the Explorer context menu. When the system timestamps of camera exports or downloads need fixing, this is the direct local way.",
+    },
+    audience: {
+      zh: "需要直接修改 Windows 本地文件/文件夹系统时间的用户，尤其是批量整理照片与下载文件日期的人。",
+      en: "Users who need to change the system timestamps of local Windows files/folders directly — especially bulk-fixing photo and download dates.",
+    },
+    take: {
+      zh: "网页版改 EXIF、桌面版改系统时间，分工明确；它几百 KB、免安装，纠正文件日期时比任何在线工具都靠谱——注意只支持 Windows。",
+      en: "The web tool edits EXIF; this desktop app edits system timestamps — a clear division of labour. It is a few hundred KB, needs no install, and beats any online tool for fixing file dates. Windows only, note.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
