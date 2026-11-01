@@ -486,6 +486,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "qqqi-panel",
+    name: { zh: "QQQI 攒股收息定投计算器", en: "QQQI Income DCA Calculator" },
+    url: "https://18btc.cc/tool/qqqi-panel",
+    tags: ["qqqi"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "QQQI 现价、派息与分红率自动调取，再逐月模拟定投攒股：期末多少股、每月收多少息，一次算清。",
+      en: "QQQI's price, payouts and distribution rate fetched automatically, plus a month-by-month DCA simulation: final shares and monthly income, worked out in one go.",
+    },
+    detail: {
+      zh: "给「攒股收息」定投 QQQI 的人做的一页式工具。上半页是自动取数的看板：现价与涨跌、52 周高低与水位、最近一次派息、最近 12 次派息合计（TTM）与当前分红率（TTM ÷ 现价）、最近 24 次派息历史表；估值参考只用收息角度的两把尺——当前分红率在它自身历史（逐月滚动年化口径）中的分位，和股价的 52 周水位，定档规则印在页面上。下半页是定投模拟器：每月定投金额、年限（1–30 年）、假设年分红率（默认带入实时 TTM 分红率）、假设股价年增速、分红再投入开关，逐月模拟出期末总股数、期末月收息、累计投入、累计分红与期末市值，附逐年汇总表。口径提醒：QQQI 是 NEOS 的备兑期权收息 ETF，2024 年 1 月才上市，派息含期权金与可能的资本返还（ROC）成分而非普通股息，分红率不等于总回报；模拟是算术不是预测，不构成投资建议。",
+      en: "A one-page tool for investors accumulating QQQI shares for income. The top half is an auto-updating board: price and change, 52-week high/low and position, the latest payout, the trailing-twelve-month distribution total (TTM) and the current distribution rate (TTM ÷ price), plus a table of the last 24 payouts. The valuation reference uses two income-angle rulers only — where the current distribution rate sits in its own history (a rolling monthly percentile) and where the price sits in its 52-week range — with the banding rules printed on the page. The bottom half is the DCA simulator: monthly amount, years (1–30), an assumed annual distribution rate (pre-filled with the live TTM rate), assumed annual price growth and a reinvestment toggle, simulated month by month into final shares, final monthly income, total contributed, total distributions and final value, with a year-by-year table. Mind the caliber: QQQI is NEOS's covered-call income ETF, listed only in January 2024; its payouts include option premium and possibly return of capital (ROC), not ordinary dividends, and the distribution rate is not a total return. The simulation is arithmetic, not a forecast, and nothing here is investment advice.",
+    },
+    audience: {
+      zh: "在定投 QQQI、想按月攒股靠派息滚现金流，并想先把股数与月收息算清楚再动手的收息型投资者。",
+      en: "Income investors dollar-cost-averaging into QQQI who want the share count and monthly income worked out before committing.",
+    },
+    take: {
+      zh: "先用模拟器把终局看清楚再定投：同样的月供，开不开分红再投入，十年后股数差出一大截；但记住派息里有 ROC 成分，别只看分红率下单。",
+      en: "Run the simulator before you start: on the same monthly amount, reinvesting or not makes a big difference to the share count ten years out. And remember the payouts include ROC — never buy on the distribution rate alone.",
+    },
+  },
+  {
     slug: "filetime",
     name: { zh: "照片/文件时间修改", en: "Photo & File Time Editor" },
     url: "https://18btc.cc/tool/filetime",

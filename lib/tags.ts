@@ -173,6 +173,32 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "qqqi",
+    name: { zh: "QQQI 收息定投", en: "QQQI Income DCA" },
+    intro: {
+      zh: "QQQI（NEOS Nasdaq-100 High Income ETF）靠卖出纳指 100 备兑期权换月度派息，是「攒股收息」人群的热门标的。这一页把它的现价、派息历史与分红率自动拉齐，再配一个逐月模拟的定投计算器：每月投多少、投几年、分红再投入开不开，期末能攒多少股、每月收多少息，一次算清。先把口径说在前面：它 2024 年 1 月才上市、历史短，派息含期权金与可能的资本返还（ROC）成分，分红率不等于总回报。",
+      en: "QQQI (the NEOS Nasdaq-100 High Income ETF) sells Nasdaq-100 covered calls to fund a monthly payout, making it a favourite of share-accumulating income investors. This page pulls its price, distribution history and distribution rate together automatically, with a month-by-month DCA simulator: how much per month, for how many years, reinvesting or not — and what that builds to in shares and monthly income. The caveats up front: it only listed in January 2024, so its history is short; its payouts include option premium and possibly return of capital (ROC); and a distribution rate is not a total return.",
+    },
+    seoDescription: {
+      zh: "QQQI 攒股收息定投计算器：现价、52 周水位、最近派息、TTM 派息合计与当前分红率自动调取，最近 24 次派息历史、分红率自身历史分位估值参考一页看齐；定投模拟器按月模拟定投金额、年限、假设分红率与股价增速、分红再投入，算出期末股数与月收息。QQQI 为 NEOS 月度派息 ETF，派息含期权金与可能的 ROC 成分，不构成投资建议。",
+      en: "QQQI share-accumulation income DCA calculator: live price, 52-week position, latest payout, TTM distributions and the current distribution rate fetched automatically, with the last 24 payouts and a valuation reference from the rate's own-history percentile. The simulator runs monthly contributions, years, an assumed distribution rate and price growth, with or without reinvestment, to final shares and monthly income. QQQI is a NEOS monthly-payout ETF; payouts include option premium and possible ROC. Not investment advice.",
+    },
+    keywords: [
+      "QQQI",
+      "QQQI分红",
+      "QQQI派息",
+      "QQQI股息率",
+      "攒股收息",
+      "收息定投",
+      "QQQI定投计算器",
+      "NEOS QQQI",
+      "月度派息ETF",
+      "备兑期权ETF",
+      "QQQI dividend",
+      "QQQI distribution rate",
+    ],
+  },
+  {
     id: "filetime",
     name: { zh: "文件时间", en: "File Time" },
     intro: {
