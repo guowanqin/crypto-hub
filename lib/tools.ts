@@ -68,6 +68,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "imagebox",
+    name: { zh: "图片工具箱", en: "Image Toolbox" },
+    url: "https://18btc.cc/tool/imagebox",
+    tags: ["office"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "十个常用图片小工具装一页：批量压缩、改尺寸、加水印、九宫格切图、拼图、长图拼接、二维码、EXIF 清除、打码和图片转 GIF，全部本地处理。",
+      en: "Ten everyday image utilities on one page — batch compression, resizing, watermarking, grid slicing, collage, long-image stitching, QR codes, EXIF scrubbing, mosaic redaction and image-to-GIF — all processed locally.",
+    },
+    detail: {
+      zh: "发朋友圈、做小红书封面、传证件图之前，总有几个小活要干：图太大传不上去、九宫格要按顺序切好、拼图留白不均匀、截图里有手机号要打码、证件图带着 GPS 定位不敢直接发。这个工具箱把十个高频小工具放在一页：批量压缩（质量可调，JPG/PNG/WebP 互转）、改尺寸、文字水印、九宫格切图（2–4 行列可选，切完带序号打包）、网格拼图、长图拼接、二维码生成、EXIF 查看与一键清除、拖框打马赛克、多图合成 GIF。如实说明：所有处理都只在你自己的浏览器里用 Canvas 完成，图片不上传任何服务器，不用注册、没有水印、没有次数限制；关掉页面就什么都不留。",
+      en: "Before posting to social media or uploading an ID photo there is always some small chore: the file is too big, a nine-grid needs slicing in order, a collage has uneven gaps, a screenshot shows a phone number, an ID photo carries GPS coordinates. This toolbox puts ten frequent jobs on one page: batch compression (adjustable quality, JPG/PNG/WebP conversion), resizing, text watermarking, grid slicing (2–4 rows/columns, numbered ZIP export), grid collages, long-image stitching, QR code generation, EXIF viewing and one-click scrubbing, drag-to-select mosaic redaction, and multi-image GIF creation. Stated plainly: everything runs only in your own browser via Canvas — images are never uploaded to any server, there is no sign-up, no watermark and no usage limit, and closing the page leaves nothing behind.",
+    },
+    audience: {
+      zh: "经常发朋友圈/小红书要切九宫格拼图的内容创作者，以及随手要压缩、改尺寸、给图片打码去隐私的普通用户。",
+      en: "Creators who slice nine-grids and build collages for social posts, plus anyone who casually needs to compress, resize, redact or de-metadata an image.",
+    },
+    take: {
+      zh: "这类小工具网上很多，但大多要你先把图传上它的服务器。这个是真本地：本站实测断网也能用，处理证件图和截图时这点比什么都重要。",
+      en: "Plenty of sites offer these little tools, but most make you upload your images to their servers first. This one is genuinely local — we tested it offline — and that matters most for ID photos and screenshots.",
+    },
+  },
+  {
     slug: "coingecko",
     name: { zh: "CoinGecko", en: "CoinGecko" },
     url: "https://www.coingecko.com",
@@ -364,6 +388,30 @@ export const TOOLS: ToolDef[] = [
     take: {
       zh: "实测提醒：它是在电脑上装软件、不是网页工具；macOS 目前还是预览版（未公证，首次打开要手动放行），Linux 的拖动手势需要 X11 会话，视频等少数格式要按提示在应用内下载一次可选引擎。能接受这三点的话，「本地转换、不上传」这件事它做得比在线站干净。",
       en: "Hands-on notes: it is a desktop app, not a web tool; the macOS build is still a preview (not notarized, needs a one-time manual allow), the drag gesture on Linux needs an X11 session, and a few formats (video etc.) ask you to download an optional engine once inside the app. Accept those, and its fully local, no-upload conversion is cleaner than any online converter.",
+    },
+  },
+  {
+    slug: "btc-cycle",
+    name: { zh: "BTC 抄底倒计时", en: "BTC Bottom Countdown" },
+    url: "https://18btc.cc/tag/btc-bottom",
+    tags: ["btc-bottom"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "按四年减半周期与实时区块高度推演 BTC 周期位置：现在离熊底还有多远、五档分批建仓点位在哪。",
+      en: "Tracks BTC's position in the four-year halving cycle from the live block height: how far the bear-market bottom is, and where the five staged buying levels sit.",
+    },
+    detail: {
+      zh: "把减半周期模型做成实时看板：锚点全部由减半区块推导（牛顶、熊底、第 5 次减半位置 0.5、下轮牛顶），用实时链上区块高度算出当前周期位置（0=熊底、1=牛顶）、熊市进度、距熊底的倒计时，以及按位置 0.20/0.15/0.10/0.05/0.02 倒推的五档分批建仓日期。越过熊底后自动切换为回升段视图与距下次减半倒计时。页面上有完整的口径说明，这是周期模型推演、不是价格预测，更不构成投资建议。",
+      en: "A live dashboard for the halving-cycle model: every anchor is derived from halving blocks (cycle top, bear bottom, the fifth halving at position 0.5, next top), and the live on-chain block height yields the current cycle position (0 = bear bottom, 1 = bull top), bear-market progress, a countdown to the bottom, and five staged buying levels back-computed from positions 0.20/0.15/0.10/0.05/0.02. Past the bottom it switches to a recovery view with a countdown to the next halving. The methodology is spelled out on the page; it is a cycle model, not a price prediction, and not investment advice.",
+    },
+    audience: {
+      zh: "按四年周期节奏做 BTC 中长线分批布局的投资者。",
+      en: "Medium- to long-term BTC investors who stage entries around the four-year cycle.",
+    },
+    take: {
+      zh: "抄底别凭感觉数日子，这个表把「还有多远、哪天到哪一档」算给你看；记住它是周期推演，仓位节奏还得自己拿捏。",
+      en: "Don't count the days to the bottom by feel — this board computes how far is left and when each level arrives. It is a cycle projection, though; position sizing is still on you.",
     },
   },
 ];
