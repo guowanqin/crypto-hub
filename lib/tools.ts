@@ -343,6 +343,29 @@ export const TOOLS: ToolDef[] = [
       en: "Skip the second-hand takes on UNI deflation — this is the ledger, counted record by record.",
     },
   },
+  {
+    slug: "filee",
+    name: { zh: "Filee 文件格式转换器", en: "Filee File Converter" },
+    url: "https://filee.sh",
+    tags: ["office"],
+    type: "third-party",
+    oneLiner: {
+      zh: "在电脑本地拖一下就转格式的免费开源转换器：255 种格式，文件不上传，不用装 Office。",
+      en: "A free, open-source converter that works locally on your computer: drag a file, drop it on a format — 255 formats, no uploads, no Office needed.",
+    },
+    detail: {
+      zh: "Filee 是装在电脑上的本地文件转换器，交互很特别：在资源管理器里选中文件，按住 Ctrl 拖动，光标旁会弹出一个格式圆环，把文件放到目标格式上松手，新文件就生成在原文件旁边。图片、PDF、Word/Excel/PowerPoint、视频、音频、电子书、压缩包等 18 大类共 255 种格式互转，还带裁剪、旋转、合并 PDF、打包 ZIP 等小工具；转换全部在本机完成，不上传、无需注册、无广告，批量转换不限制数量。转 Office 文档用它内置的引擎，不需要安装 Microsoft Office。Windows 与 Linux 为正式版，另有命令行和文件夹自动转换，适合要批量处理文件又不想把文件传上云的人。",
+      en: "Filee is a desktop file converter with an unusual gesture-driven interface: select files in your file manager, hold Ctrl and drag, and a ring of target formats appears at your cursor — drop the files on a format and the converted copies land next to the originals. It converts across 255 formats in 18 families (images, PDF, Word/Excel/PowerPoint, video, audio, ebooks, archives and more), with extras like crop, rotate, PDF merge and ZIP packing. Everything runs on your own machine: no uploads, no sign-up, no ads, and batch conversion is unlimited. Office documents convert with its built-in engines, no Microsoft Office install required. Windows and Linux are stable releases, and there is a CLI plus watch-folder automation for heavier workflows.",
+    },
+    audience: {
+      zh: "经常要转格式、又介意把文件上传到在线转换站的人；批量处理图片、文档、音视频的办公与自媒体用户。",
+      en: "Anyone who converts files often but dislikes uploading them to online converters; office and creator workflows with lots of images, documents or media.",
+    },
+    take: {
+      zh: "实测提醒：它是在电脑上装软件、不是网页工具；macOS 目前还是预览版（未公证，首次打开要手动放行），Linux 的拖动手势需要 X11 会话，视频等少数格式要按提示在应用内下载一次可选引擎。能接受这三点的话，「本地转换、不上传」这件事它做得比在线站干净。",
+      en: "Hands-on notes: it is a desktop app, not a web tool; the macOS build is still a preview (not notarized, needs a one-time manual allow), the drag gesture on Linux needs an X11 session, and a few formats (video etc.) ask you to download an optional engine once inside the app. Accept those, and its fully local, no-upload conversion is cleaner than any online converter.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
