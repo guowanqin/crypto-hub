@@ -1913,3 +1913,379 @@ a:hover {
     font-size: 36px;
   }
 }
+
+/* ---------- 图片工具箱（/tool/imagebox）：imgbox- 前缀作用域样式 ---------- */
+.imgbox-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 12px;
+}
+
+.imgbox-tab {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.imgbox-tab:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.imgbox-tab.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.imgbox-panel {
+  margin-top: 0;
+}
+
+.imgbox-desc {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+
+.imgbox-drop {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  padding: 26px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 15px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.imgbox-drop:hover,
+.imgbox-drop.dragging {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.imgbox-drop-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.imgbox-thumbs-wrap {
+  margin-top: 12px;
+}
+
+.imgbox-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.imgbox-thumb {
+  position: relative;
+  width: 108px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.imgbox-thumb img {
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+  display: block;
+}
+
+.imgbox-thumb figcaption {
+  padding: 5px 7px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.imgbox-thumb-name {
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.imgbox-thumb-size {
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.imgbox-thumb-x {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(28, 25, 23, 0.72);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.imgbox-clear {
+  margin-top: 10px;
+}
+
+.imgbox-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin: 16px 0 4px;
+}
+
+.imgbox-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  min-width: 150px;
+}
+
+.imgbox-field-label {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.imgbox-field input[type="text"],
+.imgbox-field input[type="number"],
+.imgbox-field select {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 14.5px;
+  min-width: 170px;
+}
+
+.imgbox-field input[type="range"] {
+  width: 180px;
+  accent-color: var(--gold);
+}
+
+.imgbox-field input[type="color"] {
+  width: 52px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--panel);
+  padding: 2px;
+  cursor: pointer;
+}
+
+.imgbox-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 6px;
+}
+
+.imgbox-note {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 8px 0;
+}
+
+.imgbox-empty {
+  color: var(--faint);
+  font-size: 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  margin: 14px 0 4px;
+}
+
+.imgbox-results {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imgbox-results li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 8px 12px;
+}
+
+.imgbox-result-thumb {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  flex: none;
+}
+
+.imgbox-result-name {
+  font-weight: 600;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.imgbox-result-size {
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.imgbox-result-size em {
+  color: var(--green);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.imgbox-preview {
+  margin: 14px 0 4px;
+  text-align: center;
+}
+
+.imgbox-canvas-preview,
+.imgbox-big-preview {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.imgbox-mosaic-canvas {
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.imgbox-qr-canvas {
+  max-width: min(320px, 100%);
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.imgbox-grid-preview {
+  display: grid;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.imgbox-tile {
+  position: relative;
+  border: 0;
+  padding: 0;
+  cursor: zoom-in;
+  background: var(--panel-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.imgbox-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imgbox-tile-no {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(28, 25, 23, 0.72);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.imgbox-tile-dl {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  background: rgba(28, 25, 23, 0.72);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 1px 7px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.imgbox-tile:hover .imgbox-tile-dl {
+  opacity: 1;
+}
+
+.imgbox-exif-box {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  padding: 14px 16px;
+}
+
+.imgbox-exif-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 18px;
+  margin: 8px 0 2px;
+  font-size: 14.5px;
+}
+
+.imgbox-exif-list dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.imgbox-exif-list dd {
+  margin: 0;
+  word-break: break-all;
+}
+
+.imgbox-gps-warn {
+  color: var(--red);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .imgbox-field {
+    min-width: calc(50% - 11px);
+  }
+
+  .imgbox-field input[type="text"],
+  .imgbox-field input[type="number"],
+  .imgbox-field select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .imgbox-result-size {
+    white-space: normal;
+  }
+}
