@@ -532,6 +532,29 @@ export const TOOLS: ToolDef[] = [
       en: "Its home turf is intranets and sensitive documents: open the page and work, network cable optional. We verified the seal slices align page by page — just don't mistake it for a CA e-signature.",
     },
   },
+  {
+    slug: "hongguo",
+    name: { zh: "红果短剧桌面版（第三方客户端）", en: "Hongguo Short Drama Desktop (Third-party Client)" },
+    url: "https://github.com/waligoraamodio288-rgb/hongguo-desktop-releases",
+    tags: ["video"],
+    type: "third-party",
+    oneLiner: {
+      zh: "把红果短剧搬到电脑和电视上的第三方客户端：Windows 正式版、Mac M 系列与 Android TV 测试版，找剧、收藏、本机续播，还有老板键。",
+      en: "A third-party client that brings Hongguo short dramas to PC and TV: a stable Windows build plus Mac (Apple Silicon) and Android TV betas — search, favourites, on-device resume and a boss key.",
+    },
+    detail: {
+      zh: "红果短剧官方只有手机 App，这个由「渠道有数」独立维护的第三方客户端把找剧和追剧搬到了大屏：Windows 10/11 正式版（当前 1.0.19）、Mac M 系列测试版、Android TV / 盒子 / 投影测试版。功能上有分类浏览、搜索、收藏、选集、倍速、自动连播和本机续播进度，还有上班摸鱼用的老板键（默认 Ctrl+Shift+B，隐藏窗口并自动暂停）；1.0.19 还能只读查看你手机上的云片单。通过它的 GitHub 发行仓库免费下载，仓库里同时有各版本的说明、已知问题和 SHA-256 校验值。它与红果官方没有关系：内容来自红果的内容服务，能不能播取决于服务与网络状况；观看记录和收藏只保存在当前设备，不与手机 App 同步。",
+      en: "Hongguo (ByteDance's free short-drama app) officially ships only on phones. This third-party client, maintained independently by Qudao Youshu, brings drama hunting and bingeing to bigger screens: a stable Windows 10/11 build (currently 1.0.19), a Mac beta for Apple Silicon, and an Android TV / box / projector beta. It offers category browsing, search, favourites, episode picking, playback speed, auto-play-next and on-device resume, plus a boss key (Ctrl+Shift+B by default) that hides the window and pauses. Version 1.0.19 can also read your phone's cloud playlist (read-only). Downloads are free from its GitHub releases repo, which also carries per-version notes, known issues and SHA-256 checksums. It is not affiliated with the official app: content comes from Hongguo's service, so playback depends on that service and your network, and your history and favourites live only on the device — nothing syncs with the phone app.",
+    },
+    audience: {
+      zh: "想在电脑或电视大屏上看红果短剧、不想一直举着手机的人。",
+      en: "Anyone who wants to watch Hongguo short dramas on a computer or TV instead of holding a phone.",
+    },
+    take: {
+      zh: "实测提醒：它是非官方第三方客户端，且 Windows 安装包没有发布者代码签名，安装时系统弹出「未知发布者」是正常现象——务必只从这个原发行仓库下载、别用乱七八糟的镜像站，并可对照仓库公布的 SHA-256 核对安装包；Mac 版未经公证、仍是测试版，播放可用性也要看当时的内容服务状态。",
+      en: "Hands-on notes: this is an unofficial third-party client, and the Windows installer carries no publisher code signature, so an 'unknown publisher' prompt on install is expected — download only from this original releases repo (never random mirrors) and check the installer against the SHA-256 the repo publishes. The Mac build is unnotarised and still a beta, and playback availability depends on the content service at the time.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

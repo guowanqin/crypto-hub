@@ -227,6 +227,30 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "video",
+    name: { zh: "影音娱乐", en: "Video & Entertainment" },
+    intro: {
+      zh: "想在大屏上看短剧、追剧，不用只盯着手机：这里收录能在电脑、电视和盒子上用的影音娱乐工具与客户端，看清来源与版本状态再下载安装。",
+      en: "Short dramas and shows don't have to live on a phone screen: this section collects video and entertainment apps for computers, TVs and TV boxes — check the source and build status before you install anything.",
+    },
+    seoDescription: {
+      zh: "影音娱乐工具收录：红果短剧第三方桌面客户端（Windows 正式版、Mac M 系列测试版、Android TV 版），电脑与电视大屏看短剧，找剧、收藏、本机续播与老板键，附来源核对与安全提醒。",
+      en: "Video & entertainment picks: the third-party Hongguo short-drama desktop client (Windows release, Mac Apple-Silicon beta, Android TV beta) for watching short dramas on PC and TV — search, favourites, on-device resume and a boss key, with source checks and safety notes.",
+    },
+    keywords: [
+      "红果短剧",
+      "红果短剧桌面版",
+      "红果短剧电脑版",
+      "红果短剧电视版",
+      "短剧客户端",
+      "短剧桌面版",
+      "免费短剧",
+      "影音娱乐工具",
+      "hongguo",
+      "short drama app",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {
