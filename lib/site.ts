@@ -10,7 +10,7 @@ export const SITE_NAME: Record<Lang, string> = {
   en: "18btc Crypto Tools Navigator",
 };
 
-// 吉祥物（金币形象）的说明文字，用于图片 alt 与页头小徽标；吉祥物本身不单独冠名。
+// 吉祥物（金币形象）的说明文字，仅用于图片 alt；吉祥物不单独冠名，署名一律用 SITE_NAME。
 export const MASCOT_NAME: Record<Lang, string> = {
   zh: "金币吉祥物",
   en: "Gold Coin Mascot",

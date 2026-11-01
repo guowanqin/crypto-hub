@@ -12,7 +12,6 @@ export default function SiteHeader() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="brand-avatar" />
         <span className="brand-name">{SITE_NAME[lang]}</span>
-        <span className="brand-mascot">{MASCOT_NAME[lang]}</span>
       </Link>
       <span className="header-spacer" />
       <div className="lang-switch" role="group" aria-label="Language / 语言">

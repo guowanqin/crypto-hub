@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getTool } from "@/lib/tools";
 import { TAG_MAP } from "@/lib/tags";
 import { HUB_DICT } from "@/lib/i18n";
-import { MASCOT_NAME } from "@/lib/site";
+import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import CrclBoard from "./CrclBoard";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
@@ -46,7 +46,7 @@ export default function CrclPanelClient({ adsPreview = false }: { adsPreview?: b
         <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="take-avatar" />
         <div>
           <h2 className="take-heading">
-            {MASCOT_NAME[lang]} · {t.takeTitle}
+            {SITE_NAME[lang]} · {t.takeTitle}
           </h2>
           <p className="take-quote">“{tool.take[lang]}”</p>
         </div>
