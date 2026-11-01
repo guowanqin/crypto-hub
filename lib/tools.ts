@@ -45,7 +45,7 @@ export const TOOLS: ToolDef[] = [
   {
     slug: "sheet2word",
     name: { zh: "Excel 批量生成 Word（Sheet2Word）", en: "Excel to Word Batch Generator (Sheet2Word)" },
-    url: "https://sheet2word.cc",
+    url: "https://18btc.cc/tool/sheet2word",
     tags: ["office"],
     type: "own",
     embedded: true,

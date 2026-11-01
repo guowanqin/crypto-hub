@@ -1,7 +1,7 @@
 // 站点正式地址：域名确定后填入（例如 "https://example.com"），
 // 各页 canonical / og:url 与 sitemap 会随之生效。留空时不输出这些字段。
 // 注意：必须显式标注 string 类型，否则字面量类型会让 layout 里的 !== "" 比较报错。
-export const SITE_URL: string = "";
+export const SITE_URL: string = "https://18btc.cc";
 
 export type Lang = "zh" | "en";
 

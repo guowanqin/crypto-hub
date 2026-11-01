@@ -40,11 +40,6 @@ export default function Sheet2WordClient({ adsPreview = false }: { adsPreview?: 
         <p className="body-text">{tool.detail[lang]}</p>
         <h3 className="sub-title">{t.audienceTitle}</h3>
         <p className="body-text">{tool.audience[lang]}</p>
-        <p className="standalone-line">
-          <a href={tool.url} target="_blank" rel="noopener noreferrer">
-            {t.openStandalone.replace(" →", "")}（sheet2word.cc）→
-          </a>
-        </p>
       </section>
 
       <section className="card take-card">
