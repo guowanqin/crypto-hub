@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Sheet2WordPage() {
-  return <Sheet2WordClient />;
+export default async function Sheet2WordPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ads?: string }>;
+}) {
+  const { ads } = await searchParams;
+  return <Sheet2WordClient adsPreview={ads === "preview"} />;
 }

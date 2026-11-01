@@ -10,7 +10,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <Link href="/" className="brand-link">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/jinbijun-avatar.webp" alt={MASCOT_NAME[lang]} className="brand-avatar" />
+        <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="brand-avatar" />
         <span className="brand-name">{SITE_NAME[lang]}</span>
         <span className="brand-mascot">{MASCOT_NAME[lang]}</span>
       </Link>

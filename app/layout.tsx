@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "行情数据工具",
     "链上分析工具",
     "DeFi工具",
-    "金币君",
+    "18btc",
     "crypto tools directory",
     "best crypto tools",
     "on-chain analytics tools",

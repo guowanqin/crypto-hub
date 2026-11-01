@@ -14,7 +14,7 @@ export interface ToolDef {
   oneLiner: Record<Lang, string>;
   detail: Record<Lang, string>;
   audience: Record<Lang, string>;
-  jinbijun: Record<Lang, string>;
+  take: Record<Lang, string>;
 }
 
 // 工具注册表：新增工具只改这一处数据，首页分区、标签页、介绍页、sitemap、/go 跳转自动跟随。
@@ -37,7 +37,7 @@ export const TOOLS: ToolDef[] = [
       zh: "关注加密财库股（DAT）估值、想判断 BNC / PURR 折溢价的投资者。",
       en: "Investors valuing crypto treasury (DAT) stocks and checking BNC / PURR discounts.",
     },
-    jinbijun: {
+    take: {
       zh: "财库股别只看股价，先来这儿看每股到底装了多少币。",
       en: "Don't just stare at the share price — check how much coin is inside each share first.",
     },
@@ -61,9 +61,9 @@ export const TOOLS: ToolDef[] = [
       zh: "要批量出录用通知书、证书、合同、工资条等同版式文档的行政、人事和运营人员。",
       en: "Admin, HR and ops folks who batch-produce offer letters, certificates, contracts or payslips from one template.",
     },
-    jinbijun: {
-      zh: "币圈之外也要办公——批量套打这件事，它是真能把一下午的活压成一分钟，金币君实测过。",
-      en: "Even coin folks do paperwork — for batch documents this genuinely turns an afternoon into a minute. Tested by Jinbijun.",
+    take: {
+      zh: "币圈之外也要办公——批量套打这件事，它是真能把一下午的活压成一分钟，本站实测过。",
+      en: "Even coin folks do paperwork — for batch documents this genuinely turns an afternoon into a minute. Field-tested by 18btc.",
     },
   },
   {
@@ -84,7 +84,7 @@ export const TOOLS: ToolDef[] = [
       zh: "几乎所有币圈用户，尤其是需要快速核对价格与市值的入门和进阶玩家。",
       en: "Practically every crypto user, especially anyone quickly verifying price and market cap.",
     },
-    jinbijun: {
+    take: {
       zh: "查价我第一反应还是开它，数据全，更新稳。",
       en: "Still my first tab for a price check — broad data, steady updates.",
     },
@@ -107,7 +107,7 @@ export const TOOLS: ToolDef[] = [
       zh: "喜欢用排行榜和情绪指标辅助判断的用户。",
       en: "Users who like rankings and sentiment gauges as decision aids.",
     },
-    jinbijun: {
+    take: {
       zh: "排行榜和恐贪指数做得顺手，看大盘情绪时我会扫一眼。",
       en: "Its rankings and Fear & Greed gauge are handy — I glance at them for market mood.",
     },
@@ -130,7 +130,7 @@ export const TOOLS: ToolDef[] = [
       zh: "在链上找新币、看池子深度的交易者。",
       en: "On-chain traders looking for new tokens and pool depth.",
     },
-    jinbijun: {
+    take: {
       zh: "新池子刚冒头它就有了，链上冲浪必备，但也记得先排雷。",
       en: "New pools surface here first — essential for chain surfing, just DYOR before apeing.",
     },
@@ -153,7 +153,7 @@ export const TOOLS: ToolDef[] = [
       zh: "需要核对 DEX 池子数据、做交叉验证的链上用户。",
       en: "On-chain users who verify pool data across sources.",
     },
-    jinbijun: {
+    take: {
       zh: "同一个池子我习惯和 DexScreener 对着看，数据打架时最能发现问题。",
       en: "I cross-check pools here against DexScreener — disagreements are where the truth hides.",
     },
@@ -176,7 +176,7 @@ export const TOOLS: ToolDef[] = [
       zh: "DeFi 玩家、研究型用户和需要协议基本面数据的人。",
       en: "DeFi users, researchers and anyone needing protocol fundamentals.",
     },
-    jinbijun: {
+    take: {
       zh: "看 TVL 我只认它，免费还把数据口径写得明明白白。",
       en: "For TVL this is the one I trust — free, and the methodology is out in the open.",
     },
@@ -199,7 +199,7 @@ export const TOOLS: ToolDef[] = [
       zh: "研究员、数据型玩家和想自己动手查链上数据的人。",
       en: "Researchers, data-driven traders and anyone who wants to query the chain themselves.",
     },
-    jinbijun: {
+    take: {
       zh: "别人讲故事，我来 Dune 翻面板——数据不会陪人演戏。",
       en: "People tell stories; I check Dune dashboards — data doesn't play along with narratives.",
     },
@@ -222,7 +222,7 @@ export const TOOLS: ToolDef[] = [
       zh: "关注巨鲸动向、做链上情报跟踪的用户。",
       en: "Users tracking whale moves and on-chain intelligence.",
     },
-    jinbijun: {
+    take: {
       zh: "光看地址没用，它把「这是谁的钱包」这件事做成了产品。",
       en: "Raw addresses tell you little; Arkham turned 'whose wallet is this' into a product.",
     },
@@ -245,7 +245,7 @@ export const TOOLS: ToolDef[] = [
       zh: "玩 meme 币、新币，想先查筹码结构的用户。",
       en: "Meme and new-token buyers who check token distribution first.",
     },
-    jinbijun: {
+    take: {
       zh: "买之前先看一眼气泡，筹码全攥在几个地址手里的，再香我也不碰。",
       en: "One glance before buying — if a few wallets hold everything, I pass no matter the hype.",
     },
@@ -268,7 +268,7 @@ export const TOOLS: ToolDef[] = [
       zh: "所有需要核实以太坊及 EVM 链上记录的用户。",
       en: "Anyone verifying records on Ethereum or EVM chains.",
     },
-    jinbijun: {
+    take: {
       zh: "任何人跟我说一笔转账，我都先去 Etherscan 对哈希，不听转述。",
       en: "Someone quotes me a transfer, I check the hash on Etherscan first — no hearsay.",
     },
@@ -291,7 +291,7 @@ export const TOOLS: ToolDef[] = [
       zh: "同时玩多条 EVM 链的 DeFi 用户。",
       en: "DeFi users active across multiple EVM chains.",
     },
-    jinbijun: {
+    take: {
       zh: "签名前它会先告诉我这笔签完我还剩什么，这功能用过就回不去了。",
       en: "It shows what I'll have left after signing — once you use that, there's no going back.",
     },
@@ -314,7 +314,7 @@ export const TOOLS: ToolDef[] = [
       zh: "经常与 DeFi 合约交互、给过大量授权的用户。",
       en: "DeFi users who have approved many contracts over time.",
     },
-    jinbijun: {
+    take: {
       zh: "每个月来撤一遍不用的授权，几分钟的事，能躲掉一类大坑。",
       en: "I revoke unused approvals monthly — a few minutes that dodges a whole class of drains.",
     },

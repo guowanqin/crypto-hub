@@ -9,7 +9,10 @@ export function generateStaticParams() {
   return TAGS.map((t) => ({ tag: t.id }));
 }
 
-type Props = { params: Promise<{ tag: string }> };
+type Props = {
+  params: Promise<{ tag: string }>;
+  searchParams: Promise<{ ads?: string }>;
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag: tagId } = await params;
@@ -22,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: [...tag.keywords, "币圈工具导航", "金币君"],
+    keywords: [...tag.keywords, "币圈工具导航", "18btc"],
     ...(SITE_URL !== ""
       ? { alternates: { canonical: SITE_URL + path } }
       : {}),
@@ -44,9 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function TagPage({ params }: Props) {
+export default async function TagPage({ params, searchParams }: Props) {
   const { tag: tagId } = await params;
+  const { ads } = await searchParams;
   const tag = getTag(tagId);
   if (!tag) notFound();
-  return <TagClient tag={tag} />;
+  return <TagClient tag={tag} adsPreview={ads === "preview"} />;
 }

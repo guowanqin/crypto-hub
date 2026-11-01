@@ -504,14 +504,14 @@ a:hover {
   max-width: 760px;
 }
 
-.jinbijun-card {
+.take-card {
   display: flex;
   gap: 16px;
   align-items: flex-start;
   background: linear-gradient(180deg, var(--panel) 0%, var(--panel-soft) 100%);
 }
 
-.jinbijun-avatar {
+.take-avatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -521,13 +521,13 @@ a:hover {
   flex: none;
 }
 
-.jinbijun-heading {
+.take-heading {
   font-size: 16px;
   margin: 2px 0 6px;
   color: var(--gold-strong);
 }
 
-.jinbijun-quote {
+.take-quote {
   font-size: 16px;
   line-height: 1.7;
   margin: 0;
@@ -558,6 +558,77 @@ a:hover {
   color: var(--faint);
   font-size: 12px;
   margin: 0;
+}
+
+/* ---------- 广告位 ---------- */
+.ad-slot {
+  position: relative;
+  margin: 0 0 22px;
+}
+
+/* 横幅容器：按建议尺寸比例约束（桌面 1200×160），高度封顶 */
+.ad-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 160;
+  max-height: 160px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.ad-link {
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.ad-link img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ad-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #fff;
+  background: rgba(41, 37, 36, 0.55);
+  border-radius: 999px;
+  padding: 1px 8px;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
+
+.ad-html {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+/* 预览模式占位框（?ads=preview） */
+.ad-placeholder {
+  border: 2px dashed var(--gold);
+  background: var(--gold-dim);
+  color: var(--gold-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 16px;
+}
+
+@media (max-width: 640px) {
+  /* 移动端按建议尺寸 750×200 的比例 */
+  .ad-banner {
+    aspect-ratio: 750 / 200;
+    max-height: 200px;
+  }
 }
 
 /* ---------- Sheet2Word 内嵌工具 ---------- */

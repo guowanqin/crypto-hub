@@ -5,9 +5,16 @@ import type { ToolDef } from "@/lib/tools";
 import { TAG_MAP } from "@/lib/tags";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
+import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
-export default function ToolDetailClient({ tool }: { tool: ToolDef }) {
+export default function ToolDetailClient({
+  tool,
+  adsPreview = false,
+}: {
+  tool: ToolDef;
+  adsPreview?: boolean;
+}) {
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const primaryTag = tool.tags[0] ? TAG_MAP[tool.tags[0]] : undefined;
@@ -47,14 +54,14 @@ export default function ToolDetailClient({ tool }: { tool: ToolDef }) {
         <p className="body-text">{tool.audience[lang]}</p>
       </section>
 
-      <section className="card jinbijun-card">
+      <section className="card take-card">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/jinbijun-avatar.webp" alt={MASCOT_NAME[lang]} className="jinbijun-avatar" />
+        <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="take-avatar" />
         <div>
-          <h2 className="jinbijun-heading">
-            {MASCOT_NAME[lang]} · {t.jinbijunTitle}
+          <h2 className="take-heading">
+            {MASCOT_NAME[lang]} · {t.takeTitle}
           </h2>
-          <p className="jinbijun-quote">“{tool.jinbijun[lang]}”</p>
+          <p className="take-quote">“{tool.take[lang]}”</p>
         </div>
       </section>
 
@@ -68,6 +75,9 @@ export default function ToolDetailClient({ tool }: { tool: ToolDef }) {
           ))}
         </div>
       </section>
+
+      {/* 广告位：工具页底部横幅（介绍内容下方、页脚上方） */}
+      <AdSlot id="tool_bottom" preview={adsPreview} />
     </main>
   );
 }

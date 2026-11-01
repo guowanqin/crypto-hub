@@ -6,9 +6,16 @@ import { toolsByTag } from "@/lib/tools";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
+import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
-export default function TagClient({ tag }: { tag: TagDef }) {
+export default function TagClient({
+  tag,
+  adsPreview = false,
+}: {
+  tag: TagDef;
+  adsPreview?: boolean;
+}) {
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const list = toolsByTag(tag.id);
@@ -21,7 +28,7 @@ export default function TagClient({ tag }: { tag: TagDef }) {
       </p>
       <section className="tag-hero">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/jinbijun-avatar.webp" alt={MASCOT_NAME[lang]} className="tag-mascot" />
+        <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="tag-mascot" />
         <div>
           <p className="tag-kicker">
             {t.tagPageIntro} · {t.toolsCount.replace("{n}", String(list.length))}
@@ -33,6 +40,9 @@ export default function TagClient({ tag }: { tag: TagDef }) {
           <p className="tag-intro">{tag.intro[lang]}</p>
         </div>
       </section>
+
+      {/* 广告位：标签页顶部横幅（标题区与工具列表之间） */}
+      <AdSlot id="tag_top" preview={adsPreview} />
 
       <div className="card-grid">
         {list.map((tool) => (

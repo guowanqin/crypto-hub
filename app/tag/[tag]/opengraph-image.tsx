@@ -4,10 +4,10 @@ import path from "node:path";
 import { TAGS, getTag } from "@/lib/tags";
 import { toolsByTag } from "@/lib/tools";
 
-// 每个标签一张专属 OG 分享图：米白底 + 哑光金 + 金币君图 + 标签中英名大字 + 工具数量 + 站名。
+// 每个标签一张专属 OG 分享图：米白底 + 哑光金 + 吉祥物图 + 标签中英名大字 + 工具数量 + 站名。
 // 分享 /tag/[tag] 到微信 / X 时，抓到的就是这一张独立卡片。
 
-export const alt = "币圈工具导航 · 分类工具分享图";
+export const alt = "18btc 币圈工具导航 · 分类工具分享图";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,7 +21,7 @@ async function loadAssets() {
   const [bold, regular, mascot] = await Promise.all([
     readFile(path.join(process.cwd(), "assets/fonts/noto-sc-bold.ttf")),
     readFile(path.join(process.cwd(), "assets/fonts/noto-sc-regular.ttf")),
-    readFile(path.join(process.cwd(), "assets/jinbijun-og.png")),
+    readFile(path.join(process.cwd(), "assets/mascot-og.png")),
   ]);
   return {
     fonts: [
@@ -96,9 +96,8 @@ export default async function Image({ params }: Props) {
                 display: "flex",
               }}
             >
-              币圈工具导航
+              18btc 币圈工具导航
             </div>
-            <div style={{ fontSize: 30, color: MUTED, display: "flex" }}>金币君</div>
           </div>
           <div
             style={{
@@ -131,7 +130,7 @@ export default async function Image({ params }: Props) {
               display: "flex",
             }}
           >
-            {`收录 ${count} 个工具 · 金币君实测导航`}
+            {`收录 ${count} 个工具 · 18btc 实测导航`}
           </div>
         </div>
       </div>
