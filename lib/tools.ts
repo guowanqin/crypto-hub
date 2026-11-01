@@ -368,6 +368,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "foldervault",
+    name: { zh: "文件夹加密保险箱", en: "Folder Vault" },
+    url: "https://18btc.cc/tool/foldervault",
+    tags: ["security"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "网页版文件夹加密：把一个文件夹或一批文件整体加密成一个 .vault 保险箱文件，密码或恢复密钥解锁，全程在浏览器本地完成。",
+      en: "Folder encryption in the browser: seal a folder or a batch of files into a single .vault file, unlock it with your password or recovery key — everything happens locally in your browser.",
+    },
+    detail: {
+      zh: "桌面加密软件能把文件夹原地锁在磁盘上，网页做不到原地锁定，保险箱文件是网页能给出的形态：选一个文件夹（或一批文件），设好密码，内容连同文件名和目录结构一起加密，打包成一个 .vault 文件下载保存；换台设备要用时，把 .vault 传回这个页面，输密码就能取回原来的文件，也可以改用建箱时生成的恢复密钥开箱。加密走信封设计：随机主密钥按 2 MiB 分块以 AES-256-GCM 逐块加密，主密钥由密码经 Argon2id 派生的密钥包裹，派生不可用时退化 PBKDF2-SHA256（实际用的算法会写进文件头）；密码错一个字都会被认证机制干净拒绝，不会解出坏文件。全部计算只在本地浏览器进行，文件不经过任何服务器。",
+      en: "Desktop tools can lock a folder in place on disk; a web page cannot — so the web answer is a vault file. Pick a folder (or a batch of files), set a password, and the contents are encrypted together with file names and directory structure into one downloadable .vault file. Bring that file back to this page on any device, enter the password, and your original files come back — or use the recovery key generated when the vault was created. The design uses envelope encryption: a random master key encrypts data in 2 MiB AES-256-GCM chunks, and the master key is wrapped by a key derived from your password with Argon2id (falling back to PBKDF2-SHA256 when unavailable — the algorithm actually used is recorded in the file header). A wrong password is rejected cleanly by the authentication check; nothing half-decrypted is ever produced. All computation runs locally in your browser; files never pass through any server.",
+    },
+    audience: {
+      zh: "想临时给一批文件（证件扫描、合同、私钥备份说明等）加密打包、又不想为了这点事专门装桌面软件的人。",
+      en: "Anyone who needs to encrypt a batch of files (ID scans, contracts, key-backup notes) on the spot without installing desktop software for it.",
+    },
+    take: {
+      zh: "本站实测过完整的建箱—开箱往返：逐字节比对一致，错密码会被当场拒绝，.vault 里搜不到任何明文文件名。记住三件事：恢复密钥只在建箱时出现一次、密码和密钥都丢了谁也救不了、加密不等于备份。",
+      en: "We ran the full create–open round-trip ourselves: byte-for-byte identical files, a wrong password rejected on the spot, and no plaintext file names anywhere inside the .vault. Three things to remember — the recovery key is shown only once, losing both password and key is final, and encryption is not a backup.",
+    },
+  },
+  {
     slug: "defiburn",
     name: { zh: "DeFiBurn", en: "DeFiBurn" },
     url: "https://www.defiburn.com",

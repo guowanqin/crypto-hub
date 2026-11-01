@@ -3319,3 +3319,223 @@ a:hover {
   max-width: 100%;
   margin: 0 auto;
 }
+
+/* ===== 文件夹加密保险箱（/tool/foldervault） ===== */
+.fv-tool {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-top: 8px;
+  box-shadow: 0 1px 3px rgba(138, 109, 31, 0.05);
+}
+
+.fv-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.fv-mode-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fv-mode-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.fv-mode-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.fv-drop {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 15px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.fv-drop:hover,
+.fv-drop.dragging {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.fv-drop-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.fv-vault-name {
+  color: var(--text);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.fv-list-wrap {
+  margin-top: 16px;
+}
+
+.fv-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.fv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.fv-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.fv-row:first-child {
+  border-top: none;
+}
+
+.fv-row-path {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fv-row-size {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.fv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.fv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1 1 200px;
+}
+
+.fv-field-wide {
+  flex: 2 1 320px;
+}
+
+.fv-input {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.fv-input:focus {
+  outline: 2px solid var(--gold-dim);
+  border-color: var(--gold);
+}
+
+.fv-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fv-error {
+  margin-top: 14px;
+  color: #b3261e;
+  background: rgba(179, 38, 30, 0.07);
+  border: 1px solid rgba(179, 38, 30, 0.25);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.fv-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.fv-created-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.fv-recovery {
+  margin-top: 18px;
+  border: 1px solid var(--gold);
+  background: var(--gold-dim);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.fv-recovery-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.fv-recovery-key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 20px;
+  letter-spacing: 1px;
+  word-break: break-all;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
+.fv-safety-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

@@ -5,8 +5,8 @@ import { TOOLS, getTool } from "@/lib/tools";
 import { TAG_MAP } from "@/lib/tags";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
-// sheet2word、pershare、imagebox 有专属静态页（app/tool/<slug>），不走动态路由。
-const DEDICATED_PAGES = new Set(["sheet2word", "pershare", "imagebox"]);
+// sheet2word、pershare、imagebox、foldervault 有专属静态页（app/tool/<slug>），不走动态路由。
+const DEDICATED_PAGES = new Set(["sheet2word", "pershare", "imagebox", "foldervault"]);
 
 export function generateStaticParams() {
   return TOOLS.filter((t) => !DEDICATED_PAGES.has(t.slug)).map((t) => ({ slug: t.slug }));
