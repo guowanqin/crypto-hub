@@ -440,7 +440,7 @@ export const TOOLS: ToolDef[] = [
   {
     slug: "btc-cycle",
     name: { zh: "BTC 抄底倒计时", en: "BTC Bottom Countdown" },
-    url: "https://18btc.cc/tag/btc-bottom",
+    url: "https://18btc.cc/tool/btc-cycle",
     tags: ["btc-bottom"],
     type: "own",
     embedded: true,
@@ -464,7 +464,7 @@ export const TOOLS: ToolDef[] = [
   {
     slug: "crcl-panel",
     name: { zh: "CRCL 买入估值面板", en: "CRCL Buy & Valuation Panel" },
-    url: "https://18btc.cc/tag/crcl",
+    url: "https://18btc.cc/tool/crcl-panel",
     tags: ["crcl"],
     type: "own",
     embedded: true,
@@ -488,7 +488,7 @@ export const TOOLS: ToolDef[] = [
   {
     slug: "filetime",
     name: { zh: "照片/文件时间修改", en: "Photo & File Time Editor" },
-    url: "https://18btc.cc/tag/filetime",
+    url: "https://18btc.cc/tool/filetime",
     tags: ["filetime"],
     type: "own",
     embedded: true,
@@ -535,7 +535,7 @@ export const TOOLS: ToolDef[] = [
   {
     slug: "pdfbox",
     name: { zh: "PDF 工具箱", en: "PDF Toolbox" },
-    url: "https://18btc.cc/tag/pdf",
+    url: "https://18btc.cc/tool/pdfbox",
     tags: ["pdf"],
     type: "own",
     embedded: true,
