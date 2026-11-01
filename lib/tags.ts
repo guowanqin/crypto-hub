@@ -330,6 +330,32 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "slang",
+    name: { zh: "二手黑话", en: "Secondhand Slang" },
+    intro: {
+      zh: "在闲鱼、转转、小红书买二手，最怕看不懂卖家的标题：矿渣、全绿、克劳格、买包烟成色……每个词背后都是一套话术。这一页是站内可直接查的二手黑话词典：149 个主题词条、5,000+ 个黑话变体全文检索，可按分类与存活状态（现行可用 / 抽检限流 / 平台拦截）筛选，每条都带百科释义、卖家潜台词和买家避坑，还有拼音首字母缩写反查。先把定位说清：这是给买家解码避坑的词典，本站不提供把文案转成黑话的卖家转译。数据每日自动同步自 GitHub 上的 MIT 开源词库。",
+      en: "Buying secondhand on Xianyu, Zhuanzhuan or Xiaohongshu means decoding seller titles first: every slang term, homophone and deliberate typo hides a pitch. This page is a built-in, searchable dictionary of that slang — 149 topic entries and 5,000+ variants, filterable by category and survival status (active / throttled / platform-blocked), each with a plain-language explanation, what the seller really means, and buyer warnings, plus a pinyin-initial abbreviation lookup. The positioning, up front: this is a buyer's decoding and pitfall-avoidance dictionary — there is no seller-side 'translate my listing into slang' tool here. Data syncs daily from an MIT-licensed open-source dictionary on GitHub.",
+    },
+    seoDescription: {
+      zh: "二手黑话词典：闲鱼、转转、小红书黑话暗语在线查询——149 个主题词条、5,000+ 变体全文搜索，按分类与存活状态筛选，词条带百科释义、卖家潜台词与买家避坑，附拼音首字母缩写反查（cld、ga、xd 等）。数据每日自动同步自 MIT 开源词库，买家解码避坑专用。",
+      en: "Secondhand slang dictionary: look up the slang and coded language of Xianyu, Zhuanzhuan and Xiaohongshu — 149 topic entries and 5,000+ variants, full-text search with category and survival-status filters, each entry carrying an explanation, the seller's real intent and buyer warnings, plus a pinyin-initial abbreviation lookup (cld, ga, xd…). Synced daily from an MIT-licensed open-source dictionary; built for buyers decoding listings, not for sellers writing them.",
+    },
+    keywords: [
+      "闲鱼黑话",
+      "闲鱼暗语",
+      "二手黑话词典",
+      "闲鱼避坑",
+      "转转黑话",
+      "二手交易暗语",
+      "小红书黑话",
+      "闲鱼暗语大全",
+      "二手黑话查询",
+      "拼音缩写反查",
+      "secondhand slang",
+      "xianyu slang dictionary",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {

@@ -674,6 +674,53 @@ export const TOOLS: ToolDef[] = [
       en: "A refreshingly honest entry in its class: no uploads, no sign-up, a full set of export formats. Use it for extra languages; use the built-in one here for mixed Chinese/English with line-by-line proofreading — they complement each other.",
     },
   },
+  {
+    slug: "slang-dict",
+    name: { zh: "二手黑话词典", en: "Secondhand Slang Dictionary" },
+    url: "https://18btc.cc/tool/slang-dict",
+    tags: ["slang"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "闲鱼、转转、小红书的黑话暗语站内直接查：全文搜索、分类与存活状态筛选、拼音缩写反查，每条带卖家潜台词与买家避坑。",
+      en: "Look up Xianyu, Zhuanzhuan and Xiaohongshu slang right here: full-text search, category and survival-status filters, abbreviation lookup — every entry with the seller's real intent and buyer warnings.",
+    },
+    detail: {
+      zh: "给二手买家做的解码词典，数据来自 GitHub 上的 MIT 开源词库 awesome-chinese-secondhand-slang，本站服务端每日自动同步（当前 149 个主题词条、5,082 个黑话变体，数字随上游更新）。用法：直接搜黑话、标准名或含义（如「矿渣」「全绿」「克劳格」），或按 27 个分类、按存活状态（现行可用 / 抽检限流 / 平台拦截）筛；每张词条卡列全变体、百科释义、卖家潜台词、买家避坑、当前动态与接棒新词，并标注风险等级。页面下方还有拼音首字母缩写反查：输入 cld、ga、xd 这类字母暗号，命中上游速查表与变体里真实带这个暗号的词条。定位与边界写在明处：本站只帮买家看懂黑话、避坑验货，不提供把正常文案转成黑话的卖家排雷转译，上游数据中给卖家的规避建议字段本站不展示。词条原文的版权归上游开源项目与贡献者所有（MIT License）。",
+      en: "A decoding dictionary for secondhand buyers, powered by the MIT-licensed open-source awesome-chinese-secondhand-slang dictionary on GitHub, synced daily by our server (currently 149 topic entries and 5,082 slang variants, moving with upstream). Search slang, standard names or meanings, or filter by the 27 categories and by survival status (active / throttled / platform-blocked); each entry card lists all variants, a plain-language explanation, what the seller really means, buyer warnings, the current situation, successor slang and a risk level. A pinyin-initial abbreviation lookup sits below: type letter codes like cld, ga or xd to hit the upstream quick table and the entries whose variants actually carry that code. The boundary is stated plainly: this site only helps buyers understand slang and avoid pitfalls — there is no seller-side listing-to-slang translator, and the upstream dataset's advice-for-sellers field is not displayed. Entry texts belong to the upstream open-source project and its contributors (MIT License).",
+    },
+    audience: {
+      zh: "在闲鱼、转转、小红书淘二手，怕被黑话话术绕进去、想先查清成色与套路再下单的买家。",
+      en: "Secondhand buyers on Xianyu, Zhuanzhuan and Xiaohongshu who want to decode the pitch and check the pitfalls before paying.",
+    },
+    take: {
+      zh: "下单前花十秒搜一下标题里的生词：很多「捡漏」看完卖家潜台词就冷静了。状态标成平台拦截的词更要留心——卖家还在用的，往往不是为了卖货，是为了把你引出平台。",
+      en: "Spend ten seconds searching the unfamiliar words in a listing title before you pay: many a 'bargain' looks different once you've read what the seller really means. Be extra careful with terms flagged as platform-blocked — when a seller still uses them, the point is often not the item but getting you off the platform.",
+    },
+  },
+  {
+    slug: "awesome-slang",
+    name: { zh: "Awesome 二手黑话开源词库", en: "Awesome Chinese Secondhand Slang (Open Source)" },
+    url: "https://github.com/Domainsun/awesome-chinese-secondhand-slang",
+    tags: ["slang"],
+    type: "third-party",
+    oneLiner: {
+      zh: "本站词典的数据源头：GitHub 上的 MIT 开源二手黑话词库，词条、变体、存活状态与缩写表全部结构化开放，可下载原始 JSON。",
+      en: "The data source behind this site's dictionary: an MIT-licensed open-source secondhand-slang corpus on GitHub — entries, variants, survival statuses and the abbreviation table, all structured and downloadable as raw JSON.",
+    },
+    detail: {
+      zh: "Domainsun 维护的开源项目 awesome-chinese-secondhand-slang，把闲鱼、转转、小红书等平台的二手交易暗语整理成结构化数据：每个主题词条含标准名、全部黑话变体、适用平台、风险等级、存活状态、百科释义，以及卖家潜台词、买家避坑等双向透视字段，词库 JSON 在仓库的 data 目录完全开放。本站的二手黑话词典正是基于这份 MIT 许可的数据：本站服务端每日自动同步上游词库，套上搜索、筛选与缩写反查的界面；分类统计与界面分类名由同步程序派生标注，上游原始文件是一个词条数组（其 README 描述的四段式结构与文件现状略有出入，以文件为准）。想拿原始数据自己做工具、或给词库补新词条，直接去这个仓库下载 JSON 或提 PR。",
+      en: "An open-source project maintained by Domainsun that structures the coded language of Xianyu, Zhuanzhuan, Xiaohongshu and other secondhand platforms: each topic entry carries a standard name, all its slang variants, applicable platforms, a risk level, a survival status, a plain-language explanation, and two-sided fields for what the seller really means and what buyers should watch for. The dictionary JSON sits fully open in the repo's data folder. This site's secondhand slang dictionary is built on that MIT-licensed data: our server syncs the upstream corpus daily and wraps it in search, filters and abbreviation lookup; category stats and display names are derived at sync time (the upstream file itself is a flat entry array — its README's four-part schema description differs slightly from the file, and the file wins). To build on the raw data yourself, or to contribute new entries, head to the repo for the JSON or a PR.",
+    },
+    audience: {
+      zh: "想下载原始词库数据做自己的工具、或愿意给开源词库贡献新黑话词条的人。",
+      en: "People who want the raw dictionary data for their own tools, or who'd like to contribute new slang entries to the open-source corpus.",
+    },
+    take: {
+      zh: "本站词典里每条黑话的原文都出自这里，同步关系明明白白：发现新暗号，与其发帖问人，不如顺手给上游提个 PR，全网查词的人都受益。",
+      en: "Every entry in this site's dictionary originates here, and the sync relationship is stated openly. Spot a new code word in the wild? File a PR upstream instead of just asking around — everyone who looks words up benefits.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

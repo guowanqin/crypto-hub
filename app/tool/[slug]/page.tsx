@@ -18,6 +18,7 @@ const DEDICATED_PAGES = new Set([
   "filetime",
   "pdfbox",
   "ocr-tool",
+  "slang-dict",
 ]);
 
 export function generateStaticParams() {
