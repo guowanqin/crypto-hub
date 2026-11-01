@@ -14,7 +14,7 @@ const DICT: Record<
   Lang,
   {
     boardKicker: string;
-    sourceLine: string; // {qt}
+    sourceLine: string; // {ps} 股价源 · {ds} 分红源 · {qt} 取数时间（按实际供数源填充）
     loading: string;
     loadError: string;
     quoteMeta: string; // {date}
@@ -80,7 +80,7 @@ const DICT: Record<
 > = {
   zh: {
     boardKicker: "QQQI 数据看板 · NEOS Nasdaq-100 High Income ETF",
-    sourceLine: "数据源：Yahoo Finance（股价/分红）· 备用 Cboe · 取数 {qt}",
+    sourceLine: "数据源：{ps}（股价）· {ds}（分红）· 取数 {qt}",
     loading: "正在拉取 QQQI 行情与派息数据…",
     loadError: "数据暂时拉取失败，请稍后刷新重试。",
     quoteMeta: "NasdaqGM（QQQI）· 日线截至 {date} · 2024-01-30 上市",
@@ -155,12 +155,12 @@ const DICT: Record<
     ],
     caliberTitle: "数据口径",
     caliberBody:
-      "股价与日线来自 Yahoo Finance（服务端 15 分钟缓存，被机房 IP 拦截时自动切换 Cboe 延迟行情兜底）：现价为最新日线收盘价，涨跌幅对前一交易日收盘；52 周高低按最近 252 个交易日收盘口径。派息数据来自 Yahoo Finance 分红事件（服务端 12 小时缓存）：除息日为美东日期，TTM 为最近 12 次派息之和，分红率 = TTM ÷ 现价。分红率历史分位由逐月末「过去 12 个月派息 ÷ 当月末收盘」滚动计算，窗口内派息不足 10 次的月份不纳入。本页所有数字均为公开数据的机械计算，不构成投资建议。",
+      "股价与日线来自 Yahoo Finance（服务端 15 分钟缓存，被机房 IP 拦截时自动切换 Cboe 延迟行情兜底）：现价为最新日线收盘价，涨跌幅对前一交易日收盘；52 周高低按最近 252 个交易日收盘口径。派息数据来自 Yahoo Finance 分红事件（不可用时由 stockanalysis.com 兜底，页头标注实际来源；服务端 12 小时缓存）：除息日为美东日期，TTM 为最近 12 次派息之和，分红率 = TTM ÷ 现价。分红率历史分位由逐月末「过去 12 个月派息 ÷ 当月末收盘」滚动计算，窗口内派息不足 10 次的月份不纳入。本页所有数字均为公开数据的机械计算，不构成投资建议。",
     toolsTitle: "相关工具",
   },
   en: {
     boardKicker: "QQQI Data Board · NEOS Nasdaq-100 High Income ETF",
-    sourceLine: "Sources: Yahoo Finance (price/dividends) · Cboe fallback · fetched {qt}",
+    sourceLine: "Sources: {ps} (price) · {ds} (dividends) · fetched {qt}",
     loading: "Fetching QQQI price and distribution data…",
     loadError: "Data is temporarily unavailable — please refresh shortly.",
     quoteMeta: "NasdaqGM (QQQI) · daily bars as of {date} · listed 2024-01-30",
@@ -235,7 +235,7 @@ const DICT: Record<
     ],
     caliberTitle: "Data methodology",
     caliberBody:
-      "Prices and daily bars come from Yahoo Finance (15-minute server cache, automatically falling back to Cboe delayed quotes when datacenter IPs are blocked): the price shown is the latest daily close, change is versus the previous session; the 52-week high/low use the last 252 trading days' closes. Distributions come from Yahoo Finance dividend events (12-hour server cache): ex-dates are New York dates, TTM is the sum of the last 12 payouts, and the distribution rate is TTM ÷ price. The rate's history percentile rolls month by month ('trailing-12-month payouts ÷ that month-end close'); months with fewer than 10 payouts in the window are excluded. Everything here is a mechanical computation over public data and is not investment advice.",
+      "Prices and daily bars come from Yahoo Finance (15-minute server cache, automatically falling back to Cboe delayed quotes when datacenter IPs are blocked): the price shown is the latest daily close, change is versus the previous session; the 52-week high/low use the last 252 trading days' closes. Distributions come from Yahoo Finance dividend events (falling back to stockanalysis.com when unavailable — the header names the source actually used; 12-hour server cache): ex-dates are New York dates, TTM is the sum of the last 12 payouts, and the distribution rate is TTM ÷ price. The rate's history percentile rolls month by month ('trailing-12-month payouts ÷ that month-end close'); months with fewer than 10 payouts in the window are excluded. Everything here is a mechanical computation over public data and is not investment advice.",
     toolsTitle: "Related tools",
   },
 };
@@ -264,6 +264,13 @@ function parseNum(s: string, fallback: number): number {
 }
 
 export { DICT as QQQI_DICT };
+
+/** 供数源代码 → 页面显示名（来源标注按 API 实际返回填充）。 */
+const SRC_LABEL: Record<string, string> = {
+  yahoo: "Yahoo Finance",
+  cboe: "Cboe",
+  stockanalysis: "stockanalysis.com",
+};
 
 // QQQI 攒股收息定投看板本体：/tag/qqqi 标签页与 /tool/qqqi-panel 工具页共用同一组件。
 export default function QqqiBoard() {
@@ -325,15 +332,27 @@ export default function QqqiBoard() {
 
   const verdict = dist?.verdict ?? null;
 
+  // 来源标注按实际供数源填充：股价源看 quote.source、分红源看 dist.source；
+  // 分红区块缺席时整段去掉，不给没供上数的源挂名。
+  const priceSrcLabel = SRC_LABEL[q?.source ?? "yahoo"] ?? "Yahoo Finance";
+  const divSrcLabel = dist ? SRC_LABEL[dist.source] ?? dist.source : null;
+  let sourceText = d.sourceLine.replace("{ps}", priceSrcLabel);
+  if (divSrcLabel) {
+    sourceText = sourceText.replace("{ds}", divSrcLabel);
+  } else {
+    sourceText = sourceText
+      .replace(" · {ds}（分红）", "")
+      .replace(" · {ds} (dividends)", "");
+  }
+  sourceText = data
+    ? sourceText.replace("{qt}", fmtTime(data.fetchedAt))
+    : sourceText.replace(" · 取数 {qt}", "").replace(" · fetched {qt}", "");
+
   return (
     <section className="crcl-board" aria-label={d.boardKicker}>
       <div className="burn-board-head">
         <h2 className="burn-board-title">{d.boardKicker}</h2>
-        <p className="burn-board-meta">
-          {data
-            ? d.sourceLine.replace("{qt}", fmtTime(data.fetchedAt))
-            : d.sourceLine.replace(" · 取数 {qt}", "").replace(" · fetched {qt}", "")}
-        </p>
+        <p className="burn-board-meta">{sourceText}</p>
       </div>
 
       {!data && !failed && <p className="burn-note">{d.loading}</p>}

@@ -8,10 +8,15 @@
  * 取数（服务端 /api/qqqi 汇总，任一源失败只降级对应区块，绝不编数）：
  * - 行情+分红：Yahoo Finance chart 接口（免 key，range=5y、interval=1d、events=div）
  *   一次拿到自上市以来全部日线与全部分红事件（除息日 + 每股金额）。
- * - 现价兜底：Yahoo 会封部分机房 IP（CRCL 已踩过），故行情另有 Cboe delayed
- *   quotes CDN 备用源（与 CRCL 同路：历史日线 + 现价接口补最后一根）。
- *   分红历史只有 Yahoo 一路；Yahoo 挂而 Cboe 活时，分红区块单独降级。
- * - 环境变量 QQQI_DISABLE_YAHOO=1 可强制只走备用源（运维/验证用）。
+ * - 现价兜底：Yahoo 会封部分机房 IP（CRCL 已踩过，线上实测 429），故行情另有
+ *   Cboe delayed quotes CDN 备用源（与 CRCL 同路：历史日线 + 现价接口补最后一根）；
+ *   Cboe 历史日线自上市日起全量，可同时供 52 周与分红率分位的月末收盘序列。
+ * - 分红兜底：Yahoo 分红事件不可用时改走 stockanalysis.com（其结构化接口
+ *   /api/symbol/e/qqqi/dividend 优先，页面内嵌 history 数据与表格行兜底解析），
+ *   金额保留四位小数（Yahoo 只给三位，属正常源间精度差）。payload 里 dist.source
+ *   标注实际供数源，页面来源标注跟着走。
+ * - 环境变量 QQQI_DISABLE_YAHOO=1 可强制只走备用源（行情与分红两路同时切断
+ *   Yahoo，运维/验证用）。
  *
  * 派生口径（全部写在页面上）：
  * - TTM 派息 = 最近 12 次月度派息之和；当前分红率 = TTM 派息 ÷ 现价。
@@ -51,6 +56,9 @@ export interface QqqiDiv {
 
 export type QqqiVerdict = "cheap" | "neutral" | "rich";
 
+/** 分红数据实际供数源（页面来源标注用） */
+export type QqqiDivSource = "yahoo" | "stockanalysis";
+
 export interface QqqiYieldStats {
   /** 当前分红率在自身历史滚动分红率序列中的百分位（0–100） */
   percentile: number;
@@ -74,6 +82,8 @@ export interface QqqiDist {
   yieldStats: QqqiYieldStats | null;
   /** 按分位定档的估值参考；无分位时为 null */
   verdict: QqqiVerdict | null;
+  /** 分红实际供数源："yahoo" | "stockanalysis"（线上诊断/页面标注用） */
+  source: QqqiDivSource;
   fetchedAt: string;
 }
 
@@ -112,6 +122,19 @@ async function fetchJson(url: string, timeoutMs: number): Promise<unknown> {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
   return res.json();
+}
+
+async function fetchText(
+  url: string,
+  timeoutMs: number,
+  accept: string
+): Promise<string> {
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(timeoutMs),
+    headers: { "user-agent": UA, accept },
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
+  return res.text();
 }
 
 export interface DayBar {
@@ -281,10 +304,124 @@ export async function fetchQqqiQuote(): Promise<{
   throw new Error(errs.join(" | "));
 }
 
-/** 取分红事件全量（旧→新）。只有 Yahoo 一路。 */
-export async function fetchQqqiDividends(): Promise<QqqiDiv[]> {
-  const { divs } = await fetchYahooChart();
-  return divs;
+/**
+ * 分红事件合理性过滤（兜底源解析共用）：日期须为 ISO 且不晚于今天 +7 天
+ * （容忍源站时区/预告差），金额须在 (0, 5] USD（QQQI 月度派息 0.5–0.7 量级，
+ * 超界多半是解析串列）；按日期去重后旧→新排序。
+ */
+function sanitizeDivs(rows: QqqiDiv[]): QqqiDiv[] {
+  const cutoff = new Date(Date.now() + 7 * 86_400_000)
+    .toISOString()
+    .slice(0, 10);
+  const byDate = new Map<string, number>();
+  for (const d of rows) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date)) continue;
+    if (d.date > cutoff) continue;
+    if (!Number.isFinite(d.amount) || d.amount <= 0 || d.amount > 5) continue;
+    if (!byDate.has(d.date)) byDate.set(d.date, d.amount);
+  }
+  return [...byDate.entries()]
+    .map(([date, amount]) => ({ date, amount }))
+    .sort((a, b) => (a.date < b.date ? -1 : 1));
+}
+
+const MONTH_EN: Record<string, string> = {
+  Jan: "01", Feb: "02", Mar: "03", Apr: "04", May: "05", Jun: "06",
+  Jul: "07", Aug: "08", Sep: "09", Oct: "10", Nov: "11", Dec: "12",
+};
+
+/**
+ * 分红兜底源：stockanalysis.com。优先其结构化 JSON 接口
+ * （/api/symbol/e/qqqi/dividend 的 data.history：dt 为 ISO、amt 形如 "$0.6343"）；
+ * 接口不可用时抓 SSR 派息页，先解析内嵌 history 数据，再解析表格行
+ * （首列 "Oct 21, 2026" + 次列 "$0.6343"）。三路全空则抛错走原降级。
+ */
+async function fetchStockAnalysisDivs(): Promise<QqqiDiv[]> {
+  const errs: string[] = [];
+  // 1) 结构化 JSON 接口
+  try {
+    const payload = JSON.parse(
+      await fetchText(
+        "https://stockanalysis.com/api/symbol/e/qqqi/dividend",
+        12_000,
+        "application/json"
+      )
+    ) as any;
+    const hist = payload?.data?.history;
+    if (!Array.isArray(hist)) throw new Error("bad api payload");
+    const rows: QqqiDiv[] = [];
+    for (const r of hist) {
+      const amount = Number(String(r?.amt ?? "").replace(/[^0-9.]/g, ""));
+      const date = typeof r?.dt === "string" ? r.dt : "";
+      rows.push({ date, amount });
+    }
+    const divs = sanitizeDivs(rows);
+    if (divs.length >= 12) return divs;
+    errs.push(`api: only ${divs.length} usable rows`);
+  } catch (err) {
+    errs.push(`api: ${errMsg(err)}`);
+  }
+  // 2) SSR 页面：内嵌 history 数据 → 表格行
+  try {
+    const html = await fetchText(
+      "https://stockanalysis.com/etf/qqqi/dividend/",
+      12_000,
+      "text/html"
+    );
+    const rows: QqqiDiv[] = [];
+    for (const m of html.matchAll(
+      /\{dt:"(\d{4}-\d{2}-\d{2})",amt:"\$([0-9.]+)"/g
+    )) {
+      rows.push({ date: m[1], amount: Number(m[2]) });
+    }
+    if (rows.length === 0) {
+      for (const m of html.matchAll(
+        /<td[^>]*>([A-Z][a-z]{2}) (\d{1,2}), (\d{4})<\/td><!--\]--><!--\[6--><td[^>]*>\$([0-9.]+)<\/td>/g
+      )) {
+        const mm = MONTH_EN[m[1]];
+        if (mm) {
+          rows.push({
+            date: `${m[3]}-${mm}-${m[2].padStart(2, "0")}`,
+            amount: Number(m[4]),
+          });
+        }
+      }
+    }
+    const divs = sanitizeDivs(rows);
+    if (divs.length >= 12) return divs;
+    errs.push(`page: only ${divs.length} usable rows`);
+  } catch (err) {
+    errs.push(`page: ${errMsg(err)}`);
+  }
+  throw new Error(`stockanalysis[${errs.join("; ")}]`);
+}
+
+/**
+ * 取分红事件全量（旧→新）与实际供数源：Yahoo 主源 → stockanalysis 兜底；
+ * QQQI_DISABLE_YAHOO=1 时与行情一样切断 Yahoo。全失败抛合并原因。
+ */
+export async function fetchQqqiDividends(): Promise<{
+  divs: QqqiDiv[];
+  source: QqqiDivSource;
+}> {
+  const errs: string[] = [];
+  if (process.env.QQQI_DISABLE_YAHOO !== "1") {
+    try {
+      const { divs } = await fetchYahooChart();
+      return { divs, source: "yahoo" };
+    } catch (err) {
+      errs.push(errMsg(err));
+    }
+  } else {
+    errs.push("yahoo skipped (QQQI_DISABLE_YAHOO=1)");
+  }
+  try {
+    const divs = await fetchStockAnalysisDivs();
+    return { divs, source: "stockanalysis" };
+  } catch (err) {
+    errs.push(errMsg(err));
+  }
+  throw new Error(errs.join(" | "));
 }
 
 /**
@@ -322,7 +459,8 @@ export function rollingYieldSeries(bars: DayBar[], divs: QqqiDiv[]): number[] {
 export function buildDist(
   divsOldToNew: QqqiDiv[],
   price: number | null,
-  bars: DayBar[] | null
+  bars: DayBar[] | null,
+  source: QqqiDivSource = "yahoo"
 ): QqqiDist {
   const desc = [...divsOldToNew].sort((a, b) => (a.date < b.date ? 1 : -1));
   const latest = desc[0];
@@ -357,6 +495,7 @@ export function buildDist(
     history: desc.slice(0, 24),
     yieldStats,
     verdict,
+    source,
     fetchedAt: new Date().toISOString(),
   };
 }

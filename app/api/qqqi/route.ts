@@ -5,6 +5,7 @@ import {
   fetchQqqiQuote,
   type DayBar,
   type QqqiDiv,
+  type QqqiDivSource,
   type QqqiPayload,
   type QqqiQuote,
 } from "@/lib/qqqi";
@@ -13,7 +14,8 @@ export const dynamic = "force-dynamic";
 
 // 双层缓存（与本站 /api/crcl 同一套模式：命中直出、失败回退 stale）：
 // - 行情 15 分钟（Yahoo 主源 → Cboe 兜底双源在 lib 内处理）；
-// - 分红历史 12 小时（源头月度派息，一天一查都富余）。
+// - 分红历史 12 小时（Yahoo 主源 → stockanalysis 兜底在 lib 内处理；
+//   源头月度派息，一天一查都富余；缓存同时记住实际供数源供页面标注）。
 // 分红派生（TTM、分红率、分位）在每次请求时用缓存的原始分红事件 + 当前
 // 行情现价现算，纯函数零成本，保证分红率跟着 15 分钟行情走而不是 12 小时。
 // 行情失败绝不写入成功缓存：只记 60 秒失败短路，源恢复后至多 60 秒自动重试；
@@ -24,7 +26,7 @@ const DIV_TTL_MS = 12 * 60 * 60 * 1000;
 
 let quoteCache: { at: number; quote: QqqiQuote; bars: DayBar[] | null } | null = null;
 let quoteFail: { at: number; error: string } | null = null;
-let divCache: { at: number; divs: QqqiDiv[] } | null = null;
+let divCache: { at: number; divs: QqqiDiv[]; source: QqqiDivSource } | null = null;
 
 async function getQuote(): Promise<{ quote: QqqiQuote | null; error?: string }> {
   const now = Date.now();
@@ -52,32 +54,36 @@ async function getQuote(): Promise<{ quote: QqqiQuote | null; error?: string }> 
   }
 }
 
-async function getDivs(): Promise<{ divs: QqqiDiv[] | null; error?: string }> {
+async function getDivs(): Promise<{
+  divs: QqqiDiv[] | null;
+  source: QqqiDivSource;
+  error?: string;
+}> {
   if (divCache && Date.now() - divCache.at < DIV_TTL_MS) {
-    return { divs: divCache.divs };
+    return { divs: divCache.divs, source: divCache.source };
   }
   try {
-    const divs = await fetchQqqiDividends();
-    divCache = { at: Date.now(), divs };
-    return { divs };
+    const { divs, source } = await fetchQqqiDividends();
+    divCache = { at: Date.now(), divs, source };
+    return { divs, source };
   } catch (err) {
-    if (divCache) return { divs: divCache.divs };
-    return { divs: null, error: String(err) };
+    if (divCache) return { divs: divCache.divs, source: divCache.source };
+    return { divs: null, source: "yahoo", error: String(err) };
   }
 }
 
 export async function GET() {
-  const [{ quote, error: quoteErr }, { divs, error: divErr }] = await Promise.all([
-    getQuote(),
-    getDivs(),
-  ]);
+  const [
+    { quote, error: quoteErr },
+    { divs, source: divSource, error: divErr },
+  ] = await Promise.all([getQuote(), getDivs()]);
 
   const errors: QqqiPayload["errors"] = {};
   if (quoteErr) errors.quote = quoteErr;
   if (divErr) errors.dist = divErr;
 
   const dist = divs
-    ? buildDist(divs, quote?.price ?? null, quoteCache?.bars ?? null)
+    ? buildDist(divs, quote?.price ?? null, quoteCache?.bars ?? null, divSource)
     : null;
 
   const payload: QqqiPayload = {
