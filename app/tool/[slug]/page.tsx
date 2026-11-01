@@ -21,6 +21,7 @@ const DEDICATED_PAGES = new Set([
   "slang-dict",
   "ip-check",
   "poetry",
+  "tweetbox",
 ]);
 
 export function generateStaticParams() {

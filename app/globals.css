@@ -4779,3 +4779,195 @@ a:hover {
 .poe-quiz-reveal {
   margin-top: 14px;
 }
+
+/* ---------- 推特工具箱（/tag/twitter-tools、/tool/tweetbox） ---------- */
+.tw-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.tw-input {
+  flex: 1 1 420px;
+  padding: 10px 12px;
+}
+.tw-parse-btn {
+  padding: 10px 22px;
+  font-weight: 600;
+}
+.tw-result {
+  margin-top: 18px;
+}
+.tw-source {
+  color: var(--faint);
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+.tw-tweet {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.tw-tweet-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.tw-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.tw-author {
+  margin: 0;
+  font-weight: 700;
+  font-size: 15px;
+}
+.tw-handle {
+  color: var(--faint);
+  font-weight: 400;
+}
+.tw-time {
+  margin: 2px 0 0;
+  color: var(--faint);
+  font-size: 13px;
+}
+.tw-text {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.tw-stats {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.tw-quoted {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.tw-quoted-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.tw-quoted-text {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.tw-sec-title {
+  margin: 22px 0 10px;
+  font-size: 16px;
+}
+.tw-sec-subtitle {
+  margin: 16px 0 8px;
+  font-size: 14px;
+}
+.tw-media-list {
+  display: grid;
+  gap: 14px;
+}
+.tw-media-item {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.tw-media-img {
+  max-width: 100%;
+  max-height: 340px;
+  border-radius: 10px;
+  display: block;
+}
+.tw-media-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.tw-media-meta {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.tw-media-actions .tw-media-meta {
+  margin: 0 6px 0 0;
+}
+.tw-variant-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+.tw-variant-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+.tw-variant-spec {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.tw-variant-btns {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tw-copy-btn {
+  white-space: nowrap;
+}
+.tw-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 10px 0 0;
+}
+.tw-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.tw-thread {
+  margin-top: 26px;
+  border-top: 2px solid var(--border);
+  padding-top: 4px;
+}
+.tw-thread-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.tw-thread-item {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.tw-thread-meta {
+  margin: 0;
+  color: var(--faint);
+  font-size: 12px;
+}
+.tw-thread-text {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

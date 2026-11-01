@@ -435,6 +435,35 @@ export const TAGS: TagDef[] = [
       "chinese idioms",
     ],
   },
+  {
+    id: "twitter-tools",
+    name: { zh: "推特工具", en: "Twitter Tools" },
+    intro: {
+      zh: "刷到想存下来的推文，不用再找乱七八糟的下载站：粘贴一条公开推文链接，站内工具箱就能把正文和全部媒体解析出来——图片是原图、视频逐档给出分辨率与码率的 MP4 直链，推文还能导出成 TXT、Markdown、HTML、JSON、CSV、PDF，同作者的一串 Thread 可以整串导出成 EPUB。取数走推特公开嵌入接口与 FxTwitter 公开接口双源、免登录，下载走推特 CDN 直链、本机生成文件，本站服务器不碰你的文件。老牌下载站 TwiFlux 也收在同标签里，想对照着用也行。",
+      en: "Found a tweet worth keeping? Skip the sketchy downloader sites: paste a public tweet link and the built-in toolbox parses the text and every media item — original-size photos, per-quality MP4 direct links with resolutions and bitrates, exports to TXT, Markdown, HTML, JSON, CSV and PDF, and whole same-author threads bundled into an EPUB. Data comes from Twitter's public embed endpoint and the FxTwitter public API (dual source, no login); downloads are direct Twitter-CDN links and files are generated locally — this site's servers never touch them. The long-running TwiFlux downloader is listed on the same shelf if you want a second option.",
+    },
+    seoDescription: {
+      zh: "推特视频下载与推文导出工具箱（站内可用）：粘贴公开推文链接解析正文与媒体，图片原图下载、视频各画质 MP4 直链（分辨率+码率）、GIF 下载，推文导出 TXT/Markdown/HTML/JSON/CSV/PDF，Thread 整串导出与 EPUB 打包。双源自动取数（推特公开嵌入接口 + FxTwitter），免登录免注册；另收录老牌下载站 TwiFlux。仅限公开推文，版权归原作者。",
+      en: "Twitter/X video downloader and tweet exporter, usable in-site: paste a public tweet link to parse its text and media — original-size photo downloads, MP4 direct links per quality (resolution + bitrate), GIF downloads, and exports to TXT/Markdown/HTML/JSON/CSV/PDF, with whole-thread export and EPUB bundling. Dual-source fetching (Twitter's public embed endpoint + FxTwitter), no login or sign-up; the established TwiFlux downloader is listed too. Public tweets only; media remains the authors' copyright.",
+    },
+    keywords: [
+      "推特视频下载",
+      "X视频下载",
+      "Twitter视频下载",
+      "推文下载",
+      "推特下载",
+      "推特图片下载",
+      "推特GIF下载",
+      "Thread导出",
+      "推文转PDF",
+      "推文导出",
+      "推特媒体下载",
+      "TwiFlux",
+      "twitter video downloader",
+      "tweet downloader",
+      "thread exporter",
+    ],
+  },
 ];
 
 export const TAG_MAP: Record<string, TagDef> = Object.fromEntries(

@@ -815,6 +815,53 @@ export const TOOLS: ToolDef[] = [
       en: "The scale is real — if a text isn't in the curated edition you'll very likely find it here, and its medical-classics coverage is unusually complete. The trade-off is dense pages that reward patience; for quick everyday lookups the curated edition here is faster.",
     },
   },
+  {
+    slug: "tweetbox",
+    name: { zh: "推特下载工具箱", en: "Tweet Toolbox" },
+    url: "https://18btc.cc/tool/tweetbox",
+    tags: ["twitter-tools"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "粘贴推文链接，解析正文与全部媒体：图片原图、视频各画质 MP4 直链下载，推文导出 TXT/Markdown/HTML/JSON/CSV/PDF，Thread 整串导出 EPUB。",
+      en: "Paste a tweet link to parse its text and all media: original photos, per-quality MP4 direct links, exports to TXT/Markdown/HTML/JSON/CSV/PDF, and whole threads as EPUB.",
+    },
+    detail: {
+      zh: "站内可用的推特媒体下载与推文导出工具箱，功能集参考老牌下载站 TwiFlux、独立实现。粘贴一条公开推文链接（twitter.com / x.com）或推文 ID，即可解析出作者、正文、发布时间、互动数（数据源实际返回的才显示）和全部媒体：图片给原图（name=orig）直链，视频与 GIF 逐档列出每个 MP4 变体的分辨率与码率供挑选，另附 HLS 播放列表链接（如有）。下载全部走推特 CDN 直链，本站服务器不中转文件；导出（TXT、Markdown、HTML、JSON、CSV，以及「打印另存」的 PDF）都在你的浏览器本地生成。若这条推文处在同作者自回复串中，工具会沿数据源返回的回复链把整串组装出来，提供 TXT、Markdown、JSON 与 EPUB 整串导出——组装口径如实标注：以数据源返回为准，只含截至本条的同作者串。取数双源：推特公开嵌入接口为主、FxTwitter 公开接口为备，免登录。边界：仅限公开推文；媒体版权归原作者，只下载你有权使用的内容。",
+      en: "A built-in Twitter media downloader and tweet exporter, modelled on the established TwiFlux downloader and independently implemented. Paste a public tweet link (twitter.com / x.com) or a tweet ID to parse the author, text, timestamp, engagement counts (only what the data source actually returns) and every media item: photos come with original-size (name=orig) direct links; videos and GIFs list each MP4 variant with its resolution and bitrate, plus the HLS playlist link when one exists. Downloads are direct Twitter-CDN links — this site's servers never relay files — and exports (TXT, Markdown, HTML, JSON, CSV, and a print-to-PDF path) are generated locally in your browser. If the tweet sits in a same-author self-reply chain, the tool assembles the chain from the source's reply links and offers whole-thread TXT, Markdown, JSON and EPUB exports, with the assembly rule stated plainly: it follows what the source returns and covers the author's chain up to this post. Fetching is dual-source — Twitter's public embed endpoint first, the FxTwitter public API as backup — with no login. Boundaries: public tweets only, and media remains the original authors' copyright — download only what you have the right to use.",
+    },
+    audience: {
+      zh: "想保存推文视频/图片原图、把推文或整串 Thread 存档成文档（含 EPUB 导入阅读器）的内容整理者、研究者与普通用户。",
+      en: "Anyone archiving tweets — creators, researchers and everyday users who want original photos/videos saved, or a tweet or whole thread filed away as a document (EPUB included, for e-readers).",
+    },
+    take: {
+      zh: "最省事的用法是粘贴链接先看变体表再下：同一条视频最高和最低画质体积能差几十倍，存手机里看选中间档就够；整串 Thread 导出 EPUB 塞进阅读器慢慢看，是这工具最值得用的地方。",
+      en: "The smoothest flow is: paste, check the variant table, then download — the top and bottom qualities of one video can differ by dozens of times in size, and a mid tier is plenty for phone viewing. The genuinely special move is exporting a whole thread as an EPUB for your reader.",
+    },
+  },
+  {
+    slug: "twiflux",
+    name: { zh: "TwiFlux", en: "TwiFlux" },
+    url: "https://twiflux.com",
+    tags: ["twitter-tools"],
+    type: "third-party",
+    oneLiner: {
+      zh: "老牌免费的推特/X 视频下载站：粘贴公开推文链接拿到各画质 MP4，单文件上限 500 MiB、免注册；本站推特工具箱的功能集参考对象。",
+      en: "An established free Twitter/X video downloader: paste a public tweet link for per-quality MP4s, up to 500 MiB per file, no sign-up; the feature-set reference for this site's Tweet Toolbox.",
+    },
+    detail: {
+      zh: "TwiFlux（twiflux.com）是一款免费、无需注册的在线推特/X 多功能下载站：以视频下载为主，粘贴公开推文链接后列出原帖可用的全部 MP4 格式（原始画质、分辨率与码率可见），单个文件上限 500 MiB；也覆盖 GIF、图片与音频下载，并提供把推文与 Thread 转换成 TXT、Markdown、HTML、PDF、JSON、CSV、RSS 等格式的工具（Thread 另有 EPUB、文章与轮播图）。本站的「推特下载工具箱」在功能集上参考了它——媒体逐档直链、推文多格式导出、Thread 整串打包——但两者是各自独立的站点与实现：本站取数走推特公开嵌入接口与 FxTwitter 公开接口双源，解析与导出全部在站内完成。两个都免费、都只处理公开推文，需要哪种直接用哪种；无论用哪个，媒体的版权都归原作者。",
+      en: "TwiFlux (twiflux.com) is a free, no-sign-up online Twitter/X downloader: video first — paste a public tweet link and it lists every MP4 format the source offers (original quality, resolution and bitrate shown), up to 500 MiB per file — plus GIF, photo and audio downloads, and converters that turn tweets and threads into TXT, Markdown, HTML, PDF, JSON, CSV and RSS (threads also get EPUB, article and carousel exports). This site's Tweet Toolbox takes its feature set from TwiFlux — per-quality media links, multi-format tweet exports, whole-thread bundling — but the two are independent sites and implementations: ours fetches from Twitter's public embed endpoint and the FxTwitter public API and does all parsing and exporting in-site. Both are free and both handle public tweets only; use whichever fits, and remember the media stays the original authors' copyright either way.",
+    },
+    audience: {
+      zh: "想要一个专注下载的老牌备选、或需要 RSS 等本站暂未提供的导出格式的人。",
+      en: "People who want a download-focused established alternative, or export formats this site doesn't offer yet, such as RSS.",
+    },
+    take: {
+      zh: "下载这一件事它做得最专注，格式表干净利落，是本站工具箱排版的参考原点；差别在本站把解析、Thread 组装和 EPUB 打包收进了同一页，还不用在下载站之间来回跳。两边都只碰公开推文，这点没有例外。",
+      en: "For pure downloading it's the most focused tool around, with a clean format table — the layout reference for this site's toolbox. The difference: ours folds parsing, thread assembly and EPUB bundling into one page on a site you already use. Both touch public tweets only, no exceptions.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
