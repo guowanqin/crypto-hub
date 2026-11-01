@@ -17,6 +17,7 @@ const DEDICATED_PAGES = new Set([
   "btc-cycle",
   "filetime",
   "pdfbox",
+  "ocr-tool",
 ]);
 
 export function generateStaticParams() {

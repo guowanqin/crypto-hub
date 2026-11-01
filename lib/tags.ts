@@ -280,6 +280,32 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "ocr",
+    name: { zh: "文字识别", en: "OCR" },
+    intro: {
+      zh: "把图片里的文字抠出来，不必把截图、证件、单据传到陌生服务器：这一页用 Tesseract 引擎在你自己的浏览器里做本地 OCR，中英混合识别、批量排队、按行对照原图高亮定位，识别完直接导出 TXT、Markdown 或 Word。先说清边界：第一次用要联网下载识别模型（几十 MB，之后缓存、离线可用）；印刷体和截图是它的主场，手写和复杂表格版面明显弱于云端大厂 OCR——胜在图片从头到尾不离开你的设备。",
+      en: "Pull the text out of images without uploading screenshots, ID scans or receipts to a stranger's server: this page runs the Tesseract engine locally in your own browser — mixed Chinese/English recognition, batch queuing, line-by-line highlights mapped back onto the original image, and export to TXT, Markdown or Word. The boundaries up front: the first run downloads the recognition models (tens of MB, then cached for offline use); printed text and screenshots are its home turf, while handwriting and complex table layouts are noticeably weaker than big-cloud OCR — the trade-off is that your images never leave your device.",
+    },
+    seoDescription: {
+      zh: "在线图片文字识别 OCR（浏览器本地识别、图片不上传）：批量导入最多 20 张图片，中英混合识别（简体中文 + 英文），识别结果按行展示、点击行可在原图上高亮定位、逐行可编辑纠错，导出 TXT、Markdown、Word 文档或按图打包 ZIP。首次使用需下载识别模型，之后离线可用；免费无需注册。",
+      en: "Online OCR that runs locally in your browser — images are never uploaded: batch-import up to 20 images, mixed Simplified-Chinese + English recognition, results listed line by line with click-to-highlight定位 on the original image, per-line editing, and export to TXT, Markdown, a Word document or a per-image ZIP. The first run downloads the recognition models; after that it works offline. Free, no sign-up.",
+    },
+    keywords: [
+      "图片文字识别",
+      "在线OCR",
+      "本地OCR",
+      "图片转文字",
+      "截图转文字",
+      "OCR文字识别",
+      "图片提取文字",
+      "批量OCR",
+      "免费OCR",
+      "ocr online",
+      "image to text",
+      "tesseract ocr",
+    ],
+  },
+  {
     id: "video",
     name: { zh: "影音娱乐", en: "Video & Entertainment" },
     intro: {

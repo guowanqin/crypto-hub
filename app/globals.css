@@ -3776,3 +3776,387 @@ a:hover {
   background: rgba(5, 150, 105, 0.13);
   border-radius: 0 10px 10px 0;
 }
+
+/* ---------- 本地 OCR 工具（/tag/ocr、/tool/ocr-tool） ---------- */
+.ocr-tool {
+  margin-top: 4px;
+}
+
+.ocr-drop {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  padding: 26px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--muted);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ocr-drop:hover,
+.ocr-drop.dragging {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.ocr-drop-main {
+  font-size: 16px;
+  margin: 0;
+}
+
+.ocr-drop-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.ocr-drop-sub {
+  font-size: 13px;
+  color: var(--faint);
+  margin: 8px 0 0;
+}
+
+.ocr-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 16px 0 12px;
+}
+
+.ocr-seg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ocr-seg-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ocr-seg-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ocr-seg-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.ocr-seg-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.ocr-seg-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ocr-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ocr-engine {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.ocr-engine-text {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin: 4px 0;
+}
+
+.ocr-engine-error {
+  color: var(--red);
+}
+
+.ocr-notice {
+  color: var(--gold-strong);
+  font-weight: 600;
+}
+
+.ocr-progress {
+  height: 8px;
+  background: var(--panel-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+
+.ocr-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.ocr-empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--faint);
+  font-size: 14px;
+  background: var(--panel);
+}
+
+.ocr-main {
+  display: grid;
+  grid-template-columns: minmax(280px, 5fr) minmax(320px, 7fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .ocr-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ocr-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ocr-thumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.ocr-thumb.active {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.ocr-thumb-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex: none;
+}
+
+.ocr-thumb-meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ocr-thumb-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ocr-status {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ocr-status.st-queued {
+  color: var(--faint);
+}
+
+.ocr-status.st-running {
+  color: var(--gold-strong);
+}
+
+.ocr-status.st-done {
+  color: var(--green);
+}
+
+.ocr-status.st-error {
+  color: var(--red);
+}
+
+.ocr-thumb-btns {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+.ocr-mini-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.ocr-mini-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.ocr-preview-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.ocr-preview {
+  position: relative;
+  line-height: 0;
+}
+
+.ocr-preview-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.ocr-highlight {
+  position: absolute;
+  border: 2px solid var(--red);
+  background: rgba(220, 38, 38, 0.12);
+  border-radius: 3px;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.ocr-preview-hint {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin: 10px 2px 0;
+}
+
+.ocr-right {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.ocr-lines-title {
+  font-size: 15px;
+  margin: 0 0 10px;
+  word-break: break-all;
+}
+
+.ocr-lines-empty {
+  font-size: 14px;
+  color: var(--faint);
+  margin: 6px 0;
+}
+
+.ocr-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 560px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.ocr-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.ocr-line:hover {
+  background: var(--panel-soft);
+}
+
+.ocr-line.active {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.ocr-line-no {
+  flex: none;
+  width: 26px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ocr-line-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.ocr-line-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.ocr-line-conf {
+  flex: none;
+  font-size: 12px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ocr-exports {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.ocr-exports-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ocr-notes {
+  margin-top: 16px;
+}
+
+.ocr-notes-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.75;
+}

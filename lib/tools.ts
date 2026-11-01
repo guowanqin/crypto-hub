@@ -627,6 +627,53 @@ export const TOOLS: ToolDef[] = [
       en: "Hands-on notes: this is an unofficial third-party client, and the Windows installer carries no publisher code signature, so an 'unknown publisher' prompt on install is expected — download only from this original releases repo (never random mirrors) and check the installer against the SHA-256 the repo publishes. The Mac build is unnotarised and still a beta, and playback availability depends on the content service at the time.",
     },
   },
+  {
+    slug: "ocr-tool",
+    name: { zh: "图片文字识别 OCR（本地版）", en: "Image OCR — Local, In-Browser" },
+    url: "https://18btc.cc/tool/ocr-tool",
+    tags: ["ocr"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "在浏览器本地把图片里的文字识别出来：批量最多 20 张、中英混合、按行对照原图高亮，导出 TXT / Markdown / Word / ZIP，图片不上传。",
+      en: "Recognise text from images locally in your browser: batches of up to 20, mixed Chinese/English, line-by-line highlights on the original image, export to TXT / Markdown / Word / ZIP — images are never uploaded.",
+    },
+    detail: {
+      zh: "基于开源 Tesseract 引擎的本地 OCR：拖放、点击或粘贴导入图片（一次最多 20 张），识别在你浏览器的 Web Worker 里逐张排队完成，简体中文与英文混合识别，也可切纯中文 / 纯英文模式提速。结果按行列出，点任意一行，左侧原图上会把这一行框出来对位核对；认错的字可以直接在行内改掉。导出有单张 TXT、全部合成 Markdown、全部合成 TXT、Word 文档（.docx）和按图打包 ZIP（每张图一个同名 .txt）。代价讲清楚：第一次使用要联网下载识别模型（WASM 核心加中英文语言包，共几十 MB），下完之后浏览器会缓存、断网也能用；效果上印刷体、截图、单据是主场，手写字和复杂表格版面明显不如云端大厂 OCR——换来的是图片从头到尾不离开你的设备，证件、合同、聊天截图这类敏感图片不用先过别人的服务器。",
+      en: "Local OCR powered by the open-source Tesseract engine: drag, click or paste to import images (up to 20 at a time); recognition runs in a Web Worker in your browser, one image at a time, in mixed Simplified-Chinese + English, with Chinese-only or English-only modes for speed. Results are listed line by line — click any line and that line is boxed on the original image so you can check it in place — and misread characters can be fixed right in the line. Exports: a single image's TXT, all results as Markdown, all as one TXT, a Word document (.docx), or a ZIP with one same-named .txt per image. The cost, stated plainly: the first run downloads the recognition models online (the WASM core plus the Chinese and English language packs, tens of MB in total); once cached it works offline. Print, screenshots and forms are its strength; handwriting and complex table layouts are clearly weaker than big-cloud OCR — in exchange, your images never leave your device, which matters for ID scans, contracts and chat screenshots.",
+    },
+    audience: {
+      zh: "要把截图、扫描件、单据照片转成可编辑文字，又不想把图片上传到第三方网站的人：行政、财务、学生和做资料整理的人最常用。",
+      en: "Anyone who needs text out of screenshots, scans or photos of documents without uploading the images to a third-party site — admin, finance, students and anyone tidying up documents.",
+    },
+    take: {
+      zh: "实测口径：中英混合的印刷体截图识别够稳，逐行高亮对照改错很省事；第一次打开要等模型下载，急用先点一张图把模型拉下来。手写和表格别为难它，那是云端 OCR 的活。",
+      en: "Field notes: printed mixed Chinese/English screenshots recognise reliably, and the line-highlight proofreading saves real time. The first open waits on the model download — feed it one image early to warm the cache. Don't ask it to do handwriting or tables; that's cloud OCR's job.",
+    },
+  },
+  {
+    slug: "imgpeel",
+    name: { zh: "ImgPeel 图片文字识别", en: "ImgPeel — Image to Text OCR" },
+    url: "https://imgpeel.toolooz.com/zh-CN",
+    tags: ["ocr"],
+    type: "third-party",
+    oneLiner: {
+      zh: "免费在线图片文字识别：同样主打浏览器本地 OCR、图片不上传，支持简繁英韩日俄等多语种，识别结果可导出 TXT、Markdown、Word。",
+      en: "Free online image-to-text OCR that also runs locally in the browser with no uploads, covering Simplified/Traditional Chinese, English, Korean, Japanese, Russian and more, with export to TXT, Markdown and Word.",
+    },
+    detail: {
+      zh: "ImgPeel 是 toolooz 旗下的一款在线 OCR 工具，形态是纯网页、打开即用：把图片拖进去做文字识别，按其官网介绍支持简体、繁体、英文、韩语、日语、俄语等多国语言，识别结果可以复制或下载为 TXT、Markdown、Word，也支持批量识别；和本站的本地 OCR 一样，它强调图片不上传、识别在浏览器本地完成。本站的文字识别工具在产品形态上参考了它（本地识别、批量、逐行对照、多格式导出），但两者是各自独立的实现与站点：语言覆盖上 ImgPeel 更广（多语种），本站工具则胜在与导航站一体、逐行高亮对照原图这一步做得更细。两个都是免费、无需注册，需要哪种直接用哪种。",
+      en: "ImgPeel is an online OCR tool by toolooz — a pure web app that works on open: drop an image in for text recognition. Per its official site it covers Simplified and Traditional Chinese, English, Korean, Japanese, Russian and more languages; results can be copied or downloaded as TXT, Markdown or Word, and batch recognition is supported. Like this site's local OCR it stresses that images are not uploaded and recognition happens locally in the browser. Our OCR tool takes its product shape from ImgPeel (local recognition, batching, line-by-line checking, multi-format export) but the two are independent implementations on independent sites: ImgPeel covers more languages, while ours is integrated with this hub and does the line-highlight proofreading step in more detail. Both are free with no sign-up — use whichever fits.",
+    },
+    audience: {
+      zh: "需要识别繁体或韩日俄等更多语种图片文字、或想多一个本地 OCR 备选的人。",
+      en: "People who need Traditional Chinese, Korean, Japanese, Russian or other extra languages recognised, or who want a second local-OCR option.",
+    },
+    take: {
+      zh: "同类里少见的老实工具：不上传、免注册、导出格式齐。多语种识别找它，中英混合加逐行对照核稿用本站内置的那个，两个配合着用正好。",
+      en: "A refreshingly honest entry in its class: no uploads, no sign-up, a full set of export formats. Use it for extra languages; use the built-in one here for mixed Chinese/English with line-by-line proofreading — they complement each other.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
