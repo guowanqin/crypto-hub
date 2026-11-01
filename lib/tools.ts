@@ -508,6 +508,30 @@ export const TOOLS: ToolDef[] = [
       en: "The web tool edits EXIF; this desktop app edits system timestamps — a clear division of labour. It is a few hundred KB, needs no install, and beats any online tool for fixing file dates. Windows only, note.",
     },
   },
+  {
+    slug: "pdfbox",
+    name: { zh: "PDF 工具箱", en: "PDF Toolbox" },
+    url: "https://18btc.cc/tag/pdf",
+    tags: ["pdf"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "纯前端 PDF 工具箱：合并、拆分、页面管理、水印、页码、骑缝章、批注、图片互转，文件不上传、离线可用。",
+      en: "A pure front-end PDF toolbox: merge, split, page management, watermarks, page numbers, cross-page seals, annotations and image conversion — files never uploaded, works offline.",
+    },
+    detail: {
+      zh: "参考信创 PDF 工具箱的功能集，在浏览器里把 PDF 的日常处理一次做全：多个 PDF 合并（可调序）、按页码范围拆分或逐页拆分、页面缩略图管理（删除、旋转、重排、插入同尺寸空白页）、文字水印（平铺或居中，透明度与角度可调）、页码添加（六个位置、数字或中文「第 X 页 共 N 页」格式）、骑缝章（印章图按页数自动切片逐页盖在右侧边缘，拼起来是完整一枚）、指定页文字批注，以及图片转 PDF 与 PDF 逐页转图片。全部处理都在你的浏览器本地完成：文件不经过任何服务器，断网也能用，尤其适合合同、证件、财务单据这类不该上传的文件。边界讲清：不做 PDF 转 Word/Excel（纯前端做不出可用的排版保真度），不做 OCR，也不做具法律效力的电子签章——骑缝章是把印章图按传统骑缝方式盖上，不替代 CA 电子签。",
+      en: "Modelled on the Xinchuang PDF toolbox's feature set, it covers everyday PDF work in the browser: merge multiple PDFs (reorderable), split by page ranges or page-by-page, manage pages as thumbnails (delete, rotate, reorder, insert a blank page of the same size), text watermarks (tiled or centred, adjustable opacity and angle), page numbers (six positions; numeric or Chinese 'page X of N' formats), cross-page seals — the stamp image is sliced across all pages and placed on the right edge of each, reassembling into one complete seal — text annotations on a chosen page, and image→PDF / PDF→image conversion. Everything runs locally in your browser: files never pass through a server, it works offline, which suits contracts, ID scans and financial documents that should not be uploaded. The boundaries, plainly: no PDF→Word/Excel (a pure front-end cannot keep the layout usable), no OCR, and no legally binding e-signatures — the cross-page seal stamps the image the traditional perforation way and does not replace a CA-issued electronic seal.",
+    },
+    audience: {
+      zh: "经常处理合同、标书、证件扫描件，需要合并拆分页码骑缝章、又不放心把文件传上云的行政、财务与法务人员。",
+      en: "Admin, finance and legal staff who handle contracts, bids and ID scans, need merging, splitting, page numbers and cross-page seals, and don't want those files on someone else's server.",
+    },
+    take: {
+      zh: "内网和涉密场景才是它的主场：打开页面就能干活，网线拔了照样跑；骑缝章切片对齐我们逐页验过，别拿它当 CA 电子签用就行。",
+      en: "Its home turf is intranets and sensitive documents: open the page and work, network cable optional. We verified the seal slices align page by page — just don't mistake it for a CA e-signature.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

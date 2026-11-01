@@ -2938,3 +2938,384 @@ a:hover {
   gap: 6px;
   white-space: nowrap;
 }
+
+/* ---------- PDF 工具箱（/tag/pdf）：pdf- 前缀作用域样式 ---------- */
+.pdf-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+
+.pdf-tab {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdf-tab:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.pdf-tab.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.pdf-localnote {
+  color: var(--faint);
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+.pdf-desc {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+
+.pdf-drop {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 15px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pdf-drop:hover,
+.pdf-drop.dragging {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.pdf-drop-text {
+  margin: 0;
+}
+
+.pdf-drop-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.pdf-hint {
+  color: var(--faint);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
+.pdf-error {
+  color: var(--red);
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+.pdf-busy {
+  color: var(--gold-strong);
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+.pdf-filelist {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdf-fileitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+
+.pdf-filemain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pdf-filename {
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pdf-filemeta {
+  color: var(--faint);
+  font-size: 12.5px;
+}
+
+.pdf-filebtns {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.pdf-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.pdf-count {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.pdf-modes {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+
+.pdf-mode-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdf-mode-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.pdf-controls {
+  margin-top: 14px;
+}
+
+.pdf-controls-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.pdf-controls-row:first-child {
+  margin-top: 0;
+}
+
+.pdf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  min-width: 130px;
+  flex: 0 1 auto;
+}
+
+.pdf-field-label {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13.5px;
+  margin: 0 0 6px;
+}
+
+.pdf-input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.pdf-input:focus {
+  outline: 2px solid var(--gold-dim);
+  border-color: var(--gold);
+}
+
+.pdf-half {
+  flex: 1 1 300px;
+  min-width: 260px;
+}
+
+.pdf-pagegrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.pdf-pagecell {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdf-pagecell.over {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-dim);
+}
+
+.pdf-thumbwrap {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--panel-soft);
+  border-radius: 6px;
+}
+
+.pdf-thumb {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.pdf-blankthumb {
+  color: var(--faint);
+  font-size: 13px;
+  border: 1.5px dashed var(--border);
+  border-radius: 4px;
+  width: 62%;
+  height: 78%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.pdf-pageno {
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.pdf-pageorig {
+  color: var(--faint);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.pdf-pagebtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pdf-seal-preview {
+  margin-top: 10px;
+  max-width: 140px;
+  max-height: 140px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background:
+    repeating-conic-gradient(#f0ead6 0% 25%, #fffdf8 0% 50%) 0 0 / 16px 16px;
+  padding: 6px;
+}
+
+.pdf-pagenav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pdf-preview-wrap {
+  position: relative;
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel-soft);
+  padding: 10px;
+  overflow: auto;
+}
+
+.pdf-preview {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(41, 37, 36, 0.12);
+  cursor: crosshair;
+}
+
+.pdf-mark {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.pdf-sub {
+  font-size: 15px;
+  margin: 18px 0 4px;
+}
+
+.pdf-swatches {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.pdf-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pdf-swatch.on {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--border);
+}
+
+.pdf-preview-inner {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}

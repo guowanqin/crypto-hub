@@ -197,6 +197,36 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "pdf",
+    name: { zh: "PDF 工具", en: "PDF Tools" },
+    intro: {
+      zh: "处理 PDF 不必把文件传到陌生网站：合并、拆分、页面管理、水印、页码、骑缝章、批注、图片与 PDF 互转，全部在这个页面本地完成。这一页的站内工具箱参考信创 PDF 工具箱的功能集整理而成，纯前端、离线可用，合同、证件这类敏感文件从头到尾不离开你的电脑。",
+      en: "You don't have to upload a PDF to some stranger's server to work on it: merge, split, page management, watermarks, page numbers, cross-page seals, annotations and image↔PDF conversion all happen locally on this page. The built-in toolbox follows the feature set of the Xinchuang PDF toolbox — pure front-end, works offline, and sensitive files like contracts and ID scans never leave your computer.",
+    },
+    seoDescription: {
+      zh: "在线 PDF 工具箱（纯前端本地处理）：PDF 合并、按页码拆分、页面删除/重排/旋转/插入空白页、文字水印、页码添加、骑缝章、文字批注、图片转 PDF、PDF 转图片。文件不上传服务器，离线可用，免费无需注册。",
+      en: "Online PDF toolbox that runs entirely in your browser: merge PDFs, split by page ranges, delete/reorder/rotate pages, insert blank pages, add text watermarks, page numbers, cross-page seals (perforation stamps) and text annotations, convert images to PDF and PDF pages to images. Files are never uploaded; works offline, free, no sign-up.",
+    },
+    keywords: [
+      "PDF工具箱",
+      "PDF合并",
+      "PDF拆分",
+      "PDF水印",
+      "PDF页码",
+      "骑缝章",
+      "PDF页面管理",
+      "图片转PDF",
+      "PDF转图片",
+      "离线PDF工具",
+      "信创PDF工具箱",
+      "PDF工具在线",
+      "pdf toolbox",
+      "merge pdf",
+      "split pdf",
+      "pdf watermark",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {
