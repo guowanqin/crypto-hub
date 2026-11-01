@@ -721,6 +721,53 @@ export const TOOLS: ToolDef[] = [
       en: "Every entry in this site's dictionary originates here, and the sync relationship is stated openly. Spot a new code word in the wild? File a PR upstream instead of just asking around — everyone who looks words up benefits.",
     },
   },
+  {
+    slug: "ip-check",
+    name: { zh: "IP 风险检测", en: "IP Risk Check" },
+    url: "https://18btc.cc/tool/ip-check",
+    tags: ["ip-check"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "打开先自查出口 IP，也可查任意 IP/域名：地理、ASN、机房/家宽判定、逐项列明的风险分、Whois 与 WebRTC 泄露检测一页看齐。",
+      en: "Your exit IP is checked on open; any IP or domain works too — geography, ASN, a datacenter/residential verdict, an itemised risk score, whois and a WebRTC leak check on one page.",
+    },
+    detail: {
+      zh: "站内可直接使用的 IP 自查工具，产品形态参考 pingip.co，数据源与评分规则为本站自建并全量公开。打开页面先自动查你自己的出口 IP；输入任意 IP 或域名（域名经 DoH 解析）也可查。情报由服务端合并 ipwho.is（地理、ASN、运营商）与标记源（ip-api.com 主源、proxycheck.io 兜底，给出 proxy / hosting / mobile 标记），单源失败只降级对应字段、实际供数源在页面上标注；属性判定 IDC 机房 / 家宽住宅 / 移动网络逐项列出命中证据；风险分只用四条公开规则（proxy +45、hosting +35、云厂商 ASN +15、移动网络 −20），每项加减分与证据都在页面上对得回去——它衡量「像不像代理/机房出口」，不是商业风控库的欺诈分。原生 IP 只给参考判断（地理归属国与 RDAP 网段注册国是否一致、是否 Anycast），不装作能确证。Whois 走 RDAP 官方通道给注册组织/注册商、网段、注册日期与状态摘要。另有三节完全在浏览器本地完成、不上传服务器：WebRTC 泄露检测（STUN 公网地址与出口 IP 对比）、浏览器环境（时区、语言、UA、WebGL 等）、HTTP 延迟测试（浏览器发不了 ICMP，测的是 HTTP 往返，页面已标注）。",
+      en: "A built-in IP self-audit tool whose product shape follows pingip.co, with data sources and scoring rules built — and fully published — by this site. Opening the page checks your own exit IP first; any IP or domain (domains resolved over DoH) can be queried. Intel is merged server-side from public sources — ipwho.is (geography, ASN, ISP) plus flag sources (ip-api.com primary, proxycheck.io as fallback, providing the proxy / hosting / mobile flags); if one source fails, only its fields degrade, and the page names the source that actually answered. The datacenter / residential / mobile verdict lists every piece of evidence, and the risk score uses just four public rules (proxy +45, hosting +35, cloud-provider ASN +15, mobile −20) with each item's points and evidence traceable on the page — it measures how much an IP looks like a proxy/datacenter exit, and is not a commercial fraud score. Native-IP status is a reference judgement only (geo country vs the RDAP netblock's registered country, and anycast), never a claimed certification. Whois comes from official RDAP channels: registrant/registrar, range, registration date and status. Three further sections run entirely in your browser and upload nothing: a WebRTC leak check (STUN public address vs your exit IP), a browser-environment readout (timezone, language, UA, WebGL…) and an HTTP latency test (a browser cannot send ICMP, so HTTP round-trips are measured — labelled as such on the page).",
+    },
+    audience: {
+      zh: "在意自己网络出口「干不干净」的人：用代理/VPN/机场节点、远程办公、做账号运营与风控自查，想先看清出口 IP 的机房属性、风险标记与 WebRTC 有没有泄露的人。",
+      en: "Anyone who cares how clean their network exit looks: proxy/VPN users, remote workers, account operators and the risk-conscious — anyone who wants the datacenter traits, risk flags and WebRTC leak status of their exit IP spelled out.",
+    },
+    take: {
+      zh: "先拿它查自己的出口再查别人的：评分规则就四条、全印在页面上，命中哪条加多少分自己能验算；记住它测的是机房/代理特征，不是善恶——公共 DNS 和公司 VPN 分数高是天生的。",
+      en: "Check your own exit before anyone else's: the score is just four rules printed in full on the page, so you can re-derive every point yourself. Remember it measures datacenter/proxy traits, not good or evil — public DNS resolvers and corporate VPNs score high by nature.",
+    },
+  },
+  {
+    slug: "pingip",
+    name: { zh: "PingIP", en: "PingIP" },
+    url: "https://pingip.co",
+    tags: ["ip-check"],
+    type: "third-party",
+    oneLiner: {
+      zh: "老牌在线 IP 自查站：IP/域名情报、风险评分、WebRTC 与浏览器环境检测、Ping 与 Whois，本站 IP 检测的产品形态参考对象。",
+      en: "An established online IP self-check site — IP/domain intel, risk scoring, WebRTC and browser-environment checks, ping and whois; the reference this site's IP Check takes its shape from.",
+    },
+    detail: {
+      zh: "PingIP（pingip.co）是一款免费、无需注册的在线 IP 风险检测与网络环境自查工具：可查询 IP 或域名的地理位置、ASN、运营商、CIDR、IDC 机房/家宽属性与原生 IP 倾向，并给出风险评分；站内还有 WebRTC 泄露检测、浏览器环境检测、Ping 测试与 Whois 查询，其中 WebRTC、时区、语言等环境检测在其页面本地完成、不上传服务器。本站的「IP 风险检测」在产品形态上参考了它（自查 + 情报 + 风险分 + 本地环境检测一页流），但两者是各自独立的站点与实现：本站把情报合并源（ipwho.is + ip-api）与四条评分规则的权重全量公开、逐项可验算，并把延迟一节如实标注为 HTTP 往返而非 ICMP Ping；PingIP 的覆盖与呈现则有它自己的口径。两个都免费，需要哪种直接用哪种。",
+      en: "PingIP (pingip.co) is a free, no-sign-up IP risk-check and network self-audit tool: look up an IP or domain for geography, ASN, ISP, CIDR, datacenter-vs-residential traits and native-IP tendency, with a risk score; it also offers a WebRTC leak check, a browser-environment check, ping tests and whois lookups, with the WebRTC, timezone and language checks running locally on its pages rather than on a server. This site's IP Risk Check takes its product shape from PingIP (self-check + intel + risk score + local environment checks in one flow), but the two are independent sites and implementations: ours publishes its merged intel sources (ipwho.is + ip-api) and all four scoring weights for anyone to re-derive, and labels its latency section honestly as HTTP round-trips rather than ICMP ping; PingIP has its own coverage and presentation. Both are free — use whichever fits.",
+    },
+    audience: {
+      zh: "想多一个 IP 自查备选、或想对照两家口径看同一个 IP 的人。",
+      en: "People who want a second IP self-check option, or who like comparing two methodologies on the same IP.",
+    },
+    take: {
+      zh: "这类工具的老面孔，功能排布是本站参考的原点；两边最大的差别在透明度：本站把数据源和评分权重全摊开，它更像开箱即用的成品——对照着用，正好互相验算。",
+      en: "A familiar face in this category and the layout reference for this site's tool. The biggest difference is transparency: ours lays its sources and scoring weights bare, while PingIP is the more packaged product — run both and cross-check.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

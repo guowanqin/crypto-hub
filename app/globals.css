@@ -4361,3 +4361,180 @@ a:hover {
 .slang-about {
   margin-top: 20px;
 }
+
+/* ---------- IP 检测（/tag/ip-check 与 /tool/ip-check 共用组件 IpCheckBoard） ---------- */
+.ipc-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 6px;
+}
+.ipc-input {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 11px 14px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+.ipc-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.ipc-head {
+  margin: 16px 0 4px;
+}
+.ipc-kind {
+  margin: 0 0 4px;
+  font-size: 13.5px;
+  color: var(--gold-strong);
+  font-weight: 600;
+}
+.ipc-bigip {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  word-break: break-all;
+}
+.ipc-fetched {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+.ipc-stat-small {
+  font-size: 19px;
+}
+.ipc-block {
+  margin-top: 26px;
+}
+.ipc-sec-title {
+  font-size: 19px;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+.ipc-sub-title {
+  font-size: 15.5px;
+  margin: 20px 0 8px;
+  color: var(--gold-strong);
+}
+.ipc-score-row {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.ipc-score-num {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.ipc-band {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #fff;
+}
+.ipc-band-low {
+  background: var(--green);
+}
+.ipc-band-mid {
+  background: #d97706;
+}
+.ipc-band-high {
+  background: var(--red);
+}
+.ipc-score-side {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.ipc-score-label {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.ipc-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  overflow: hidden;
+}
+.ipc-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.ipc-band-bg-low {
+  background: var(--green);
+}
+.ipc-band-bg-mid {
+  background: #d97706;
+}
+.ipc-band-bg-high {
+  background: var(--red);
+}
+.ipc-score-type {
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+.ipc-evidence {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.ipc-evidence strong {
+  color: var(--text);
+}
+.ipc-kv {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px 26px;
+}
+.ipc-kv > div {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 8px;
+}
+.ipc-kv dt {
+  flex: 0 0 108px;
+  font-size: 13.5px;
+  color: var(--faint);
+  margin: 0;
+}
+.ipc-kv dd {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text);
+  word-break: break-word;
+}
+.ipc-kv-long {
+  font-size: 12.8px;
+  line-height: 1.55;
+}
+.ipc-card {
+  margin-top: 20px;
+}
+.ipc-card .btn {
+  margin-top: 12px;
+}

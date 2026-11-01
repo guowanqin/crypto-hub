@@ -374,6 +374,36 @@ export const TAGS: TagDef[] = [
       "generate word documents from excel",
     ],
   },
+  {
+    id: "ip-check",
+    name: { zh: "IP 检测", en: "IP Check" },
+    intro: {
+      zh: "你的出口 IP 在别人眼里是什么样，风控系统就是怎么看你的：这一页打开先自动自查——地理位置、ASN、运营商、网段一次拉齐，再按四条全公开的规则判定它是 IDC 机房、家宽住宅还是移动网络，给出逐项列明的风险分，原生 IP 只给参考判断不装确证。也可以查任意 IP 或域名，附 RDAP Whois；WebRTC 泄露、浏览器环境与延迟测试三节全在你的浏览器本地跑，不上传。先说清边界：风险分是公开信号的规则评分，不是商业风控库的欺诈分；浏览器测不了 ICMP Ping，延迟一节测的是 HTTP 往返。",
+      en: "Your exit IP is exactly what every risk system sees. This page self-checks yours on open — geography, ASN, ISP and netblock pulled together — then applies four fully published rules to call it datacenter, residential or mobile, with an itemised risk score; native-IP status is a reference judgement, never a fake certification. You can also look up any IP or domain, with RDAP whois attached, and the WebRTC-leak, browser-environment and latency sections all run locally in your browser. The limits up front: the score is a public-signal rule score, not a commercial fraud score; a browser cannot send ICMP pings, so the latency section measures HTTP round-trips.",
+    },
+    seoDescription: {
+      zh: "IP 风险检测与网络环境自查：打开自动查出口 IP，可查任意 IP/域名的地理位置、ASN、运营商、CIDR 与 RDAP Whois，按公开规则判定 IDC 机房/家宽住宅/移动网络、给出逐项证据的风险分与原生 IP 参考判断；附 WebRTC 泄露检测、浏览器环境检测、HTTP 延迟测试（本地完成不上传）。免费、无需注册。",
+      en: "IP risk check and network self-audit: your exit IP is checked on open; look up any IP or domain for geography, ASN, ISP, CIDR and RDAP whois, with a datacenter/residential/mobile verdict, an itemised rule-based risk score and a native-IP reference judgement. Includes a WebRTC leak check, browser-environment readout and HTTP latency test — all local, nothing uploaded. Free, no sign-up.",
+    },
+    keywords: [
+      "IP检测",
+      "IP风险检测",
+      "IP查询",
+      "原生IP",
+      "原生IP检测",
+      "机房IP",
+      "家宽IP",
+      "WebRTC泄露检测",
+      "Whois查询",
+      "IP地址查询",
+      "IP归属地",
+      "代理IP检测",
+      "IP check",
+      "IP risk score",
+      "native IP",
+      "WebRTC leak test",
+    ],
+  },
 ];
 
 export const TAG_MAP: Record<string, TagDef> = Object.fromEntries(
