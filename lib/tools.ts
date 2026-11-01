@@ -414,6 +414,30 @@ export const TOOLS: ToolDef[] = [
       en: "Don't count the days to the bottom by feel — this board computes how far is left and when each level arrives. It is a cycle projection, though; position sizing is still on you.",
     },
   },
+  {
+    slug: "crcl-panel",
+    name: { zh: "CRCL 买入估值面板", en: "CRCL Buy & Valuation Panel" },
+    url: "https://18btc.cc/tag/crcl",
+    tags: ["crcl"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "按买入信号分模型（v6）实时算 Circle（CRCL）的估值与买入信号：P/S、RSI、USDC 供应与市占率自动取数。",
+      en: "Circle's (CRCL) valuation and buy signal, computed live under the Buy Signal Score model (v6): P/S, RSI, USDC supply and market share fetched automatically.",
+    },
+    detail: {
+      zh: "把「什么时候该买 CRCL」写成不受情绪影响的规则：总分 =（估值层 0–80 + 恐慌层 0–20 + 基本面层 ±10）× 1.3 × 否决乘数，封顶 130。估值层看实时 P/S，恐慌层看 RSI14，基本面层看 USDC 供应量 180 天变化；黑天鹅否决只看 USDC 市占率——份额被对手抢走才打折，全市场一起缩水不触发。面板同时给出流通市值、FDV、P/S(TTM)、市值/调整后 EBITDA、距历史新高与上市低点，以及 USDC 基本面仪表与营收利润表。股价与日线来自 Yahoo Finance，USDC 数据来自 DeFiLlama，股本与利润表为标注了来源与截至日期的可编辑配置。分数是纪律工具，不是预测，不构成投资建议。",
+      en: "It turns 'when should I buy CRCL?' into emotion-free rules: total = (valuation layer 0–80 + panic layer 0–20 + fundamentals layer ±10) × 1.3 × veto multiplier, capped at 130. The valuation layer reads live P/S, the panic layer RSI14, the fundamentals layer USDC supply's 180-day change; the black-swan veto watches USDC market share only — share lost to rivals triggers a haircut, a market-wide shrink does not. The panel also shows market cap, FDV, P/S (TTM), market cap / adjusted EBITDA, distance from the all-time high and the post-IPO low, a USDC fundamentals gauge and the revenue & profit table. Prices and daily bars come from Yahoo Finance, USDC data from DeFiLlama; share counts and financials are an editable configuration with sources and as-of dates. The score is a discipline tool, not a prediction, and not investment advice.",
+    },
+    audience: {
+      zh: "持有或观望 CRCL、想用规则代替情绪决定分批节奏的投资者。",
+      en: "Investors holding or watching CRCL who want rules, not emotions, to pace staged buying.",
+    },
+    take: {
+      zh: "先看分数再下单：三层分数条把贵不贵、慌不慌、基本面顺不顺一次摊开；记住它只是纪律工具，财报类数字记得看标注的截至日期。",
+      en: "Check the score before the order: the three layer bars lay out cheap-or-not, panic-or-not and fundamentals in one view. It is a discipline tool only — and mind the as-of dates on the financial figures.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
