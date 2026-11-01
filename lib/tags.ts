@@ -105,6 +105,27 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "burn",
+    name: { zh: "销毁数据", en: "Burn Data" },
+    intro: {
+      zh: "代币销毁是真金白银的通缩：每一笔都记在链上，谁都能验。这一页直接读以太坊主网 UNI 合约，追踪 Uniswap 协议费驱动的 UNI 销毁——累计销毁了多少、占供应多少、最近又烧了多少笔，一目了然。",
+      en: "A token burn is deflation you can verify: every burn is written on-chain for anyone to check. This page reads the UNI contract on Ethereum mainnet directly, tracking the protocol-fee-driven UNI burn — how much has been burned in total, what share of supply that is, and the latest burn records.",
+    },
+    seoDescription: {
+      zh: "UNI 销毁数据实时追踪：直接读取以太坊主网 UNI 合约，统计 UNI 累计销毁量、销毁占初始供应比例、有效供应、近 24 小时与近 30 天销毁量、年化销毁量与年化通缩率，并逐笔列出最近销毁记录（附交易哈希）。",
+      en: "Live UNI burn tracker reading the UNI contract on Ethereum mainnet: total UNI burned, share of the initial supply destroyed, effective supply, 24h and 30d burn totals, annualized burn and deflation rate, plus the latest burn records with transaction hashes.",
+    },
+    keywords: [
+      "UNI销毁",
+      "UNI销毁数据",
+      "Uniswap销毁",
+      "UNI通缩",
+      "UNI burn",
+      "Uniswap burn tracker",
+      "代币销毁数据",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {

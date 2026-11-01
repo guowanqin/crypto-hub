@@ -320,6 +320,29 @@ export const TOOLS: ToolDef[] = [
       en: "I revoke unused approvals monthly — a few minutes that dodges a whole class of drains.",
     },
   },
+  {
+    slug: "defiburn",
+    name: { zh: "DeFiBurn", en: "DeFiBurn" },
+    url: "https://www.defiburn.com",
+    tags: ["burn"],
+    type: "third-party",
+    oneLiner: {
+      zh: "UNI 销毁数据终端：逐笔追踪 Uniswap 协议费销毁与各链销毁分布。",
+      en: "A UNI burn data terminal: tracks Uniswap protocol-fee burns record by record, with per-chain breakdowns.",
+    },
+    detail: {
+      zh: "专盯 UNI 销毁的数据站：把 Uniswap 各链协议费触发的销毁逐笔采集入账，给出每日销毁量、7/30 天合计、年化销毁速率与销毁构成（协议费销毁 vs 一次性金库销毁），并按链拆分销毁来源与费用开关状态。本站「销毁数据」页的核心指标与它的累计口径互相印证；想看更细的多链分布和历史趋势时，来这里深挖。",
+      en: "A data site devoted to the UNI burn: it records every protocol-fee burn triggered across Uniswap's chains, with daily totals, 7/30-day sums, annualized burn rates and burn composition (protocol-fee burns vs the one-off treasury burn), plus per-chain sources and fee-switch status. The headline figures on our Burn Data page cross-check against its totals; come here for the deeper per-chain breakdowns and history.",
+    },
+    audience: {
+      zh: "持有或观望 UNI、想量化其通缩节奏的投资者与研究者。",
+      en: "UNI holders and researchers who want to quantify its deflation pace.",
+    },
+    take: {
+      zh: "看 UNI 通缩别听人转述，来这里看它逐笔数出来的账。",
+      en: "Skip the second-hand takes on UNI deflation — this is the ledger, counted record by record.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

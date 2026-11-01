@@ -1536,3 +1536,158 @@ a:hover {
     font-size: 18px;
   }
 }
+
+/* ---------- UNI 销毁看板（/tag/burn） ---------- */
+.burn-board {
+  margin-top: 8px;
+}
+
+.burn-board-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.burn-board-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.burn-board-meta {
+  color: var(--faint);
+  font-size: 13px;
+  margin: 0;
+}
+
+.burn-note {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  color: var(--muted);
+}
+
+.burn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.burn-stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.burn-stat-hero {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-soft) 100%);
+}
+
+.burn-stat-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+
+.burn-stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.burn-stat-hero .burn-stat-value {
+  color: var(--gold-strong);
+  font-size: 30px;
+}
+
+.burn-stat-sub {
+  color: var(--faint);
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.burn-bar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--panel-2);
+  overflow: hidden;
+  margin: 4px 0 8px;
+}
+
+.burn-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 99px;
+}
+
+.burn-records {
+  margin-top: 22px;
+}
+
+.burn-records-title {
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+
+.burn-table-wrap {
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.burn-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 560px;
+}
+
+.burn-table th,
+.burn-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.burn-table th {
+  color: var(--muted);
+  font-weight: 600;
+  background: var(--panel-soft);
+}
+
+.burn-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.burn-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.burn-addr-line {
+  margin-top: 10px;
+  word-break: break-all;
+}
+
+@media (max-width: 720px) {
+  .burn-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .burn-stat-value {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,389 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import type { TagDef } from "@/lib/tags";
+import { toolsByTag } from "@/lib/tools";
+import type { UniBurnData } from "@/lib/uniburn";
+import { DEAD_ADDRESS, UNI_ADDRESS } from "@/lib/uniburn";
+import { HUB_DICT } from "@/lib/i18n";
+import { MASCOT_NAME, type Lang } from "@/lib/site";
+import ToolCard from "./ToolCard";
+import AdSlot from "./AdSlot";
+import { useLang } from "./LangProvider";
+
+const DICT: Record<
+  Lang,
+  {
+    boardKicker: string;
+    updatedAt: string;
+    blockHeight: string;
+    loading: string;
+    loadError: string;
+    totalBurned: string;
+    totalBurnedSub: string;
+    burnedShare: string;
+    burnedShareSub: string;
+    totalSupply: string;
+    totalSupplySub: string;
+    effectiveSupply: string;
+    effectiveSupplySub: string;
+    burn24h: string;
+    burn24hSub: string;
+    burn30d: string;
+    burn30dSub: string;
+    annualized: string;
+    annualizedSub: string;
+    deflationRate: string;
+    deflationRateSub: string;
+    unavailable: string;
+    recentTitle: string;
+    colTime: string;
+    colAmount: string;
+    colFrom: string;
+    colTx: string;
+    viewTx: string;
+    mechTitle: string;
+    mechBody: string;
+    caliberTitle: string;
+    caliberBody: string;
+    toolsTitle: string;
+  }
+> = {
+  zh: {
+    boardKicker: "UNI 销毁看板 · 以太坊主网实时数据",
+    updatedAt: "数据更新",
+    blockHeight: "区块高度",
+    loading: "正在从以太坊主网读取销毁数据…",
+    loadError: "销毁数据暂时拉取失败，请稍后刷新重试。",
+    totalBurned: "累计销毁总量",
+    totalBurnedSub: "销毁地址 0x…dEaD 的 UNI 余额",
+    burnedShare: "占初始供应比例",
+    burnedShareSub: "初始供应 1,000,000,000 UNI",
+    totalSupply: "当前总供应（合约）",
+    totalSupplySub: "UNI 合约 totalSupply，销毁不改变此值",
+    effectiveSupply: "有效供应",
+    effectiveSupplySub: "总供应 − 累计销毁",
+    burn24h: "近 24 小时销毁",
+    burn24hSub: "主网入账口径",
+    burn30d: "近 30 天销毁",
+    burn30dSub: "主网入账口径",
+    annualized: "年化销毁量",
+    annualizedSub: "按近 30 天速度折算（× 365/30）",
+    deflationRate: "年化通缩率",
+    deflationRateSub: "年化销毁量 ÷ 有效供应",
+    unavailable: "暂不可用",
+    recentTitle: "最近销毁记录",
+    colTime: "时间（UTC）",
+    colAmount: "销毁量",
+    colFrom: "发送方",
+    colTx: "交易",
+    viewTx: "查看",
+    mechTitle: "销毁机制",
+    mechBody:
+      "Uniswap 的 UNIfication 改革开启协议费开关后，各链协议费收入经 TokenJar 归集、跨链回到以太坊主网，兑换为 UNI 后转入销毁地址 0x000…dEaD 永久退出流通；2025 年 12 月底另有一笔约 1 亿枚的一次性金库销毁同路入账，占累计销毁的大头，此后每日销毁主要由协议费驱动。",
+    caliberTitle: "统计口径",
+    caliberBody:
+      "本页所有数字直接读取以太坊主网 UNI 合约：累计销毁 = 销毁地址余额（UNI 合约没有减少总供应的 burn 函数，总供应恒为 10 亿，有效供应 = 总供应 − 累计销毁）；近 24 小时 / 30 天销毁按主网入账时间统计，与按「销毁发生日」记账的多链口径有 1–7 天时滞差异，两者不可直接相加。数据由本站服务端读取公共 RPC 节点，缓存 30 分钟刷新。",
+    toolsTitle: "相关工具",
+  },
+  en: {
+    boardKicker: "UNI Burn Board · Live Ethereum mainnet data",
+    updatedAt: "Updated",
+    blockHeight: "Block",
+    loading: "Reading burn data from Ethereum mainnet…",
+    loadError: "Burn data is temporarily unavailable — please refresh shortly.",
+    totalBurned: "Total Burned",
+    totalBurnedSub: "UNI balance of the 0x…dEaD burn address",
+    burnedShare: "Share of Initial Supply",
+    burnedShareSub: "Initial supply 1,000,000,000 UNI",
+    totalSupply: "Total Supply (contract)",
+    totalSupplySub: "UNI contract totalSupply — burns do not change it",
+    effectiveSupply: "Effective Supply",
+    effectiveSupplySub: "Total supply − total burned",
+    burn24h: "Burned in 24h",
+    burn24hSub: "Mainnet crediting basis",
+    burn30d: "Burned in 30d",
+    burn30dSub: "Mainnet crediting basis",
+    annualized: "Annualized Burn",
+    annualizedSub: "30d pace scaled (× 365/30)",
+    deflationRate: "Annualized Deflation",
+    deflationRateSub: "Annualized burn ÷ effective supply",
+    unavailable: "Unavailable",
+    recentTitle: "Latest Burn Records",
+    colTime: "Time (UTC)",
+    colAmount: "Amount",
+    colFrom: "From",
+    colTx: "Tx",
+    viewTx: "View",
+    mechTitle: "How the burn works",
+    mechBody:
+      "Since Uniswap's UNIfication reform switched on protocol fees, fee revenue across chains is collected in TokenJars, bridged back to Ethereum mainnet, converted into UNI and sent to the burn address 0x000…dEaD, permanently leaving circulation. A one-off treasury burn of roughly 100M UNI was credited the same way in late December 2025 and makes up most of the cumulative total; daily burns since then are driven by protocol fees.",
+    caliberTitle: "Methodology",
+    caliberBody:
+      "Every figure on this page is read directly from the UNI contract on Ethereum mainnet: total burned = the burn address balance (the UNI contract has no supply-reducing burn function, so total supply stays at 1 billion and effective supply = total supply − total burned). The 24h / 30d figures use mainnet crediting time and can lag burn-occurrence-date accounting by 1–7 days; the two bases must not be added together. Data is fetched server-side from public RPC endpoints and cached for 30 minutes.",
+    toolsTitle: "Related tools",
+  },
+};
+
+function fmtFull(n: number): string {
+  return n.toLocaleString("en-US", { maximumFractionDigits: 2 });
+}
+
+function fmtCompact(n: number): string {
+  if (n >= 1e6) return (n / 1e6).toFixed(2) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(2) + "K";
+  return n.toFixed(2);
+}
+
+function shortAddr(a: string): string {
+  return a.slice(0, 6) + "…" + a.slice(-4);
+}
+
+function fmtTimeUtc(iso: string): string {
+  const dt = new Date(iso);
+  const p = (v: number) => String(v).padStart(2, "0");
+  return `${dt.getUTCFullYear()}-${p(dt.getUTCMonth() + 1)}-${p(dt.getUTCDate())} ${p(dt.getUTCHours())}:${p(dt.getUTCMinutes())}`;
+}
+
+export default function UniBurnClient({
+  tag,
+  adsPreview = false,
+}: {
+  tag: TagDef;
+  adsPreview?: boolean;
+}) {
+  const { lang } = useLang();
+  const t = HUB_DICT[lang];
+  const d = DICT[lang];
+  const list = toolsByTag(tag.id);
+  const otherLang = lang === "zh" ? "en" : "zh";
+
+  const [data, setData] = useState<UniBurnData | null>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/uni-burn")
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json();
+      })
+      .then((j: UniBurnData) => {
+        if (alive) setData(j);
+      })
+      .catch(() => {
+        if (alive) setError(true);
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return (
+    <main className="page">
+      <p className="crumb">
+        <Link href="/">{t.backHome}</Link>
+      </p>
+      <section className="tag-hero">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/mascot-avatar.webp" alt={MASCOT_NAME[lang]} className="tag-mascot" />
+        <div>
+          <p className="tag-kicker">
+            {t.tagPageIntro} · {t.toolsCount.replace("{n}", String(list.length))}
+          </p>
+          <h1 className="tag-title">
+            {tag.name[lang]}
+            <span className="tag-title-alt">{tag.name[otherLang]}</span>
+          </h1>
+          <p className="tag-intro">{tag.intro[lang]}</p>
+        </div>
+      </section>
+
+      {/* 广告位：标签页顶部横幅 */}
+      <AdSlot id="tag_top" preview={adsPreview} />
+
+      <section className="burn-board" aria-label={d.boardKicker}>
+        <div className="burn-board-head">
+          <h2 className="burn-board-title">{d.boardKicker}</h2>
+          {data && (
+            <p className="burn-board-meta">
+              {d.updatedAt} {fmtTimeUtc(data.fetchedAt)} UTC · {d.blockHeight}{" "}
+              {data.latestBlock.toLocaleString("en-US")}
+            </p>
+          )}
+        </div>
+
+        {!data && !error && <p className="burn-note">{d.loading}</p>}
+        {error && <p className="burn-note">{d.loadError}</p>}
+
+        {data && (
+          <>
+            <div className="burn-grid">
+              <div className="burn-stat burn-stat-hero">
+                <p className="burn-stat-label">{d.totalBurned}</p>
+                <p className="burn-stat-value">{fmtCompact(data.totalBurned)} UNI</p>
+                <p className="burn-stat-sub">
+                  {fmtFull(data.totalBurned)} UNI · {d.totalBurnedSub}
+                </p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.burnedShare}</p>
+                <p className="burn-stat-value">{data.burnedPctOfGenesis.toFixed(2)}%</p>
+                <div className="burn-bar" role="img" aria-label={`${data.burnedPctOfGenesis.toFixed(2)}%`}>
+                  <div
+                    className="burn-bar-fill"
+                    style={{ width: `${Math.min(100, data.burnedPctOfGenesis)}%` }}
+                  />
+                </div>
+                <p className="burn-stat-sub">{d.burnedShareSub}</p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.effectiveSupply}</p>
+                <p className="burn-stat-value">{fmtCompact(data.effectiveSupply)} UNI</p>
+                <p className="burn-stat-sub">
+                  {fmtFull(data.effectiveSupply)} UNI · {d.effectiveSupplySub}
+                </p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.totalSupply}</p>
+                <p className="burn-stat-value">{fmtCompact(data.totalSupply)} UNI</p>
+                <p className="burn-stat-sub">{d.totalSupplySub}</p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.burn24h}</p>
+                <p className="burn-stat-value">
+                  {data.burn24h === null ? "—" : `${fmtCompact(data.burn24h)} UNI`}
+                </p>
+                <p className="burn-stat-sub">
+                  {data.burn24h === null ? d.unavailable : `${fmtFull(data.burn24h)} UNI · ${d.burn24hSub}`}
+                </p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.burn30d}</p>
+                <p className="burn-stat-value">
+                  {data.burn30d === null ? "—" : `${fmtCompact(data.burn30d)} UNI`}
+                </p>
+                <p className="burn-stat-sub">
+                  {data.burn30d === null
+                    ? d.unavailable
+                    : `${fmtFull(data.burn30d)} UNI · ${d.burn30dSub}${
+                        data.burn7d !== null
+                          ? lang === "zh"
+                            ? ` · 近 7 天 ${fmtCompact(data.burn7d)} UNI`
+                            : ` · 7d ${fmtCompact(data.burn7d)} UNI`
+                          : ""
+                      }`}
+                </p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.annualized}</p>
+                <p className="burn-stat-value">
+                  {data.annualizedBurn === null ? "—" : `${fmtCompact(data.annualizedBurn)} UNI`}
+                </p>
+                <p className="burn-stat-sub">
+                  {data.annualizedBurn === null ? d.unavailable : d.annualizedSub}
+                </p>
+              </div>
+              <div className="burn-stat">
+                <p className="burn-stat-label">{d.deflationRate}</p>
+                <p className="burn-stat-value">
+                  {data.annualizedRatePct === null
+                    ? "—"
+                    : `${data.annualizedRatePct.toFixed(2)}%`}
+                </p>
+                <p className="burn-stat-sub">
+                  {data.annualizedRatePct === null ? d.unavailable : d.deflationRateSub}
+                </p>
+              </div>
+            </div>
+
+            {data.recentBurns.length > 0 && (
+              <div className="burn-records">
+                <h3 className="burn-records-title">{d.recentTitle}</h3>
+                <div className="burn-table-wrap">
+                  <table className="burn-table">
+                    <thead>
+                      <tr>
+                        <th>{d.colTime}</th>
+                        <th>{d.colAmount}</th>
+                        <th>{d.colFrom}</th>
+                        <th>{d.colTx}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.recentBurns.map((b) => (
+                        <tr key={b.txHash + b.from}>
+                          <td>{fmtTimeUtc(b.timestamp)}</td>
+                          <td>{fmtFull(b.amountUni)} UNI</td>
+                          <td>
+                            <a
+                              href={`https://etherscan.io/address/${b.from}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {shortAddr(b.from)}
+                            </a>
+                          </td>
+                          <td>
+                            <a
+                              href={`https://etherscan.io/tx/${b.txHash}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {shortAddr(b.txHash)} · {d.viewTx}
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            <div className="burn-notes">
+              <div className="card">
+                <h2>{d.mechTitle}</h2>
+                <p className="body-text">{d.mechBody}</p>
+                <p className="body-text burn-addr-line">
+                  UNI{" "}
+                  <a
+                    href={`https://etherscan.io/token/${UNI_ADDRESS}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {shortAddr(UNI_ADDRESS)}
+                  </a>{" "}
+                  · {lang === "zh" ? "销毁地址" : "Burn address"}{" "}
+                  <a
+                    href={`https://etherscan.io/token/${UNI_ADDRESS}?a=${DEAD_ADDRESS}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {shortAddr(DEAD_ADDRESS)}
+                  </a>
+                </p>
+              </div>
+              <div className="card">
+                <h2>{d.caliberTitle}</h2>
+                <p className="body-text">{d.caliberBody}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </section>
+
+      {list.length > 0 && (
+        <section className="section">
+          <h2 className="section-title">{d.toolsTitle}</h2>
+          <div className="card-grid">
+            {list.map((tool) => (
+              <ToolCard key={tool.slug} tool={tool} />
+            ))}
+          </div>
+        </section>
+      )}
+    </main>
+  );
+}
