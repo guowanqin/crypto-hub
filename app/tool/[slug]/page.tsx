@@ -20,6 +20,7 @@ const DEDICATED_PAGES = new Set([
   "ocr-tool",
   "slang-dict",
   "ip-check",
+  "poetry",
 ]);
 
 export function generateStaticParams() {

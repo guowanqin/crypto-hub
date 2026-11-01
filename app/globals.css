@@ -4538,3 +4538,244 @@ a:hover {
 .ipc-card .btn {
   margin-top: 12px;
 }
+
+/* ---------- 古籍诗词精选（.poe-* 作用域） ---------- */
+.poe-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 16px;
+}
+.poe-tab {
+  border: 1.5px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.poe-tab:hover {
+  border-color: var(--gold);
+}
+.poe-tab.is-active {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #fff;
+}
+.poe-chip {
+  background: var(--panel);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13.5px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.poe-chip:hover {
+  border-color: var(--gold);
+}
+.poe-chip.is-active {
+  border-color: var(--gold);
+  color: var(--gold-strong);
+  font-weight: 700;
+  background: var(--panel-soft);
+}
+.poe-list {
+  display: grid;
+  gap: 10px;
+}
+.poe-item {
+  text-align: left;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+  width: 100%;
+}
+.poe-item:hover {
+  border-color: var(--gold);
+}
+.poe-item.is-active {
+  border-color: var(--gold);
+  background: var(--panel-soft);
+}
+.poe-item-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+.poe-item-meta {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--faint);
+}
+.poe-item-first {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.poe-pager {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.poe-reader {
+  margin-top: 18px;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.poe-reader-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+.poe-reader-meta {
+  color: var(--faint);
+  font-size: 13.5px;
+  margin: 0 0 12px;
+}
+.poe-reader-body p {
+  margin: 0 0 6px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+}
+.poe-idiom {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 18px;
+}
+.poe-idiom-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+.poe-idiom-word {
+  font-size: 18px;
+  font-weight: 700;
+}
+.poe-idiom-pinyin {
+  color: var(--faint);
+  font-size: 13.5px;
+}
+.poe-idiom-btn {
+  margin-left: auto;
+}
+.poe-idiom-line {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+}
+.poe-chain-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.poe-chain-move {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 13px;
+  background: var(--panel);
+}
+.poe-chain-move.is-system {
+  background: var(--panel-soft);
+  border-color: var(--gold);
+}
+.poe-chain-who {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-strong);
+}
+.poe-chain-word {
+  font-size: 15.5px;
+  font-weight: 600;
+}
+.poe-chain-pinyin {
+  font-size: 12.5px;
+  color: var(--faint);
+}
+.poe-chain-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.poe-chain-msg {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold-strong);
+}
+.poe-quiz-given {
+  font-size: 20px;
+  line-height: 1.7;
+  margin: 6px 0 14px;
+  color: var(--text);
+}
+.poe-quiz-label {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gold-strong);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-right: 10px;
+  vertical-align: 3px;
+}
+.poe-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 560px) {
+  .poe-quiz-options {
+    grid-template-columns: 1fr;
+  }
+}
+.poe-quiz-opt {
+  border: 1.5px solid var(--border);
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 16.5px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+.poe-quiz-opt:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+.poe-quiz-opt.is-right {
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: 700;
+}
+.poe-quiz-opt.is-wrong {
+  border-color: var(--red);
+  color: var(--red);
+}
+.poe-quiz-reveal {
+  margin-top: 14px;
+}

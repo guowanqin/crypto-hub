@@ -768,6 +768,53 @@ export const TOOLS: ToolDef[] = [
       en: "A familiar face in this category and the layout reference for this site's tool. The biggest difference is transparency: ours lays its sources and scoring weights bare, while PingIP is the more packaged product — run both and cross-check.",
     },
   },
+  {
+    slug: "poetry",
+    name: { zh: "古籍诗词精选", en: "Classical Poetry Picks" },
+    url: "https://18btc.cc/tool/poetry",
+    tags: ["poetry"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "唐诗三百首、宋词三百首、诗经、楚辞、论语站内全文检索阅读，外加 3 万条成语词典和成语接龙、猜诗词小游戏。",
+      en: "Search and read the 300 Tang Poems, 300 Song Ci, the Book of Songs, the Verses of Chu and the Analects in-site, with a 30k idiom dictionary and idiom-chain and guess-the-line games.",
+    },
+    detail: {
+      zh: "本站的古籍诗词精选版，数据在构建时从 GitHub 开源语料落盘进仓库，运行时只经本站接口按页下发、不依赖任何外部服务。四块功能：诗词检索——按标题、作者或正文关键词搜五部典籍（唐诗三百首 366 条、宋词三百首 280 条、诗经 305 篇、楚辞 65 篇、论语 20 篇，共 1,036 篇），可按典籍筛选、分页浏览、点开读全篇；成语词典——30,895 条成语，拼音、释义、出处齐全，可按释义关键词反查；成语接龙——同字与同音（不计声调）两种模式轮流接龙，带提示与计分；猜诗词——给出上句四选一下句，干扰项同出一部典籍，答后揭晓出处并可读全篇。定位与边界写明：这是常用精选版，全量古籍（85 万首诗词、2 万部古籍、700 部中医古籍）与全文检索不在本站，请用同标签的文籍典册原站。数据许可：chinese-poetry 与 chinese-xinhua 均为 MIT；诗词落盘时经 OpenCC 繁转简，《静夜思》一条按现代通行本校订（源数据收的是宋本文字），原文均为公版古籍。",
+      en: "This site's curated classical-poetry edition. Its data was vendored into the repo from open GitHub corpora at build time and is served page-by-page through this site's own API at runtime, with no outside services involved. Four parts: poem search across five classics by title, author or body text (366 Tang-poem entries, 280 Song-ci entries, 305 Book of Songs pieces, 65 Verses of Chu pieces, 20 Analects chapters — 1,036 texts), filterable by collection and readable in full; an idiom dictionary of 30,895 entries with pinyin, meanings and sources, searchable by meaning keywords too; an idiom-chain game in same-character and homophone (tone-insensitive) modes with hints and scoring; and a guess-the-next-line quiz whose distractors come from the same collection, with the source revealed and the full poem one tap away. Positioning and limits, stated plainly: this is a curated edition — the full corpus (850k poems, 20k classics, 700 medical classics) and full-text search live on the Wendian site, listed on the same shelf. Licensing: chinese-poetry and chinese-xinhua are both MIT; the poems were converted from traditional to simplified Chinese with OpenCC when vendored, and one entry （静夜思） follows the modern standard text where the source carried a Song-dynasty variant. All texts are public-domain classics.",
+    },
+    audience: {
+      zh: "日常查诗查词、帮孩子预习背诵、或想玩两局成语接龙和猜诗词的普通读者。",
+      en: "Everyday readers looking up a poem or idiom, helping kids preview and recite classics, or up for a round of idiom chain and guess-the-line.",
+    },
+    take: {
+      zh: "精选版的好处是快和干净：五部最常用的典籍加一部够厚的成语词典，没有广告和注册墙，查完还能顺手接两轮龙；真要翻冷门篇目和中医古籍，别在这儿耗着，去原站查全量。",
+      en: "A curated edition earns its keep in speed and cleanliness: the five most-used classics plus a thick idiom dictionary, no ads and no sign-up wall, and a couple of chain rounds after your lookup. For obscure texts or the medical classics, don't linger here — go to the original site for the full corpus.",
+    },
+  },
+  {
+    slug: "wendian",
+    name: { zh: "文籍典册", en: "Wendian" },
+    url: "https://wendian.dicomp.net",
+    tags: ["poetry"],
+    type: "third-party",
+    oneLiner: {
+      zh: "中华传统文化全量资料站：85 万+ 首古诗词、3 万+ 成语、2 万+ 部古籍与 700 部中医古籍，带全文检索——本站精选版之外的全量去处。",
+      en: "A full-scale traditional-culture library: 850k+ poems, 30k+ idioms, 20k+ classics and 700 medical classics with full-text search — where to go beyond this site's curated edition.",
+    },
+    detail: {
+      zh: "文籍典册（wendian.dicomp.net）是一个中华传统文化资料查询站，走的是全量路线：整合古诗词、汉语字典、成语、歇后语、四书五经、中医药古籍、古籍文献与蒙学等内容，自述收录 85 万+ 首古诗词、1.4 万+ 汉字、3 万+ 成语、2 万+ 部古籍藏书和 700 部中医古籍，并提供全文检索、生字本、成语接龙、词语接龙、猜诗词等功能，免费使用、无需注册。本站的古籍诗词精选版只收五部常用典籍加一部成语词典，胜在站内直接查、直接玩、无广告；要翻精选之外的篇目、查中医古籍或做大范围全文检索，来文籍典册。两个站定位互补：日常高频用精选版，深挖全量用原站。",
+      en: "Wendian (wendian.dicomp.net) is a traditional Chinese culture reference site that goes for full scale: classical poetry, a Chinese dictionary, idioms, xiehouyu, the Four Books and Five Classics, traditional-medicine classics, classical literature and children's primers — by its own account 850,000+ poems, 14,000+ characters, 30,000+ idioms, 20,000+ classics and 700 medical classics — with full-text search, a new-words notebook, idiom chains, word chains and line-guessing, free with no sign-up. This site's curated poetry edition keeps only the five everyday classics plus an idiom dictionary, and wins on being in-site, ad-free and instantly playable; for anything beyond the selection, the medical classics, or broad full-text search, Wendian is the place. The two complement each other: the curated edition for daily use, the original for deep digging.",
+    },
+    audience: {
+      zh: "需要查冷门诗词、整部古籍或中医古籍原文，做传统文化资料深挖的人。",
+      en: "Anyone who needs obscure poems, complete classical texts or TCM classics — deep-diving into traditional-culture sources.",
+    },
+    take: {
+      zh: "体量是真大，精选版里找不到的篇目基本都能在这儿翻到，中医古籍这一块更是少见的全；代价是页面信息密度高、找东西要多点耐心，日常小查还是本站精选版更快。",
+      en: "The scale is real — if a text isn't in the curated edition you'll very likely find it here, and its medical-classics coverage is unusually complete. The trade-off is dense pages that reward patience; for quick everyday lookups the curated edition here is faster.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

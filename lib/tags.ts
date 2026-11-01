@@ -404,6 +404,37 @@ export const TAGS: TagDef[] = [
       "WebRTC leak test",
     ],
   },
+  {
+    id: "poetry",
+    name: { zh: "古籍诗词", en: "Classical Poetry" },
+    intro: {
+      zh: "查古诗词、背典籍、玩成语，不用在广告和弹窗里翻页：本站收了唐诗三百首、宋词三百首、诗经、楚辞、论语五部常用典籍做全文检索和整篇阅读，再配一部 3 万多条的成语词典（拼音、释义、出处齐全）和成语接龙、猜诗词两个小游戏。定位老实交代：这是常用精选版，不是 85 万首的全量古籍库——查全量古籍、中医古籍和全文检索，去同标签的文籍典册原站。数据取自 GitHub 开源语料，原文都是公版古籍。",
+      en: "Classical poems, idioms and word games without the ads and popups: this shelf carries five everyday classics — the 300 Tang Poems, 300 Song Ci, the Book of Songs, the Verses of Chu and the Analects — with full-text search and whole-text reading, plus a 30,000-entry idiom dictionary (pinyin, meaning, source) and two mini-games, idiom chain and guess-the-next-line. The honest positioning: this is a curated edition, not an 850,000-poem full library — for the complete corpus, medical classics and full-text search, use the Wendian entry on this same shelf. Data comes from open GitHub corpora; all texts are public-domain classics.",
+    },
+    seoDescription: {
+      zh: "古诗词查询精选版：唐诗三百首、宋词三百首、诗经、楚辞、论语共 1,036 篇全文检索与整篇阅读，30,895 条成语词典（拼音、释义、出处），成语接龙（同字/同音）与猜诗词小游戏，全部站内可用。数据来自 GitHub 开源语料 chinese-poetry、chinese-xinhua（MIT），原文为公版古籍；全量古籍与中医古籍请查文籍典册。",
+      en: "Curated classical-poetry lookup: full-text search and reading across 1,036 texts — the 300 Tang Poems, 300 Song Ci, the Book of Songs, the Verses of Chu and the Analects — plus a 30,895-entry idiom dictionary (pinyin, meaning, source) and idiom-chain and guess-the-line games, all usable in-site. Data from the MIT-licensed chinese-poetry and chinese-xinhua corpora on GitHub; texts are public-domain classics. For the full corpus and medical classics, see Wendian.",
+    },
+    keywords: [
+      "古诗词",
+      "古诗词查询",
+      "唐诗三百首",
+      "宋词三百首",
+      "宋词精选",
+      "诗经",
+      "楚辞",
+      "论语",
+      "成语词典",
+      "成语大全",
+      "成语接龙",
+      "猜诗词",
+      "文籍典册",
+      "tang poems",
+      "song ci",
+      "book of songs",
+      "chinese idioms",
+    ],
+  },
 ];
 
 export const TAG_MAP: Record<string, TagDef> = Object.fromEntries(
