@@ -510,6 +510,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "qqq-panel",
+    name: { zh: "QQQ 定投回测计算器", en: "QQQ DCA Backtest Calculator" },
+    url: "https://18btc.cc/tool/qqq-panel",
+    tags: ["qqq"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "QQQ 现价、估值温度自动调取，再用 1999 年上市以来的全史月线回测定投：期末股数、年化与最大回撤一次算清。",
+      en: "QQQ's live price and valuation temperature fetched automatically, plus a DCA backtest on the full monthly history since its 1999 listing: final shares, annualised return and max drawdown in one go.",
+    },
+    detail: {
+      zh: "给长期定投 QQQ 的人做的一页式工具。上半页是自动取数的看板：现价与涨跌、历史最高收盘（ATH，收盘口径）与距 ATH 回撤、52 周高低与水位、MA200 偏离，PE 取得到时一并列出；估值温度把 MA200 偏离、距 ATH 回撤、52 周水位（PE 可用时四项）各打一个子分再取平均，定档为偏冷/中性偏冷/中性偏热/偏热，子分公式与阈值全部印在页面上——它是指标刻度，不是买卖信号。下半页是定投回测器：数据是 QQQ 自 1999 年 3 月上市以来的全史月收盘与季度分红，任选起始年月、每月定投金额、分红再投入开关，输出累计投入、期末股数、摊薄成本对比期末价、期末总资产、累计分红、年化收益率（按月现金流 XIRR 近似）、期间标的最大回撤（月线总回报口径）与逐年汇总表，并附一条对比线：同一笔总投入在起始月一次性买入的结果。口径提醒：回测每月按当月收盘价买入，分红按上月末持股计，未计税费与汇率；历史回测不代表未来，不构成投资建议。",
+      en: "A one-page tool for long-term QQQ dollar-cost averagers. The top half is an auto-updating board: price and change, the all-time high close (closing basis) and drawdown from it, the 52-week high/low and position, the distance to the 200-day average, and P/E when available. The valuation temperature scores each of the MA200 deviation, ATH drawdown and 52-week position (four inputs when P/E is available) and averages them into cold / cool-neutral / warm-neutral / hot bands, with every subscore formula and threshold printed on the page — it is a metric scale, not a buy or sell signal. The bottom half is the DCA backtester: QQQ's full monthly closes and quarterly dividends since its March 1999 listing, with any start month, a monthly amount and a dividend-reinvestment toggle, producing total contributed, final shares, diluted cost versus the final price, final total assets, total dividends, annualised return (an XIRR approximation over monthly cash flows), the underlying's max drawdown in the window (monthly total-return basis) and a year-by-year table — plus a comparison line for investing the same total as a lump sum at the start. Methodology notes: the backtest buys at each month's close, dividends are computed on the previous month-end share count, and taxes and FX are excluded. A backtest is history, not a forecast, and nothing here is investment advice.",
+    },
+    audience: {
+      zh: "在按月定投 QQQ、想知道现在贵不贵、并想用真实历史检验自己定投方案的人。",
+      en: "Investors dollar-cost-averaging into QQQ who want to know how stretched the price is and to test their plan against real history.",
+    },
+    take: {
+      zh: "先拉一遍 2000 年起的回测再定投：看清最惨的时候账户要扛多深、一次性买入和定投差多少，再决定月供和心态；估值温度只当仪表盘看，别当择时器用。",
+      en: "Run the backtest from 2000 before you start: see how deep the worst stretch gets and how DCA compares with a lump sum, then set your monthly amount and your expectations. Treat the temperature as a dashboard gauge, not a timing device.",
+    },
+  },
+  {
     slug: "filetime",
     name: { zh: "照片/文件时间修改", en: "Photo & File Time Editor" },
     url: "https://18btc.cc/tool/filetime",

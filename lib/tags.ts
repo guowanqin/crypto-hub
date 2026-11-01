@@ -199,6 +199,33 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "qqq",
+    name: { zh: "QQQ 定投", en: "QQQ DCA" },
+    intro: {
+      zh: "QQQ（Invesco QQQ Trust）跟踪纳斯达克 100，1999 年上市，是定投人群最常拿来「无脑月供」的标的之一。但定投不等于不用看位置：这一页把现价、距历史最高收盘的回撤、52 周水位、与 200 日均线的偏离自动拉齐，拼成一把口径全公开的估值温度刻度；再用上市以来的全史月线做定投回测——任选起始年月、每月金额，算清期末股数、年化、期间最大回撤，并和同一笔钱一次性买入对照。先说清：刻度是指标不是预测，回测是历史不是未来。",
+      en: "QQQ (the Invesco QQQ Trust) tracks the Nasdaq-100 and has been listed since 1999 — a default monthly-DCA vehicle for many investors. But DCA does not mean never looking at where you are: this page pulls the price, the drawdown from the all-time high close, the 52-week position and the distance to the 200-day average into one fully documented valuation-temperature scale, and backtests monthly DCA on the full monthly history since listing — pick a start month and a monthly amount to get final shares, annualised return and the worst drawdown in the window, compared against investing the same total as a lump sum. Up front: the scale is a metric, not a forecast, and a backtest is history, not the future.",
+    },
+    seoDescription: {
+      zh: "QQQ 定投回测计算器：现价、距 ATH 回撤、52 周水位、MA200 偏离自动调取，拼成口径公开的估值温度（偏冷/中性偏冷/中性偏热/偏热）；回测器用 1999 年上市以来全史月线与季度分红，任选起始年月与每月定投金额，算出期末股数、摊薄成本、年化（XIRR）、期间最大回撤与逐年汇总，并对比同额一次性买入。历史回测不代表未来，不构成投资建议。",
+      en: "QQQ DCA backtest calculator: live price, drawdown from the ATH close, 52-week position and MA200 deviation fetched automatically and combined into a fully documented valuation temperature (cold / cool-neutral / warm-neutral / hot). The backtester runs the full monthly history since the 1999 listing plus quarterly dividends — pick any start month and monthly amount to get final shares, diluted cost, annualised return (XIRR), the window's max drawdown and a year-by-year table, compared with a lump sum of the same total. Backtests are history, not a forecast, and not investment advice.",
+    },
+    keywords: [
+      "QQQ定投",
+      "QQQ估值",
+      "QQQ定投计算器",
+      "定投回测",
+      "定投计算器",
+      "纳斯达克100定投",
+      "纳指ETF",
+      "QQQ PE",
+      "QQQ回测",
+      "纳指100",
+      "QQQ DCA",
+      "QQQ backtest",
+      "Nasdaq-100 DCA",
+    ],
+  },
+  {
     id: "filetime",
     name: { zh: "文件时间", en: "File Time" },
     intro: {

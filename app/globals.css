@@ -3733,3 +3733,46 @@ a:hover {
 .qqqi-sim-out {
   margin-bottom: 14px;
 }
+
+/* QQQ 估值温度：四区刻度（0–35 偏热 / 35–50 中性偏热 / 50–65 中性偏冷 / 65–100 偏冷） */
+.qqq-band.is-cold {
+  background: rgba(5, 150, 105, 0.12);
+  border-color: rgba(5, 150, 105, 0.45);
+  color: var(--green);
+}
+
+.qqq-band.is-cool {
+  background: rgba(13, 148, 136, 0.1);
+  border-color: rgba(13, 148, 136, 0.4);
+  color: #0f766e;
+}
+
+.qqq-band.is-warm {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold-strong);
+}
+
+.qqq-band.is-hot {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.35);
+  color: var(--red);
+}
+
+.qqq-zone.is-hot {
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: 10px 0 0 10px;
+}
+
+.qqq-zone.is-warm {
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.qqq-zone.is-cool {
+  background: rgba(13, 148, 136, 0.1);
+}
+
+.qqq-zone.is-cold {
+  background: rgba(5, 150, 105, 0.13);
+  border-radius: 0 10px 10px 0;
+}
