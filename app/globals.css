@@ -899,32 +899,6 @@ a:hover {
   margin-left: auto;
 }
 
-.pershare-tool .lang-switch {
-  display: inline-flex;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  overflow: hidden;
-}
-
-.pershare-tool .lang-switch button {
-  background: var(--panel);
-  color: var(--muted);
-  border: none;
-  padding: 6px 12px;
-  font-size: 13px;
-  line-height: 1.2;
-}
-
-.pershare-tool .lang-switch button + button {
-  border-left: 1px solid var(--border);
-}
-
-.pershare-tool .lang-switch button.on {
-  background: var(--accent);
-  color: #ffffff;
-  font-weight: 700;
-}
-
 .pershare-tool button {
   font: inherit;
   cursor: pointer;

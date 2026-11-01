@@ -31,11 +31,8 @@ const DEFAULT_SETTINGS: HypeSettings = {
 /** 预填的 PURR 收盘价日期（与 DEFAULT_SETTINGS.purrPrice 对应） */
 const PREFILL_CLOSE_DATE = "2026-10-30";
 
-export default function HypeCalculator(props: {
-  lang: Lang;
-  onLangChange: (l: Lang) => void;
-}) {
-  const { lang, onLangChange } = props;
+export default function HypeCalculator(props: { lang: Lang }) {
+  const { lang } = props;
   const [data, setData] = useState<HypeMarketData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -184,22 +181,6 @@ export default function HypeCalculator(props: {
                 data.source,
               )
             : t.loadingMarket}
-        </span>
-        <span className="lang-switch" role="group" aria-label="Language">
-          <button
-            type="button"
-            className={lang === "zh" ? "on" : ""}
-            onClick={() => onLangChange("zh")}
-          >
-            中文
-          </button>
-          <button
-            type="button"
-            className={lang === "en" ? "on" : ""}
-            onClick={() => onLangChange("en")}
-          >
-            EN
-          </button>
         </span>
         <button type="button" className="btn" onClick={load} disabled={loading}>
           {loading ? t.refreshing : t.refresh}

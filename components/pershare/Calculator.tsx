@@ -24,11 +24,8 @@ const DEFAULT_SETTINGS: Settings = {
   liabilities: "16800000",
 };
 
-export default function Calculator(props: {
-  lang: Lang;
-  onLangChange: (l: Lang) => void;
-}) {
-  const { lang, onLangChange } = props;
+export default function Calculator(props: { lang: Lang }) {
+  const { lang } = props;
   const [data, setData] = useState<MarketData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -149,22 +146,6 @@ export default function Calculator(props: {
                 data.source,
               )
             : t.loadingMarket}
-        </span>
-        <span className="lang-switch" role="group" aria-label="Language">
-          <button
-            type="button"
-            className={lang === "zh" ? "on" : ""}
-            onClick={() => onLangChange("zh")}
-          >
-            中文
-          </button>
-          <button
-            type="button"
-            className={lang === "en" ? "on" : ""}
-            onClick={() => onLangChange("en")}
-          >
-            EN
-          </button>
         </span>
         <button type="button" className="btn" onClick={load} disabled={loading}>
           {loading ? t.refreshing : t.refresh}

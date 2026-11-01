@@ -3,7 +3,7 @@
 // PerShare 计算器外壳：从 pershare.cc 独立站 app/Shell.tsx 移植。
 // 适配点（仅外壳 glue，不动计算逻辑）：
 // - 语言改由导航站 LangProvider 的全站中英切换驱动，不再用独立站自己的 bnc-lang localStorage；
-//   计算器顶栏的语言按钮也接同一个 setLang，与站头切换双向同步。
+//   计算器内不再设语言按钮，全站只保留站头一处中英切换，计算器只读 lang 渲染。
 // - document.title 由本站页面 metadata 固定，不再随 BNC/HYPE 标签改写；
 // - ?tab=hype 仍可分享，但写回的是本页路径（/tool/pershare），不再跳独立站根路径。
 // - 两个标签页都保持挂载（隐藏而非卸载），切换不丢失各自的区间与设置状态（与源站一致）。
@@ -20,7 +20,7 @@ const TAB_LABELS: Record<AssetTab, Record<Lang, string>> = {
 };
 
 export default function PerShareShell() {
-  const { lang, setLang } = useLang();
+  const { lang } = useLang();
   const [tab, setTab] = useState<AssetTab>("bnc");
 
   /* 标签初始化：读 URL 查询参数 ?tab=hype */
@@ -62,10 +62,10 @@ export default function PerShareShell() {
       </div>
 
       <div style={{ display: tab === "bnc" ? undefined : "none" }}>
-        <Calculator lang={lang} onLangChange={setLang} />
+        <Calculator lang={lang} />
       </div>
       <div style={{ display: tab === "hype" ? undefined : "none" }}>
-        <HypeCalculator lang={lang} onLangChange={setLang} />
+        <HypeCalculator lang={lang} />
       </div>
     </div>
   );
