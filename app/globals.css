@@ -870,3 +870,695 @@ a:hover {
     display: none;
   }
 }
+
+/* ---------- PerShare 每股含币量计算器（站内内嵌，移植自 pershare.cc 独立站） ----------
+   全部规则收在 .pershare-tool 作用域内：变量继承本站 :root 哑光金米白主题，
+   不污染全站同名类（.btn / .chip / .hero / .section-title 等在作用域内以计算器口径为准）。 */
+.pershare-tool a {
+  color: var(--accent);
+}
+
+.pershare-tool .topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-bottom: 18px;
+}
+
+.pershare-tool .topbar .brand {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pershare-tool .topbar .updated {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin-left: auto;
+}
+
+.pershare-tool .lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.pershare-tool .lang-switch button {
+  background: var(--panel);
+  color: var(--muted);
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.pershare-tool .lang-switch button + button {
+  border-left: 1px solid var(--border);
+}
+
+.pershare-tool .lang-switch button.on {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pershare-tool button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.pershare-tool .btn {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.pershare-tool .btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pershare-tool .btn:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.pershare-tool .tabbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pershare-tool .tab-btn {
+  flex: 1 1 0;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 12px;
+  padding: 11px 10px;
+  font-size: clamp(14px, 3.4vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.pershare-tool .tab-btn:hover {
+  border-color: #d9cdae;
+  color: var(--text);
+}
+
+.pershare-tool .tab-btn.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(101, 82, 34, 0.18);
+}
+
+.pershare-tool .hero {
+  background: linear-gradient(165deg, var(--panel) 0%, var(--panel-soft) 75%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 28px 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(101, 82, 34, 0.07);
+}
+
+.pershare-tool .hero h1 {
+  font-size: clamp(21px, 4.6vw, 30px);
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.pershare-tool .hero .sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.pershare-tool .hero-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 28px;
+}
+
+.pershare-tool .hero-num {
+  font-size: clamp(42px, 9vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.pershare-tool .hero-num small {
+  font-size: 0.38em;
+  font-weight: 600;
+  color: var(--text);
+  margin-left: 6px;
+}
+
+.pershare-tool .hero-bnb {
+  font-size: clamp(19px, 4vw, 25px);
+  font-weight: 600;
+  padding-bottom: 6px;
+}
+
+.pershare-tool .hero-bnb span {
+  color: var(--muted);
+  font-size: 0.62em;
+  font-weight: 500;
+}
+
+.pershare-tool .formula {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.pershare-tool .formula .chip {
+  background: var(--accent-dim);
+  border: 1px solid rgba(180, 83, 9, 0.32);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pershare-tool .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.pershare-tool .stat {
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  min-width: 0;
+}
+
+.pershare-tool .stat .k {
+  font-size: 12px;
+  color: var(--faint);
+  margin-bottom: 5px;
+}
+
+.pershare-tool .stat .v {
+  font-size: 19px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pershare-tool .stat .v small {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.pershare-tool .stat-bncb {
+  border-color: rgba(180, 83, 9, 0.45);
+  background: var(--accent-dim);
+}
+
+.pershare-tool .stat-bncb .k {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.pershare-tool .stat-bncb .v {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.pershare-tool .spread-card {
+  margin-top: 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px 10px;
+}
+
+.pershare-tool .spread-card.spread-disc {
+  border-color: rgba(5, 150, 105, 0.5);
+  background: rgba(5, 150, 105, 0.05);
+}
+
+.pershare-tool .spread-card.spread-prem {
+  border-color: rgba(220, 38, 38, 0.42);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.pershare-tool .spread-title {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pershare-tool .spread-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.pershare-tool .spread-term .spread-k {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.pershare-tool .spread-v {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pershare-tool .spread-v small {
+  font-size: 0.6em;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.pershare-tool .spread-op {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--faint);
+}
+
+.pershare-tool .spread-big {
+  font-size: clamp(32px, 7vw, 46px);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.pershare-tool .spread-disc .spread-big {
+  color: var(--green);
+}
+
+.pershare-tool .spread-prem .spread-big {
+  color: var(--red);
+}
+
+.pershare-tool .spread-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 3px 11px;
+  border-radius: 999px;
+  margin-left: 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.pershare-tool .badge-disc {
+  background: rgba(5, 150, 105, 0.13);
+  color: #047857;
+}
+
+.pershare-tool .badge-prem {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+}
+
+.pershare-tool .badge-par {
+  background: var(--panel-2);
+  color: var(--muted);
+}
+
+.pershare-tool .spread-legend {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
+.pershare-tool .spread-note {
+  font-size: 12px;
+  color: var(--faint);
+  line-height: 1.6;
+  margin: 10px 0 2px;
+}
+
+.pershare-tool .edit-panel {
+  margin-top: 16px;
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+}
+
+.pershare-tool .edit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.pershare-tool .field label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.pershare-tool .field input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.pershare-tool .field input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.pershare-tool .hint {
+  font-size: 12px;
+  color: var(--faint);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.pershare-tool .section-title {
+  font-size: clamp(18px, 3.6vw, 22px);
+  margin: 30px 0 4px;
+}
+
+.pershare-tool .section-sub {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 0 0 14px;
+  line-height: 1.65;
+}
+
+.pershare-tool .panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.pershare-tool .range-ctl {
+  margin: 10px 0 4px;
+}
+
+.pershare-tool .range-ctl .r-label {
+  font-size: 12px;
+  color: var(--faint);
+  margin-bottom: 7px;
+}
+
+.pershare-tool .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pershare-tool .chip-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 13px;
+}
+
+.pershare-tool .chip-btn:hover {
+  color: var(--text);
+  border-color: #d9cdae;
+}
+
+.pershare-tool .chip-btn.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pershare-tool .custom-box {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px 22px;
+}
+
+.pershare-tool .slider-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.pershare-tool .slider-row .numin {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.pershare-tool .slider-row input[type="number"] {
+  width: 64px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  padding: 3px 6px;
+  font-size: 13px;
+}
+
+.pershare-tool .slider-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.pershare-tool .pool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pershare-tool .pool-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  min-width: 0;
+  box-shadow: 0 1px 3px rgba(101, 82, 34, 0.06);
+}
+
+.pershare-tool .pool-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pershare-tool .pool-head .pair {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.pershare-tool .pool-head .dex {
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.pershare-tool .pool-head .fee {
+  font-size: 12px;
+  color: var(--faint);
+  margin-left: auto;
+}
+
+.pershare-tool .pool-apr {
+  font-size: clamp(34px, 7vw, 44px);
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1.1;
+  margin-top: 10px;
+}
+
+.pershare-tool .pool-apr-label {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.pershare-tool .pool-avg {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin-top: 6px;
+}
+
+.pershare-tool .pool-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 14px;
+  margin-top: 13px;
+  font-size: 13px;
+}
+
+.pershare-tool .pool-meta .k {
+  color: var(--faint);
+  font-size: 12px;
+}
+
+.pershare-tool .pool-meta .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px dashed #efe6cf;
+  padding-bottom: 5px;
+}
+
+.pershare-tool .pool-meta .row b {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pershare-tool .pool-meta .row-bncb .k {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.pershare-tool .pool-meta .row-bncb b {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 14.5px;
+}
+
+.pershare-tool .band-line {
+  margin-top: 11px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pershare-tool .band-line b {
+  color: var(--text);
+}
+
+.pershare-tool .warn-line {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--accent-strong);
+  line-height: 1.6;
+}
+
+.pershare-tool .pool-card .range-ctl {
+  border-top: 1px dashed var(--border);
+  margin-top: 13px;
+  padding-top: 11px;
+}
+
+.pershare-tool .lp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.pershare-tool .lp-grid select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.pershare-tool .lp-result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.pershare-tool .faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.pershare-tool .faq-item h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.pershare-tool .faq-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+
+.pershare-tool .footer {
+  margin-top: 34px;
+  color: var(--faint);
+  font-size: 12.5px;
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.pershare-tool .loading, .pershare-tool .error-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.pershare-tool .error-box {
+  color: var(--red);
+}
+
+@media (max-width: 560px) {
+  .pershare-tool .hero {
+    padding: 20px 16px 16px;
+  }
+
+  .pershare-tool .pool-card {
+    padding: 15px;
+  }
+
+  .pershare-tool .spread-card {
+    padding: 12px 14px 8px;
+  }
+
+  .pershare-tool .spread-eq {
+    gap: 6px 10px;
+  }
+
+  .pershare-tool .spread-v {
+    font-size: 18px;
+  }
+}

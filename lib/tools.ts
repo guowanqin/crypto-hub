@@ -9,7 +9,7 @@ export interface ToolDef {
   url: string;
   tags: string[];
   type: ToolType;
-  /** 是否在本站内嵌可直接使用（目前只有 sheet2word） */
+  /** 是否在本站内嵌可直接使用（sheet2word、pershare） */
   embedded?: boolean;
   oneLiner: Record<Lang, string>;
   detail: Record<Lang, string>;
@@ -25,6 +25,7 @@ export const TOOLS: ToolDef[] = [
     url: "https://pershare.cc",
     tags: ["market"],
     type: "own",
+    embedded: true,
     oneLiner: {
       zh: "实时计算 BNC、PURR 两只加密财库股的每股含币量、含币价值与折溢价。",
       en: "Live per-share coin content, coin value per share, and discount/premium for the BNC and PURR crypto treasury stocks.",
@@ -333,8 +334,10 @@ export function toolsByTag(tagId: string): ToolDef[] {
   return TOOLS.filter((t) => t.tags.includes(tagId));
 }
 
-/** /go/[slug] 的跳转目标：sheet2word 站内可用 → 站内页；其余 → 官网 */
+/** /go/[slug] 的跳转目标：站内可用工具 → 站内页；其余 → 官网。
+ *  例外：pershare 虽已站内内嵌，但 /go/pershare 是给外部引用用的短链，固定 302 到独立站官网。 */
 export function goTarget(tool: ToolDef): string {
+  if (tool.slug === "pershare") return tool.url;
   if (tool.embedded) return `/tool/${tool.slug}`;
   return tool.url;
 }
