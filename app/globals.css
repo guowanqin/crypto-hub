@@ -1691,3 +1691,225 @@ a:hover {
     font-size: 22px;
   }
 }
+
+/* ---------- BTC 周期抄底看板（/tag/btc-bottom） ---------- */
+.cycle-board {
+  margin-top: 8px;
+}
+
+.cycle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cycle-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.cycle-card-label {
+  color: var(--gold-strong);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 0 10px;
+}
+
+.cycle-position-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cycle-position {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--gold-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-stage-label {
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.cycle-stage-label.is-bear {
+  color: var(--red);
+}
+
+.cycle-stage-label.is-bull {
+  color: var(--green);
+}
+
+.cycle-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.cycle-chip {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel-soft);
+  color: var(--muted);
+  font-size: 13px;
+  padding: 4px 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-chip strong {
+  color: var(--text);
+}
+
+.cycle-hint-box {
+  margin-top: 16px;
+  border: 1px solid var(--gold);
+  background: var(--accent-dim);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.cycle-hint-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold-strong);
+  margin: 0 0 4px;
+}
+
+.cycle-hint-text {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cycle-progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--faint);
+  font-size: 13px;
+  margin-top: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-bar {
+  margin-top: 2px;
+}
+
+.cycle-bar .burn-bar-fill {
+  background: linear-gradient(90deg, var(--gold) 0%, #e07b39 100%);
+}
+
+.cycle-countdown {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-cd-num {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--gold-strong);
+}
+
+.cycle-cd-unit {
+  font-size: 14px;
+  color: var(--faint);
+  margin: 0 8px 0 2px;
+}
+
+.cycle-target-line {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 10px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-timeline {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.cycle-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  flex: none;
+}
+
+.cycle-timeline-label {
+  color: var(--text);
+  font-weight: 600;
+  min-width: 0;
+}
+
+.cycle-timeline-date {
+  color: var(--faint);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.cycle-timeline-eta {
+  color: var(--muted);
+  min-width: 76px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cycle-table td .cycle-tier-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--gold);
+  margin-right: 8px;
+}
+
+.cycle-table td .cycle-tier-dot.is-gold {
+  background: var(--green);
+}
+
+.cycle-table tr.is-done td {
+  color: var(--faint);
+}
+
+.cycle-table tr.is-next td {
+  background: var(--accent-dim);
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .cycle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cycle-position {
+    font-size: 42px;
+  }
+
+  .cycle-cd-num {
+    font-size: 36px;
+  }
+}

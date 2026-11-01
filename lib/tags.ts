@@ -126,6 +126,29 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "btc-bottom",
+    name: { zh: "BTC 抄底", en: "BTC Bottom Fishing" },
+    intro: {
+      zh: "比特币的四年减半周期里，熊底和牛顶在区块高度上大致等距。这一页把周期锚点全部换算成区块：当前周期位置、距熊底还剩多少块多少天、五档分批建仓触发位——数据实时读链，位置一目了然。模型推演仅供参考，不构成投资建议。",
+      en: "Across Bitcoin's four-year halving cycles, bear bottoms and bull tops sit at roughly even block-height distances. This page converts the cycle anchors into blocks: your current cycle position, how many blocks and days remain to the projected bottom, and five staged entry triggers — read live from the chain. A model projection for reference only, not investment advice.",
+    },
+    seoDescription: {
+      zh: "BTC 抄底倒计时：按四年减半周期与实时区块高度推演比特币周期位置——当前周期位置、熊市进度、距本轮熊底的倒计时（目标区块 971,250）、第 5 次减半与下轮牛顶的预计日期，以及 0.20 / 0.15 / 0.10 / 0.05 / 0.02 五档分批建仓触发位。数据源为实时链上区块高度。",
+      en: "BTC bottom-fishing countdown: Bitcoin's cycle position projected from the four-year halving cycle and the live block height — current position, bear-market progress, a countdown to this cycle's projected bottom (target block 971,250), estimated dates for the 5th halving and the next bull top, and five staged entry triggers at positions 0.20 / 0.15 / 0.10 / 0.05 / 0.02. Data source: live on-chain block height.",
+    },
+    keywords: [
+      "BTC抄底",
+      "比特币抄底",
+      "比特币熊底",
+      "BTC抄底倒计时",
+      "减半周期",
+      "比特币周期位置",
+      "BTC bottom fishing",
+      "bitcoin cycle bottom",
+      "halving cycle",
+    ],
+  },
+  {
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {
