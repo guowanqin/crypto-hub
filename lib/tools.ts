@@ -5,7 +5,7 @@ export type ToolType = "own" | "third-party";
 export interface ToolDef {
   slug: string;
   name: Record<Lang, string>;
-  /** 第三方官网 / 自研官网；站内可用工具（sheet2word）为本站内页，url 指向其独立站仅作备用入口 */
+  /** 第三方官网 / 本站工具官网；站内可用工具（sheet2word）为本站内页，url 指向其独立站仅作备用入口 */
   url: string;
   tags: string[];
   type: ToolType;

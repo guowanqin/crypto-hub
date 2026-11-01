@@ -11,9 +11,11 @@ export interface HubDict {
   noResults: string;
   allTags: string;
   toolsCount: string; // {n}
-  ownBadge: string;
   thirdPartyBadge: string;
   embeddedBadge: string;
+  filterBuiltin: string;
+  filterThird: string;
+  filterEmpty: string;
   viewIntro: string;
   visitTool: string;
   openStandalone: string;
@@ -33,15 +35,17 @@ export const HUB_DICT: Record<Lang, HubDict> = {
   zh: {
     navHome: "首页",
     heroTitle: "18btc 币圈工具导航",
-    heroSub: "18btc 替你淘遍币圈好工具：实测、分类、导航——自研工具站内直接用，第三方工具每个都有原创介绍。",
+    heroSub: "18btc 替你淘遍币圈好工具：实测、分类、导航——站内工具直接用，第三方工具每个都有原创介绍。",
     searchPlaceholder: "搜索工具：试试「钱包」「行情」「Excel」…",
     searchResults: "找到 {n} 个与「{q}」相关的工具",
     noResults: "没有找到相关工具，换个关键词试试。",
     allTags: "全部",
     toolsCount: "{n} 个工具",
-    ownBadge: "自研",
     thirdPartyBadge: "第三方",
     embeddedBadge: "站内可用",
+    filterBuiltin: "独立可用",
+    filterThird: "第三方",
+    filterEmpty: "没有符合筛选的工具，换个组合试试。",
     viewIntro: "查看介绍",
     visitTool: "访问工具",
     openStandalone: "在独立站打开完整版 →",
@@ -59,15 +63,17 @@ export const HUB_DICT: Record<Lang, HubDict> = {
   en: {
     navHome: "Home",
     heroTitle: "18btc Crypto Tools Navigator",
-    heroSub: "18btc hunts down the best crypto tools for you — field-tested, categorized, navigable. Our own tools run right here; every third-party tool gets an original intro.",
+    heroSub: "18btc hunts down the best crypto tools for you — field-tested, categorized, navigable. Built-in tools run right here; every third-party tool gets an original intro.",
     searchPlaceholder: "Search tools: try “wallet”, “market”, “Excel”…",
     searchResults: "{n} tools matching “{q}”",
     noResults: "No tools found — try another keyword.",
     allTags: "All",
     toolsCount: "{n} tools",
-    ownBadge: "Ours",
     thirdPartyBadge: "Third-party",
-    embeddedBadge: "Runs on-site",
+    embeddedBadge: "Built-in",
+    filterBuiltin: "Built-in",
+    filterThird: "Third-party",
+    filterEmpty: "No tools match these filters — try another combination.",
     viewIntro: "View intro",
     visitTool: "Visit tool",
     openStandalone: "Open the full standalone version →",

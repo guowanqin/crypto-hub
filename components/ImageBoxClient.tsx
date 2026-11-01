@@ -25,7 +25,6 @@ export default function ImageBoxClient({ adsPreview = false }: { adsPreview?: bo
 
       <section className="detail-head">
         <div className="tool-badges">
-          <span className="badge badge-own">{t.ownBadge}</span>
           <span className="badge badge-embedded">{t.embeddedBadge}</span>
         </div>
         <h1 className="detail-title">{tool.name[lang]}</h1>

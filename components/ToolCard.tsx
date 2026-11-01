@@ -14,10 +14,11 @@ export default function ToolCard({ tool }: { tool: ToolDef }) {
       <div className="tool-card-top">
         <h3 className="tool-card-name">{tool.name[lang]}</h3>
         <div className="tool-badges">
-          <span className={`badge ${tool.type === "own" ? "badge-own" : "badge-third"}`}>
-            {tool.type === "own" ? t.ownBadge : t.thirdPartyBadge}
-          </span>
-          {tool.embedded && <span className="badge badge-embedded">{t.embeddedBadge}</span>}
+          {tool.embedded ? (
+            <span className="badge badge-embedded">{t.embeddedBadge}</span>
+          ) : (
+            <span className="badge badge-third">{t.thirdPartyBadge}</span>
+          )}
         </div>
       </div>
       <p className="tool-card-oneliner">{tool.oneLiner[lang]}</p>

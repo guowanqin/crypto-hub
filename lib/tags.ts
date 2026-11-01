@@ -15,8 +15,8 @@ export const TAGS: TagDef[] = [
     id: "market",
     name: { zh: "行情数据", en: "Market Data" },
     intro: {
-      zh: "查价格、看市值、盯新池子——行情是每个币圈人每天打开的第一类工具。这一类里既有全站式的行情总站，也有 DEX 实时终端，还有本站自研的财库股含币量计算器。",
-      en: "Prices, market caps and fresh pools — market data is the first thing every crypto user opens each day. This shelf mixes all-in-one market boards, real-time DEX terminals, and our own treasury-stock per-share calculator.",
+      zh: "查价格、看市值、盯新池子——行情是每个币圈人每天打开的第一类工具。这一类里既有全站式的行情总站，也有 DEX 实时终端，还有站内可直接用的财库股含币量计算器。",
+      en: "Prices, market caps and fresh pools — market data is the first thing every crypto user opens each day. This shelf mixes all-in-one market boards, real-time DEX terminals, and a treasury-stock per-share calculator that runs right here on this site.",
     },
     seoDescription: {
       zh: "行情数据工具收录：CoinGecko、CoinMarketCap 查币价与市值，DexScreener、GeckoTerminal 看 DEX 新池子与流动性，PerShare 算 BNC、PURR 财库股每股含币量——本站实测介绍，附适合人群与上手短评。",
@@ -152,12 +152,12 @@ export const TAGS: TagDef[] = [
     id: "office",
     name: { zh: "办公效率", en: "Office & Productivity" },
     intro: {
-      zh: "币圈之外也要办公。这一类放本站自研的效率工具：第一个就是站内可直接用的 Excel 批量生成 Word——模板加表格，一行数据一份文档，不用离开本站就能生成下载。",
-      en: "Even crypto people do paperwork. This shelf holds our own productivity tools, starting with the Excel-to-Word batch generator that runs right here on this site — template plus spreadsheet, one document per row, no leaving the page.",
+      zh: "币圈之外也要办公。这一类放站内可直接用的效率工具：第一个就是 Excel 批量生成 Word——模板加表格，一行数据一份文档，不用离开本站就能生成下载。",
+      en: "Even crypto people do paperwork. This shelf holds productivity tools that run right here on this site, starting with the Excel-to-Word batch generator — template plus spreadsheet, one document per row, no leaving the page.",
     },
     seoDescription: {
-      zh: "办公效率工具收录：Excel 批量生成 Word（Sheet2Word）——本站自研、站内可直接使用：上传 Word 模板与 Excel 表格，按行批量生成文档打包下载，本地处理不上传，免费无行数限制、免注册。",
-      en: "Office tools, field-tested: Excel to Word Batch Generator (Sheet2Word) — built by us and usable right on this site: upload a Word template and an Excel sheet, generate one document per row and download the ZIP; local processing, free, no row limit, no sign-up.",
+      zh: "办公效率工具收录：Excel 批量生成 Word（Sheet2Word）——站内可直接使用：上传 Word 模板与 Excel 表格，按行批量生成文档打包下载，本地处理不上传，免费无行数限制、免注册。",
+      en: "Office tools, field-tested: Excel to Word Batch Generator (Sheet2Word) — usable right on this site: upload a Word template and an Excel sheet, generate one document per row and download the ZIP; local processing, free, no row limit, no sign-up.",
     },
     keywords: [
       "办公效率工具",

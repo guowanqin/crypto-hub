@@ -35,10 +35,11 @@ export default function ToolDetailClient({
 
       <section className="detail-head">
         <div className="tool-badges">
-          <span className={`badge ${tool.type === "own" ? "badge-own" : "badge-third"}`}>
-            {tool.type === "own" ? t.ownBadge : t.thirdPartyBadge}
-          </span>
-          {tool.embedded && <span className="badge badge-embedded">{t.embeddedBadge}</span>}
+          {tool.embedded ? (
+            <span className="badge badge-embedded">{t.embeddedBadge}</span>
+          ) : (
+            <span className="badge badge-third">{t.thirdPartyBadge}</span>
+          )}
         </div>
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>

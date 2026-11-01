@@ -22,6 +22,6 @@ export const SITE_TITLE: Record<Lang, string> = {
 };
 
 export const SITE_DESCRIPTION: Record<Lang, string> = {
-  zh: "18btc 替你淘遍币圈好工具：行情数据、链上分析、DeFi 数据、钱包、安全工具与办公效率——自研工具加实测收录的第三方工具，每个工具都有原创介绍、适合人群和实测短评。",
-  en: "18btc hunts down the best crypto tools for you: market data, on-chain analytics, DeFi data, wallets, security and office tools — our own tools plus field-tested third-party picks, each with an original intro, who it's for, and a hands-on verdict.",
+  zh: "18btc 替你淘遍币圈好工具：行情数据、链上分析、DeFi 数据、钱包、安全工具与办公效率——站内可用的工具加实测收录的第三方工具，每个工具都有原创介绍、适合人群和实测短评。",
+  en: "18btc hunts down the best crypto tools for you: market data, on-chain analytics, DeFi data, wallets, security and office tools — built-in tools that run right here, plus field-tested third-party picks, each with an original intro, who it's for, and a hands-on verdict.",
 };
