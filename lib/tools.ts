@@ -345,6 +345,29 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "folderlock",
+    name: { zh: "FolderLock 文件夹加密", en: "FolderLock Folder Encryption" },
+    url: "https://github.com/ns2250225/FolderLock",
+    tags: ["security"],
+    type: "third-party",
+    oneLiner: {
+      zh: "Windows 本地文件夹加密工具：AES-256-GCM + Argon2id，连文件名和目录结构一起加密，资源管理器右键一键上锁。",
+      en: "A Windows folder encryption tool: AES-256-GCM with Argon2id, encrypting file names and folder structure too — lock a folder from the Explorer right-click menu.",
+    },
+    detail: {
+      zh: "FolderLock 是开源的 Windows 10/11 文件夹加密工具（Rust + Tauri）。选一个文件夹、设好密码，它会把内容连同文件名、目录名和目录结构一起加密，放进同级一个隐藏的 .folderlock 保险箱，原位置只留一个同名锁定入口，双击输密码解锁。它用信封加密：Argon2id 从密码派生密钥、每个保险箱有独立随机主密钥、文件按 1 MiB 分块流式加解密，大文件夹不用整体载入内存；建箱时还会生成一把独立的安全恢复密钥，忘密码能靠它找回来。支持右键菜单、系统托盘、健康检查、改密码，也提供命令行版本。免费开源，在 GitHub 上下载使用。",
+      en: "FolderLock is an open-source folder encryption tool for Windows 10/11 (Rust + Tauri). Pick a folder, set a password, and it encrypts the contents together with file names, directory names and structure into a hidden .folderlock vault next to it, leaving a same-name locked entry in Explorer that unlocks with your password. It uses envelope encryption — Argon2id derives the key-wrapping key from your password, each vault gets its own random master key, and files are processed in 1 MiB authenticated chunks so large folders never load fully into memory. A separate recovery key is generated when you create a vault, in case the password is forgotten. Explorer context menu, system tray, vault health checks, password change and a CLI are included. Free and open source, distributed via GitHub.",
+    },
+    audience: {
+      zh: "想在 Windows 电脑上给敏感文件夹加一把本地密码锁、又不想把文件传到任何云端的人。",
+      en: "Windows users who want a local password lock on sensitive folders without sending files to any cloud.",
+    },
+    take: {
+      zh: "实测提醒：加密设计是正经的（认证加密 + 信封密钥 + 恢复密钥），但项目还很早期、未经独立安全审计——先拿非重要文件试，重要数据务必另留一份独立备份，加密不能替代备份；另外它的解锁是把文件恢复成普通目录，不是实时挂载的虚拟盘。",
+      en: "Hands-on notes: the crypto design is sound (authenticated encryption, envelope keys, a recovery key), but the project is young and has not had an independent security audit — try it on non-critical files first and always keep a separate backup of anything important; encryption is not a backup. Unlocking restores a plain folder rather than mounting a live virtual drive.",
+    },
+  },
+  {
     slug: "defiburn",
     name: { zh: "DeFiBurn", en: "DeFiBurn" },
     url: "https://www.defiburn.com",
