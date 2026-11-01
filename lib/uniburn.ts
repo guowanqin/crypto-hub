@@ -29,10 +29,13 @@ const CALL_RPCS = [
   "https://eth.drpc.org",
   "https://eth-mainnet.public.blastapi.io",
   "https://ethereum-rpc.publicnode.com",
+  "https://gateway.tenderly.co/public/mainnet",
 ];
-/** eth_getLogs 端点（大范围优先） */
+/** eth_getLogs 端点（大范围优先）：mevblocker 可整段直查 21.6 万区块；
+ *  Tenderly 网关单次上限 1 万区块，供 9000 块分段兜底（均 2026-11-01 实测）。 */
 const LOG_RPCS = [
   "https://rpc.mevblocker.io",
+  "https://gateway.tenderly.co/public/mainnet",
   "https://ethereum-rpc.publicnode.com",
   "https://eth.drpc.org",
 ];
