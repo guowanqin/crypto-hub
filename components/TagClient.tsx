@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import type { TagDef } from "@/lib/tags";
-import { toolsByTag } from "@/lib/tools";
+import { TOOLS, toolsByTag, type ToolDef } from "@/lib/tools";
+import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
@@ -20,6 +21,29 @@ export default function TagClient({
   const t = HUB_DICT[lang];
   const list = toolsByTag(tag.id);
   const otherLang = lang === "zh" ? "en" : "zh";
+
+  // 单工具标签页补位：工具数 < 3 时，底部用热门精选补到 4 个（排除本页已展示）；
+  // 精选不足时再用其他站内可用工具补齐。工具数 ≥ 3 的标签页不渲染此区。
+  const exploreList: ToolDef[] = [];
+  if (list.length < 3) {
+    const seen = new Set(list.map((x) => x.slug));
+    for (const f of FEATURED_TOOLS) {
+      if (exploreList.length >= 4) break;
+      if (!seen.has(f.slug)) {
+        exploreList.push(f);
+        seen.add(f.slug);
+      }
+    }
+    if (exploreList.length < 4) {
+      for (const tool of TOOLS) {
+        if (exploreList.length >= 4) break;
+        if (tool.embedded && !seen.has(tool.slug)) {
+          exploreList.push(tool);
+          seen.add(tool.slug);
+        }
+      }
+    }
+  }
 
   return (
     <main className="page">
@@ -70,6 +94,20 @@ export default function TagClient({
                 <summary>{f.q[lang]}</summary>
                 <p className="tag-faq-a">{f.a[lang]}</p>
               </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 单工具标签页补位推荐：仅工具数 < 3 时渲染 */}
+      {exploreList.length > 0 && (
+        <section className="section tag-explore">
+          <div className="section-head">
+            <h2 className="section-title">{t.exploreTitle}</h2>
+          </div>
+          <div className="card-grid">
+            {exploreList.map((tool) => (
+              <ToolCard key={tool.slug} tool={tool} />
             ))}
           </div>
         </section>

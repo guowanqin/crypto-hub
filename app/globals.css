@@ -646,6 +646,12 @@ a:hover {
   line-height: 1.8;
 }
 
+/* 标签页补位推荐区（单工具标签页底部） */
+.tag-explore {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
 /* ---------- 工具介绍页 ---------- */
 .detail-head {
   padding: 10px 0 22px;
