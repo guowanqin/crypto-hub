@@ -534,6 +534,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "chain-dau-panel",
+    name: { zh: "公链日活排行看板", en: "Chain Daily Activity Ranking" },
+    url: "https://18btc.cc/tool/chain-dau-panel",
+    tags: ["chain-dau"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "主流公链过去 24 小时的活跃地址数从多到少排一排，带日活 7 日变化、TVL 与人均锁仓，数据自动调取、可搜索可排序。",
+      en: "The major chains ranked by active addresses over the past 24 hours, with the DAU 7-day change, TVL and TVL per active address — auto-fetched, searchable and sortable.",
+    },
+    detail: {
+      zh: "一天之内真有人在用的链，从多到少排一排：波场、BSC、Solana、以太坊、比特币、Base、Arbitrum、Polygon、TON 等主流公链过去 24 小时发起过交易的去重地址数（日活），加上日活较 7 天前的变化、每条链的 TVL，以及人均锁仓（TVL ÷ 24h 日活）。数据与 DeFiLlama 的 active-users 指标同源（与其官网 /chains 页同一条管线）：日活走其 metrics 机器接口、TVL 走其 chains 接口自动拼合，接口不可达时回退解析官网页面，缓存约 1 小时。口径如实交代：日活是全量活跃地址口径（主流链按交易发送地址去重，Solana 数签名者，比特币系用 CoinMetrics 活跃地址），地址不等于真人；DeFiLlama 不提供 7 日去重活跃总数，本页不硬拼，只给真实存在的 7 日变化率；Robinhood Chain 尚未被该数据集统计日活，不在榜内。本工具不构成投资建议。",
+      en: "The chains people actually used in the last day, ranked: unique addresses that sent a transaction in the past 24 hours (DAU) for Tron, BSC, Solana, Ethereum, Bitcoin, Base, Arbitrum, Polygon, TON and more, plus the DAU change versus 7 days ago, each chain's TVL, and TVL per active address (TVL ÷ 24h DAU). Data shares DeFiLlama's active-users pipeline (the same one behind its /chains page): DAU from its metrics API and TVL from its chains API, joined automatically, with a fallback that parses the public web page if the APIs are unreachable; cached for about an hour. The caliber, stated plainly: DAU counts all active addresses (distinct transaction senders on major chains, signers on Solana, CoinMetrics active addresses for the Bitcoin family), and an address is not a person; DeFiLlama publishes no deduplicated 7-day active total, so this board shows only the real 7-day change rate instead of stitching one together; Robinhood Chain's activity is not yet tracked by this dataset and is absent. Not investment advice.",
+    },
+    audience: {
+      zh: "想快速判断一条公链到底有没有真实使用、是人多还是钱多，再决定去哪条链上交互、发币或投研的使用者与研究者。",
+      en: "Users and researchers who want a quick read on whether a chain has real usage — people, money, or both — before choosing where to transact, launch or dig deeper.",
+    },
+    take: {
+      zh: "看日活先分清「人」和「钱」：日活高、人均锁仓低的是散户大本营，日活不高、人均锁仓畸高的多半是资金盘着不动；两个数对着看，比单看 TVL 或单看日活都靠谱。还有一句：地址不是人，女巫和机器人最爱把日活刷出虚胖。",
+      en: "Read DAU as two numbers, not one: high DAU with low TVL-per-address is retail country; modest DAU with very high TVL-per-address is mostly money parked still. The pair beats either metric alone — and remember an address is not a person: sybils and bots love inflating DAU.",
+    },
+  },
+  {
     slug: "qqq-panel",
     name: { zh: "QQQ 定投回测计算器", en: "QQQ DCA Backtest Calculator" },
     url: "https://18btc.cc/tool/qqq-panel",

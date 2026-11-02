@@ -15,6 +15,7 @@ const DEDICATED_PAGES = new Set([
   "qqqi-panel",
   "qqq-panel",
   "flows-panel",
+  "chain-dau-panel",
   "btc-cycle",
   "filetime",
   "pdfbox",

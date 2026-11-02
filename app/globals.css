@@ -5046,3 +5046,37 @@ a:hover {
   font-size: 13px;
   white-space: nowrap;
 }
+
+/* ---------- 公链日活看板（/tag/chain-dau、/tool/chain-dau-panel） ---------- */
+.chaindau-search {
+  margin-top: 18px;
+}
+
+.chaindau-th-sort {
+  cursor: pointer;
+  user-select: none;
+}
+
+.chaindau-th-sort:hover {
+  color: var(--gold-strong);
+}
+
+.chaindau-showall {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.chaindau-showall-btn {
+  border: 1.5px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chaindau-showall-btn:hover {
+  border-color: var(--gold-strong);
+  color: var(--gold-strong);
+}

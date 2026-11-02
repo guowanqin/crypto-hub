@@ -257,6 +257,38 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "chain-dau",
+    name: { zh: "公链日活", en: "Chain Activity" },
+    intro: {
+      zh: "一条链到底有没有人用，不看口号看日活。这一页把主流公链过去 24 小时真正发起过交易的地址数从多到少排一排：波场、BSC、Solana、以太坊、比特币、Base、Arbitrum、Polygon、TON……再配上每条链的 TVL 和「人均锁仓」（TVL ÷ 日活），看清哪些链是人多钱也多，哪些是钱躺着不动、哪些是人挤人。数据取自 DeFiLlama 自动更新。先说清口径：地址不是真人，一人多地址、机器人和女巫都在数里；日活看的是链上真实使用强度，不是注册用户数。",
+      en: "Whether a chain is actually used is a numbers question, not a slogan. This page ranks the major chains by the addresses that really sent a transaction in the past 24 hours — Tron, BSC, Solana, Ethereum, Bitcoin, Base, Arbitrum, Polygon, TON and more — with each chain's TVL and TVL-per-active-address alongside, so you can see which chains have both people and money, which have money sitting still, and which are crowded with small addresses. Data comes from DeFiLlama and refreshes automatically. The caveat up front: an address is not a person — multi-address users, bots and sybils are all counted; DAU measures real on-chain usage intensity, not registered users.",
+    },
+    seoDescription: {
+      zh: "公链日活排行：主流公链过去 24 小时活跃地址数（日活）排名、日活 7 日变化、TVL 与人均锁仓（TVL ÷ 24h 日活）一页看齐，数据取自 DeFiLlama 自动调取，可按链名搜索、按日活/TVL/人均锁仓排序。含口径说明：地址不等于真人，Robinhood Chain 等未被统计的链不在榜内。",
+      en: "Chain daily-activity ranking: the major chains ranked by active addresses over the past 24 hours, with the DAU 7-day change, TVL and TVL per active address (TVL ÷ 24h DAU) on one page — data fetched automatically from DeFiLlama, searchable, sortable by DAU, TVL or TVL per address. Includes the full methodology: an address is not a person, and chains the dataset does not track (e.g. Robinhood Chain) are absent.",
+    },
+    keywords: [
+      "公链日活",
+      "公链日活排行",
+      "链日活排名",
+      "每日活跃地址",
+      "活跃地址数",
+      "公链活跃度",
+      "公链活跃度排名",
+      "人均锁仓",
+      "BSC日活",
+      "波场日活",
+      "Solana日活",
+      "以太坊日活",
+      "比特币活跃地址",
+      "TON日活",
+      "daily active addresses",
+      "chain DAU ranking",
+      "active addresses by chain",
+      "most used blockchains",
+    ],
+  },
+  {
     id: "filetime",
     name: { zh: "文件时间", en: "File Time" },
     intro: {
