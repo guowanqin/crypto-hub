@@ -386,6 +386,16 @@ a:hover {
   margin-bottom: 12px;
 }
 
+.section-head-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.section[id] {
+  scroll-margin-top: 16px;
+}
+
 .section-title-link {
   display: inline-flex;
   align-items: baseline;

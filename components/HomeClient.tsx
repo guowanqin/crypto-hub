@@ -1,9 +1,9 @@
 "use client";
 
 import { Fragment, useMemo, useState } from "react";
-import Link from "next/link";
-import { TAGS, TAG_MAP } from "@/lib/tags";
-import { TOOLS, toolsByTag, type ToolDef } from "@/lib/tools";
+import { TAG_MAP } from "@/lib/tags";
+import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
+import { TOOLS, type ToolDef } from "@/lib/tools";
 import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
@@ -15,19 +15,8 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const [query, setQuery] = useState("");
-  const [activeTag, setActiveTag] = useState<string>("all");
+  const [activeGroup, setActiveGroup] = useState<string>("all");
   const [activeType, setActiveType] = useState<"all" | "builtin" | "third">("all");
-  const [tagsExpanded, setTagsExpanded] = useState(false);
-
-  // 分类 chips 默认只露前 9 个；当前选中的分类不在默认集合内时也要露出来，避免选中项「消失」
-  const visibleTags = useMemo(() => {
-    const base = tagsExpanded ? TAGS : TAGS.slice(0, 9);
-    if (activeTag !== "all" && !base.some((tg) => tg.id === activeTag)) {
-      const sel = TAGS.find((tg) => tg.id === activeTag);
-      if (sel) return [...base, sel];
-    }
-    return base;
-  }, [tagsExpanded, activeTag]);
 
   const q = query.trim().toLowerCase();
   const matches = useMemo(() => {
@@ -40,10 +29,15 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         tool.oneLiner.en,
         tool.detail.zh,
         tool.detail.en,
-        // 所属标签的中英文名也纳入匹配：搜「销毁」「钱包」能命中整个分类的工具
+        // 所属标签与所属大类的中英文名也纳入匹配：搜「销毁」「钱包」能命中整个分类的工具，
+        // 搜「定投」「安全」能命中对应大类（美股定投 / 钱包与安全）的工具
         ...tool.tags.flatMap((id) => {
           const tg = TAG_MAP[id];
-          return tg ? [tg.name.zh, tg.name.en] : [];
+          const gr = GROUP_BY_TAG[id];
+          return [
+            ...(tg ? [tg.name.zh, tg.name.en] : []),
+            ...(gr ? [gr.name.zh, gr.name.en] : []),
+          ];
         }),
       ]
         .join(" ")
@@ -60,11 +54,12 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         ? Boolean(tool.embedded)
         : tool.type === "third-party";
 
-  // 首页实际展示的分类区块（应用分类 + 类型筛选，跳过变空的分类），供分类间广告位按序插入
-  const visibleSections = TAGS.filter((tag) => activeTag === "all" || tag.id === activeTag)
-    .map((tag) => ({
-      tag,
-      list: toolsByTag(tag.id).filter(typeOk),
+  // 首页实际展示的大类区块（方案一：按大类组织；应用大类 + 类型筛选，跳过变空的大类），
+  // 供大类间广告位按序插入。组内工具 = 成员标签的工具按成员顺序拼接去重
+  const visibleSections = GROUPS.filter((group) => activeGroup === "all" || group.id === activeGroup)
+    .map((group) => ({
+      group,
+      list: toolsByGroup(group).filter(typeOk),
     }))
     .filter((s) => s.list.length > 0);
 
@@ -108,8 +103,8 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         </section>
       ) : (
         <>
-          {/* 热门精选：仅默认视图（无搜索词、分类=全部、类型=全部）显示，避免与筛选结果重复 */}
-          {activeTag === "all" && activeType === "all" && (
+          {/* 热门精选：仅默认视图（无搜索词、大类=全部、类型=全部）显示，避免与筛选结果重复 */}
+          {activeGroup === "all" && activeType === "all" && (
             <section className="section featured-section">
               <div className="section-head">
                 <h2 className="section-title">🔥 {t.featuredTitle}</h2>
@@ -122,38 +117,28 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
             </section>
           )}
 
-          {/* 筛选：分类（来自标签注册表）+ 类型（独立可用 / 第三方），可组合 */}
+          {/* 筛选：大类（方案一的 7 个大类）+ 类型（独立可用 / 第三方），可组合 */}
           <div className="filter-bar">
             <div className="filter-row" role="group" aria-label="Filter by category">
               <button
                 type="button"
-                className={`filter-chip${activeTag === "all" ? " on" : ""}`}
-                aria-pressed={activeTag === "all"}
-                onClick={() => setActiveTag("all")}
+                className={`filter-chip${activeGroup === "all" ? " on" : ""}`}
+                aria-pressed={activeGroup === "all"}
+                onClick={() => setActiveGroup("all")}
               >
                 {t.allTags}
               </button>
-              {visibleTags.map((tag) => (
+              {GROUPS.map((group) => (
                 <button
                   type="button"
-                  key={tag.id}
-                  className={`filter-chip${activeTag === tag.id ? " on" : ""}`}
-                  aria-pressed={activeTag === tag.id}
-                  onClick={() => setActiveTag(tag.id)}
+                  key={group.id}
+                  className={`filter-chip${activeGroup === group.id ? " on" : ""}`}
+                  aria-pressed={activeGroup === group.id}
+                  onClick={() => setActiveGroup(group.id)}
                 >
-                  {tag.name[lang]}
+                  {group.name[lang]}
                 </button>
               ))}
-              {TAGS.length > 9 && (
-                <button
-                  type="button"
-                  className="filter-chip filter-chip-more"
-                  aria-expanded={tagsExpanded}
-                  onClick={() => setTagsExpanded((v) => !v)}
-                >
-                  {tagsExpanded ? t.lessTags : t.moreTags}
-                </button>
-              )}
             </div>
             <div className="filter-row" role="group" aria-label="Filter by type">
               <button
@@ -188,17 +173,16 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
               <p className="empty-note">{t.filterEmpty}</p>
             </section>
           ) : (
-            visibleSections.map(({ tag, list }, idx) => (
-              <Fragment key={tag.id}>
-                <section className="section">
+            visibleSections.map(({ group, list }, idx) => (
+              <Fragment key={group.id}>
+                <section className="section" id={group.id}>
                   <div className="section-head">
-                    <Link href={`/tag/${tag.id}`} className="section-title-link">
-                      <h2 className="section-title">{tag.name[lang]}</h2>
+                    <div className="section-head-row">
+                      <h2 className="section-title">{group.name[lang]}</h2>
                       <span className="section-count">
                         {t.toolsCount.replace("{n}", String(list.length))}
                       </span>
-                      <span className="section-arrow">→</span>
-                    </Link>
+                    </div>
                   </div>
                   <div className="card-grid">
                     {list.map((tool) => (
@@ -206,7 +190,7 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
                     ))}
                   </div>
                 </section>
-                {/* 广告位：首页中部横幅（第 3 个分类区块之后） */}
+                {/* 广告位：首页中部横幅（第 3 个大类区块之后） */}
                 {idx === 2 && <AdSlot id="home_mid" preview={adsPreview} />}
               </Fragment>
             ))
