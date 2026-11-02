@@ -8,6 +8,10 @@ export interface TagDef {
   // SEO：独立 meta description（中英）
   seoDescription: Record<Lang, string>;
   keywords: string[];
+  // 可选：分类选购/使用指南（标签页正文补厚，中英）
+  guide?: Record<Lang, string>;
+  // 可选：常见问答（标签页正文，中英）
+  faqs?: { q: Record<Lang, string>; a: Record<Lang, string> }[];
 }
 
 export const TAGS: TagDef[] = [
@@ -31,6 +35,42 @@ export const TAGS: TagDef[] = [
       "crypto market data tools",
       "crypto price tracker",
     ],
+    guide: {
+      zh: "看行情先统一口径：同一个币在不同网站价格对不上，多半是聚合的交易所不同、更新慢了几秒。日常查价、市值排名用 CoinGecko、CoinMarketCap 这类聚合站足够；盯 DEX 新币要去 DexScreener、GeckoTerminal 看池子——别只看价格，流动性更重要，池子只有几千美元的币，涨幅再漂亮也卖不出去。涨跌幅确认是 24 小时还是 7 天口径，市值分清流通市值与完全稀释市值（FDV），差得远说明后面还有大量解锁。看财库股每股含币量，用站内的 PerShare。",
+      en: "Start by aligning definitions: when two sites show different prices for the same coin, it is usually a different mix of exchanges and a few seconds of lag, not fake data. For everyday prices and market-cap rankings, aggregators like CoinGecko and CoinMarketCap are enough. For brand-new DEX tokens, go to DexScreener or GeckoTerminal and look past the price: liquidity depth matters more, because a pool holding only a few thousand dollars cannot absorb your sell however pretty the chart looks. Check whether a move is measured over 24 hours or 7 days, and separate circulating market cap from fully diluted valuation (FDV) — a wide gap means heavy unlocks ahead. For treasury stocks specifically, the built-in PerShare tracks the coin content of each share.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "CoinGecko 和 CoinMarketCap 上的价格为什么不一样？",
+          en: "Why do CoinGecko and CoinMarketCap show different prices for the same coin?",
+        },
+        a: {
+          zh: "两家聚合的交易所和加权方式不同，更新也有先后，流动性薄的小币差价更明显。看主流币用哪家都行；真要下单，最终以你下单那家交易所的实时盘口为准。",
+          en: "They aggregate different exchanges with different weighting, and their updates land seconds apart; thin, illiquid coins differ the most. Either is fine for major coins — but when you actually trade, the order book of the exchange you are trading on is the price that counts.",
+        },
+      },
+      {
+        q: {
+          zh: "DEX 上新币涨了几十倍，能买吗？",
+          en: "A new DEX token is up dozens of times — is it safe to buy?",
+        },
+        a: {
+          zh: "先别看涨幅，去 DEX 终端看池子的流动性和持有人分布：流动性太浅，你买得进卖不出；前几名地址占比过高，随时可能砸盘。再确认合约允许卖出（不是只能买不能卖的貔貅盘），都过了关再谈买入。",
+          en: "Ignore the percentage gain and check the pool first: its liquidity and holder distribution. A shallow pool lets you buy but not sell, and a few top addresses holding most of the supply can dump at any time. Also confirm the contract actually allows selling (no honeypot), then decide.",
+        },
+      },
+      {
+        q: {
+          zh: "流通市值和 FDV 应该看哪个？",
+          en: "Market cap or FDV — which one should I look at?",
+        },
+        a: {
+          zh: "两个都看：流通市值反映当下盘子的大小，FDV 是全部代币解锁之后的市值。如果 FDV 是流通的好几倍，说明未来抛压很大，估值要打折看，别只拿流通市值觉得便宜。",
+          en: "Both. Circulating market cap shows the size of today's float; FDV is the valuation once every token is unlocked. If FDV is several times the circulating cap, big sell pressure is still ahead — discount the valuation instead of calling it cheap on the circulating figure alone.",
+        },
+      },
+    ],
   },
   {
     id: "onchain",
@@ -52,6 +92,42 @@ export const TAGS: TagDef[] = [
       "on-chain analytics tools",
       "whale tracker",
     ],
+    guide: {
+      zh: "链上工具分工明确：区块浏览器（Etherscan 这类）是查账本的——转账到没到、合约验证过没有、地址还剩多少，先在这里核对；分析平台是做研究的：Dune 用 SQL 把原始数据做成可筛选的面板，跟踪赛道的资金和用户变化；Arkham 给地址打实体标签，盯交易所和巨鲸钱包的进出；Bubblemaps 用气泡图看持币地址之间的关联，专治「筹码是不是集中在少数人手里」。新手顺序：先查清一笔交易，再看懂一个地址的全部持仓，最后再碰面板和标签，别被别人的结论牵着走。",
+      en: "On-chain tools have clear jobs. A block explorer (Etherscan and its peers) is the ledger: did a transfer land, is the contract verified, what does an address still hold — verify here first. Analytics platforms are for research: Dune turns raw data into filterable dashboards with SQL, good for tracking money and users across a sector; Arkham attaches entity labels to addresses, good for watching exchanges, institutions and whale wallets; Bubblemaps draws holder relationships as bubble charts, built for one question — is the supply concentrated in a few hands? A sensible learning order: read a single transaction in an explorer, then read one address's full portfolio, then graduate to dashboards and labels instead of starting from other people's conclusions.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "怎么查一个钱包地址都买了哪些币？",
+          en: "How do I see which tokens a wallet address holds?",
+        },
+        a: {
+          zh: "把地址粘进对应链的区块浏览器（以太坊用 Etherscan），看它的代币持仓页就能列全。再想知道这个地址属于哪个机构、历史上跟谁转过账，去 Arkham 的实体标签页对照着看。",
+          en: "Paste the address into the block explorer for its chain (Etherscan for Ethereum) and open its token holdings page for the full list. To learn which entity the address belongs to and who it has transacted with, cross-check it on Arkham's entity pages.",
+        },
+      },
+      {
+        q: {
+          zh: "巨鲸地址在哪里看？转入交易所就是要砸盘吗？",
+          en: "Where can I track whale wallets — and does a transfer to an exchange mean a dump is coming?",
+        },
+        a: {
+          zh: "Arkham 和 Dune 上都有现成的巨鲸追踪面板，单个代币的大户分布可以在 Bubblemaps 看。转入交易所不必然是砸盘，也可能是做市、换仓或托管迁移，要结合金额大小和后续动作判断，别看到大额转账就追涨杀跌。",
+          en: "Arkham and Dune both host ready-made whale-tracking dashboards, and Bubblemaps shows the big holders of a single token. A transfer into an exchange is not automatically a sell-off — it can be market making, a wallet reshuffle or a custody move. Judge it by size and by what happens next instead of chasing every large transfer.",
+        },
+      },
+      {
+        q: {
+          zh: "Etherscan 显示交易成功，币为什么还没到账？",
+          en: "Etherscan says the transaction succeeded — why hasn't the money arrived?",
+        },
+        a: {
+          zh: "先核对转的是哪条链、哪个代币合约：转错链、或者转了同名假币，浏览器显示成功也不会进对方账户。再确认接收方是不是交易所充值地址——不少平台要等够确认数才入账，耐心等确认数达标即可。",
+          en: "First check which chain and which token contract the transfer used: a wrong-chain send, or a look-alike fake token, will show as successful yet never reach the recipient. If the destination is an exchange deposit address, many platforms credit only after a set number of confirmations — wait for that count.",
+        },
+      },
+    ],
   },
   {
     id: "defi",
@@ -71,6 +147,42 @@ export const TAGS: TagDef[] = [
       "defi analytics",
       "TVL tracker",
     ],
+    guide: {
+      zh: "看 DeFi 先看 TVL（总锁仓量）：有多少真金白银押在一个协议或一条链里，是判断规模和信任度的第一指标，但别当成「项目值多少钱」——TVL 会随币价涨跌被动变化，也能被高补贴短期冲高。更靠谱的看法是两点：剔除币价涨幅后还剩多少真实流入；再看协议收入，有没有人持续付费，比锁仓数字更能说明生意成不成立。不同平台的 TVL 对不上多半是口径不同：是否计入借贷仓位、嵌套存款有没有重复计算、覆盖了哪些链。本站的 DeFiLlama 口径公开可查，适合做默认参照。",
+      en: "In DeFi, start with TVL (total value locked): the real money parked in a protocol or on a chain, and the first gauge of scale and trust. Do not mistake it for what a project is worth — TVL floats passively with token prices and can be inflated short-term by yield subsidies. Two better checks: strip out price gains and see how much genuine inflow remains, and look at protocol revenue — people continuously paying to use something says more than a locked total. When platforms disagree on TVL it is almost always methodology: whether borrowing positions count, whether nested deposits are double-counted, which chains are covered. DeFiLlama, listed here, publishes its methodology, which makes it a good default reference; cross-check a project's own docs before any big decision.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "TVL 是什么？是不是越高越好？",
+          en: "What is TVL — and is higher always better?",
+        },
+        a: {
+          zh: "TVL 是锁在协议里的资产总价值，反映规模和资金信任度，但高不等于安全，更不等于能赚钱：币价一涨 TVL 就跟着虚增，高补贴也能短期刷高。要结合协议收入、以及剔除币价涨幅后的 TVL 走势一起看。",
+          en: "TVL is the total value of assets locked in a protocol — a measure of scale and of how much capital trusts it. Higher is not automatically safer or more profitable: a token rally inflates it passively, and generous subsidies can pump it briefly. Read it together with protocol revenue and the price-adjusted TVL trend.",
+        },
+      },
+      {
+        q: {
+          zh: "为什么 DeFiLlama 和项目官网显示的 TVL 不一样？",
+          en: "Why does DeFiLlama's TVL differ from the number on a project's own site?",
+        },
+        a: {
+          zh: "官网常只算自家主要链，或把借贷、质押重复计数；DeFiLlama 用统一口径跨链统计并剔除一部分重复计算。差异来自统计口径，不是必有一方造假——DeFiLlama 的方法页写明了每个协议具体怎么算，拿不准时去对照。",
+          en: "Project sites often count only their main chain, or count borrowed and staked positions twice. DeFiLlama applies one methodology across chains and removes some of that double-counting. The gap is methodology, not proof that either side is faking it — DeFiLlama's methodology pages document exactly how each protocol is counted.",
+        },
+      },
+      {
+        q: {
+          zh: "看一个 DeFi 协议应该先看哪几项数据？",
+          en: "Which numbers should I check first when sizing up a DeFi protocol?",
+        },
+        a: {
+          zh: "先看 TVL 及其长期走势，再看手续费和协议收入（有没有真实付费用户），然后看它部署在哪些链、审计情况和历史安全记录。只盯着 APY 数字冲进去，是新手最常见的亏钱方式。",
+          en: "Start with TVL and its long-term trend, then fees and protocol revenue (are there real paying users?), then which chains it runs on, its audits and its security track record. Charging in on the APY number alone is the most common way beginners lose money.",
+        },
+      },
+    ],
   },
   {
     id: "wallet",
@@ -84,6 +196,42 @@ export const TAGS: TagDef[] = [
       en: "Wallet tools, field-tested: Rabby Wallet — a multi-chain EVM wallet with automatic network switching, pre-sign transaction simulation with risk flags, and a portfolio overview.",
     },
     keywords: ["币圈钱包", "EVM钱包", "多链钱包", "crypto wallet", "web3 wallet"],
+    guide: {
+      zh: "选钱包先看三件事：常玩的链它支不支持——Rabby 主打 EVM 多链、自动切链，不支持的链钱包再好也白搭；安全记录干不干净，有没有出过被盗事件、是否开源审计；日常体验，资产总览清不清楚、连 dApp 顺不顺。比功能更重要的是习惯：助记词只离线手写保管，截图存手机、念给任何「客服」听都等于送钱；大额资产放硬件钱包或单独地址，别和天天签合约的热钱包混用。签名前看一眼交易模拟和风险提示，看不懂的签名不要签——Rabby 这类钱包的签前预演，正是为这一步设计的。",
+      en: "Judge a wallet on three things. First, chain support: Rabby is built for EVM chains with automatic network switching — a wallet that does not support the chains you use is useless however good it is. Second, its security record: any past drain incidents, and is the code open-source and audited? Third, daily feel: a clear portfolio overview and painless dApp connections. Habits matter more than features. Keep your seed phrase offline and handwritten — a screenshot on your phone, or reading it to any 'support agent', is handing over the money. Keep large holdings in a hardware wallet or a separate address, away from the hot wallet that signs contracts daily. And before signing, actually read the wallet's transaction simulation and risk flags; never sign what you do not understand — Rabby-style pre-sign previews exist precisely for that moment.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "Rabby 和 MetaMask 有什么区别，该选哪个？",
+          en: "Rabby vs MetaMask — what is the difference and which should I pick?",
+        },
+        a: {
+          zh: "都是 EVM 钱包：Rabby 主打多链自动切换、签名前预演交易结果与风险、资产总览更直观；MetaMask 生态最广，老 dApp 兼容性最好。两个可以都装、按顺手程度切换，但同一套助记词不要在来路不明的钱包里导入。",
+          en: "Both are EVM wallets. Rabby leans into automatic multi-chain switching, pre-sign simulation with risk flags and a clearer portfolio view; MetaMask has the widest ecosystem and the best compatibility with older dApps. You can run both and switch by preference — just never import the same seed phrase into a wallet you have not verified.",
+        },
+      },
+      {
+        q: {
+          zh: "助记词到底怎么保管才安全？",
+          en: "How should I actually store my seed phrase?",
+        },
+        a: {
+          zh: "手写在纸上、离线存放，绝不截图、不存网盘、不发给任何人。任何网站、弹窗或「客服」让你输入助记词，都是诈骗。如果助记词丢失又删除了钱包，资产无法找回，没有例外。",
+          en: "Write it on paper and store it offline. Never screenshot it, never put it in cloud storage, never give it to anyone. Any website, pop-up or 'support agent' asking for your seed phrase is a scam. And if you lose the phrase and delete the wallet, the funds are unrecoverable — there are no exceptions.",
+        },
+      },
+      {
+        q: {
+          zh: "钱包里突然多了不认识的代币，是天上掉馅饼吗？",
+          en: "Unknown tokens just appeared in my wallet — free money?",
+        },
+        a: {
+          zh: "大概率是空投骗局：这类币常诱导你去陌生网站「领取」或授权，一签就被盗。不要点它附带的链接，也不要拿它去兑换，在钱包里把这个代币隐藏掉就好，眼不见为净。",
+          en: "Almost certainly a dusting scam: these tokens lure you to a strange site to 'claim' or approve something, and one signature drains your wallet. Do not follow any link attached to them and do not try to swap them — just hide the token in your wallet and move on.",
+        },
+      },
+    ],
   },
   {
     id: "security",
@@ -102,6 +250,42 @@ export const TAGS: TagDef[] = [
       "撤销授权",
       "revoke token approvals",
       "crypto security tools",
+    ],
+    guide: {
+      zh: "这类工具防两种丢钱方式。链上最常见的是授权风险：用过的 dApp 可能留着对你代币的授权（allowance），项目作恶或合约被攻破时，旧授权能被人直接用来掏空钱包——用 Revoke.cash 定期盘点、撤销不用的授权，成本只有一点 Gas。本地文件怕的是设备丢失或被人打开：钱包备份、私钥、证件这类敏感文件，用文件夹加密（站内保险箱或桌面版 FolderLock）加一层密码。把话说在前面：加密只是提高门槛，密码强度和保管方式才是关键，没有工具能承诺绝对安全；重要文件还要留一份异地备份。",
+      en: "These tools guard against two different ways of losing money. On-chain, the common one is approval risk: every dApp you have used may still hold an allowance over your tokens, and if the project turns malicious or its contract is exploited, that stale approval can empty your wallet — audit regularly with Revoke.cash and revoke what you no longer use, for the cost of a little gas. Local files are the other front: wallet backups, key files and ID scans are at risk when a device is lost or opened by someone else, so put sensitive folders behind a folder-encryption tool (the built-in vault here, or the desktop FolderLock). One honest caveat: encryption only raises the bar — password strength and how you store it are what actually protect you, and no tool can promise absolute security. Keep an off-site backup of anything important, encrypted or not.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "代币授权（allowance）是什么？为什么说它危险？",
+          en: "What is a token allowance, and why is it risky?",
+        },
+        a: {
+          zh: "授权就是你允许某个合约动用你钱包里某种代币的额度，swap、质押时都会用到，而且额度常被设成无限大。合约日后被盗或项目跑路时，攻击者就能凭这份旧授权直接转走你的币。定期撤销不用的授权，等于随手关门。",
+          en: "An allowance is permission for a contract to move a set amount of a token out of your wallet — swaps and staking all need one, and the amount is often set to unlimited. If that contract is later exploited or the project rugs, the stale approval lets attackers transfer your tokens directly. Revoking approvals you no longer use is locking a door you left open.",
+        },
+      },
+      {
+        q: {
+          zh: "撤销授权要花钱吗？会把我的币弄丢吗？",
+          en: "Does revoking an allowance cost money — and can it lose my tokens?",
+        },
+        a: {
+          zh: "撤销本身是一笔链上交易，只花少量 Gas，不会动你的代币余额；之后再用那个 dApp，重新授权一次就行。在 Revoke.cash 操作前先核对打开的是官网——这类工具的钓鱼仿站不少，进错站反而会被盗。",
+          en: "A revoke is an ordinary on-chain transaction: it costs a little gas and never touches your token balances. Next time you use that dApp you simply approve again. Before doing anything on Revoke.cash, double-check you are on the real site — phishing clones of tools like this are common, and the fake one is the actual trap.",
+        },
+      },
+      {
+        q: {
+          zh: "文件夹加密后，密码忘了怎么办？",
+          en: "I encrypted a folder and forgot the password — now what?",
+        },
+        a: {
+          zh: "基本上找不回来——正规加密工具没有后门，这正是它能挡住别人的原因。设置时就用密码管理器记好主密码，并把加密备份留一份在别处，别让唯一的钥匙和唯一的锁放在同一台设备上。",
+          en: "In practice, it is gone — legitimate encryption tools have no backdoor, which is exactly why they keep other people out too. When you set up encryption, save the master password in a password manager and keep an encrypted backup somewhere else; never let the only key live on the same device as the only lock.",
+        },
+      },
     ],
   },
   {
@@ -391,6 +575,42 @@ export const TAGS: TagDef[] = [
       "hongguo",
       "short drama app",
     ],
+    guide: {
+      zh: "这一类收录的是红果短剧的第三方桌面客户端，把手机短剧搬到电脑和电视上看。先分清：它不是红果官方出品，官方只有手机 App；第三方客户端是个人开发者做的，版本状态也不同——Windows 有正式版，Mac（M 系列）和 Android TV 还是测试版，完整度以下载页标注为准。安装前做两件事：只从本站核对过的发布页下载，别点搜索引擎里的「高速下载器」仿冒链接；系统拦截或提醒时先核对来源再放行。另外，收藏和续播只存本机，换设备不同步，和官方的账号体系不同。",
+      en: "This shelf currently lists a third-party desktop client for Hongguo short dramas — a way to watch the free phone-first dramas on a computer or TV. Be clear on what it is: not an official Hongguo product (the official app is mobile-only), but an independent developer's client, and its builds are at different stages — a proper Windows release, while the Mac (Apple Silicon) and Android TV builds are still betas, with completeness and stability as noted on the download page. Before installing, do two things: download only from the release page verified in this site's intro, never from a random 'high-speed downloader' ad in a search result; and if your system flags the installer, verify the source before overriding the warning instead of clicking through blindly. Also note that favourites and resume points are stored on the device only — nothing syncs across devices, unlike the official app's account system.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "红果短剧有官方电脑版或电视版吗？",
+          en: "Is there an official Hongguo app for PC or TV?",
+        },
+        a: {
+          zh: "没有，红果官方只有手机 App。本站收录的桌面版是第三方开发者做的客户端，能在 Windows、Mac 和 Android TV 上看短剧，但与官方没有隶属关系；下载认准本站介绍里核对过的发布页，不要搜到什么就装什么。",
+          en: "No — Hongguo's official app is mobile-only. The desktop client listed here is made by a third-party developer and has no affiliation with the official app, though it plays the same short dramas on Windows, Mac and Android TV. Download it only from the release page verified in this site's intro.",
+        },
+      },
+      {
+        q: {
+          zh: "Android TV 电视版怎么安装？",
+          en: "How do I install the Android TV build on my television?",
+        },
+        a: {
+          zh: "把安装包拷进 U 盘插到电视上安装，或用电视自带的文件管理器侧载，前提是在设置里允许「安装未知来源应用」。它目前还是测试版，个别机型的遥控器适配不完善，操作别扭时接个鼠标会顺手很多。",
+          en: "Copy the installer onto a USB drive and install it from the TV, or sideload it with the TV's file manager — either way you will need to allow 'install from unknown sources' in settings first. The TV build is still a beta and remote-control support is rough on some models; a plugged-in mouse makes it much easier.",
+        },
+      },
+      {
+        q: {
+          zh: "第三方客户端安全吗？需要注册登录吗？",
+          en: "Is a third-party client like this safe? Do I need an account?",
+        },
+        a: {
+          zh: "本站收录的这个客户端不需要注册登录，收藏和播放记录只存在本机。通用的防护原则不变：只从可信发布页下载、核对文件名和版本号，来路不明的「破解版」「去广告版」不要装——那类包才是真正的高危区。",
+          en: "The client listed here needs no account or login, and its favourites and playback history stay on your device. The usual rules still apply: download only from a trusted release page, check the file name and version, and never install 'cracked' or 'ad-free mod' builds from unknown sources — those are the genuinely dangerous ones.",
+        },
+      },
+    ],
   },
   {
     id: "slang",
@@ -435,6 +655,42 @@ export const TAGS: TagDef[] = [
       "在线邮件合并",
       "productivity tools",
       "generate word documents from excel",
+    ],
+    guide: {
+      zh: "办公工具先分清文件在哪儿处理。合同、证件、名单这类敏感文件，优先选本地处理的——本站的 Excel 批量生成 Word 和图片工具箱，文件不离开浏览器，关掉页面即无痕；要上传服务器转换的在线站，用之前先想想内容能不能见人。其次看批量能力：单个文件哪个都行，要按 Excel 几百行批量出文档、批量转格式，就要确认行数和大小限制、要不要注册付费。最后抽查质量：生成后抽最前、中间、最后各一份，看占位符有没有漏替换、排版有没有跑偏，再整批交付。",
+      en: "With office tools, first ask where the file gets processed. For sensitive material — contracts, ID scans, rosters — prefer tools that work locally: this site's Excel-to-Word generator and image toolbox never let files leave your browser, and closing the tab leaves no trace. Upload-convert-download sites actually receive your files, so think before sending them anything private. Second, check batch limits: any tool handles one file, but generating documents from hundreds of spreadsheet rows or converting in bulk means checking row and size caps, and whether the good tier hides behind sign-up or payment. Finally, verify output quality: after a batch run, spot-check the first, a middle and the last file — confirm every placeholder was replaced and the layout held — before you ship the whole batch.",
+    },
+    faqs: [
+      {
+        q: {
+          zh: "Excel 批量生成 Word 是怎么工作的？",
+          en: "How does generating Word documents from Excel in bulk work?",
+        },
+        a: {
+          zh: "先在 Word 模板里把要替换的位置写成占位符，再上传 Excel：表格的一行生成一份文档，列名和占位符一一对应。站内的 Sheet2Word 全程在本地处理，生成后打包成 ZIP 下载，没有行数限制，也不用注册。",
+          en: "You mark the spots to fill in a Word template with placeholders, then upload an Excel sheet: each row becomes one document, with column names mapping to placeholders. The built-in Sheet2Word does this entirely locally, delivers a ZIP download, and has no row limit and no sign-up.",
+        },
+      },
+      {
+        q: {
+          zh: "在线处理文件安全吗？文件会不会被上传？",
+          en: "Is it safe to process files online — do they get uploaded?",
+        },
+        a: {
+          zh: "取决于实现方式。本站的办公工具是纯前端本地处理，文件不上传服务器。采用「上传—转换—下载」模式的网站则真的会拿到你的文件，合同、证件这类敏感内容不要用这类站点处理。",
+          en: "It depends on how the tool is built. This site's office tools run entirely in your browser and upload nothing. Sites built on an upload-convert-download model do receive your files — keep contracts, ID scans and anything sensitive away from those.",
+        },
+      },
+      {
+        q: {
+          zh: "Filee 这种本地转换器和在线转换站有什么区别？",
+          en: "How is a local converter like Filee different from online conversion sites?",
+        },
+        a: {
+          zh: "Filee 是装在电脑上的本地转换器，拖拽就能批量转换图片、文档、音视频等多种格式，不依赖网络、不限次数。在线站胜在免安装，但通常有文件大小限制，文件也要经过别人的服务器。转换频繁、文件又大，本地工具更省事。",
+          en: "Filee is a converter installed on your own machine: drag files in and convert images, documents, audio and video in bulk, with no network dependency and no usage caps. Online sites win on zero install, but they usually cap file size and your files pass through someone else's server. If you convert often or work with large files, a local tool is less hassle.",
+        },
+      },
     ],
   },
   {

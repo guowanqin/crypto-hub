@@ -49,6 +49,31 @@ export default function TagClient({
           <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
+
+      {/* 正文补厚：分类选购/使用指南（仅配了 guide 的标签渲染） */}
+      {tag.guide && (
+        <section className="tag-guide">
+          <h2 className="section-title">{t.guideTitle}</h2>
+          <p className="tag-guide-text">{tag.guide[lang]}</p>
+        </section>
+      )}
+
+      {/* 正文补厚：常见问答（仅配了 faqs 的标签渲染） */}
+      {tag.faqs && tag.faqs.length > 0 && (
+        <section className="tag-faq">
+          <div className="section-head">
+            <h2 className="section-title">{t.faqTitle}</h2>
+          </div>
+          <div className="tag-faq-list">
+            {tag.faqs.map((f, i) => (
+              <details key={i} className="tag-faq-item">
+                <summary>{f.q[lang]}</summary>
+                <p className="tag-faq-a">{f.a[lang]}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

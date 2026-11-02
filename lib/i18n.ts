@@ -34,6 +34,9 @@ export interface HubDict {
   lessTags: string;
   liveDataBadge: string;
   relatedTitle: string;
+  guideTitle: string;
+  faqTitle: string;
+  exploreTitle: string;
 }
 
 export const HUB_DICT: Record<Lang, HubDict> = {
@@ -69,6 +72,9 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     lessTags: "收起 ▴",
     liveDataBadge: "数据自动更新",
     relatedTitle: "同类工具",
+    guideTitle: "选购指南",
+    faqTitle: "常见问题",
+    exploreTitle: "继续逛逛",
   },
   en: {
     navHome: "Home",
@@ -102,5 +108,8 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     lessTags: "Show less ▴",
     liveDataBadge: "Live data",
     relatedTitle: "Related tools",
+    guideTitle: "Buying Guide",
+    faqTitle: "FAQ",
+    exploreTitle: "Keep exploring",
   },
 };
