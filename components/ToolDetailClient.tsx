@@ -6,6 +6,7 @@ import { TAG_MAP } from "@/lib/tags";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 export default function ToolDetailClient({
@@ -47,6 +48,7 @@ export default function ToolDetailClient({
           {t.visitTool} →
         </a>
       </section>
+      <GroupBanner slug={tool.slug} small />
 
       <section className="card">
         <h2>{t.detailTitle}</h2>

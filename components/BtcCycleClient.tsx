@@ -7,6 +7,7 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import BtcCycleBoard, { BTC_CYCLE_DICT } from "./BtcCycleBoard";
 import { useLang } from "./LangProvider";
 
@@ -42,6 +43,7 @@ export default function BtcCycleClient({
           <p className="tag-intro">{tag.intro[lang]}</p>
         </div>
       </section>
+      <GroupBanner tagId={tag.id} />
 
       {/* 广告位：标签页顶部横幅 */}
       <AdSlot id="tag_top" preview={adsPreview} />

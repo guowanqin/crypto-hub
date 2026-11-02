@@ -7,6 +7,7 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import FlowsBoard from "./FlowsBoard";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("flows-panel")!;
@@ -34,6 +35,7 @@ export default function FlowsPanelClient({
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
+      <GroupBanner slug="flows-panel" small />
 
       {/* 看板本体：站内直接使用（与 /tag/flows 共用同一组件） */}
       <FlowsBoard />

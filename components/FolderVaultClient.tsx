@@ -7,6 +7,7 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import FolderVault from "./FolderVault";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("foldervault")!;
@@ -87,6 +88,7 @@ export default function FolderVaultClient({ adsPreview = false }: { adsPreview?:
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
+      <GroupBanner slug="foldervault" small />
 
       {/* 工具本体：站内直接使用 */}
       <FolderVault />

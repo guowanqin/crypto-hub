@@ -7,6 +7,7 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, type Lang } from "@/lib/site";
 import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import PdfToolbox from "./PdfToolbox";
 import { useLang } from "./LangProvider";
 
@@ -103,6 +104,7 @@ export default function PdfClient({
           <p className="tag-intro">{tag.intro[lang]}</p>
         </div>
       </section>
+      <GroupBanner tagId={tag.id} />
 
       {/* 广告位：标签页顶部横幅 */}
       <AdSlot id="tag_top" preview={adsPreview} />

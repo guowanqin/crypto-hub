@@ -7,6 +7,7 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import QqqBoard from "./QqqBoard";
 import AdSlot from "./AdSlot";
+import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("qqq-panel")!;
@@ -30,6 +31,7 @@ export default function QqqPanelClient({ adsPreview = false }: { adsPreview?: bo
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
+      <GroupBanner slug="qqq-panel" small />
 
       {/* 看板本体：站内直接使用（与 /tag/qqq 共用同一组件） */}
       <QqqBoard />
