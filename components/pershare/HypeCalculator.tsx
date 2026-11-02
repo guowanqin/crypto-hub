@@ -189,7 +189,7 @@ export default function HypeCalculator(props: { lang: Lang }) {
 
       {/* ---------- 板块一：每股含 HYPE（官方摊薄口径） ---------- */}
       <section className="hero">
-        <h1>{t.heroTitle}</h1>
+        <h2>{t.heroTitle}</h2>
         <p className="sub">{t.heroSub}</p>
 
         {hero && data ? (

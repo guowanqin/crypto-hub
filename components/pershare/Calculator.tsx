@@ -154,7 +154,7 @@ export default function Calculator(props: { lang: Lang }) {
 
       {/* ---------- 板块一：美股含币量 ---------- */}
       <section className="hero">
-        <h1>{t.heroTitle}</h1>
+        <h2>{t.heroTitle}</h2>
         <p className="sub">{t.heroSub}</p>
 
         {hero && data ? (
