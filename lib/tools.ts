@@ -395,6 +395,31 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "uni-burn",
+    name: { zh: "UNI 销毁看板", en: "UNI Burn Tracker" },
+    url: "https://18btc.cc/tool/uni-burn",
+    tags: ["burn"],
+    type: "own",
+    embedded: true,
+    liveData: true,
+    oneLiner: {
+      zh: "UNI 销毁进度一页追踪：累计销毁量、占初始供应比例、有效供应与近 24 小时 / 30 天销毁速度，直接读以太坊主网 UNI 合约，最近记录逐笔可核对。",
+      en: "The UNI burn on one page: total burned, share of the initial supply destroyed, effective supply and the 24h / 30d burn pace — read straight from the UNI contract on Ethereum mainnet, with the latest burns listed for verification.",
+    },
+    detail: {
+      zh: "本站自建的 UNI 销毁追踪看板，数据不经第三方加工：服务端直接读取以太坊主网 UNI 合约——累计销毁量就是销毁地址 0x000…dEaD 的 UNI 余额（UNI 合约没有减少总供应的 burn 函数，总供应恒为 10 亿枚，有效供应 = 总供应 − 累计销毁），并据此算出销毁占初始供应的比例、近 24 小时与近 30 天销毁量，以及按近 30 天速度折算的年化销毁量与年化通缩率；最近销毁记录逐笔列出，附发送方与交易哈希，点开即可在 Etherscan 核对。背景：Uniswap 的 UNIfication 改革开启协议费开关后，各链协议费收入经 TokenJar 归集、跨链回到以太坊主网，兑换为 UNI 后转入销毁地址永久退出流通；2025 年 12 月底另有一笔约 1 亿枚的一次性金库销毁同路入账，占了累计销毁的大头，此后每日销毁主要由协议费驱动。口径提醒：近 24 小时 / 30 天按主网入账时间统计，与按「销毁发生日」记账的多链口径有 1–7 天时滞差异，两者不可直接相加；数据由本站服务端缓存 30 分钟刷新。本工具不构成投资建议。",
+      en: "Our own UNI burn tracker with no third-party processing in between: the server reads the UNI contract on Ethereum mainnet directly — the total burned is simply the UNI balance of the burn address 0x000…dEaD (the UNI contract has no supply-reducing burn function, so total supply stays at 1 billion and effective supply = total supply − total burned) — and derives the destroyed share of the initial supply, the 24h and 30d burn totals, and an annualized burn and deflation rate scaled from the 30-day pace. The latest burns are listed one by one with sender and transaction hash, each openable on Etherscan for verification. Background: since Uniswap's UNIfication reform switched on protocol fees, fee revenue from every chain is collected in TokenJars, bridged back to Ethereum mainnet, converted into UNI and sent to the burn address to leave circulation for good; a one-off treasury burn of roughly 100M UNI was credited the same way in late December 2025 and makes up most of the cumulative total, while daily burns since then are fee-driven. Mind the caliber: the 24h / 30d figures use mainnet crediting time and can lag burn-occurrence-date accounting by 1–7 days, so the two bases must not be added together; data is cached server-side and refreshed every 30 minutes. Not investment advice.",
+    },
+    audience: {
+      zh: "持有或观望 UNI、想亲眼核对协议费销毁进度与通缩速度、而不是听二手转述的投资者与研究者。",
+      en: "UNI holders and watchers who want to verify the protocol-fee burn progress and deflation pace first-hand instead of relying on second-hand summaries.",
+    },
+    take: {
+      zh: "看 UNI 通缩先分清存量和增量：累计数里躺着约 1 亿枚一次性金库销毁，真正反映协议费造血速度的是近 30 天那一栏；年化通缩率还只是百分之零点几时，叙事归叙事，别把销毁本身当成买入理由。",
+      en: "Separate the stock from the flow: the cumulative figure holds a one-off treasury burn of about 100M UNI, while the 30-day column is what actually reflects the protocol-fee engine. While the annualized deflation rate is still a fraction of a percent, enjoy the narrative — but don't treat the burn itself as a reason to buy.",
+    },
+  },
+  {
     slug: "defiburn",
     name: { zh: "DeFiBurn", en: "DeFiBurn" },
     url: "https://www.defiburn.com",
