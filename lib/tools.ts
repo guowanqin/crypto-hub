@@ -11,8 +11,6 @@ export interface ToolDef {
   type: ToolType;
   /** 是否在本站内嵌可直接使用（sheet2word、pershare） */
   embedded?: boolean;
-  /** 数据是否自动取数/自动更新（卡片上显示「数据自动更新」标识），只给确实自动调取实时数据的条目打标 */
-  liveData?: boolean;
   /** 实际上架日期（YYYY-MM-DD），必填：首页「最新上架」与统一排序都靠它 */
   addedAt: string;
   /** 人工置顶权重（数字越大越靠前），只有站长点名要推的才设，一般留空 */
@@ -33,7 +31,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-01",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "加密财库股每股含币量计算器：实时算 BNC、PURR 的含币价值与折溢价。",
       en: "Per-share coin calculator for crypto treasury stocks: live coin value and discount/premium for BNC and PURR.",
@@ -447,7 +444,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-02",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "UNI 销毁进度追踪：累计销毁、供应占比与销毁速度逐笔可查。",
       en: "UNI burn tracker: total burned, share of supply and burn pace — every record verifiable.",
@@ -521,7 +517,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-01",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "实时区块高度推演 BTC 周期位置：离熊底多远、五档建仓点在哪。",
       en: "BTC cycle position from the live block height: how far to the bear bottom, and where the five buying tranches sit.",
@@ -547,7 +542,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-01",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "CRCL 估值与买入信号：P/S、RSI 与 USDC 数据自动取数打分。",
       en: "CRCL valuation and buy signal: P/S, RSI and USDC data fetched and scored automatically.",
@@ -573,7 +567,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-02",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "QQQI 收息定投计算：现价派息自动取数，逐月模拟期末股数与月息。",
       en: "QQQI income-DCA calculator: live price and payouts, simulated month by month — final shares and monthly income.",
@@ -599,7 +592,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-02",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "交易所资金流看板：储备、净流入与资金费率一页看，来源逐行标注。",
       en: "Exchange flows board: reserves, netflows and funding rates on one page — sources marked per row.",
@@ -625,7 +617,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-02",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "公链日活排行：24 小时活跃地址排名，带 TVL 与人均锁仓可排序。",
       en: "Chains ranked by 24h active addresses, with TVL and TVL per active address — sortable.",
@@ -651,7 +642,6 @@ export const TOOLS: ToolDef[] = [
     addedAt: "2026-11-02",
     type: "own",
     embedded: true,
-    liveData: true,
     oneLiner: {
       zh: "QQQ 定投回测：现价与估值温度自动取数，全史月线算年化回撤。",
       en: "QQQ DCA backtest: live price and valuation temperature, full-history monthly data — annualised return and drawdown.",

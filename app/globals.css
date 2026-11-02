@@ -251,13 +251,6 @@ a:hover {
   color: #047857;
 }
 
-/* 数据自动更新（新鲜度）徽标：哑金系，与米白主题一致 */
-.badge-live {
-  background: var(--gold-dim);
-  border-color: rgba(184, 145, 43, 0.45);
-  color: var(--gold-strong);
-}
-
 .chips-row {
   display: flex;
   flex-wrap: wrap;

@@ -35,7 +35,6 @@ export interface HubDict {
   hideTools: string;
   moreTags: string;
   lessTags: string;
-  liveDataBadge: string;
   relatedTitle: string;
   guideTitle: string;
   faqTitle: string;
@@ -76,7 +75,6 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     hideTools: "收起 ▴",
     moreTags: "更多分类 ▾",
     lessTags: "收起 ▴",
-    liveDataBadge: "数据自动更新",
     relatedTitle: "同类工具",
     guideTitle: "选购指南",
     faqTitle: "常见问题",
@@ -115,7 +113,6 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     hideTools: "Show less ▴",
     moreTags: "More categories ▾",
     lessTags: "Show less ▴",
-    liveDataBadge: "Live data",
     relatedTitle: "Related tools",
     guideTitle: "Buying Guide",
     faqTitle: "FAQ",
