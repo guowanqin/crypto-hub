@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { HUB_DICT } from "@/lib/i18n";
-import { TAGS } from "@/lib/tags";
+import { GROUPS } from "@/lib/groups";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
@@ -24,13 +24,13 @@ export default function SiteFooter() {
         <FooterAdSlot />
       </Suspense>
       <footer className="site-footer">
-        {/* 分类导航：全部标签页直达（文案随全站语言开关切换，页脚不另设语言切换） */}
+        {/* 分类导航：7 个大类直达首页对应区块（方案一；标签页仍各自保留，文案随全站语言开关切换，页脚不另设语言切换） */}
         <nav className="footer-cats" aria-label={t.categoriesTitle}>
           <p className="footer-cats-title">{t.categoriesTitle}</p>
           <div className="footer-cats-grid">
-            {TAGS.map((tag) => (
-              <Link key={tag.id} href={`/tag/${tag.id}`} className="footer-cat-link">
-                {tag.name[lang]}
+            {GROUPS.map((group) => (
+              <Link key={group.id} href={`/#${group.id}`} className="footer-cat-link">
+                {group.name[lang]}
               </Link>
             ))}
           </div>
