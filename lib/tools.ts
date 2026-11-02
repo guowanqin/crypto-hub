@@ -1290,6 +1290,93 @@ export const TOOLS: ToolDef[] = [
       tw: "四個倒計時同屏開啟，等下班的心情一下子具體了；工資秒錶按秒跳的那幾分錢，是今天搬磚最誠實的反饋。",
     },
   },
+  {
+    slug: "pixelfx",
+    name: { zh: "像素特效", en: "PixelFX",
+    tw: "像素特效" },
+    url: "https://patch-gg.github.io/pixelfx/",
+    tags: ["video"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "像素游戏特效库：244 个代码生成的火焰雷击等特效，可试玩可导出。",
+      en: "A pixel game effects library: 244 code-generated fire, ice and lightning effects to preview live and export.",
+      tw: "像素遊戲特效庫：244 個程式碼生成的火焰雷擊等特效，可試玩可匯出。",
+    },
+    detail: {
+      zh: "它原名 Pixelfx，是 2026-10-30 发布在 GitHub 的开源像素特效库（MIT 许可，约 3,100 星）：244 个游戏特效全部由代码实时生成，不是录好的图片或视频素材。特效按火焰、爆炸、水流、冰霜、雷电、科幻、近战、打击、弹道、魔法、天气、界面、拾取等约 20 类整理，官网画廊里每个都能在线播放，还能换色、镜像，导出成精灵图集给各类游戏引擎用，或直接嵌入浏览器游戏；仓库另附一个 Claude Code 技能包，可以按同样的方法生成新特效。收录提醒：它面向的是游戏开发与像素美术，不是视频剪辑用的特效工具；本站没有正好对口的分类，归入影音娱乐只是现有分类里最接近的一项。",
+      en: "Originally named Pixelfx, it is an open-source pixel effects library released on GitHub on 2026-10-30 (MIT licence, ~3,100 stars): all 244 game effects are generated live by code, not pre-rendered images or video clips. Effects are organised into around 20 categories — fire, explosions, water, ice, lightning, sci-fi, melee, impacts, projectiles, arcane magic, weather, UI, pickups and more. Every effect plays live in the online gallery, can be recoloured and mirrored, exported as sprite sheets for any game engine, or dropped straight into a browser game; the repo also ships a Claude Code skill for generating new effects the same way. Listing note: this is a resource for game development and pixel art, not a video-editing effects tool — no category here fits it exactly, and Video & Entertainment is simply the closest one.",
+      tw: "它原名 Pixelfx，是 2026-10-30 發布在 GitHub 的開源像素特效庫（MIT 許可，約 3,100 星）：244 個遊戲特效全部由程式碼即時生成，不是錄好的圖片或影片素材。特效按火焰、爆炸、水流、冰霜、雷電、科幻、近戰、打擊、彈道、魔法、天氣、介面、拾取等約 20 類整理，官網畫廊裡每個都能線上播放，還能換色、鏡像，匯出成精靈圖集給各類遊戲引擎用，或直接嵌入瀏覽器遊戲；倉庫另附一個 Claude Code 技能包，可以按同樣的方法生成新特效。收錄提醒：它面向的是遊戲開發與像素美術，不是影片剪輯用的特效工具；本站沒有正好對口的分類，歸入影音娛樂只是現有分類裡最接近的一項。",
+    },
+    audience: {
+      zh: "做像素风、独立游戏的开发者与美术；给浏览器小游戏找现成火焰、雷击、打击感特效，不想从零手绘每一帧的人。",
+      en: "Developers and artists making pixel-art or indie games, and anyone building a browser game who wants ready-made fire, lightning and impact effects instead of hand-drawing every frame.",
+      tw: "做像素風、獨立遊戲的開發者與美術；給瀏覽器小遊戲找現成火焰、雷擊、打擊感特效，不想從零手繪每一幀的人。",
+    },
+    take: {
+      zh: "收录说明：官网画廊打开就能挨个播放 244 个特效，换色、镜像、导出精灵图都很直接，代码生成的路子也方便改参数；再强调一次，它是给游戏开发用的素材库，找短视频特效的别走错门。",
+      en: "Listing notes: open the gallery and all 244 effects play right there — recolouring, mirroring and sprite-sheet export are all straightforward, and because everything is code, parameters are easy to tweak. One more time: this is a game-development resource, not a short-video effects pack.",
+      tw: "收錄說明：官網畫廊打開就能挨個播放 244 個特效，換色、鏡像、匯出精靈圖都很直接，程式碼生成的路子也方便改參數；再強調一次，它是給遊戲開發用的素材庫，找短影片特效的別走錯門。",
+    },
+  },
+  {
+    slug: "upscayl",
+    name: { zh: "AI 图片放大", en: "Upscayl",
+    tw: "AI 圖片放大" },
+    url: "https://upscayl.org",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "免费开源AI图片放大：本地运行把图片放大2–16倍，无水印不上传。",
+      en: "A free, open-source AI image upscaler: enlarge photos 2x–16x locally — no watermark, no uploads.",
+      tw: "免費開源AI圖片放大：在本機把圖片放大2–16倍，無浮水印不上傳。",
+    },
+    detail: {
+      zh: "它原名 Upscayl，是免费开源的 AI 图片放大桌面软件（AGPL-3.0 许可，GitHub 约 5.2 万星）：把图片交给本机的 Real-ESRGAN 等 AI 模型放大 2–16 倍、补出细节，全程在本机运行——无水印、不上传服务器、不按张收费。支持 Windows、macOS 与 Linux，可单张也可批量处理，老照片、低清截图、下载到的糊图都能试着抢救一下。收录提醒：它是桌面软件、不是网页工具，且放大靠显卡算力，需要 Vulkan 兼容的 GPU（核显或独显），太老的机器可能跑不动或非常慢；AI 放大是按模型推测补细节，糊得太厉害的图也变不出真实信息。",
+      en: "Originally named Upscayl, it is a free, open-source AI image upscaler for the desktop (AGPL-3.0, ~52K stars on GitHub): local Real-ESRGAN and other AI models enlarge images 2x–16x and fill in detail, all on your own machine — no watermark, no uploads, no per-image fees. It runs on Windows, macOS and Linux, handles single images or batches, and gives old photos, low-res screenshots and blurry downloads a second chance. Listing notes: it is a desktop app, not a web tool, and the upscaling needs GPU compute — a Vulkan-compatible GPU, integrated or discrete; very old machines may fail or crawl. AI upscaling invents plausible detail, so a hopelessly blurred image still can't yield real information.",
+      tw: "它原名 Upscayl，是免費開源的 AI 圖片放大桌面軟體（AGPL-3.0 許可，GitHub 約 5.2 萬星）：把圖片交給本機的 Real-ESRGAN 等 AI 模型放大 2–16 倍、補出細節，全程在本機運行——無浮水印、不上傳伺服器、不按張收費。支援 Windows、macOS 與 Linux，可單張也可批次處理，老照片、低解析度截圖、下載到的糊圖都能試著搶救一下。收錄提醒：它是桌面軟體、不是網頁工具，且放大靠顯示卡算力，需要 Vulkan 相容的 GPU（核顯或獨顯），太老的機器可能跑不動或非常慢；AI 放大是按模型推測補細節，糊得太厲害的圖也變不出真實資訊。",
+    },
+    audience: {
+      zh: "手里有老照片、低清截图或糊图想放大的人；电商、自媒体配图需要把小图变大图，又不想把图片传给在线网站的人。",
+      en: "Anyone with old photos, low-res screenshots or blurry images to enlarge, and e-commerce or social-media creators who need small images bigger without uploading them to an online service.",
+      tw: "手裡有老照片、低解析度截圖或糊圖想放大的人；電商、自媒體配圖需要把小圖變大圖，又不想把圖片傳給線上網站的人。",
+    },
+    take: {
+      zh: "收录说明：本地跑模型、不上传、无水印，这三点比在线放大站干净，批量处理也顺手；代价是得装软件、吃显卡，没 Vulkan 支持的机器先去官网看兼容说明再下载。",
+      en: "Listing notes: models run locally — no uploads, no watermark — which is cleaner than online upscalers, and batch mode is handy. The price is installing software and feeding it a GPU; if your machine lacks Vulkan support, check the compatibility notes on its site first.",
+      tw: "收錄說明：本機跑模型、不上傳、無浮水印，這三點比線上放大站乾淨，批次處理也順手；代價是得裝軟體、吃顯示卡，沒 Vulkan 支援的機器先去官網看相容說明再下載。",
+    },
+  },
+  {
+    slug: "excalidraw",
+    name: { zh: "手绘白板", en: "Excalidraw",
+    tw: "手繪白板" },
+    url: "https://excalidraw.com",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "免费在线手绘风白板：免注册打开就能画，无限画布支持加密协作。",
+      en: "A free online hand-drawn whiteboard: no sign-up, an infinite canvas, and encrypted live collaboration.",
+      tw: "免費線上手繪風白板：免註冊打開就能畫，無限畫布支援加密協作。",
+    },
+    detail: {
+      zh: "它原名 Excalidraw，是免费开源的在线手绘风白板（MIT 许可，GitHub 约 13.5 万星）：打开网页免注册就能画，无限画布随便铺，矩形、箭头、文字、手绘线条都是涂鸦感的笔触，画流程图、架构图、讲解草图都不端着。作品默认只存在你的浏览器本地，可导出 PNG、SVG 或工程文件，也能生成协作链接拉人一起改，实时协作房间走端到端加密。要分清：excalidraw.com 这个编辑器本身免费；官方另有付费的 Excalidraw+ 云服务，卖的是云端工作区、团队管理与文件托管，不订阅不影响基础绘图与协作。",
+      en: "Originally named Excalidraw, it is a free, open-source online whiteboard with a hand-drawn look (MIT licence, ~135K stars on GitHub): open the page and start sketching — no sign-up, an infinite canvas, and shapes, arrows, text and freehand strokes that all keep a doodle feel, equally at home for flowcharts, architecture diagrams and explainer sketches. Your work lives in your browser by default; export to PNG, SVG or a project file, or share a collaboration link so others can edit with you — live rooms are end-to-end encrypted. Keep the two apart: the editor at excalidraw.com is free, while Excalidraw+ is the official paid cloud service selling cloud workspaces, team management and file hosting — skipping it costs you none of the core drawing or collaboration.",
+      tw: "它原名 Excalidraw，是免費開源的線上手繪風白板（MIT 許可，GitHub 約 13.5 萬星）：打開網頁免註冊就能畫，無限畫布隨便鋪，矩形、箭頭、文字、手繪線條都是塗鴉感的筆觸，畫流程圖、架構圖、講解草圖都不端著。作品預設只存在你的瀏覽器本機，可匯出 PNG、SVG 或工程檔案，也能生成協作連結拉人一起改，即時協作房間走端到端加密。要分清：excalidraw.com 這個編輯器本身免費；官方另有付費的 Excalidraw+ 雲服務，賣的是雲端工作區、團隊管理與檔案託管，不訂閱不影響基礎繪圖與協作。",
+    },
+    audience: {
+      zh: "需要快速画流程图、架构图、界面草图的人；开会头脑风暴、远程讲解时想拉块白板一起涂改的人。",
+      en: "Anyone who needs a quick flowchart, architecture diagram or interface sketch, and people who want a shared whiteboard for brainstorming or walking others through an idea remotely.",
+      tw: "需要快速畫流程圖、架構圖、介面草圖的人；開會頭腦風暴、遠端講解時想拉塊白板一起塗改的人。",
+    },
+    take: {
+      zh: "收录说明：手绘风让草图没有压力，打开就能画、链接发出去就能一起改，这两点是它最讨喜的地方；注意免费版文件主要存浏览器本地，重要图记得导出备份，云端工作区那是付费版 Excalidraw+ 的事。",
+      en: "Listing notes: the hand-drawn style takes the pressure off sketching, and open-and-draw plus share-a-link collaboration are its most likeable traits. Note that free-version files mostly live in your browser — export backups of anything important; cloud workspaces belong to the paid Excalidraw+.",
+      tw: "收錄說明：手繪風讓草圖沒有壓力，打開就能畫、連結發出去就能一起改，這兩點是它最討喜的地方；注意免費版檔案主要存瀏覽器本機，重要圖記得匯出備份，雲端工作區那是付費版 Excalidraw+ 的事。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
