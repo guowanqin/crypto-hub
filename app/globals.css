@@ -483,6 +483,12 @@ a:hover {
   line-height: 1.65;
   margin: 0;
   flex: 1;
+  /* 介绍区固定两行：超出截断，不足两行也预留两行高度，同排卡片对齐 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(14px * 1.65 * 2);
 }
 
 /* 卡片上的实测短评摘要：最多两行截断 */

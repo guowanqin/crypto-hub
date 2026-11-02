@@ -30,8 +30,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "实时计算 BNC、PURR 两只加密财库股的每股含币量、含币价值与折溢价。",
-      en: "Live per-share coin content, coin value per share, and discount/premium for the BNC and PURR crypto treasury stocks.",
+      zh: "加密财库股每股含币量计算器：实时算 BNC、PURR 的含币价值与折溢价。",
+      en: "Per-share coin calculator for crypto treasury stocks: live coin value and discount/premium for BNC and PURR.",
     },
     detail: {
       zh: "把财库公司的持币量、股本和实时币价、股价放在一页算清：每股含多少 BNB / HYPE、每股含币价值多少美元、相对股价是折价还是溢价、mNAV 是多少。数据自动刷新，不用自己拉盘口和财报拼表格；折溢价的正负号全站统一规则，不会被符号绕晕。",
@@ -54,8 +54,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "上传带 {{占位符}} 的 Word 模板和 Excel 表格，一行数据生成一份 Word，打包一次下载。",
-      en: "Upload a Word template with {{placeholders}} and an Excel sheet — one Word document per row, packed into a single ZIP download.",
+      zh: "Excel 批量生成 Word：模板填占位符，一行数据一份文档，打包下载。",
+      en: "Batch-generate Word from Excel: fill a placeholder template — one document per row, one ZIP download.",
     },
     detail: {
       zh: "在线邮件合并替代工具：不用装 Office，浏览器打开就能用。把 Word 模板里要替换的位置写成 {{姓名}} 这类占位符，Excel 第一行表头会自动与占位符按名匹配，每一行数据生成一份独立的 .docx，可按某一列的值自动命名，最后打包成 ZIP 一次下载。所有解析和生成都在你的浏览器本地完成，文件不上传任何服务器；完全免费、无行数限制、免注册。",
@@ -78,8 +78,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "十个常用图片小工具装一页：批量压缩、改尺寸、加水印、九宫格切图、拼图、长图拼接、二维码、EXIF 清除、打码和图片转 GIF，全部本地处理。",
-      en: "Ten everyday image utilities on one page — batch compression, resizing, watermarking, grid slicing, collage, long-image stitching, QR codes, EXIF scrubbing, mosaic redaction and image-to-GIF — all processed locally.",
+      zh: "本地图片工具箱：压缩、改尺寸、水印、九宫格、拼图、打码十合一，不上传。",
+      en: "A local image toolbox: compress, resize, watermark, grid-slice, collage and redaction — ten tools, nothing uploaded.",
     },
     detail: {
       zh: "发朋友圈、做小红书封面、传证件图之前，总有几个小活要干：图太大传不上去、九宫格要按顺序切好、拼图留白不均匀、截图里有手机号要打码、证件图带着 GPS 定位不敢直接发。这个工具箱把十个高频小工具放在一页：批量压缩（质量可调，JPG/PNG/WebP 互转）、改尺寸、文字水印、九宫格切图（2–4 行列可选，切完带序号打包）、网格拼图、长图拼接、二维码生成、EXIF 查看与一键清除、拖框打马赛克、多图合成 GIF。如实说明：所有处理都只在你自己的浏览器里用 Canvas 完成，图片不上传任何服务器，不用注册、没有水印、没有次数限制；关掉页面就什么都不留。",
@@ -101,7 +101,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["market"],
     type: "third-party",
     oneLiner: {
-      zh: "全球币种行情总站：价格、市值、交易所与新币发现。",
+      zh: "全球币种行情总站：价格、市值、交易所分布与新币发现。",
       en: "The all-in-one crypto market board: prices, market caps, exchanges and new listings.",
     },
     detail: {
@@ -124,7 +124,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["market"],
     type: "third-party",
     oneLiner: {
-      zh: "老牌行情站：市值排行榜、恐惧贪婪指数与空投资讯。",
+      zh: "老牌币圈行情站：市值排行榜、恐惧贪婪指数与空投资讯。",
       en: "The veteran market site: cap rankings, the Fear & Greed Index and airdrop news.",
     },
     detail: {
@@ -147,7 +147,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["market"],
     type: "third-party",
     oneLiner: {
-      zh: "DEX 实时行情利器：新池子、新代币的第一发现地。",
+      zh: "DEX 实时行情利器：新池子与新代币的链上第一发现地。",
       en: "Real-time DEX charts: where new pools and new tokens show up first.",
     },
     detail: {
@@ -216,7 +216,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["onchain"],
     type: "third-party",
     oneLiner: {
-      zh: "链上数据 SQL 平台：可视化面板和社区查询宝库。",
+      zh: "链上数据 SQL 查询平台：可视化面板与社区查询宝库。",
       en: "On-chain data in SQL: dashboards and a huge library of community queries.",
     },
     detail: {
@@ -239,7 +239,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["onchain"],
     type: "third-party",
     oneLiner: {
-      zh: "实体标签情报平台：看懂大地址和机构在链上干什么。",
+      zh: "实体标签情报平台：看懂大地址和机构在链上的一举一动。",
       en: "Entity-labelled intelligence: see what big addresses and institutions do on-chain.",
     },
     detail: {
@@ -262,7 +262,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["onchain"],
     type: "third-party",
     oneLiner: {
-      zh: "气泡图看持币分布：一眼识破筹码集中和关联钱包。",
+      zh: "气泡图可视化持币分布：一眼识破筹码集中和关联钱包的藏身处。",
       en: "Bubble charts for holder distribution: spot concentration and linked wallets at a glance.",
     },
     detail: {
@@ -331,8 +331,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["security"],
     type: "third-party",
     oneLiner: {
-      zh: "授权管理工具：查清并收回你给过的代币授权。",
-      en: "Allowance manager: see every token approval you've given — and revoke them.",
+      zh: "代币授权管理工具：查清并撤销你给过的全部授权，降低被盗风险。",
+      en: "Allowance manager: see every token approval you've given — and revoke them to cut risk.",
     },
     detail: {
       zh: "专门管理代币授权（allowance）的工具：连上钱包就能看到你对每个合约的历史授权额度，不再使用的可以一键撤销。很多盗币事件源于很久以前的旧授权被利用，定期来这里清理一遍，是成本最低的安全习惯。",
@@ -354,8 +354,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["security"],
     type: "third-party",
     oneLiner: {
-      zh: "Windows 本地文件夹加密工具：AES-256-GCM + Argon2id，连文件名和目录结构一起加密，资源管理器右键一键上锁。",
-      en: "A Windows folder encryption tool: AES-256-GCM with Argon2id, encrypting file names and folder structure too — lock a folder from the Explorer right-click menu.",
+      zh: "Windows 文件夹加密：AES-256 加密连文件名一起锁，右键一键上锁。",
+      en: "Windows folder encryption: AES-256 locks file names too — one right-click to seal a folder.",
     },
     detail: {
       zh: "FolderLock 是开源的 Windows 10/11 文件夹加密工具（Rust + Tauri）。选一个文件夹、设好密码，它会把内容连同文件名、目录名和目录结构一起加密，放进同级一个隐藏的 .folderlock 保险箱，原位置只留一个同名锁定入口，双击输密码解锁。它用信封加密：Argon2id 从密码派生密钥、每个保险箱有独立随机主密钥、文件按 1 MiB 分块流式加解密，大文件夹不用整体载入内存；建箱时还会生成一把独立的安全恢复密钥，忘密码能靠它找回来。支持右键菜单、系统托盘、健康检查、改密码，也提供命令行版本。免费开源，在 GitHub 上下载使用。",
@@ -378,8 +378,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "网页版文件夹加密：把一个文件夹或一批文件整体加密成一个 .vault 保险箱文件，密码或恢复密钥解锁，全程在浏览器本地完成。",
-      en: "Folder encryption in the browser: seal a folder or a batch of files into a single .vault file, unlock it with your password or recovery key — everything happens locally in your browser.",
+      zh: "浏览器文件夹加密：整夹打包成 .vault 保险箱，本地完成不上传。",
+      en: "Folder encryption in the browser: seal a whole folder into one .vault file — done locally, never uploaded.",
     },
     detail: {
       zh: "桌面加密软件能把文件夹原地锁在磁盘上，网页做不到原地锁定，保险箱文件是网页能给出的形态：选一个文件夹（或一批文件），设好密码，内容连同文件名和目录结构一起加密，打包成一个 .vault 文件下载保存；换台设备要用时，把 .vault 传回这个页面，输密码就能取回原来的文件，也可以改用建箱时生成的恢复密钥开箱。加密走信封设计：随机主密钥按 2 MiB 分块以 AES-256-GCM 逐块加密，主密钥由密码经 Argon2id 派生的密钥包裹，派生不可用时退化 PBKDF2-SHA256（实际用的算法会写进文件头）；密码错一个字都会被认证机制干净拒绝，不会解出坏文件。全部计算只在本地浏览器进行，文件不经过任何服务器。",
@@ -403,8 +403,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "UNI 销毁进度一页追踪：累计销毁量、占初始供应比例、有效供应与近 24 小时 / 30 天销毁速度，直接读以太坊主网 UNI 合约，最近记录逐笔可核对。",
-      en: "The UNI burn on one page: total burned, share of the initial supply destroyed, effective supply and the 24h / 30d burn pace — read straight from the UNI contract on Ethereum mainnet, with the latest burns listed for verification.",
+      zh: "UNI 销毁进度追踪：累计销毁、供应占比与销毁速度逐笔可查。",
+      en: "UNI burn tracker: total burned, share of supply and burn pace — every record verifiable.",
     },
     detail: {
       zh: "本站自建的 UNI 销毁追踪看板，数据不经第三方加工：服务端直接读取以太坊主网 UNI 合约——累计销毁量就是销毁地址 0x000…dEaD 的 UNI 余额（UNI 合约没有减少总供应的 burn 函数，总供应恒为 10 亿枚，有效供应 = 总供应 − 累计销毁），并据此算出销毁占初始供应的比例、近 24 小时与近 30 天销毁量，以及按近 30 天速度折算的年化销毁量与年化通缩率；最近销毁记录逐笔列出，附发送方与交易哈希，点开即可在 Etherscan 核对。背景：Uniswap 的 UNIfication 改革开启协议费开关后，各链协议费收入经 TokenJar 归集、跨链回到以太坊主网，兑换为 UNI 后转入销毁地址永久退出流通；2025 年 12 月底另有一笔约 1 亿枚的一次性金库销毁同路入账，占了累计销毁的大头，此后每日销毁主要由协议费驱动。口径提醒：近 24 小时 / 30 天按主网入账时间统计，与按「销毁发生日」记账的多链口径有 1–7 天时滞差异，两者不可直接相加；数据由本站服务端缓存 30 分钟刷新。本工具不构成投资建议。",
@@ -449,8 +449,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["office"],
     type: "third-party",
     oneLiner: {
-      zh: "在电脑本地拖一下就转格式的免费开源转换器：255 种格式，文件不上传，不用装 Office。",
-      en: "A free, open-source converter that works locally on your computer: drag a file, drop it on a format — 255 formats, no uploads, no Office needed.",
+      zh: "免费开源格式转换器：本地拖拽即转 255 种格式，文件不上传。",
+      en: "A free, open-source format converter: drag and drop locally — 255 formats, files never uploaded.",
     },
     detail: {
       zh: "Filee 是装在电脑上的本地文件转换器，交互很特别：在资源管理器里选中文件，按住 Ctrl 拖动，光标旁会弹出一个格式圆环，把文件放到目标格式上松手，新文件就生成在原文件旁边。图片、PDF、Word/Excel/PowerPoint、视频、音频、电子书、压缩包等 18 大类共 255 种格式互转，还带裁剪、旋转、合并 PDF、打包 ZIP 等小工具；转换全部在本机完成，不上传、无需注册、无广告，批量转换不限制数量。转 Office 文档用它内置的引擎，不需要安装 Microsoft Office。Windows 与 Linux 为正式版，另有命令行和文件夹自动转换，适合要批量处理文件又不想把文件传上云的人。",
@@ -474,8 +474,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "按四年减半周期与实时区块高度推演 BTC 周期位置：现在离熊底还有多远、五档分批建仓点位在哪。",
-      en: "Tracks BTC's position in the four-year halving cycle from the live block height: how far the bear-market bottom is, and where the five staged buying levels sit.",
+      zh: "实时区块高度推演 BTC 周期位置：离熊底多远、五档建仓点在哪。",
+      en: "BTC cycle position from the live block height: how far to the bear bottom, and where the five buying tranches sit.",
     },
     detail: {
       zh: "把减半周期模型做成实时看板：锚点全部由减半区块推导（牛顶、熊底、第 5 次减半位置 0.5、下轮牛顶），用实时链上区块高度算出当前周期位置（0=熊底、1=牛顶）、熊市进度、距熊底的倒计时，以及按位置 0.20/0.15/0.10/0.05/0.02 倒推的五档分批建仓日期。越过熊底后自动切换为回升段视图与距下次减半倒计时。页面上有完整的口径说明，这是周期模型推演、不是价格预测，更不构成投资建议。",
@@ -499,8 +499,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "按买入信号分模型（v6）实时算 Circle（CRCL）的估值与买入信号：P/S、RSI、USDC 供应与市占率自动取数。",
-      en: "Circle's (CRCL) valuation and buy signal, computed live under the Buy Signal Score model (v6): P/S, RSI, USDC supply and market share fetched automatically.",
+      zh: "CRCL 估值与买入信号：P/S、RSI 与 USDC 数据自动取数打分。",
+      en: "CRCL valuation and buy signal: P/S, RSI and USDC data fetched and scored automatically.",
     },
     detail: {
       zh: "把「什么时候该买 CRCL」写成不受情绪影响的规则：总分 =（估值层 0–80 + 恐慌层 0–20 + 基本面层 ±10）× 1.3 × 否决乘数，封顶 130。估值层看实时 P/S，恐慌层看 RSI14，基本面层看 USDC 供应量 180 天变化；黑天鹅否决只看 USDC 市占率——份额被对手抢走才打折，全市场一起缩水不触发。面板同时给出流通市值、FDV、P/S(TTM)、市值/调整后 EBITDA、距历史新高与上市低点，以及 USDC 基本面仪表与营收利润表。股价与日线来自 Yahoo Finance，USDC 数据来自 DeFiLlama，股本与利润表为标注了来源与截至日期的可编辑配置。分数是纪律工具，不是预测，不构成投资建议。",
@@ -524,8 +524,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "QQQI 现价、派息与分红率自动调取，再逐月模拟定投攒股：期末多少股、每月收多少息，一次算清。",
-      en: "QQQI's price, payouts and distribution rate fetched automatically, plus a month-by-month DCA simulation: final shares and monthly income, worked out in one go.",
+      zh: "QQQI 收息定投计算：现价派息自动取数，逐月模拟期末股数与月息。",
+      en: "QQQI income-DCA calculator: live price and payouts, simulated month by month — final shares and monthly income.",
     },
     detail: {
       zh: "给「攒股收息」定投 QQQI 的人做的一页式工具。上半页是自动取数的看板：现价与涨跌、52 周高低与水位、最近一次派息、最近 12 次派息合计（TTM）与当前分红率（TTM ÷ 现价）、最近 24 次派息历史表；估值参考只用收息角度的两把尺——当前分红率在它自身历史（逐月滚动年化口径）中的分位，和股价的 52 周水位，定档规则印在页面上。下半页是定投模拟器：每月定投金额、年限（1–30 年）、假设年分红率（默认带入实时 TTM 分红率）、假设股价年增速、分红再投入开关，逐月模拟出期末总股数、期末月收息、累计投入、累计分红与期末市值，附逐年汇总表。口径提醒：QQQI 是 NEOS 的备兑期权收息 ETF，2024 年 1 月才上市，派息含期权金与可能的资本返还（ROC）成分而非普通股息，分红率不等于总回报；模拟是算术不是预测，不构成投资建议。",
@@ -549,8 +549,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "主流交易所的储备总额、24h/7d/30d 净流入净流出，加上各所合约未平仓总额与 BTC 永续资金费率，一页看齐、来源逐行标注。",
-      en: "Major exchanges' total reserves and 24h/7d/30d net inflows and outflows, plus each venue's total open interest and BTC perpetual funding rate — one page, sources marked per row.",
+      zh: "交易所资金流看板：储备、净流入与资金费率一页看，来源逐行标注。",
+      en: "Exchange flows board: reserves, netflows and funding rates on one page — sources marked per row.",
     },
     detail: {
       zh: "上半张表是资金流：Binance、OKX、Bybit、Bitfinex、Bitget、Gate、KuCoin、MEXC、HTX、Deribit 等主流交易所的链上储备总额与近 24 小时、7 天、30 天净流入净流出，数据与 DeFiLlama 的 CEX 储备追踪同源（已标记钱包口径，储备剔除各所自家代币如 BNB、OKB）；点开任意一行，能看这家的主要币种构成（前 8 名）和近 35 日储备走势，另附一组按日线余额差算的「余额变化」作交叉核对，并明示它含价格因素、与净流入引擎口径不同。下半张表是保证金（合约）：各所未平仓总额（OI）与 BTC 永续资金费率——OKX、Hyperliquid 走官方接口直取，Binance、Bybit 等官方接口对机房与部分地域 IP 受限，改用 CoinGecko 衍生品聚合，逐行标注来源；多空比因免费公开源暂无可靠口径（官方统计接口受限或已下线）而空缺，页面上如实说明。口径提醒：净流入只是标记钱包的转账净额，不等于用户净申购，更不等于交易所的财务状况；Coinbase、Kraken、Upbit 未被该数据集追踪，不在表内。本工具不构成投资建议。",
@@ -574,8 +574,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "主流公链过去 24 小时的活跃地址数从多到少排一排，带日活 7 日变化、TVL 与人均锁仓，数据自动调取、可搜索可排序。",
-      en: "The major chains ranked by active addresses over the past 24 hours, with the DAU 7-day change, TVL and TVL per active address — auto-fetched, searchable and sortable.",
+      zh: "公链日活排行：24 小时活跃地址排名，带 TVL 与人均锁仓可排序。",
+      en: "Chains ranked by 24h active addresses, with TVL and TVL per active address — sortable.",
     },
     detail: {
       zh: "一天之内真有人在用的链，从多到少排一排：波场、BSC、Solana、以太坊、比特币、Base、Arbitrum、Polygon、TON 等主流公链过去 24 小时发起过交易的去重地址数（日活），加上日活较 7 天前的变化、每条链的 TVL，以及人均锁仓（TVL ÷ 24h 日活）。数据与 DeFiLlama 的 active-users 指标同源（与其官网 /chains 页同一条管线）：日活走其 metrics 机器接口、TVL 走其 chains 接口自动拼合，接口不可达时回退解析官网页面，缓存约 1 小时。口径如实交代：日活是全量活跃地址口径（主流链按交易发送地址去重，Solana 数签名者，比特币系用 CoinMetrics 活跃地址），地址不等于真人；DeFiLlama 不提供 7 日去重活跃总数，本页不硬拼，只给真实存在的 7 日变化率；Robinhood Chain 尚未被该数据集统计日活，不在榜内。本工具不构成投资建议。",
@@ -599,8 +599,8 @@ export const TOOLS: ToolDef[] = [
     embedded: true,
     liveData: true,
     oneLiner: {
-      zh: "QQQ 现价、估值温度自动调取，再用 1999 年上市以来的全史月线回测定投：期末股数、年化与最大回撤一次算清。",
-      en: "QQQ's live price and valuation temperature fetched automatically, plus a DCA backtest on the full monthly history since its 1999 listing: final shares, annualised return and max drawdown in one go.",
+      zh: "QQQ 定投回测：现价与估值温度自动取数，全史月线算年化回撤。",
+      en: "QQQ DCA backtest: live price and valuation temperature, full-history monthly data — annualised return and drawdown.",
     },
     detail: {
       zh: "给长期定投 QQQ 的人做的一页式工具。上半页是自动取数的看板：现价与涨跌、历史最高收盘（ATH，收盘口径）与距 ATH 回撤、52 周高低与水位、MA200 偏离，PE 取得到时一并列出；估值温度把 MA200 偏离、距 ATH 回撤、52 周水位（PE 可用时四项）各打一个子分再取平均，定档为偏冷/中性偏冷/中性偏热/偏热，子分公式与阈值全部印在页面上——它是指标刻度，不是买卖信号。下半页是定投回测器：数据是 QQQ 自 1999 年 3 月上市以来的全史月收盘与季度分红，任选起始年月、每月定投金额、分红再投入开关，输出累计投入、期末股数、摊薄成本对比期末价、期末总资产、累计分红、年化收益率（按月现金流 XIRR 近似）、期间标的最大回撤（月线总回报口径）与逐年汇总表，并附一条对比线：同一笔总投入在起始月一次性买入的结果。口径提醒：回测每月按当月收盘价买入，分红按上月末持股计，未计税费与汇率；历史回测不代表未来，不构成投资建议。",
@@ -623,8 +623,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "批量修改照片内嵌的 EXIF 拍摄/创建/修改时间：统一设置、整体平移、按张递增，本地处理不上传。",
-      en: "Batch-edit the EXIF date taken, digitized and modified times inside your photos — set, shift or step — processed locally, never uploaded.",
+      zh: "照片 EXIF 时间批量改：统一、平移、递增三种改法，本地不上传。",
+      en: "Batch-edit photo EXIF timestamps — set, shift or step — processed locally, never uploaded.",
     },
     detail: {
       zh: "照片的时间分两处：电脑里文件的系统时间，和照片文件内嵌的 EXIF 时间。这个站内工具改后一处：把 JPEG 照片的拍摄时间（DateTimeOriginal）、创建时间（DateTimeDigitized）、修改时间（ModifyDate）三者同步改掉，GPS、设备等其余 EXIF 原样保留。三种批量模式——统一设为某一时刻、按 ±天/时/分整体平移、从起始时间按张递增（批量补打卡序列用）；改前改后逐张对照核对，再单张下载或打包 ZIP。全部处理在浏览器本地完成，照片不上传任何服务器。边界要讲清：网页改不了你硬盘上已有文件的系统创建时间/修改时间，下载回去的文件其系统修改时间会是下载时刻——相册排序、打卡补传读的是 EXIF 时间，所以多数照片场景本工具就够；确需改本地文件系统时间，用同标签收录的桌面版 NewFileTime。",
@@ -646,8 +646,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["filetime"],
     type: "third-party",
     oneLiner: {
-      zh: "Windows 便携小工具：直接修改本地文件与文件夹的创建、修改、访问时间，免安装、免费。",
-      en: "A portable Windows utility that directly changes the created, modified and accessed timestamps of local files and folders — no install, free.",
+      zh: "Windows 便携时间工具：改文件的创建、修改、访问时间，免安装。",
+      en: "A portable Windows utility: edit created, modified and accessed timestamps of local files — no install.",
     },
     detail: {
       zh: "SoftwareOK 出品的老牌 Windows 小工具（当前 8.33 版），绿色便携、免安装、免费。它调用系统接口，直接修改你电脑上文件与文件夹的创建时间、修改时间与访问时间——正是网页版做不到的那件事。支持拖放批量添加、按文件夹（含子目录）导入、把文件批量变「年轻」或「变老」（整体平移）、按文件名生成时间戳、夏令时/冬令时一小时纠偏，还能通过资源管理器右键菜单调用。需要纠正相机导出的文件系统时间、整理下载文件的日期时，用它在本地改最直接。",
@@ -670,8 +670,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "纯前端 PDF 工具箱：合并、拆分、页面管理、水印、页码、骑缝章、批注、图片互转，文件不上传、离线可用。",
-      en: "A pure front-end PDF toolbox: merge, split, page management, watermarks, page numbers, cross-page seals, annotations and image conversion — files never uploaded, works offline.",
+      zh: "本地 PDF 工具箱：合并拆分、水印页码、骑缝章与图片互转，不上传。",
+      en: "A local PDF toolbox: merge, split, watermarks, page numbers, cross-page seals and image conversion — never uploaded.",
     },
     detail: {
       zh: "参考信创 PDF 工具箱的功能集，在浏览器里把 PDF 的日常处理一次做全：多个 PDF 合并（可调序）、按页码范围拆分或逐页拆分、页面缩略图管理（删除、旋转、重排、插入同尺寸空白页）、文字水印（平铺或居中，透明度与角度可调）、页码添加（六个位置、数字或中文「第 X 页 共 N 页」格式）、骑缝章（印章图按页数自动切片逐页盖在右侧边缘，拼起来是完整一枚）、指定页文字批注，以及图片转 PDF 与 PDF 逐页转图片。全部处理都在你的浏览器本地完成：文件不经过任何服务器，断网也能用，尤其适合合同、证件、财务单据这类不该上传的文件。边界讲清：不做 PDF 转 Word/Excel（纯前端做不出可用的排版保真度），不做 OCR，也不做具法律效力的电子签章——骑缝章是把印章图按传统骑缝方式盖上，不替代 CA 电子签。",
@@ -693,8 +693,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["video"],
     type: "third-party",
     oneLiner: {
-      zh: "把红果短剧搬到电脑和电视上的第三方客户端：Windows 正式版、Mac M 系列与 Android TV 测试版，找剧、收藏、本机续播，还有老板键。",
-      en: "A third-party client that brings Hongguo short dramas to PC and TV: a stable Windows build plus Mac (Apple Silicon) and Android TV betas — search, favourites, on-device resume and a boss key.",
+      zh: "红果短剧第三方客户端：把短剧搬上电脑和电视，找剧续播都方便。",
+      en: "A third-party Hongguo client for PC and TV: search dramas and pick up where you left off.",
     },
     detail: {
       zh: "红果短剧官方只有手机 App，这个由「渠道有数」独立维护的第三方客户端把找剧和追剧搬到了大屏：Windows 10/11 正式版（当前 1.0.19）、Mac M 系列测试版、Android TV / 盒子 / 投影测试版。功能上有分类浏览、搜索、收藏、选集、倍速、自动连播和本机续播进度，还有上班摸鱼用的老板键（默认 Ctrl+Shift+B，隐藏窗口并自动暂停）；1.0.19 还能只读查看你手机上的云片单。通过它的 GitHub 发行仓库免费下载，仓库里同时有各版本的说明、已知问题和 SHA-256 校验值。它与红果官方没有关系：内容来自红果的内容服务，能不能播取决于服务与网络状况；观看记录和收藏只保存在当前设备，不与手机 App 同步。",
@@ -717,8 +717,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "在浏览器本地把图片里的文字识别出来：批量最多 20 张、中英混合、按行对照原图高亮，导出 TXT / Markdown / Word / ZIP，图片不上传。",
-      en: "Recognise text from images locally in your browser: batches of up to 20, mixed Chinese/English, line-by-line highlights on the original image, export to TXT / Markdown / Word / ZIP — images are never uploaded.",
+      zh: "浏览器本地 OCR：图片文字批量识别，中英混合、不上传可导出。",
+      en: "Local browser OCR: recognise text from image batches — mixed Chinese/English, never uploaded, exportable.",
     },
     detail: {
       zh: "基于开源 Tesseract 引擎的本地 OCR：拖放、点击或粘贴导入图片（一次最多 20 张），识别在你浏览器的 Web Worker 里逐张排队完成，简体中文与英文混合识别，也可切纯中文 / 纯英文模式提速。结果按行列出，点任意一行，左侧原图上会把这一行框出来对位核对；认错的字可以直接在行内改掉。导出有单张 TXT、全部合成 Markdown、全部合成 TXT、Word 文档（.docx）和按图打包 ZIP（每张图一个同名 .txt）。代价讲清楚：第一次使用要联网下载识别模型（WASM 核心加中英文语言包，共几十 MB），下完之后浏览器会缓存、断网也能用；效果上印刷体、截图、单据是主场，手写字和复杂表格版面明显不如云端大厂 OCR——换来的是图片从头到尾不离开你的设备，证件、合同、聊天截图这类敏感图片不用先过别人的服务器。",
@@ -740,8 +740,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["ocr"],
     type: "third-party",
     oneLiner: {
-      zh: "免费在线图片文字识别：同样主打浏览器本地 OCR、图片不上传，支持简繁英韩日俄等多语种，识别结果可导出 TXT、Markdown、Word。",
-      en: "Free online image-to-text OCR that also runs locally in the browser with no uploads, covering Simplified/Traditional Chinese, English, Korean, Japanese, Russian and more, with export to TXT, Markdown and Word.",
+      zh: "在线图片文字识别：浏览器本地 OCR 不上传，多语种可导出。",
+      en: "Online image-to-text OCR that runs locally in the browser — many languages, no uploads, exportable results.",
     },
     detail: {
       zh: "ImgPeel 是 toolooz 旗下的一款在线 OCR 工具，形态是纯网页、打开即用：把图片拖进去做文字识别，按其官网介绍支持简体、繁体、英文、韩语、日语、俄语等多国语言，识别结果可以复制或下载为 TXT、Markdown、Word，也支持批量识别；和本站的本地 OCR 一样，它强调图片不上传、识别在浏览器本地完成。本站的文字识别工具在产品形态上参考了它（本地识别、批量、逐行对照、多格式导出），但两者是各自独立的实现与站点：语言覆盖上 ImgPeel 更广（多语种），本站工具则胜在与导航站一体、逐行高亮对照原图这一步做得更细。两个都是免费、无需注册，需要哪种直接用哪种。",
@@ -764,8 +764,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "闲鱼、转转、小红书的黑话暗语站内直接查：全文搜索、分类与存活状态筛选、拼音缩写反查，每条带卖家潜台词与买家避坑。",
-      en: "Look up Xianyu, Zhuanzhuan and Xiaohongshu slang right here: full-text search, category and survival-status filters, abbreviation lookup — every entry with the seller's real intent and buyer warnings.",
+      zh: "二手平台黑话词典：暗语站内直接查，带潜台词解析与避坑提示。",
+      en: "A secondhand-market slang dictionary: look up coded phrases in-site, with the real intent and buyer warnings.",
     },
     detail: {
       zh: "给二手买家做的解码词典，数据来自 GitHub 上的 MIT 开源词库 awesome-chinese-secondhand-slang，本站服务端每日自动同步（当前 149 个主题词条、5,082 个黑话变体，数字随上游更新）。用法：直接搜黑话、标准名或含义（如「矿渣」「全绿」「克劳格」），或按 27 个分类、按存活状态（现行可用 / 抽检限流 / 平台拦截）筛；每张词条卡列全变体、百科释义、卖家潜台词、买家避坑、当前动态与接棒新词，并标注风险等级。页面下方还有拼音首字母缩写反查：输入 cld、ga、xd 这类字母暗号，命中上游速查表与变体里真实带这个暗号的词条。定位与边界写在明处：本站只帮买家看懂黑话、避坑验货，不提供把正常文案转成黑话的卖家排雷转译，上游数据中给卖家的规避建议字段本站不展示。词条原文的版权归上游开源项目与贡献者所有（MIT License）。",
@@ -787,8 +787,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["slang"],
     type: "third-party",
     oneLiner: {
-      zh: "本站词典的数据源头：GitHub 上的 MIT 开源二手黑话词库，词条、变体、存活状态与缩写表全部结构化开放，可下载原始 JSON。",
-      en: "The data source behind this site's dictionary: an MIT-licensed open-source secondhand-slang corpus on GitHub — entries, variants, survival statuses and the abbreviation table, all structured and downloadable as raw JSON.",
+      zh: "开源二手黑话词库：本站词典数据源，MIT 许可、结构化开放。",
+      en: "An open-source secondhand-slang corpus: the data behind this site's dictionary — MIT-licensed and structured.",
     },
     detail: {
       zh: "Domainsun 维护的开源项目 awesome-chinese-secondhand-slang，把闲鱼、转转、小红书等平台的二手交易暗语整理成结构化数据：每个主题词条含标准名、全部黑话变体、适用平台、风险等级、存活状态、百科释义，以及卖家潜台词、买家避坑等双向透视字段，词库 JSON 在仓库的 data 目录完全开放。本站的二手黑话词典正是基于这份 MIT 许可的数据：本站服务端每日自动同步上游词库，套上搜索、筛选与缩写反查的界面；分类统计与界面分类名由同步程序派生标注，上游原始文件是一个词条数组（其 README 描述的四段式结构与文件现状略有出入，以文件为准）。想拿原始数据自己做工具、或给词库补新词条，直接去这个仓库下载 JSON 或提 PR。",
@@ -811,8 +811,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "打开先自查出口 IP，也可查任意 IP/域名：地理、ASN、机房/家宽判定、逐项列明的风险分、Whois 与 WebRTC 泄露检测一页看齐。",
-      en: "Your exit IP is checked on open; any IP or domain works too — geography, ASN, a datacenter/residential verdict, an itemised risk score, whois and a WebRTC leak check on one page.",
+      zh: "IP 风险自查：出口与任意 IP 都可查，风险分逐项列明可核。",
+      en: "IP risk self-check: your exit IP or any IP — with an itemised, verifiable risk score.",
     },
     detail: {
       zh: "站内可直接使用的 IP 自查工具，产品形态参考 pingip.co，数据源与评分规则为本站自建并全量公开。打开页面先自动查你自己的出口 IP；输入任意 IP 或域名（域名经 DoH 解析）也可查。情报由服务端合并 ipwho.is（地理、ASN、运营商）与标记源（ip-api.com 主源、proxycheck.io 兜底，给出 proxy / hosting / mobile 标记），单源失败只降级对应字段、实际供数源在页面上标注；属性判定 IDC 机房 / 家宽住宅 / 移动网络逐项列出命中证据；风险分只用四条公开规则（proxy +45、hosting +35、云厂商 ASN +15、移动网络 −20），每项加减分与证据都在页面上对得回去——它衡量「像不像代理/机房出口」，不是商业风控库的欺诈分。原生 IP 只给参考判断（地理归属国与 RDAP 网段注册国是否一致、是否 Anycast），不装作能确证。Whois 走 RDAP 官方通道给注册组织/注册商、网段、注册日期与状态摘要。另有三节完全在浏览器本地完成、不上传服务器：WebRTC 泄露检测（STUN 公网地址与出口 IP 对比）、浏览器环境（时区、语言、UA、WebGL 等）、HTTP 延迟测试（浏览器发不了 ICMP，测的是 HTTP 往返，页面已标注）。",
@@ -834,8 +834,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["ip-check"],
     type: "third-party",
     oneLiner: {
-      zh: "老牌在线 IP 自查站：IP/域名情报、风险评分、WebRTC 与浏览器环境检测、Ping 与 Whois，本站 IP 检测的产品形态参考对象。",
-      en: "An established online IP self-check site — IP/domain intel, risk scoring, WebRTC and browser-environment checks, ping and whois; the reference this site's IP Check takes its shape from.",
+      zh: "在线 IP 情报站：风险评分、WebRTC 检测与 Whois 一站查齐。",
+      en: "An online IP intel site: risk scoring, WebRTC checks and whois in one place.",
     },
     detail: {
       zh: "PingIP（pingip.co）是一款免费、无需注册的在线 IP 风险检测与网络环境自查工具：可查询 IP 或域名的地理位置、ASN、运营商、CIDR、IDC 机房/家宽属性与原生 IP 倾向，并给出风险评分；站内还有 WebRTC 泄露检测、浏览器环境检测、Ping 测试与 Whois 查询，其中 WebRTC、时区、语言等环境检测在其页面本地完成、不上传服务器。本站的「IP 风险检测」在产品形态上参考了它（自查 + 情报 + 风险分 + 本地环境检测一页流），但两者是各自独立的站点与实现：本站把情报合并源（ipwho.is + ip-api）与四条评分规则的权重全量公开、逐项可验算，并把延迟一节如实标注为 HTTP 往返而非 ICMP Ping；PingIP 的覆盖与呈现则有它自己的口径。两个都免费，需要哪种直接用哪种。",
@@ -858,8 +858,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "唐诗三百首、宋词三百首、诗经、楚辞、论语站内全文检索阅读，外加 3 万条成语词典和成语接龙、猜诗词小游戏。",
-      en: "Search and read the 300 Tang Poems, 300 Song Ci, the Book of Songs, the Verses of Chu and the Analects in-site, with a 30k idiom dictionary and idiom-chain and guess-the-line games.",
+      zh: "古诗词全文检索：唐诗宋词诗经楚辞论语，外加成语词典与接龙。",
+      en: "Full-text search of Tang and Song poetry, the Book of Songs, Chu Ci and the Analects — plus an idiom dictionary and games.",
     },
     detail: {
       zh: "本站的古籍诗词精选版，数据在构建时从 GitHub 开源语料落盘进仓库，运行时只经本站接口按页下发、不依赖任何外部服务。四块功能：诗词检索——按标题、作者或正文关键词搜五部典籍（唐诗三百首 366 条、宋词三百首 280 条、诗经 305 篇、楚辞 65 篇、论语 20 篇，共 1,036 篇），可按典籍筛选、分页浏览、点开读全篇；成语词典——30,895 条成语，拼音、释义、出处齐全，可按释义关键词反查；成语接龙——同字与同音（不计声调）两种模式轮流接龙，带提示与计分；猜诗词——给出上句四选一下句，干扰项同出一部典籍，答后揭晓出处并可读全篇。定位与边界写明：这是常用精选版，全量古籍（85 万首诗词、2 万部古籍、700 部中医古籍）与全文检索不在本站，请用同标签的文籍典册原站。数据许可：chinese-poetry 与 chinese-xinhua 均为 MIT；诗词落盘时经 OpenCC 繁转简，《静夜思》一条按现代通行本校订（源数据收的是宋本文字），原文均为公版古籍。",
@@ -881,8 +881,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["poetry"],
     type: "third-party",
     oneLiner: {
-      zh: "中华传统文化全量资料站：85 万+ 首古诗词、3 万+ 成语、2 万+ 部古籍与 700 部中医古籍，带全文检索——本站精选版之外的全量去处。",
-      en: "A full-scale traditional-culture library: 850k+ poems, 30k+ idioms, 20k+ classics and 700 medical classics with full-text search — where to go beyond this site's curated edition.",
+      zh: "传统文化全量资料库：85 万首古诗词全文检索，古籍成语齐全。",
+      en: "A full-scale traditional-culture library: 850k poems with full-text search, plus classics and idioms.",
     },
     detail: {
       zh: "文籍典册（wendian.dicomp.net）是一个中华传统文化资料查询站，走的是全量路线：整合古诗词、汉语字典、成语、歇后语、四书五经、中医药古籍、古籍文献与蒙学等内容，自述收录 85 万+ 首古诗词、1.4 万+ 汉字、3 万+ 成语、2 万+ 部古籍藏书和 700 部中医古籍，并提供全文检索、生字本、成语接龙、词语接龙、猜诗词等功能，免费使用、无需注册。本站的古籍诗词精选版只收五部常用典籍加一部成语词典，胜在站内直接查、直接玩、无广告；要翻精选之外的篇目、查中医古籍或做大范围全文检索，来文籍典册。两个站定位互补：日常高频用精选版，深挖全量用原站。",
@@ -905,8 +905,8 @@ export const TOOLS: ToolDef[] = [
     type: "own",
     embedded: true,
     oneLiner: {
-      zh: "粘贴推文链接，解析正文与全部媒体：图片原图、视频各画质 MP4 直链下载，推文导出 TXT/Markdown/HTML/JSON/CSV/PDF，Thread 整串导出 EPUB。",
-      en: "Paste a tweet link to parse its text and all media: original photos, per-quality MP4 direct links, exports to TXT/Markdown/HTML/JSON/CSV/PDF, and whole threads as EPUB.",
+      zh: "推文解析下载：粘贴链接取原图与各画质视频，还能整串导出。",
+      en: "Tweet parser and downloader: paste a link for original photos and per-quality videos — whole threads exportable too.",
     },
     detail: {
       zh: "站内可用的推特媒体下载与推文导出工具箱，功能集参考老牌下载站 TwiFlux、独立实现。粘贴一条公开推文链接（twitter.com / x.com）或推文 ID，即可解析出作者、正文、发布时间、互动数（数据源实际返回的才显示）和全部媒体：图片给原图（name=orig）直链，视频与 GIF 逐档列出每个 MP4 变体的分辨率与码率供挑选，另附 HLS 播放列表链接（如有）。下载全部走推特 CDN 直链，本站服务器不中转文件；导出（TXT、Markdown、HTML、JSON、CSV，以及「打印另存」的 PDF）都在你的浏览器本地生成。若这条推文处在同作者自回复串中，工具会沿数据源返回的回复链把整串组装出来，提供 TXT、Markdown、JSON 与 EPUB 整串导出——组装口径如实标注：以数据源返回为准，只含截至本条的同作者串。取数双源：推特公开嵌入接口为主、FxTwitter 公开接口为备，免登录。边界：仅限公开推文；媒体版权归原作者，只下载你有权使用的内容。",
@@ -928,8 +928,8 @@ export const TOOLS: ToolDef[] = [
     tags: ["twitter-tools"],
     type: "third-party",
     oneLiner: {
-      zh: "老牌免费的推特/X 视频下载站：粘贴公开推文链接拿到各画质 MP4，单文件上限 500 MiB、免注册；本站推特工具箱的功能集参考对象。",
-      en: "An established free Twitter/X video downloader: paste a public tweet link for per-quality MP4s, up to 500 MiB per file, no sign-up; the feature-set reference for this site's Tweet Toolbox.",
+      zh: "推特视频下载站：粘贴推文链接取各画质 MP4，免注册免费下。",
+      en: "A Twitter/X video downloader: paste a tweet link for per-quality MP4s — free, no sign-up.",
     },
     detail: {
       zh: "TwiFlux（twiflux.com）是一款免费、无需注册的在线推特/X 多功能下载站：以视频下载为主，粘贴公开推文链接后列出原帖可用的全部 MP4 格式（原始画质、分辨率与码率可见），单个文件上限 500 MiB；也覆盖 GIF、图片与音频下载，并提供把推文与 Thread 转换成 TXT、Markdown、HTML、PDF、JSON、CSV、RSS 等格式的工具（Thread 另有 EPUB、文章与轮播图）。本站的「推特下载工具箱」在功能集上参考了它——媒体逐档直链、推文多格式导出、Thread 整串打包——但两者是各自独立的站点与实现：本站取数走推特公开嵌入接口与 FxTwitter 公开接口双源，解析与导出全部在站内完成。两个都免费、都只处理公开推文，需要哪种直接用哪种；无论用哪个，媒体的版权都归原作者。",
