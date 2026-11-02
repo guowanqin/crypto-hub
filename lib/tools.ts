@@ -1002,6 +1002,54 @@ export const TOOLS: ToolDef[] = [
       en: "For pure downloading it's the most focused tool around, with a clean format table — the layout reference for this site's toolbox. The difference: ours folds parsing, thread assembly and EPUB bundling into one page on a site you already use. Both touch public tweets only, no exceptions.",
     },
   },
+  {
+    slug: "handy",
+    name: { zh: "Handy 离线语音转文字", en: "Handy — Offline Speech to Text" },
+    url: "https://handy.computer",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "免费开源离线语音转文字：按快捷键说话，文字直接粘贴到任意输入框。",
+      en: "Free, open-source offline speech to text: hold a shortcut, speak, and the text lands in any text field.",
+    },
+    detail: {
+      zh: "Handy 是装在电脑上的免费开源语音转文字应用（MIT 许可），主打离线与隐私：按住自定义快捷键说话、松手即转写，文字直接粘贴到当前输入框，不用在聊天框和转写窗口之间来回复制。转写全程在本机完成：先用 Silero 做语音活动检测过滤静音，再用 Whisper 模型（Small / Medium / Turbo / Large，可选 GPU 加速）或 CPU 优化的 Parakeet V3 转写，音频不发往任何云端。支持 Windows、macOS 与 Linux，也提供命令行开关与 Raycast 扩展。收录提醒：它是桌面软件、不是网页工具；模型首次使用需下载一次，之后全程离线；macOS 蓝牙耳机麦克风与部分 Linux 桌面环境有已知限制，见其官网说明。",
+      en: "Handy is a free, open-source desktop speech-to-text app (MIT licence) built around offline use and privacy: hold a custom shortcut, speak, release, and the transcription is pasted straight into whatever text field is active — no copying back and forth between chat and transcription windows. Everything runs on your own machine: Silero voice-activity detection filters silence first, then Whisper models (Small / Medium / Turbo / Large, GPU acceleration optional) or the CPU-optimised Parakeet V3 transcribe — audio never goes to any cloud. It runs on Windows, macOS and Linux, with CLI flags and a Raycast extension. Listing notes: it is a desktop app, not a web tool; models download once on first use and then everything is offline; Bluetooth-headset microphones on macOS and some Linux desktop setups have known limitations, documented on its site.",
+    },
+    audience: {
+      zh: "不想把语音发上云、又想用说的代替打字的人；写长消息、会议纪要、代码注释时习惯口述的办公与创作用户。",
+      en: "Anyone who'd rather not send voice to the cloud but wants to speak instead of type — office and creator users who dictate long messages, meeting notes or code comments.",
+    },
+    take: {
+      zh: "收录说明：它是桌面软件不是网页工具，模型首次使用需下载一次，之后全程离线；按快捷键说话、松手即粘贴的流程，适合一切需要把语音变文字的场景，隐私这条线守得比在线转写站干净。",
+      en: "Listing notes: a desktop app, not a web tool — models download once, then everything stays offline. The hold-to-talk, release-to-paste flow fits any speak-to-text job, and its privacy line is cleaner than any online transcription site's.",
+    },
+  },
+  {
+    slug: "public-apis",
+    name: { zh: "Public APIs 免费接口大全", en: "Public APIs — Free API Directory" },
+    url: "https://github.com/public-apis/public-apis",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "免费公开接口目录：按分类、认证方式与 CORS 支持筛选，附直链。",
+      en: "A directory of free public APIs: filter by category, auth and CORS support, with direct links.",
+    },
+    detail: {
+      zh: "Public APIs 是 GitHub 上近 50 万星的免费公开接口目录（MIT 许可，持续维护）：把互联网上无需付费即可调用的公开 API 按 Animal、区块链、加密货币、金融、天气、新闻等几十个分类整理成一张大表，每个条目写明是否需要认证（免 Key、OAuth 或 API Key）、是否支持 HTTPS 与 CORS，并附官方直链。找公开数据源、给小工具接天气汇率行情、做 Demo 缺测试接口时，先来这儿按分类翻一遍，比搜索引擎逐条验证省事。收录提醒：目录本身是清单、不是聚合网关，条目的可用性与限额以各接口官网为准；仓库不再提供可下载的 entries.json 数据文件，以 README 列表为准。",
+      en: "Public APIs is a near-500K-star directory of free public APIs on GitHub (MIT licence, actively maintained): it organises no-cost public APIs into dozens of categories — Animals, Blockchain, Cryptocurrency, Finance, Weather, News and more — with each entry stating whether auth is needed (no key, OAuth or API key), whether HTTPS and CORS are supported, and a direct link to the official docs. Looking for a public data source, wiring weather, exchange-rate or market data into a small tool, or needing test endpoints for a demo? Browsing this list by category beats verifying search results one by one. Listing notes: the directory is a catalogue, not an aggregation gateway — availability and rate limits follow each API's own site — and the repo no longer ships a downloadable entries.json data file, so the README list is the source of truth.",
+    },
+    audience: {
+      zh: "给小工具找公开数据源的开发者、做 Demo 缺测试接口的人，以及想了解有哪些免费接口可玩的爱好者。",
+      en: "Developers hunting public data sources for small tools, anyone needing test endpoints for a demo, and hobbyists curious about what free APIs exist.",
+    },
+    take: {
+      zh: "收录说明：近 50 万星的清单，区块链、加密货币、金融这些分类对本站读者尤其有用；条目只列接口名与直链，免 Key 与否、支不支持 CORS 都标明了，找数据源先来这儿翻一遍。",
+      en: "Listing notes: a near-500K-star catalogue whose Blockchain, Cryptocurrency and Finance categories are especially useful for this site's readers — each entry names the API and links out, with no-key vs keyed and CORS support marked, so check here before hunting for a data source elsewhere.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
