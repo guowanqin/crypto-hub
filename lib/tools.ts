@@ -102,6 +102,31 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "devtools",
+    name: { zh: "开发者工具箱", en: "Dev Toolbox" },
+    url: "https://18btc.cc/tool/devtools",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "开发者工具箱：编码、哈希、JSON、时间戳等二十件小工具，本地运行。",
+      en: "A developer toolbox: encoding, hashing, JSON, timestamps and more — twenty tools running locally.",
+    },
+    detail: {
+      zh: "把开发者和运维日常最高频的二十件小事装进一页：编码转换组有 Base64、URL 编码、Unicode 转义、进制转换与 Hex 互转（进制用 BigInt，再大的整数也不溢出）；加密与校验组有 MD5 / SHA-1 / SHA-256 / SHA-512 哈希计算、JWT 解码（只解 header 与 payload，页面上明示不验签）和密码强度检测（给熵估算和等级，不下绝对结论）；生成器组有 UUID 批量生成、随机密码与随机数；格式化与转换组有 JSON 格式化/压缩/校验（语法错误指出第几行第几列）、时间戳互转（带实时当前时间戳）、颜色转换、单位换算与 URL 参数解析（参数可编辑后拼回完整链接）；文本工具组有字数统计、八种大小写互转、行处理和按行文本对比。页面顶部可按工具名中英文搜索过滤。所有计算都只在你的浏览器本地完成：粘贴 token、密钥、日志片段都不会离开这台设备；免费、免注册、无次数限制。",
+      en: "Twenty of the small jobs developers and ops folks do every day, on one page: Base64, URL encoding, Unicode escapes, radix conversion (BigInt — no overflow however large the integer) and hex conversion; MD5 / SHA-1 / SHA-256 / SHA-512 hashing, a JWT decoder (header and payload only, clearly labelled as not verifying signatures) and a password strength checker (entropy estimate and a grade, never an absolute verdict); batch UUIDs, random passwords and random numbers; JSON formatting, minifying and validation that points at the exact line and column of a syntax error, timestamp conversion with a live clock, color conversion, unit conversion and a URL parser whose query table is editable and rebuilds the link live; plus a text counter, eight case conversions, line tools and a line-by-line text diff. A search box at the top filters the tools by name in either language. Everything computes locally in your browser — tokens, keys and log snippets you paste never leave your device. Free, no sign-up, no usage limits.",
+    },
+    audience: {
+      zh: "天天和接口、日志、token、时间戳打交道的开发者与运维，以及偶尔要解一段 Base64、验一个 JWT、算个哈希的普通用户。",
+      en: "Developers and ops folks who live among APIs, logs, tokens and timestamps — plus anyone who occasionally needs to decode a Base64 string, peek inside a JWT or hash something.",
+    },
+    take: {
+      zh: "工具盘子照着 it-tools 那类合集的功能清单盘的，但东西是本站自己一件件做的：二十件全在本地跑，处理 token 和密钥时不用把敏感串粘到别人的服务器上——这一条就是把它留在站内的理由。常用度最高的是 JSON 校验的位置提示和 JWT 解码，接口调试时是真省事。",
+      en: "The line-up follows the kind of inventory that collections like it-tools made popular, but every tool here is this site's own build and all twenty run locally — when you are handling tokens and keys, not pasting secrets into someone else's server is the whole point. The JSON error locator and the JWT decoder earn their keep fastest in day-to-day API debugging.",
+    },
+  },
+  {
     slug: "coingecko",
     name: { zh: "CoinGecko", en: "CoinGecko" },
     url: "https://www.coingecko.com",
