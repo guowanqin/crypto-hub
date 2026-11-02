@@ -1050,6 +1050,31 @@ export const TOOLS: ToolDef[] = [
       en: "Listing notes: a near-500K-star catalogue whose Blockchain, Cryptocurrency and Finance categories are especially useful for this site's readers — each entry names the API and links out, with no-key vs keyed and CORS support marked, so check here before hunting for a data source elsewhere.",
     },
   },
+  {
+    slug: "niuma-clock",
+    name: { zh: "牛马时钟", en: "Niuma Clock" },
+    url: "https://18btc.cc/tool/niuma-clock",
+    tags: ["office"],
+    addedAt: "2026-11-02",
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "打工人牛马时钟：下班、周末、发薪与假期倒计时，工资按秒实时跳。",
+      en: "A worker's clock: live countdowns to off-work, the weekend, payday and the next holiday, plus a per-second salary meter.",
+    },
+    detail: {
+      zh: "牛马时钟是给打工人的一页时间账本：大字时钟每秒刷新，今日牛马进度按你设定的上下班时间算已搬砖多久、还剩多久；距离下班、距离周末、距离发工资、距离下一个法定节假日四个倒计时同屏盯着；填上月薪，工资秒表按秒跳钱——日薪按当月应出勤天数折算（周一至周五，扣除 2026 年法定放假、计入调休补班日）。上下班时间、午休、发薪日、月薪都能改，全部只保存在本机浏览器，不注册、不上传。",
+      en: "Niuma Clock is a one-page time ledger for working folks: a big clock ticking every second, today's grind progress computed from your own start and finish times, and four countdowns on one screen — until off work, until the weekend, until payday and until the next public holiday. Add your monthly salary and the salary stopwatch ticks money in per second, with daily pay pro-rated over this month's scheduled workdays (Mon–Fri, minus 2026 public holidays, plus official make-up workdays). Work hours, lunch break, payday and salary are all adjustable and stored only in your browser — no sign-up, no upload.",
+    },
+    audience: {
+      zh: "办公室打工人、等下班等发薪的牛马同胞，以及想把倒计时挂在屏幕上当桌面时钟的人。",
+      en: "Office workers counting down to off-work and payday, and anyone who wants a countdown clock sitting on their screen.",
+    },
+    take: {
+      zh: "四个倒计时同屏打开，等下班的心情一下子具体了；工资秒表按秒跳的那几分钱，是今天搬砖最诚实的反馈。",
+      en: "With all four countdowns on one screen, waiting for off-work suddenly has numbers; the few cents ticking in per second are the most honest feedback today's grind gives back.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
