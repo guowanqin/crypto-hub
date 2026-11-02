@@ -4,6 +4,7 @@ import { Fragment, useMemo, useState } from "react";
 import Link from "next/link";
 import { TAGS } from "@/lib/tags";
 import { TOOLS, toolsByTag, type ToolDef } from "@/lib/tools";
+import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
@@ -16,6 +17,17 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string>("all");
   const [activeType, setActiveType] = useState<"all" | "builtin" | "third">("all");
+  const [tagsExpanded, setTagsExpanded] = useState(false);
+
+  // 分类 chips 默认只露前 9 个；当前选中的分类不在默认集合内时也要露出来，避免选中项「消失」
+  const visibleTags = useMemo(() => {
+    const base = tagsExpanded ? TAGS : TAGS.slice(0, 9);
+    if (activeTag !== "all" && !base.some((tg) => tg.id === activeTag)) {
+      const sel = TAGS.find((tg) => tg.id === activeTag);
+      if (sel) return [...base, sel];
+    }
+    return base;
+  }, [tagsExpanded, activeTag]);
 
   const q = query.trim().toLowerCase();
   const matches = useMemo(() => {
@@ -84,6 +96,20 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         </section>
       ) : (
         <>
+          {/* 热门精选：仅默认视图（无搜索词、分类=全部、类型=全部）显示，避免与筛选结果重复 */}
+          {activeTag === "all" && activeType === "all" && (
+            <section className="section featured-section">
+              <div className="section-head">
+                <h2 className="section-title">🔥 {t.featuredTitle}</h2>
+              </div>
+              <div className="card-grid">
+                {FEATURED_TOOLS.map((tool) => (
+                  <ToolCard key={tool.slug} tool={tool} />
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* 筛选：分类（来自标签注册表）+ 类型（独立可用 / 第三方），可组合 */}
           <div className="filter-bar">
             <div className="filter-row" role="group" aria-label="Filter by category">
@@ -95,7 +121,7 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
               >
                 {t.allTags}
               </button>
-              {TAGS.map((tag) => (
+              {visibleTags.map((tag) => (
                 <button
                   type="button"
                   key={tag.id}
@@ -106,6 +132,16 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
                   {tag.name[lang]}
                 </button>
               ))}
+              {TAGS.length > 9 && (
+                <button
+                  type="button"
+                  className="filter-chip filter-chip-more"
+                  aria-expanded={tagsExpanded}
+                  onClick={() => setTagsExpanded((v) => !v)}
+                >
+                  {tagsExpanded ? t.lessTags : t.moreTags}
+                </button>
+              )}
             </div>
             <div className="filter-row" role="group" aria-label="Filter by type">
               <button

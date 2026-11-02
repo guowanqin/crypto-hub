@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ToolDef } from "@/lib/tools";
 import { TAG_MAP } from "@/lib/tags";
 import { HUB_DICT } from "@/lib/i18n";
+import { tagIcon, iconBgForSlug } from "@/lib/tagIcons";
 import { useLang } from "./LangProvider";
 
 export default function ToolCard({ tool }: { tool: ToolDef }) {
@@ -12,6 +13,13 @@ export default function ToolCard({ tool }: { tool: ToolDef }) {
   return (
     <Link href={`/tool/${tool.slug}`} className="tool-card">
       <div className="tool-card-top">
+        <span
+          className="tool-card-icon"
+          style={{ background: iconBgForSlug(tool.slug) }}
+          aria-hidden="true"
+        >
+          {tagIcon(tool.tags[0])}
+        </span>
         <h3 className="tool-card-name">{tool.name[lang]}</h3>
         <div className="tool-badges">
           {tool.embedded ? (
