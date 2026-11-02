@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import FileTimeToolClient from "@/components/FileTimeToolClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -49,5 +50,10 @@ export default async function FileTimeToolPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <FileTimeToolClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <FileTimeToolClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="filetime" />
+    </>
+  );
 }

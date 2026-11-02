@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import IpCheckPanelClient from "@/components/IpCheckPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,5 +52,10 @@ export default async function IpCheckToolPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <IpCheckPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <IpCheckPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="ip-check" />
+    </>
+  );
 }

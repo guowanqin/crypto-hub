@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import SlangDictClient from "@/components/SlangDictClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,5 +52,10 @@ export default async function SlangDictPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <SlangDictClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <SlangDictClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="slang-dict" />
+    </>
+  );
 }

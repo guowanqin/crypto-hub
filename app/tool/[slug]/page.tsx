@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ToolDetailClient from "@/components/ToolDetailClient";
+import RelatedTools from "@/components/RelatedTools";
 import { TOOLS, getTool } from "@/lib/tools";
 import { TAG_MAP } from "@/lib/tags";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -70,5 +71,10 @@ export default async function ToolPage({ params, searchParams }: Props) {
   const { ads } = await searchParams;
   const tool = getTool(slug);
   if (!tool || DEDICATED_PAGES.has(slug)) notFound();
-  return <ToolDetailClient tool={tool} adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <ToolDetailClient tool={tool} adsPreview={ads === "preview"} />
+      <RelatedTools slug={tool.slug} />
+    </>
+  );
 }

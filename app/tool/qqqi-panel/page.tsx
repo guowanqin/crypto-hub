@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import QqqiPanelClient from "@/components/QqqiPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,5 +52,10 @@ export default async function QqqiPanelPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <QqqiPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <QqqiPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="qqqi-panel" />
+    </>
+  );
 }

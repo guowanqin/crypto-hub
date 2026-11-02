@@ -11,6 +11,8 @@ export interface ToolDef {
   type: ToolType;
   /** 是否在本站内嵌可直接使用（sheet2word、pershare） */
   embedded?: boolean;
+  /** 数据是否自动取数/自动更新（卡片上显示「数据自动更新」标识），只给确实自动调取实时数据的条目打标 */
+  liveData?: boolean;
   oneLiner: Record<Lang, string>;
   detail: Record<Lang, string>;
   audience: Record<Lang, string>;
@@ -26,6 +28,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["market"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "实时计算 BNC、PURR 两只加密财库股的每股含币量、含币价值与折溢价。",
       en: "Live per-share coin content, coin value per share, and discount/premium for the BNC and PURR crypto treasury stocks.",
@@ -444,6 +447,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["btc-bottom"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "按四年减半周期与实时区块高度推演 BTC 周期位置：现在离熊底还有多远、五档分批建仓点位在哪。",
       en: "Tracks BTC's position in the four-year halving cycle from the live block height: how far the bear-market bottom is, and where the five staged buying levels sit.",
@@ -468,6 +472,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["crcl"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "按买入信号分模型（v6）实时算 Circle（CRCL）的估值与买入信号：P/S、RSI、USDC 供应与市占率自动取数。",
       en: "Circle's (CRCL) valuation and buy signal, computed live under the Buy Signal Score model (v6): P/S, RSI, USDC supply and market share fetched automatically.",
@@ -492,6 +497,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["qqqi"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "QQQI 现价、派息与分红率自动调取，再逐月模拟定投攒股：期末多少股、每月收多少息，一次算清。",
       en: "QQQI's price, payouts and distribution rate fetched automatically, plus a month-by-month DCA simulation: final shares and monthly income, worked out in one go.",
@@ -516,6 +522,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["flows"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "主流交易所的储备总额、24h/7d/30d 净流入净流出，加上各所合约未平仓总额与 BTC 永续资金费率，一页看齐、来源逐行标注。",
       en: "Major exchanges' total reserves and 24h/7d/30d net inflows and outflows, plus each venue's total open interest and BTC perpetual funding rate — one page, sources marked per row.",
@@ -540,6 +547,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["chain-dau"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "主流公链过去 24 小时的活跃地址数从多到少排一排，带日活 7 日变化、TVL 与人均锁仓，数据自动调取、可搜索可排序。",
       en: "The major chains ranked by active addresses over the past 24 hours, with the DAU 7-day change, TVL and TVL per active address — auto-fetched, searchable and sortable.",
@@ -564,6 +572,7 @@ export const TOOLS: ToolDef[] = [
     tags: ["qqq"],
     type: "own",
     embedded: true,
+    liveData: true,
     oneLiner: {
       zh: "QQQ 现价、估值温度自动调取，再用 1999 年上市以来的全史月线回测定投：期末股数、年化与最大回撤一次算清。",
       en: "QQQ's live price and valuation temperature fetched automatically, plus a DCA backtest on the full monthly history since its 1999 listing: final shares, annualised return and max drawdown in one go.",

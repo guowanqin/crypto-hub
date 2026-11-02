@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import BtcCycleToolClient from "@/components/BtcCycleToolClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -49,5 +50,10 @@ export default async function BtcCycleToolPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <BtcCycleToolClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <BtcCycleToolClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="btc-cycle" />
+    </>
+  );
 }

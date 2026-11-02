@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import ChainDauPanelClient from "@/components/ChainDauPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -55,5 +56,10 @@ export default async function ChainDauPanelPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <ChainDauPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <ChainDauPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="chain-dau-panel" />
+    </>
+  );
 }

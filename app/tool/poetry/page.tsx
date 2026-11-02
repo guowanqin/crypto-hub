@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import PoetryPanelClient from "@/components/PoetryPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -53,5 +54,10 @@ export default async function PoetryToolPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <PoetryPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <PoetryPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="poetry" />
+    </>
+  );
 }

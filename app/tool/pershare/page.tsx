@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import PerShareClient from "@/components/PerShareClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -55,5 +56,10 @@ export default async function PerSharePage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <PerShareClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <PerShareClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="pershare" />
+    </>
+  );
 }

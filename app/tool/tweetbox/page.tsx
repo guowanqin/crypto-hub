@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import TweetPanelClient from "@/components/TweetPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,5 +52,10 @@ export default async function TweetboxPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <TweetPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <TweetPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="tweetbox" />
+    </>
+  );
 }

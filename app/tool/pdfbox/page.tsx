@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import PdfBoxClient from "@/components/PdfBoxClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,5 +52,10 @@ export default async function PdfBoxPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <PdfBoxClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <PdfBoxClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="pdfbox" />
+    </>
+  );
 }

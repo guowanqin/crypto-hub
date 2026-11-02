@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import FlowsPanelClient from "@/components/FlowsPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -53,5 +54,10 @@ export default async function FlowsPanelPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <FlowsPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <FlowsPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="flows-panel" />
+    </>
+  );
 }

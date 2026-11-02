@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import CrclPanelClient from "@/components/CrclPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -50,5 +51,10 @@ export default async function CrclPanelPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <CrclPanelClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <CrclPanelClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="crcl-panel" />
+    </>
+  );
 }

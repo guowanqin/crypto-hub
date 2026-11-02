@@ -27,9 +27,16 @@ export default function ToolCard({ tool }: { tool: ToolDef }) {
           ) : (
             <span className="badge badge-third">{t.thirdPartyBadge}</span>
           )}
+          {tool.liveData && <span className="badge badge-live">{t.liveDataBadge}</span>}
         </div>
       </div>
       <p className="tool-card-oneliner">{tool.oneLiner[lang]}</p>
+      {tool.take?.[lang] ? (
+        <p className="tool-card-take">
+          <span className="tool-card-take-label">{t.takeTitle}</span>
+          {tool.take[lang]}
+        </p>
+      ) : null}
       <div className="tool-card-foot">
         <span className="tool-card-tags">
           {tool.tags.map((tagId) => (

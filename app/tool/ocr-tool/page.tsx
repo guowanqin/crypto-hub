@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import OcrToolClient from "@/components/OcrToolClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -53,5 +54,10 @@ export default async function OcrToolPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <OcrToolClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <OcrToolClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="ocr-tool" />
+    </>
+  );
 }

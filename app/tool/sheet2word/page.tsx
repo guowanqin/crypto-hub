@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RelatedTools from "@/components/RelatedTools";
 import Sheet2WordClient from "@/components/Sheet2WordClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -41,5 +42,10 @@ export default async function Sheet2WordPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <Sheet2WordClient adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <Sheet2WordClient adsPreview={ads === "preview"} />
+      <RelatedTools slug="sheet2word" />
+    </>
+  );
 }
