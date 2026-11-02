@@ -5737,3 +5737,115 @@ a:hover {
   color: var(--faint);
   font-size: 13px;
 }
+
+/* ---------- 视觉插画（大类主图体系，方案见 visual-assets/plan.md） ---------- */
+
+/* 首页 Hero 横版主视觉：搜索框下方通栏，米白底与页面同色系无缝衔接 */
+.hero-visual {
+  display: block;
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  margin: 24px auto 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* 「最新上架」区块头的小吉祥物（原 Hero 的 mascot-pose 退到此处做装饰） */
+.newest-mascot {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  object-fit: cover;
+  background: #1c1c1e;
+  align-self: center;
+}
+
+/* 首页大类区块头方形小图（64–96px 档，实际 56px / 移动端 44px） */
+.group-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  align-self: center;
+  flex: none;
+}
+
+/* 标签页 / 工具页页头横幅：大类主图横版裁切（object-fit: cover，焦点在 lib/visuals.ts） */
+.group-banner {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+  line-height: 0;
+}
+
+.group-banner img {
+  display: block;
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+}
+
+/* 工具页横幅略矮，不抢工具本体 */
+.group-banner-sm img {
+  height: 120px;
+}
+
+/* 空状态（首页搜索 / 筛选无结果）：举牌吉祥物 + 说明文字 */
+.empty-state {
+  text-align: center;
+  padding: 14px 0 6px;
+}
+
+.empty-state img {
+  width: 132px;
+  height: 132px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.empty-state .empty-note {
+  padding: 10px 0 0;
+}
+
+/* 404 页：举牌吉祥物引导回首页 */
+.notfound {
+  text-align: center;
+  padding: 44px 16px 54px;
+}
+
+.notfound img {
+  width: 176px;
+  height: 176px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.notfound h1 {
+  font-size: 30px;
+  margin: 18px 0 10px;
+}
+
+.notfound p {
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+@media (max-width: 640px) {
+  .group-banner img {
+    height: 104px;
+  }
+
+  .group-banner-sm img {
+    height: 84px;
+  }
+
+  .group-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+}

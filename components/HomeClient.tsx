@@ -5,6 +5,7 @@ import { TAG_MAP } from "@/lib/tags";
 import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
 import { TOOLS, newestTools, type ToolDef } from "@/lib/tools";
 import { HUB_DICT } from "@/lib/i18n";
+import { GROUP_IMAGES, HERO_IMAGE, SIGN_IMAGE } from "@/lib/visuals";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
@@ -93,8 +94,6 @@ export default function HomeClient({
   return (
     <main className="page">
       <section className="hero">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/mascot-pose.webp" alt={MASCOT_NAME[lang]} className="hero-mascot" />
         <h1>{t.heroTitle}</h1>
         <p className="hero-sub">{t.heroSub}</p>
         <div className="search-box">
@@ -106,6 +105,10 @@ export default function HomeClient({
             aria-label="Search tools"
           />
         </div>
+        {/* Hero 主视觉：横版插画（吉祥物与行情线、链环、工具箱、盾牌等元素环绕），纯装饰；
+            原 mascot-pose 改到「最新上架」区块头做小装饰（见下方） */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={HERO_IMAGE} alt="" width={1440} height={810} className="hero-visual" />
       </section>
 
       {/* 广告位：首页顶部横幅（hero 下方、分类区块上方） */}
@@ -117,7 +120,11 @@ export default function HomeClient({
             {t.searchResults.replace("{n}", String(matches.length)).replace("{q}", query.trim())}
           </h2>
           {matches.length === 0 ? (
-            <p className="empty-note">{t.noResults}</p>
+            <div className="empty-state">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={SIGN_IMAGE} alt={MASCOT_NAME[lang]} width={800} height={800} />
+              <p className="empty-note">{t.noResults}</p>
+            </div>
           ) : (
             <div className="card-grid">
               {matches.map((tool) => (
@@ -132,7 +139,11 @@ export default function HomeClient({
           {activeGroup === "all" && activeType === "all" && (
             <section className="section newest-section">
               <div className="section-head">
-                <h2 className="section-title">🆕 {t.newestTitle}</h2>
+                <div className="section-head-row">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/mascot-pose.webp" alt={MASCOT_NAME[lang]} className="newest-mascot" />
+                  <h2 className="section-title">🆕 {t.newestTitle}</h2>
+                </div>
               </div>
               <div className="card-grid">
                 {newestList.map((tool) => (
@@ -195,17 +206,26 @@ export default function HomeClient({
 
           {filteredTotal === 0 ? (
             <section className="section">
-              <p className="empty-note">{t.filterEmpty}</p>
+              <div className="empty-state">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={SIGN_IMAGE} alt={MASCOT_NAME[lang]} width={800} height={800} />
+                <p className="empty-note">{t.filterEmpty}</p>
+              </div>
             </section>
           ) : (
             visibleSections.map(({ group, list }, idx) => {
               const expanded = expandedGroups.has(group.id);
               const shown = expanded ? list : list.slice(0, GROUP_PAGE_SIZE);
+              const gimg = GROUP_IMAGES[group.id];
               return (
                 <Fragment key={group.id}>
                   <section className="section" id={group.id}>
                     <div className="section-head">
                       <div className="section-head-row">
+                        {gimg && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={gimg.src} alt="" width={800} height={800} className="group-thumb" />
+                        )}
                         <h2 className="section-title">{group.name[lang]}</h2>
                         <span className="section-count">
                           {t.toolsCount.replace("{n}", String(list.length))}
