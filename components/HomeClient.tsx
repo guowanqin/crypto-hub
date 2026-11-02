@@ -3,7 +3,7 @@
 import { Fragment, useMemo, useState } from "react";
 import { TAG_MAP } from "@/lib/tags";
 import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
-import { TOOLS, compareTools, type ToolDef } from "@/lib/tools";
+import { TOOLS, newestTools, type ToolDef } from "@/lib/tools";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
@@ -31,11 +31,8 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
       return next;
     });
 
-  // 最新上架：全站按统一排序（pin → 站内可用 → addedAt 新 → 同日注册靠后）取前 6
-  const newestTools = useMemo(
-    () => [...TOOLS].sort(compareTools).slice(0, NEWEST_SIZE),
-    []
-  );
+  // 最新上架：纯时间排序（addedAt 新 → 同日注册靠后），站内工具与第三方分享页一视同仁，取前 6
+  const newestList = useMemo(() => newestTools(NEWEST_SIZE), []);
 
   const q = query.trim().toLowerCase();
   const matches = useMemo(() => {
@@ -122,14 +119,14 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         </section>
       ) : (
         <>
-          {/* 最新上架：仅默认视图（无搜索词、大类=全部、类型=全部）显示，避免与筛选结果重复；取全站排序前 6 */}
+          {/* 最新上架：仅默认视图（无搜索词、大类=全部、类型=全部）显示，避免与筛选结果重复；纯时间排序取前 6 */}
           {activeGroup === "all" && activeType === "all" && (
             <section className="section newest-section">
               <div className="section-head">
                 <h2 className="section-title">🆕 {t.newestTitle}</h2>
               </div>
               <div className="card-grid">
-                {newestTools.map((tool) => (
+                {newestList.map((tool) => (
                   <ToolCard key={tool.slug} tool={tool} />
                 ))}
               </div>
