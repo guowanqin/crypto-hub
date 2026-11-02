@@ -2,14 +2,25 @@
  * 交易所资金流 + 保证金（合约）看板：自动取数 + 派生口径（纯函数尽量与取数分离）。
  *
  *
- * - 总览：DeFiLlama /cexs 页同源数据。旧版 api.llama.fi/cex、/cex/{slug} 已 404，
- * api.llama.fi/inflows 现为付费接口（HTTP 402）。现行前端（defillama-app 的
- * src/pages/cexs/index.tsx，2026-11 复核其公开镜像源码）用 CEXS_API 目录 +
- * updatedProtocol + inflows 拼装，而 defillama.com/cexs 的服务端渲染页把拼好的
- * 结果（clean reserves 与 inflows_24h/1w/1m）整份写在 __NEXT_DATA__ 里——本工具
- * 服务端解析这份与页面展示完全一致的 payload，数字与 defillama.com/cexs 当日
- * 展示同源同值。只收录主流名单内、且 currentTvl 有值的交易所；Coinbase、
- * Kraken、Upbit 等未被 DeFiLlama 追踪钱包集覆盖（currentTvl 为空），不硬凑行。
+ * - 总览：DeFiLlama /cexs 页展示的那组数（clean reserves + inflows_24h/1w/1m），
+ * 两级取数（按保真度排序，任一级成功即用，两级全败时 errors.flows 带每一级
+ * 的来源标签与原始错误）：
+ *   L1 解析 defillama.com/cexs 服务端渲染页的 __NEXT_DATA__（与页面展示完全
+ *   同源同值），请求带完整浏览器头。但 defillama.com 对部分机房出口直接 403
+ *   （2026-11-02 线上实测 Vercel 出口被挡，本地出口正常；彼时线上错误为
+ *   "HTTP 403 https://defillama.com/cexs"），仅靠请求头未必能过，故有 L2。
+ *   L2 api.llama.fi/cexs 目录 JSON（前端 CEXS_API 的目录端点）：实测其 payload
+ *   已内嵌拼装好的 currentTvl 与 inflows_24h/1w/1m，与页面 __NEXT_DATA__ 同
+ *   字段、同管线，两次抓取仅有分钟级数值时差；其 slug 小写后与页面的
+ *   cexProtocolSlug 逐一相同，coin/currentTvl 16 家全对齐。api.llama.fi 域名
+ *   不在 defillama.com 的机房封锁范围内（本站 updatedProtocol 明细一直走它）。
+ *   环境变量 FLOWS_FORCE_LEVEL=1|2 可强制只走某一级（本地验证 fallback 用）。
+ * 旧版 api.llama.fi/cex、/cex/{slug} 已 404，api.llama.fi/inflows 现为付费
+ * 接口（HTTP 402）；defillama-datasets.llama.fi 下 cex 相关文件名（cex.json、
+ * cexs.json、cex/、cex-reserves.json 等，2026-11-02 逐一探测）均为 404，无
+ * 静态 JSON 镜像可用。只收录主流名单内、且 currentTvl 有值的交易所；
+ * Coinbase、Kraken、Upbit 等未被 DeFiLlama 追踪钱包集覆盖（currentTvl 为
+ * 空），不硬凑行。
  * - 口径：currentTvl 是「clean reserves」——已标记钱包资产总额剔除自家代币
  * （如 Binance 剔除 BNB）；inflows 是 DeFiLlama 按钱包转账算的净流入（剔除价格
  * 因素的近似），不等于用户净申购，口径卡里写明。
@@ -60,10 +71,17 @@ async function fetchJson(
   return res.json();
 }
 
+/** 页面抓取带完整浏览器请求头（UA/Accept/Accept-Language/Referer），排除纯 UA 引起的 403。 */
 async function fetchText(url: string, timeoutMs: number): Promise<string> {
   const res = await fetch(url, {
     signal: AbortSignal.timeout(timeoutMs),
-    headers: { "user-agent": UA, accept: "text/html" },
+    headers: {
+      "user-agent": UA,
+      accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "accept-language": "en-US,en;q=0.9",
+      referer: "https://defillama.com/",
+    },
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
   return res.text();
@@ -109,15 +127,12 @@ const FLOW_WHITELIST = [
   "BingX",
 ];
 
-export function parseCexsNextData(html: string): FlowRow[] {
-  const m = html.match(
-    /<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/,
-  );
-  if (!m) throw new Error("defillama cexs: __NEXT_DATA__ not found");
-  const data = JSON.parse(m[1]);
-  const cexs = data?.props?.pageProps?.cexs;
-  if (!Array.isArray(cexs))
-    throw new Error("defillama cexs: pageProps.cexs missing");
+/** L1（页面 __NEXT_DATA__）与 L2（api.llama.fi/cexs）条目字段同名，仅 slug 字段不同，统一在此建行。 */
+function rowsFromCexEntries(
+  cexs: any[],
+  slugOf: (c: any) => string,
+  srcLabel: string,
+): FlowRow[] {
   const rows: FlowRow[] = [];
   for (const c of cexs) {
     if (!c || typeof c.name !== "string") continue;
@@ -130,7 +145,7 @@ export function parseCexsNextData(html: string): FlowRow[] {
     };
     rows.push({
       name: c.name,
-      slug: typeof c.cexProtocolSlug === "string" ? c.cexProtocolSlug : "",
+      slug: slugOf(c),
       ownToken: typeof c.coin === "string" && c.coin ? c.coin : null,
       reservesUsd: tvl,
       flow24h: num(c.inflows_24h),
@@ -140,14 +155,72 @@ export function parseCexsNextData(html: string): FlowRow[] {
   }
   rows.sort((a, b) => (b.reservesUsd ?? 0) - (a.reservesUsd ?? 0));
   if (rows.length < 5)
-    throw new Error(`defillama cexs: only ${rows.length} usable rows`);
+    throw new Error(`${srcLabel}: only ${rows.length} usable rows`);
   return rows;
 }
 
-export async function fetchFlowsOverview(): Promise<FlowsOverview> {
+export function parseCexsNextData(html: string): FlowRow[] {
+  const m = html.match(
+    /<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/,
+  );
+  if (!m) throw new Error("defillama cexs page: __NEXT_DATA__ not found");
+  const data = JSON.parse(m[1]);
+  const cexs = data?.props?.pageProps?.cexs;
+  if (!Array.isArray(cexs))
+    throw new Error("defillama cexs page: pageProps.cexs missing");
+  return rowsFromCexEntries(
+    cexs,
+    (c) => (typeof c.cexProtocolSlug === "string" ? c.cexProtocolSlug : ""),
+    "defillama cexs page",
+  );
+}
+
+/** L2 解析：api.llama.fi/cexs 目录 JSON（slug 小写后与页面 cexProtocolSlug 对齐，如 "Binance-CEX"→"binance-cex"）。 */
+export function parseCexsApiPayload(payload: any): FlowRow[] {
+  const cexs = payload?.cexs;
+  if (!Array.isArray(cexs))
+    throw new Error("api.llama.fi/cexs: cexs array missing");
+  return rowsFromCexEntries(
+    cexs,
+    (c) => (typeof c.slug === "string" ? c.slug.toLowerCase() : ""),
+    "api.llama.fi/cexs",
+  );
+}
+
+async function fetchFlowsOverviewL1(): Promise<FlowRow[]> {
   const html = await fetchText("https://defillama.com/cexs", 25_000);
-  const rows = parseCexsNextData(html);
-  return { rows, fetchedAt: new Date().toISOString() };
+  return parseCexsNextData(html);
+}
+
+async function fetchFlowsOverviewL2(): Promise<FlowRow[]> {
+  const payload = await fetchJson("https://api.llama.fi/cexs", 20_000);
+  return parseCexsApiPayload(payload);
+}
+
+/**
+ * 资金流总览两级取数：L1 defillama.com/cexs 页面 → L2 api.llama.fi/cexs JSON。
+ * FLOWS_FORCE_LEVEL=1|2 时只走指定一级（验证 fallback 用，生产不设）。
+ * 任一级成功即返回；全部失败抛出的错误带每一级的来源标签与原始错误。
+ */
+export async function fetchFlowsOverview(): Promise<FlowsOverview> {
+  const force = process.env.FLOWS_FORCE_LEVEL;
+  const failures: string[] = [];
+  if (force !== "2") {
+    try {
+      const rows = await fetchFlowsOverviewL1();
+      return { rows, fetchedAt: new Date().toISOString() };
+    } catch (err) {
+      failures.push(`flows L1 (defillama.com/cexs page): ${errMsg(err)}`);
+      if (force === "1") throw new Error(failures.join(" | "));
+    }
+  }
+  try {
+    const rows = await fetchFlowsOverviewL2();
+    return { rows, fetchedAt: new Date().toISOString() };
+  } catch (err) {
+    failures.push(`flows L2 (api.llama.fi/cexs): ${errMsg(err)}`);
+    throw new Error(failures.join(" | "));
+  }
 }
 
 /* ---------------- 单所明细（updatedProtocol 按需聚合） ---------------- */
