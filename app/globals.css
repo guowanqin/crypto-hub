@@ -4971,3 +4971,78 @@ a:hover {
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+/* 交易所资金流看板（components/FlowsBoard） */
+.flows-table td.flows-in,
+.flows-in {
+  color: var(--green);
+  font-weight: 600;
+}
+.flows-table td.flows-out,
+.flows-out {
+  color: var(--red);
+  font-weight: 600;
+}
+.flows-row-clickable {
+  cursor: pointer;
+}
+.flows-row-clickable:hover td {
+  background: var(--panel-soft);
+}
+.flows-expand-hint {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.flows-detail-row td {
+  background: var(--panel-soft);
+  white-space: normal;
+  text-align: left;
+}
+.flows-detail {
+  padding: 6px 4px 10px;
+}
+.flows-detail-title {
+  margin: 14px 0 8px;
+  font-size: 15px;
+  color: var(--text);
+}
+.flows-detail-title:first-child {
+  margin-top: 2px;
+}
+.flows-detail-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+.flows-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.flows-token-chip {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.flows-token-chip strong {
+  color: var(--text);
+}
+.flows-spark {
+  display: block;
+  width: 100%;
+  height: 56px;
+}
+.flows-spark polyline {
+  stroke: var(--gold);
+  stroke-width: 1.6;
+}
+.flows-source {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}

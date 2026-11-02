@@ -510,6 +510,30 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "flows-panel",
+    name: { zh: "交易所资金流与保证金看板", en: "Exchange Flows & Margin Board" },
+    url: "https://18btc.cc/tool/flows-panel",
+    tags: ["flows"],
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "主流交易所的储备总额、24h/7d/30d 净流入净流出，加上各所合约未平仓总额与 BTC 永续资金费率，一页看齐、来源逐行标注。",
+      en: "Major exchanges' total reserves and 24h/7d/30d net inflows and outflows, plus each venue's total open interest and BTC perpetual funding rate — one page, sources marked per row.",
+    },
+    detail: {
+      zh: "上半张表是资金流：Binance、OKX、Bybit、Bitfinex、Bitget、Gate、KuCoin、MEXC、HTX、Deribit 等主流交易所的链上储备总额与近 24 小时、7 天、30 天净流入净流出，数据与 DeFiLlama 的 CEX 储备追踪同源（已标记钱包口径，储备剔除各所自家代币如 BNB、OKB）；点开任意一行，能看这家的主要币种构成（前 8 名）和近 35 日储备走势，另附一组按日线余额差算的「余额变化」作交叉核对，并明示它含价格因素、与净流入引擎口径不同。下半张表是保证金（合约）：各所未平仓总额（OI）与 BTC 永续资金费率——OKX、Hyperliquid 走官方接口直取，Binance、Bybit 等官方接口对机房与部分地域 IP 受限，改用 CoinGecko 衍生品聚合，逐行标注来源；多空比因免费公开源暂无可靠口径（官方统计接口受限或已下线）而空缺，页面上如实说明。口径提醒：净流入只是标记钱包的转账净额，不等于用户净申购，更不等于交易所的财务状况；Coinbase、Kraken、Upbit 未被该数据集追踪，不在表内。本工具不构成投资建议。",
+      en: "The top table is fund flows: total on-chain reserves and net inflows/outflows over 24h, 7d and 30d for Binance, OKX, Bybit, Bitfinex, Bitget, Gate, KuCoin, MEXC, HTX, Deribit and more, from the same DeFiLlama CEX reserve tracking (labelled-wallet caliber; reserves exclude each exchange's own token such as BNB or OKB). Expanding a row shows that exchange's top-eight asset breakdown and its 35-day reserve trend, plus a balance-change cross-check computed from daily balance differences — labelled as price-contaminated and different in caliber from the net-inflow engine. The bottom table is margin (derivatives): each venue's total open interest (OI) and BTC perpetual funding rate — OKX and Hyperliquid straight from their official APIs, the rest via CoinGecko's derivatives aggregation because their official APIs restrict datacenter and some regional IPs, with the source marked on every row. The long/short ratio is deliberately left blank: no free public source offers a reliable caliber (official statistics endpoints are restricted or retired), and the page says so. Mind the caliber: a net inflow is only the net transfer across labelled wallets — not users' net subscriptions, and not an exchange's financial condition; Coinbase, Kraken and Upbit are not tracked by this dataset and are absent. Nothing here is investment advice.",
+    },
+    audience: {
+      zh: "想盯交易所资金进出方向、合约杠杆热度与资金费率，再决定仓位节奏的现货与合约交易者。",
+      en: "Spot and derivatives traders who watch which way exchange funds are flowing, how hot contract leverage is and where funding sits before sizing positions.",
+    },
+    take: {
+      zh: "看资金流先认口径：这是标记钱包的转账净额，某所一天净流出几十亿美金多半是大钱包搬家或内部划转的噪声，别看一根红柱子就恐慌；真要交叉验证，点开明细看余额变化和币种构成，两组数对着看才踏实。",
+      en: "Read the caliber before the numbers: these are net transfers across labelled wallets, so a multi-billion one-day outflow is usually a big wallet moving or internal shuffling, not a bank run. Cross-check with the row's balance change and asset breakdown before drawing conclusions.",
+    },
+  },
+  {
     slug: "qqq-panel",
     name: { zh: "QQQ 定投回测计算器", en: "QQQ DCA Backtest Calculator" },
     url: "https://18btc.cc/tool/qqq-panel",

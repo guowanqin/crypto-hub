@@ -226,6 +226,37 @@ export const TAGS: TagDef[] = [
     ],
   },
   {
+    id: "flows",
+    name: { zh: "交易所资金流", en: "Exchange Flows" },
+    intro: {
+      zh: "钱在往哪家交易所进、从哪家出，是判断市场情绪最直接的链上信号之一。这一页把主流交易所的储备与资金流和合约保证金放在一张看板上：储备总额与 24h/7d/30d 净流入净流出取自 DeFiLlama 追踪的已标记钱包（clean reserves，剔除各所自家代币），点开单家还能看主要币种构成与近 35 日储备走势；保证金部分是各所合约未平仓总额（OI）与 BTC 永续资金费率，OKX、Hyperliquid 官方接口直取，其余走 CoinGecko 衍生品聚合，来源逐行标注。先说清口径：净流入是标记钱包的转账净额，不等于用户净申购；Coinbase、Kraken 等未被该数据集追踪的交易所不在表内。",
+      en: "Which exchanges money is flowing into — and out of — is one of the most direct on-chain sentiment signals there is. This board puts major exchanges' reserves and fund flows next to their derivatives margin: total reserves and 24h/7d/30d net inflows come from DeFiLlama's tracked, labelled wallets (clean reserves, each exchange's own token excluded), and expanding a row shows its top asset breakdown and 35-day reserve trend. The margin half lists each exchange's total open interest (OI) and BTC perpetual funding rate — straight from the official OKX and Hyperliquid APIs where possible, CoinGecko's derivatives aggregation elsewhere, with the source marked on every row. The caveat up front: a net inflow is the net transfer across labelled wallets, not users' net subscriptions, and exchanges this dataset does not track (Coinbase, Kraken, …) are not in the table.",
+    },
+    seoDescription: {
+      zh: "交易所资金流入流出与保证金看板：Binance、OKX、Bybit、Bitfinex、Bitget、Gate、KuCoin、MEXC、HTX、Deribit 等主流交易所的链上储备总额与 24h/7d/30d 净流入净流出（DeFiLlama 已标记钱包口径，剔除自家代币），单家可展开主要币种构成与近 35 日储备走势；保证金汇总各所合约未平仓总额（OI）与 BTC 永续资金费率，官方接口与 CoinGecko 聚合逐行标注来源。储备与净流入不等于用户净申购，不构成投资建议。",
+      en: "Exchange inflow/outflow and margin board: total on-chain reserves and 24h/7d/30d net flows for Binance, OKX, Bybit, Bitget, Gate, KuCoin, MEXC, HTX, Deribit and more (DeFiLlama labelled-wallet caliber, own tokens excluded), with per-exchange asset breakdowns and 35-day reserve trends; the margin table totals each exchange's open interest (OI) and BTC perpetual funding rate, sourced per row from official APIs or CoinGecko aggregation. Reserves and net flows are not users' net subscriptions; not investment advice.",
+    },
+    keywords: [
+      "交易所资金流",
+      "交易所净流入",
+      "交易所净流出",
+      "交易所资金流入",
+      "交易所储备金",
+      "交易所储备",
+      "合约未平仓量",
+      "未平仓量",
+      "资金费率",
+      "多空比",
+      "交易所保证金",
+      "币安资金流",
+      "OKX资金流",
+      "exchange inflows",
+      "exchange reserves",
+      "open interest",
+      "funding rate",
+    ],
+  },
+  {
     id: "filetime",
     name: { zh: "文件时间", en: "File Time" },
     intro: {
