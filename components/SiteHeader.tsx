@@ -16,9 +16,11 @@ export default function SiteHeader() {
       <span className="header-spacer" />
       <div className="lang-switch" role="group" aria-label="Language / 语言">
         <button className={lang === "zh" ? "active" : ""} onClick={() => setLang("zh")}>
-          中文
+          简
         </button>
-        <span className="lang-sep">|</span>
+        <button className={lang === "tw" ? "active" : ""} onClick={() => setLang("tw")}>
+          繁
+        </button>
         <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")}>
           EN
         </button>

@@ -3,25 +3,36 @@
 // 注意：必须显式标注 string 类型，否则字面量类型会让 layout 里的 !== "" 比较报错。
 export const SITE_URL: string = "https://18btc.cc";
 
-export type Lang = "zh" | "en";
+export type Lang = "zh" | "tw" | "en";
+
+/** Intl / toLocaleString 用的 locale 标识，与 Lang 一一对应 */
+export const LOCALE: Record<Lang, string> = {
+  zh: "zh-CN",
+  tw: "zh-TW",
+  en: "en-US",
+};
 
 export const SITE_NAME: Record<Lang, string> = {
   zh: "18btc 币圈工具导航",
   en: "18btc Crypto Tools Navigator",
+  tw: "18btc 幣圈工具導航",
 };
 
 // 吉祥物（金币形象）的说明文字，仅用于图片 alt；吉祥物不单独冠名，署名一律用 SITE_NAME。
 export const MASCOT_NAME: Record<Lang, string> = {
   zh: "金币吉祥物",
   en: "Gold Coin Mascot",
+  tw: "金幣吉祥物",
 };
 
 export const SITE_TITLE: Record<Lang, string> = {
   zh: "18btc 币圈工具导航｜实测收录的币圈好工具",
   en: "18btc Crypto Tools Navigator | Field-Tested Crypto Tools",
+  tw: "18btc 幣圈工具導航｜實測收錄的幣圈好工具",
 };
 
 export const SITE_DESCRIPTION: Record<Lang, string> = {
   zh: "18btc 替你淘遍币圈好工具：行情数据、链上分析、DeFi 数据、钱包、安全工具与办公效率——站内可用的工具加实测收录的第三方工具，每个工具都有原创介绍、适合人群和实测短评。",
   en: "18btc hunts down the best crypto tools for you: market data, on-chain analytics, DeFi data, wallets, security and office tools — built-in tools that run right here, plus field-tested third-party picks, each with an original intro, who it's for, and a hands-on verdict.",
+  tw: "18btc 替你淘遍幣圈好工具：行情資料、鏈上分析、DeFi 資料、錢包、安全工具與辦公效率——站內可用的工具加實測收錄的第三方工具，每個工具都有原創介紹、適合人群和實測短評。",
 };
