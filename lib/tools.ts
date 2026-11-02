@@ -1377,6 +1377,93 @@ export const TOOLS: ToolDef[] = [
       tw: "收錄說明：手繪風讓草圖沒有壓力，打開就能畫、連結發出去就能一起改，這兩點是它最討喜的地方；注意免費版檔案主要存瀏覽器本機，重要圖記得匯出備份，雲端工作區那是付費版 Excalidraw+ 的事。",
     },
   },
+  {
+    slug: "zero-breach",
+    name: { zh: "间谍软件自查", en: "Zero Breach Toolkit",
+    tw: "間諜軟體自查" },
+    url: "https://github.com/interplains/Zero-Breach-Toolkit",
+    tags: ["security"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "免费开源间谍软件自查：离线扫描电脑与手机备份中的雇佣间谍软件痕迹。",
+      en: "A free, open-source spyware check: scan computers and phone backups offline for mercenary spyware traces.",
+      tw: "免費開源間諜軟體自查：離線掃描電腦與手機備份中的僱傭間諜軟體痕跡。",
+    },
+    detail: {
+      zh: "它原名 Zero-Breach-Toolkit，是免费开源的雇佣间谍软件痕迹自查工具（Apache-2.0 许可，GitHub 约 4,200 星）：v2 版是 Windows、macOS、Linux 都能双击打开的桌面应用，支持 27 种语言。扫描电脑、安卓手机与 iPhone 备份，找 Pegasus、Predator、Graphite、Candiru 这类已知雇佣间谍软件留下的痕迹。扫描全程只读、不改动原始证据与系统设置，扫描时不联网、不上传，报告会明说每项证据的强度和哪些查不到。收录提醒：阴性结果不等于绝对安全；如果怀疑自己正在被针对性监控，先找专业人士求助，不必先跑它。",
+      en: "Originally named Zero-Breach-Toolkit, it is a free, open-source check for traces of mercenary spyware (Apache-2.0 licence, ~4,200 stars on GitHub): version 2 is a double-click desktop app for Windows, macOS and Linux, in 27 languages. It scans computers, Android phones and iPhone backups for traces of known mercenary spyware such as Pegasus, Predator, Graphite and Candiru. Scans are read-only — they do not modify source evidence or system settings — and make no network requests and upload nothing; every report states the strength of each finding and what could not be checked. Listing note: a clean result is never proof of safety; if you believe you are being targeted right now, get expert help first — you do not need to run it before asking.",
+      tw: "它原名 Zero-Breach-Toolkit，是免費開源的僱傭間諜軟體痕跡自查工具（Apache-2.0 許可，GitHub 約 4,200 星）：v2 版是 Windows、macOS、Linux 都能雙擊開啟的桌面應用，支援 27 種語言。掃描電腦、安卓手機與 iPhone 備份，找 Pegasus、Predator、Graphite、Candiru 這類已知僱傭間諜軟體留下的痕跡。掃描全程只讀、不改動原始證據與系統設定，掃描時不聯網、不上傳，報告會明說每項證據的強度和哪些查不到。收錄提醒：陰性結果不等於絕對安全；如果懷疑自己正在被針對性監控，先找專業人士求助，不必先跑它。",
+    },
+    audience: {
+      zh: "担心手机或电脑被间谍软件盯上的记者、活动人士等高风险人群，以及想给设备做一次离线体检的普通用户。",
+      en: "Journalists, activists and others at higher risk of targeted surveillance, and anyone who wants an offline health check for their devices.",
+      tw: "擔心手機或電腦被間諜軟體盯上的記者、活動人士等高風險人群，以及想給裝置做一次離線體檢的普通使用者。",
+    },
+    take: {
+      zh: "收录说明：只读扫描、不联网、不上传，这三点是它最值得信任的地方；报告会明说查不到什么，阴性结果不等于绝对安全，真怀疑被盯上先找专业人士，别只靠它。",
+      en: "Listing notes: read-only scanning, no network, no uploads — those three are why it earns trust; reports say plainly what they cannot check, a negative result is not proof of safety, and if you think you are being targeted, talk to an expert first rather than relying on this alone.",
+      tw: "收錄說明：只讀掃描、不聯網、不上傳，這三點是它最值得信任的地方；報告會明說查不到什麼，陰性結果不等於絕對安全，真懷疑被盯上先找專業人士，別隻靠它。",
+    },
+  },
+  {
+    slug: "ai-pose-gallery",
+    name: { zh: "AI 姿势参考图库", en: "AI Pose Gallery",
+    tw: "AI 姿勢參考圖庫" },
+    url: "https://ai-pose-gallery.anhao.app/",
+    tags: ["video"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "中文AI姿势参考图库：1439组姿势白模与深度图，配服装人像可对照出图。",
+      en: "A Chinese AI pose reference gallery: 1,439 pose groups with white-model and depth maps, plus costumes and portraits.",
+      tw: "中文AI姿勢參考圖庫：1439組姿勢白模與深度圖，配服裝人像可對照出圖。",
+    },
+    detail: {
+      zh: "它原名 ai-pose-gallery-zh，是 AI 绘画用的中文姿势参考图库（GitHub 约 5,400 星）：姿势库 1,439 组白模与对应的深度图，另有服装库 1,407 套、人像库 1,499 位，全部做了中文检索，在线画廊打开就能翻、零依赖。找姿势时按动作、角度筛，服装与人像可以对照着搭，画分镜、游戏立绘、AI 出图找参考都顺手。仓库另带 5 种 AI 图像协议直连的工作台与 ComfyUI 自定义节点，那部分出图要自己接 API 密钥；纯翻图库不用。收录提醒：这是原版日文图库的中文维护版，仓库未明示许可证，图片按仓库声明仅供个人学习与人体动态研究创作参考。",
+      en: "Originally named ai-pose-gallery-zh, it is a Chinese-language reference gallery for AI art (about 5,400 stars on GitHub): 1,439 pose groups, each with a white-model figure and its depth map, plus a costume library of 1,407 outfits and a portrait library of 1,499 people — all searchable in Chinese, in a zero-dependency online gallery that opens and browses as-is. Filter poses by action and angle, and match costumes and portraits against them — handy for storyboards, game character art and finding references for AI-generated images. The repo also ships a studio connected to five AI image protocols and a ComfyUI custom node; that part needs your own API keys, while browsing the gallery needs none. Listing note: this is the Chinese-maintained edition of the original Japanese galleries, and the repo does not state a licence clearly; per its own disclaimer its images are for personal study and human-motion research and creation reference only.",
+      tw: "它原名 ai-pose-gallery-zh，是 AI 繪畫用的中文姿勢參考圖庫（GitHub 約 5,400 星）：姿勢庫 1,439 組白模與對應的深度圖，另有服裝庫 1,407 套、人像庫 1,499 位，全部做了中文檢索，線上畫廊開啟就能翻、零依賴。找姿勢時按動作、角度篩，服裝與人像可以對照著搭，畫分鏡、遊戲立繪、AI 出圖找參考都順手。倉庫另帶 5 種 AI 圖像協議直連的工作台與 ComfyUI 自定義節點，那部分出圖要自己接 API 金鑰；純翻圖庫不用。收錄提醒：這是原版日文圖庫的中文維護版，倉庫未明示許可證，圖片按倉庫宣告僅供個人學習與人體動態研究創作參考。",
+    },
+    audience: {
+      zh: "AI 绘画、漫画分镜、游戏美术需要找姿势参考的人；用 ComfyUI 出图、想对照姿势与服装搭配的创作者。",
+      en: "AI artists, comic storyboarders and game artists looking for pose references, and ComfyUI creators who want to match poses with costumes.",
+      tw: "AI 繪畫、漫畫分鏡、遊戲美術需要找姿勢參考的人；用 ComfyUI 出圖、想對照姿勢與服裝搭配的創作者。",
+    },
+    take: {
+      zh: "收录说明：中文检索、在线打开就能翻，比原版日文站顺手；姿势、服装、人像三库对照着找参考很实用，出图工作台那部分要自己接 API 密钥，纯翻图库不用。",
+      en: "Listing notes: Chinese search and an online gallery that opens and browses immediately beat the original Japanese site for Chinese users; the pose, costume and portrait libraries work best used against each other, while the generation studio part needs your own API keys — browsing alone needs none.",
+      tw: "收錄說明：中文檢索、線上開啟就能翻，比原版日文站順手；姿勢、服裝、人像三庫對照著找參考很實用，出圖工作台那部分要自己接 API 金鑰，純翻圖庫不用。",
+    },
+  },
+  {
+    slug: "android-ad-cleaner",
+    name: { zh: "安卓去广告", en: "Android Ad Cleaner",
+    tw: "安卓去廣告" },
+    url: "https://github.com/rddmwmddr/android-ad-cleaner",
+    tags: ["security"],
+    addedAt: "2026-11-02",
+    type: "third-party",
+    oneLiner: {
+      zh: "国产安卓去广告工具：免 root 关掉系统广告热搜与资讯推送，可还原。",
+      en: "A cleaner for Chinese Android phones: turn off system ads, hot searches and info feeds without root — reversible.",
+      tw: "國產安卓去廣告工具：免 root 關掉系統廣告熱搜與資訊推送，可還原。",
+    },
+    detail: {
+      zh: "它原名 android-ad-cleaner，是免费开源的国产安卓手机去广告工具（MIT 许可，GitHub 约 5,800 星，2026-11-02 仍在更新）：桌面客户端插上手机点几下就能做，不用 root，也不用装 Python 或 AI 工具。它关的是国产安卓系统里的广告、热搜、资讯推荐和营销推送，覆盖小米、华为、vivo、OPPO、POCO 等品牌机型，改动前有备份、可还原，另有 AI 智能体一键执行的新机型适配方式。收录提醒：动的是系统组件与通知渠道，动手前先看官方说明、确认机型，改动保留备份，别手滑全清。",
+      en: "Originally named android-ad-cleaner, it is a free, open-source cleaner for ads on Chinese-brand Android phones (MIT licence, ~5,800 stars on GitHub, still updated on 2026-11-02): a desktop client that works by plugging in the phone and clicking through a few steps — no root, no Python, no AI tooling required. It switches off system ads, hot searches, info recommendations and marketing pushes, covering Xiaomi, Huawei, vivo, OPPO, POCO and other brands; changes are backed up first and can be reverted, and there is also a one-click AI-agent mode for adapting new models. Listing note: it touches system components and notification channels, so read the official instructions and confirm your model first, keep the backup, and do not wipe everything in one sweep.",
+      tw: "它原名 android-ad-cleaner，是免費開源的國產安卓手機去廣告工具（MIT 許可，GitHub 約 5,800 星，2026-11-02 仍在更新）：桌面客戶端插上手機點幾下就能做，不用 root，也不用裝 Python 或 AI 工具。它關的是國產安卓系統裡的廣告、熱搜、資訊推薦和營銷推送，覆蓋小米、華為、vivo、OPPO、POCO 等品牌機型，改動前有備份、可還原，另有 AI 智慧體一鍵執行的新機型適配方式。收錄提醒：動的是系統元件與通知渠道，動手前先看官方說明、確認機型，改動保留備份，別手滑全清。",
+    },
+    audience: {
+      zh: "受够国产安卓系统广告、热搜与营销推送，想一次性关干净、又怕改坏系统的人。",
+      en: "People fed up with system ads, hot searches and marketing pushes on Chinese-brand Android phones who want them off in one pass without breaking the phone.",
+      tw: "受夠國產安卓系統廣告、熱搜與營銷推送，想一次性關乾淨、又怕改壞系統的人。",
+    },
+    take: {
+      zh: "收录说明：免 root、可还原是它敢推荐的底气，桌面客户端插上手机点几下就能做；动系统组件总有风险，动手前先看官方说明，改动保留备份别手滑全清。",
+      en: "Listing notes: no root and reversible changes are why it is safe to recommend, and the desktop client does the job in a few clicks with the phone plugged in; touching system components still carries risk, so read the official instructions first and keep the backup — do not clear everything by hand.",
+      tw: "收錄說明：免 root、可還原是它敢推薦的底氣，桌面客戶端插上手機點幾下就能做；動系統元件總有風險，動手前先看官方說明，改動保留備份別手滑全清。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
