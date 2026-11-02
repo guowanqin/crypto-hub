@@ -5264,3 +5264,336 @@ a:hover {
   border-color: var(--gold-strong);
   color: var(--gold-strong);
 }
+
+/* ---------- 开发者工具箱 ---------- */
+.devtools .dt-searchrow {
+  margin: 4px 0 12px;
+}
+
+.dt-in,
+.dt-ta,
+.dt-sel {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+
+.dt-ta {
+  width: 100%;
+  resize: vertical;
+  line-height: 1.6;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.dt-in:focus,
+.dt-ta:focus,
+.dt-sel:focus {
+  outline: 2px solid var(--gold-dim);
+  border-color: var(--gold);
+}
+
+.dt-search {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: 15px;
+  border-radius: 999px;
+}
+
+.dt-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.dt-chip {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-strong);
+  background: var(--gold-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.dt-chip:hover {
+  text-decoration: none;
+  border-color: var(--gold);
+}
+
+.dt-group {
+  scroll-margin-top: 16px;
+  margin-top: 22px;
+}
+
+.dt-group-title {
+  margin-bottom: 12px;
+}
+
+.dt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 480px) {
+  .dt-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dt-card {
+  margin: 0;
+}
+
+.dt-card-title {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.dt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.dt-wrap {
+  flex-wrap: wrap;
+}
+
+.dt-grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.dt-full {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dt-num {
+  width: 90px;
+}
+
+.dt-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.dt-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dt-modes {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dt-mode {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dt-mode.on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.dt-outwrap {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.dt-out {
+  background: var(--panel-soft);
+  margin-bottom: 0;
+}
+
+.dt-outtools {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.dt-err {
+  margin: 4px 0 8px;
+}
+
+.dt-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 12px 0 6px;
+}
+
+.dt-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+
+.dt-kv-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.dt-kv-k {
+  flex: none;
+  min-width: 92px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.dt-kv-v {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+}
+
+.dt-meter {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  overflow: hidden;
+  margin: 4px 0 10px;
+}
+
+.dt-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.2s;
+}
+
+.dt-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.dt-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  flex: none;
+}
+
+.dt-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.dt-stat {
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dt-stat-v {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--gold-strong);
+}
+
+.dt-stat-k {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.dt-params {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dt-params .dt-row {
+  margin-bottom: 0;
+}
+
+.dt-diff-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .dt-diff-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dt-diff {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+
+.dt-diff-line {
+  display: flex;
+  gap: 8px;
+  padding: 3px 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+}
+
+.dt-diff-line:last-child {
+  border-bottom: 0;
+}
+
+.dt-diff-add {
+  background: rgba(5, 150, 105, 0.1);
+}
+
+.dt-diff-remove {
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.dt-diff-sign {
+  flex: none;
+  width: 12px;
+  font-weight: 700;
+}
