@@ -2,7 +2,7 @@
 
 import { Fragment, useMemo, useState } from "react";
 import Link from "next/link";
-import { TAGS } from "@/lib/tags";
+import { TAGS, TAG_MAP } from "@/lib/tags";
 import { TOOLS, toolsByTag, type ToolDef } from "@/lib/tools";
 import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
@@ -33,7 +33,19 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
   const matches = useMemo(() => {
     if (!q) return null;
     return TOOLS.filter((tool) =>
-      [tool.name.zh, tool.name.en, tool.oneLiner.zh, tool.oneLiner.en, tool.detail.zh, tool.detail.en]
+      [
+        tool.name.zh,
+        tool.name.en,
+        tool.oneLiner.zh,
+        tool.oneLiner.en,
+        tool.detail.zh,
+        tool.detail.en,
+        // 所属标签的中英文名也纳入匹配：搜「销毁」「钱包」能命中整个分类的工具
+        ...tool.tags.flatMap((id) => {
+          const tg = TAG_MAP[id];
+          return tg ? [tg.name.zh, tg.name.en] : [];
+        }),
+      ]
         .join(" ")
         .toLowerCase()
         .includes(q)

@@ -656,6 +656,36 @@ a:hover {
   margin: 0;
 }
 
+/* 页脚分类导航 */
+.footer-cats {
+  margin-bottom: 18px;
+}
+
+.footer-cats-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.footer-cats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.footer-cat-link {
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.footer-cat-link:hover {
+  color: var(--gold-strong);
+}
+
 /* ---------- 广告位 ---------- */
 .ad-slot {
   position: relative;
