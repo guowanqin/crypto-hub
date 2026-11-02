@@ -21,13 +21,20 @@ export interface CnHoliday {
 }
 
 export const CN_HOLIDAYS_2026: CnHoliday[] = [
-  { name: { zh: "元旦", en: "New Year's Day" }, start: "2026-01-01", end: "2026-01-03" },
-  { name: { zh: "春节", en: "Spring Festival" }, start: "2026-02-15", end: "2026-02-23" },
-  { name: { zh: "清明节", en: "Qingming Festival" }, start: "2026-04-04", end: "2026-04-06" },
-  { name: { zh: "劳动节", en: "Labour Day" }, start: "2026-05-01", end: "2026-05-05" },
-  { name: { zh: "端午节", en: "Dragon Boat Festival" }, start: "2026-06-19", end: "2026-06-21" },
-  { name: { zh: "中秋节", en: "Mid-Autumn Festival" }, start: "2026-09-25", end: "2026-09-27" },
-  { name: { zh: "国庆节", en: "National Day" }, start: "2026-10-01", end: "2026-10-07" },
+  { name: { zh: "元旦", en: "New Year's Day",
+  tw: "元旦" }, start: "2026-01-01", end: "2026-01-03" },
+  { name: { zh: "春节", en: "Spring Festival",
+  tw: "春節" }, start: "2026-02-15", end: "2026-02-23" },
+  { name: { zh: "清明节", en: "Qingming Festival",
+  tw: "清明節" }, start: "2026-04-04", end: "2026-04-06" },
+  { name: { zh: "劳动节", en: "Labour Day",
+  tw: "勞動節" }, start: "2026-05-01", end: "2026-05-05" },
+  { name: { zh: "端午节", en: "Dragon Boat Festival",
+  tw: "端午節" }, start: "2026-06-19", end: "2026-06-21" },
+  { name: { zh: "中秋节", en: "Mid-Autumn Festival",
+  tw: "中秋節" }, start: "2026-09-25", end: "2026-09-27" },
+  { name: { zh: "国庆节", en: "National Day",
+  tw: "國慶節" }, start: "2026-10-01", end: "2026-10-07" },
 ];
 
 /** 调休补班日（周末改为工作日），YYYY-MM-DD */

@@ -52,13 +52,13 @@ export interface SlangEntry {
 
 export interface SlangCategory {
   id: string;
-  name: { zh: string; en: string };
+  name: { zh: string; tw: string; en: string };
   count: number;
 }
 
 export interface SlangStatus {
   value: SlangLiveness;
-  label: { zh: string; en: string };
+  label: { zh: string; tw: string; en: string };
   count: number;
 }
 
@@ -84,46 +84,79 @@ export interface SlangDataset {
 }
 
 // 分类 id → 本站界面标注名（上游 JSON 只给英文 slug；未收录的 id 原样显示）。
-const CATEGORY_NAMES: Record<string, { zh: string; en: string }> = {
-  "ai-services": { zh: "AI 账号与服务", en: "AI Accounts & Services" },
-  "digital-phone": { zh: "手机数码", en: "Phones & Mobile" },
-  "pc-hardware": { zh: "电脑硬件", en: "PC Hardware" },
-  "condition-slang": { zh: "成色黑话", en: "Condition Slang" },
-  "evasion-contact": { zh: "引流与联系方式", en: "Off-platform Contact Lures" },
-  "trading-terms": { zh: "交易行话", en: "Trading Terms" },
-  "xiaohongshu-matrix": { zh: "小红书矩阵", en: "Xiaohongshu Matrix Accounts" },
-  "shoes-sneakers": { zh: "潮鞋鞋靴", en: "Sneakers & Shoes" },
-  "watches-jewelry": { zh: "手表珠宝", en: "Watches & Jewelry" },
-  "anime-goods": { zh: "二次元谷子", en: "Anime Merch (Guzi)" },
-  "game-accounts": { zh: "游戏账号", en: "Game Accounts" },
-  "academic-services": { zh: "学术代办服务", en: "Academic Services" },
-  "traffic-growth": { zh: "引流涨粉", en: "Traffic & Follower Boosting" },
-  "virtual-resources": { zh: "虚拟资源", en: "Virtual Resources" },
-  "ticket-voucher": { zh: "票务卡券", en: "Tickets & Vouchers" },
-  "camera-optics": { zh: "相机与光学", en: "Cameras & Optics" },
-  "beauty-cosmetics": { zh: "美妆个护", en: "Beauty & Cosmetics" },
-  "pets-plants": { zh: "宠物绿植", en: "Pets & Plants" },
-  "general-slang": { zh: "通用黑话", en: "General Slang" },
-  "luxury-fashion": { zh: "奢侈品服饰", en: "Luxury Fashion" },
-  "digital-hardware": { zh: "数码硬件", en: "Digital Hardware" },
-  "streetwear-luxury": { zh: "潮牌轻奢", en: "Streetwear & Light Luxury" },
-  "anime-fandom": { zh: "二次元圈子", en: "Anime Fandom" },
-  "network-tools": { zh: "网络工具", en: "Network Tools" },
-  "social-traffic": { zh: "社交流量", en: "Social Traffic" },
-  "digital-assets": { zh: "数字资产", en: "Digital Assets" },
-  "hardware-mods": { zh: "硬件改装", en: "Hardware Mods" },
+const CATEGORY_NAMES: Record<string, { zh: string; tw: string; en: string }> = {
+  "ai-services": { zh: "AI 账号与服务", en: "AI Accounts & Services",
+  tw: "AI 賬號與服務" },
+  "digital-phone": { zh: "手机数码", en: "Phones & Mobile",
+  tw: "手機數碼" },
+  "pc-hardware": { zh: "电脑硬件", en: "PC Hardware",
+  tw: "電腦硬體" },
+  "condition-slang": { zh: "成色黑话", en: "Condition Slang",
+  tw: "成色黑話" },
+  "evasion-contact": { zh: "引流与联系方式", en: "Off-platform Contact Lures",
+  tw: "引流與聯絡方式" },
+  "trading-terms": { zh: "交易行话", en: "Trading Terms",
+  tw: "交易行話" },
+  "xiaohongshu-matrix": { zh: "小红书矩阵", en: "Xiaohongshu Matrix Accounts",
+  tw: "小紅書矩陣" },
+  "shoes-sneakers": { zh: "潮鞋鞋靴", en: "Sneakers & Shoes",
+  tw: "潮鞋鞋靴" },
+  "watches-jewelry": { zh: "手表珠宝", en: "Watches & Jewelry",
+  tw: "手錶珠寶" },
+  "anime-goods": { zh: "二次元谷子", en: "Anime Merch (Guzi)",
+  tw: "二次元穀子" },
+  "game-accounts": { zh: "游戏账号", en: "Game Accounts",
+  tw: "遊戲賬號" },
+  "academic-services": { zh: "学术代办服务", en: "Academic Services",
+  tw: "學術代辦服務" },
+  "traffic-growth": { zh: "引流涨粉", en: "Traffic & Follower Boosting",
+  tw: "引流漲粉" },
+  "virtual-resources": { zh: "虚拟资源", en: "Virtual Resources",
+  tw: "虛擬資源" },
+  "ticket-voucher": { zh: "票务卡券", en: "Tickets & Vouchers",
+  tw: "票務卡券" },
+  "camera-optics": { zh: "相机与光学", en: "Cameras & Optics",
+  tw: "相機與光學" },
+  "beauty-cosmetics": { zh: "美妆个护", en: "Beauty & Cosmetics",
+  tw: "美妝個護" },
+  "pets-plants": { zh: "宠物绿植", en: "Pets & Plants",
+  tw: "寵物綠植" },
+  "general-slang": { zh: "通用黑话", en: "General Slang",
+  tw: "通用黑話" },
+  "luxury-fashion": { zh: "奢侈品服饰", en: "Luxury Fashion",
+  tw: "奢侈品服飾" },
+  "digital-hardware": { zh: "数码硬件", en: "Digital Hardware",
+  tw: "數碼硬體" },
+  "streetwear-luxury": { zh: "潮牌轻奢", en: "Streetwear & Light Luxury",
+  tw: "潮牌輕奢" },
+  "anime-fandom": { zh: "二次元圈子", en: "Anime Fandom",
+  tw: "二次元圈子" },
+  "network-tools": { zh: "网络工具", en: "Network Tools",
+  tw: "網路工具" },
+  "social-traffic": { zh: "社交流量", en: "Social Traffic",
+  tw: "社交流量" },
+  "digital-assets": { zh: "数字资产", en: "Digital Assets",
+  tw: "數字資產" },
+  "hardware-mods": { zh: "硬件改装", en: "Hardware Mods",
+  tw: "硬體改裝" },
 };
 
-export const LIVENESS_LABELS: Record<SlangLiveness, { zh: string; en: string }> = {
-  active: { zh: "现行可用", en: "Active" },
-  watching: { zh: "抽检限流", en: "Throttled / Watched" },
-  killed: { zh: "平台拦截", en: "Blocked by Platform" },
+export const LIVENESS_LABELS: Record<SlangLiveness, { zh: string; tw: string; en: string }> = {
+  active: { zh: "现行可用", en: "Active",
+  tw: "現行可用" },
+  watching: { zh: "抽检限流", en: "Throttled / Watched",
+  tw: "抽檢限流" },
+  killed: { zh: "平台拦截", en: "Blocked by Platform",
+  tw: "平臺攔截" },
 };
 
-export const RISK_LABELS: Record<SlangRisk, { zh: string; en: string }> = {
-  danger: { zh: "高风险", en: "High Risk" },
-  warning: { zh: "需谨慎", en: "Caution" },
-  safe: { zh: "相对安全", en: "Relatively Safe" },
+export const RISK_LABELS: Record<SlangRisk, { zh: string; tw: string; en: string }> = {
+  danger: { zh: "高风险", en: "High Risk",
+  tw: "高風險" },
+  warning: { zh: "需谨慎", en: "Caution",
+  tw: "需謹慎" },
+  safe: { zh: "相对安全", en: "Relatively Safe",
+  tw: "相對安全" },
 };
 
 async function fetchText(url: string, timeoutMs: number): Promise<string> {
@@ -230,7 +263,7 @@ async function loadDataset(): Promise<SlangDataset> {
   const categories: SlangCategory[] = [...catCounts.entries()]
     .map(([id, count]) => ({
       id,
-      name: CATEGORY_NAMES[id] ?? { zh: id, en: id },
+      name: CATEGORY_NAMES[id] ?? { zh: id, tw: id, en: id },
       count,
     }))
     .sort((a, b) => b.count - a.count);

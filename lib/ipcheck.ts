@@ -37,7 +37,7 @@ export interface ScoreItem {
   id: "proxy" | "hosting" | "cloudAsn" | "mobile";
   points: number; // 命中时的分值（可为负，表示减分项）
   hit: boolean | null; // null = 无数据
-  evidence: { zh: string; en: string } | null;
+  evidence: { zh: string; tw: string; en: string } | null;
 }
 
 export type IpTypeKey = "idc" | "residential" | "mobile" | "unknown";
@@ -45,12 +45,12 @@ export type RiskBand = "low" | "mid" | "high";
 
 export interface IpVerdict {
   type: IpTypeKey;
-  typeEvidence: { zh: string; en: string }[];
+  typeEvidence: { zh: string; tw: string; en: string }[];
   score: number; // 0–100
   band: RiskBand;
   items: ScoreItem[];
   nativeKey: "likely" | "anycast" | "mismatch" | "unknown";
-  nativeEvidence: { zh: string; en: string }[];
+  nativeEvidence: { zh: string; tw: string; en: string }[];
 }
 
 export interface WhoisSummary {
@@ -327,6 +327,7 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
           : {
               zh: `${src} 标记 proxy=${proxy}（该 IP 被识别为代理/VPN 类出口时为 true）`,
               en: `${src} flags proxy=${proxy} (true when the IP is recognised as a proxy/VPN-style exit)`,
+              tw: `${src} 標記 proxy=${proxy}（該 IP 被識別為代理/VPN 類出口時為 true）`,
             },
     },
     {
@@ -345,6 +346,7 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
                 intel.flagsSource === "proxycheck.io"
                   ? `proxycheck.io's type classification maps to hosting=${hosting} (true when it classifies the IP as Datacenter/Hosting)`
                   : `ip-api flags hosting=${hosting} (true when the IP sits in a hosting/datacenter range)`,
+              tw: intel.flagsSource === "proxycheck.io" ? `proxycheck.io 的 type 分類對映為 hosting=${hosting}（其分類為 Datacenter/Hosting 類時記 true）` : `ip-api 標記 hosting=${hosting}（IP 屬於託管/機房網段時為 true）`,
             },
     },
     {
@@ -355,6 +357,7 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
         ? {
             zh: `ASN/组织名命中云厂商名单：${cloudHit}（${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""}）`,
             en: `ASN/org name matches the cloud-provider list: ${cloudHit} (${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""})`,
+            tw: `ASN/組織名命中雲廠商名單：${cloudHit}（${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""}）`,
           }
         : null,
     },
@@ -374,6 +377,7 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
                 intel.flagsSource === "proxycheck.io"
                   ? `proxycheck.io's type classification maps to mobile=${mobile} (true when it classifies the IP as Wireless)`
                   : `ip-api flags mobile=${mobile} (a mobile-carrier exit looks like a real user network, so a hit subtracts)`,
+              tw: intel.flagsSource === "proxycheck.io" ? `proxycheck.io 的 type 分類對映為 mobile=${mobile}（其分類為 Wireless 時記 true）` : `ip-api 標記 mobile=${mobile}（行動網路出口更像真實使用者網路，命中減分）`,
             },
     },
   ];
@@ -386,13 +390,14 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
   const band: RiskBand = score >= 60 ? "high" : score >= 30 ? "mid" : "low";
 
   // ---- 类型判定 ----
-  const typeEvidence: { zh: string; en: string }[] = [];
+  const typeEvidence: { zh: string; tw: string; en: string }[] = [];
   let type: IpTypeKey = "unknown";
   if (mobile === true) {
     type = "mobile";
     typeEvidence.push({
       zh: `${src} 标记 mobile=true，属于移动运营商网络`,
       en: `${src} flags mobile=true — a mobile carrier network`,
+      tw: `${src} 標記 mobile=true，屬於移動運營商網路`,
     });
   } else if (hosting === true || cloudHit) {
     type = "idc";
@@ -400,38 +405,44 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
       typeEvidence.push({
         zh: `${src} 标记 hosting=true，IP 位于托管/机房网段`,
         en: `${src} flags hosting=true — the IP sits in a hosting/datacenter range`,
+        tw: `${src} 標記 hosting=true，IP 位於託管/機房網段`,
       });
     if (cloudHit)
       typeEvidence.push({
         zh: `ASN/组织命中云厂商名单：${cloudHit}`,
         en: `ASN/org matches the cloud-provider list: ${cloudHit}`,
+        tw: `ASN/組織命中雲廠商名單：${cloudHit}`,
       });
   } else if (hosting === false && mobile === false) {
     type = "residential";
     typeEvidence.push({
       zh: `${src} 标记 hosting=false、mobile=false，未见机房/代理托管信号`,
       en: `${src} flags hosting=false and mobile=false — no datacenter signals seen`,
+      tw: `${src} 標記 hosting=false、mobile=false，未見機房/代理託管訊號`,
     });
     if (proxy === false)
       typeEvidence.push({
         zh: `${src} 标记 proxy=false`,
         en: `${src} flags proxy=false`,
+        tw: `${src} 標記 proxy=false`,
       });
   } else {
     typeEvidence.push({
       zh: "关键标记源暂无数据，仅凭地理与 ASN 无法可靠判定类型",
       en: "The flag sources have no data, so geography and ASN alone cannot settle the type",
+      tw: "關鍵標記源暫無資料，僅憑地理與 ASN 無法可靠判定型別",
     });
   }
   if (proxy === true && type !== "idc") {
     typeEvidence.push({
       zh: `另注意：${src} 标记 proxy=true，该 IP 带有代理出口特征`,
       en: `Also note: ${src} flags proxy=true — this IP shows proxy-exit traits`,
+      tw: `另注意：${src} 標記 proxy=true，該 IP 帶有代理出口特徵`,
     });
   }
 
   // ---- 原生 IP 参考判断（只给证据，不确证）----
-  const nativeEvidence: { zh: string; en: string }[] = [];
+  const nativeEvidence: { zh: string; tw: string; en: string }[] = [];
   let nativeKey: IpVerdict["nativeKey"] = "unknown";
   const asnHay = `${intel.asName ?? ""} ${intel.org ?? ""} ${intel.isp ?? ""}`.toUpperCase();
   if (ANYCAST_KEYWORDS.some((a) => asnHay.includes(a))) {
@@ -439,6 +450,7 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
     nativeEvidence.push({
       zh: `${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""} 是全球 Anycast 网络：你在各地查到的地理位置是就近接入点，不是 IP 的注册归属地，「原生/广播」之分对它不成立。`,
       en: `${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""} is a global anycast network: the location you see is the nearest point of presence, not the IP's registered home, so the native-vs-broadcast distinction does not apply.`,
+      tw: `${intel.asn ?? ""} ${intel.asName ?? intel.org ?? ""} 是全球 Anycast 網路：你在各地查到的地理位置是就近接入點，不是 IP 的註冊歸屬地，「原生/廣播」之分對它不成立。`,
     });
   } else if (whois?.country && intel.countryCode) {
     if (whois.country.toUpperCase() === intel.countryCode.toUpperCase()) {
@@ -446,18 +458,21 @@ export function judgeIntel(intel: IpIntel, whois: WhoisSummary | null): IpVerdic
       nativeEvidence.push({
         zh: `IP 地理归属国（${intel.countryCode}）与 RDAP 网段注册国（${whois.country}）一致——符合「原生 IP」的常见特征，但公开数据只能支持到参考判断，无法确证。`,
         en: `The IP's geo country (${intel.countryCode}) matches the RDAP netblock's registered country (${whois.country}) — consistent with a "native IP", but public data only supports this as a reference judgement, never proof.`,
+        tw: `IP 地理歸屬國（${intel.countryCode}）與 RDAP 網段註冊國（${whois.country}）一致——符合「原生 IP」的常見特徵，但公開資料只能支援到參考判斷，無法確證。`,
       });
     } else {
       nativeKey = "mismatch";
       nativeEvidence.push({
         zh: `IP 地理归属国（${intel.countryCode}）与 RDAP 网段注册国（${whois.country}）不一致——更像广播/租用 IP 的特征，但 Anycast 与数据库误差同样可能造成不一致，只能作参考。`,
         en: `The IP's geo country (${intel.countryCode}) differs from the RDAP netblock's registered country (${whois.country}) — more typical of a broadcast/leased IP, though anycast and database error can cause the same mismatch. Reference only.`,
+        tw: `IP 地理歸屬國（${intel.countryCode}）與 RDAP 網段註冊國（${whois.country}）不一致——更像廣播/租用 IP 的特徵，但 Anycast 與資料庫誤差同樣可能造成不一致，只能作參考。`,
       });
     }
   } else {
     nativeEvidence.push({
       zh: "缺少 RDAP 注册国或地理数据，无法给出原生 IP 参考判断。",
       en: "RDAP country or geo data is missing, so no native-IP reference judgement can be made.",
+      tw: "缺少 RDAP 註冊國或地理資料，無法給出原生 IP 參考判斷。",
     });
   }
 

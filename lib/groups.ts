@@ -14,37 +14,44 @@ export interface GroupDef {
 export const GROUPS: GroupDef[] = [
   {
     id: "cat-market",
-    name: { zh: "行情数据", en: "Market Data" },
+    name: { zh: "行情数据", en: "Market Data",
+    tw: "行情資料" },
     tags: ["market", "btc-bottom"],
   },
   {
     id: "cat-onchain",
-    name: { zh: "链上与资金", en: "On-chain & Funds" },
+    name: { zh: "链上与资金", en: "On-chain & Funds",
+    tw: "鏈上與資金" },
     tags: ["onchain", "defi", "burn", "flows", "chain-dau"],
   },
   {
     id: "cat-us",
-    name: { zh: "美股定投", en: "US Stocks & DCA" },
+    name: { zh: "美股定投", en: "US Stocks & DCA",
+    tw: "美股定投" },
     tags: ["crcl", "qqqi", "qqq"],
   },
   {
     id: "cat-wallet",
-    name: { zh: "钱包与安全", en: "Wallets & Security" },
+    name: { zh: "钱包与安全", en: "Wallets & Security",
+    tw: "錢包與安全" },
     tags: ["wallet", "security", "ip-check"],
   },
   {
     id: "cat-office",
-    name: { zh: "办公效率", en: "Office Tools" },
+    name: { zh: "办公效率", en: "Office Tools",
+    tw: "辦公效率" },
     tags: ["office", "pdf", "filetime", "ocr"],
   },
   {
     id: "cat-twitter",
-    name: { zh: "推特工具", en: "Twitter Tools" },
+    name: { zh: "推特工具", en: "Twitter Tools",
+    tw: "推特工具" },
     tags: ["twitter-tools"],
   },
   {
     id: "cat-life",
-    name: { zh: "生活娱乐", en: "Life & Fun" },
+    name: { zh: "生活娱乐", en: "Life & Fun",
+    tw: "生活娛樂" },
     tags: ["video", "slang", "poetry"],
   },
 ];

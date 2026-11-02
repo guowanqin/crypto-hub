@@ -608,55 +608,79 @@ export function hslToRgb(h: number, s: number, l: number): Rgb {
 
 export interface UnitDef {
   id: string;
-  label: Record<"zh" | "en", string>;
+  label: Record<"zh" | "tw" | "en", string>;
   /** 换算到基准单位的倍率 */
   factor: number;
 }
 
 export interface UnitCategory {
   id: string;
-  label: Record<"zh" | "en", string>;
+  label: Record<"zh" | "tw" | "en", string>;
   units: UnitDef[];
 }
 
 export const UNIT_CATEGORIES: UnitCategory[] = [
   {
     id: "length",
-    label: { zh: "长度", en: "Length" },
+    label: { zh: "长度", en: "Length",
+    tw: "長度" },
     units: [
-      { id: "mm", label: { zh: "毫米 mm", en: "Millimeter (mm)" }, factor: 0.001 },
-      { id: "cm", label: { zh: "厘米 cm", en: "Centimeter (cm)" }, factor: 0.01 },
-      { id: "m", label: { zh: "米 m", en: "Meter (m)" }, factor: 1 },
-      { id: "km", label: { zh: "千米 km", en: "Kilometer (km)" }, factor: 1000 },
-      { id: "in", label: { zh: "英寸 in", en: "Inch (in)" }, factor: 0.0254 },
-      { id: "ft", label: { zh: "英尺 ft", en: "Foot (ft)" }, factor: 0.3048 },
-      { id: "yd", label: { zh: "码 yd", en: "Yard (yd)" }, factor: 0.9144 },
-      { id: "mi", label: { zh: "英里 mi", en: "Mile (mi)" }, factor: 1609.344 },
+      { id: "mm", label: { zh: "毫米 mm", en: "Millimeter (mm)",
+      tw: "毫米 mm" }, factor: 0.001 },
+      { id: "cm", label: { zh: "厘米 cm", en: "Centimeter (cm)",
+      tw: "釐米 cm" }, factor: 0.01 },
+      { id: "m", label: { zh: "米 m", en: "Meter (m)",
+      tw: "米 m" }, factor: 1 },
+      { id: "km", label: { zh: "千米 km", en: "Kilometer (km)",
+      tw: "千米 km" }, factor: 1000 },
+      { id: "in", label: { zh: "英寸 in", en: "Inch (in)",
+      tw: "英寸 in" }, factor: 0.0254 },
+      { id: "ft", label: { zh: "英尺 ft", en: "Foot (ft)",
+      tw: "英尺 ft" }, factor: 0.3048 },
+      { id: "yd", label: { zh: "码 yd", en: "Yard (yd)",
+      tw: "碼 yd" }, factor: 0.9144 },
+      { id: "mi", label: { zh: "英里 mi", en: "Mile (mi)",
+      tw: "英里 mi" }, factor: 1609.344 },
     ],
   },
   {
     id: "weight",
-    label: { zh: "重量", en: "Weight" },
+    label: { zh: "重量", en: "Weight",
+    tw: "重量" },
     units: [
-      { id: "mg", label: { zh: "毫克 mg", en: "Milligram (mg)" }, factor: 0.001 },
-      { id: "g", label: { zh: "克 g", en: "Gram (g)" }, factor: 1 },
-      { id: "kg", label: { zh: "千克 kg", en: "Kilogram (kg)" }, factor: 1000 },
-      { id: "t", label: { zh: "吨 t", en: "Tonne (t)" }, factor: 1_000_000 },
-      { id: "oz", label: { zh: "盎司 oz", en: "Ounce (oz)" }, factor: 28.349523125 },
-      { id: "lb", label: { zh: "磅 lb", en: "Pound (lb)" }, factor: 453.59237 },
+      { id: "mg", label: { zh: "毫克 mg", en: "Milligram (mg)",
+      tw: "毫克 mg" }, factor: 0.001 },
+      { id: "g", label: { zh: "克 g", en: "Gram (g)",
+      tw: "克 g" }, factor: 1 },
+      { id: "kg", label: { zh: "千克 kg", en: "Kilogram (kg)",
+      tw: "千克 kg" }, factor: 1000 },
+      { id: "t", label: { zh: "吨 t", en: "Tonne (t)",
+      tw: "噸 t" }, factor: 1_000_000 },
+      { id: "oz", label: { zh: "盎司 oz", en: "Ounce (oz)",
+      tw: "盎司 oz" }, factor: 28.349523125 },
+      { id: "lb", label: { zh: "磅 lb", en: "Pound (lb)",
+      tw: "磅 lb" }, factor: 453.59237 },
     ],
   },
   {
     id: "data",
-    label: { zh: "数据容量（1024 进制）", en: "Data size (1024-based)" },
+    label: { zh: "数据容量（1024 进制）", en: "Data size (1024-based)",
+    tw: "資料容量（1024 進位制）" },
     units: [
-      { id: "bit", label: { zh: "比特 bit", en: "Bit" }, factor: 1 },
-      { id: "B", label: { zh: "字节 B", en: "Byte (B)" }, factor: 8 },
-      { id: "KB", label: { zh: "KB", en: "KB" }, factor: 8 * 1024 },
-      { id: "MB", label: { zh: "MB", en: "MB" }, factor: 8 * 1024 ** 2 },
-      { id: "GB", label: { zh: "GB", en: "GB" }, factor: 8 * 1024 ** 3 },
-      { id: "TB", label: { zh: "TB", en: "TB" }, factor: 8 * 1024 ** 4 },
-      { id: "PB", label: { zh: "PB", en: "PB" }, factor: 8 * 1024 ** 5 },
+      { id: "bit", label: { zh: "比特 bit", en: "Bit",
+      tw: "位元 bit" }, factor: 1 },
+      { id: "B", label: { zh: "字节 B", en: "Byte (B)",
+      tw: "位元組 B" }, factor: 8 },
+      { id: "KB", label: { zh: "KB", en: "KB",
+      tw: "KB" }, factor: 8 * 1024 },
+      { id: "MB", label: { zh: "MB", en: "MB",
+      tw: "MB" }, factor: 8 * 1024 ** 2 },
+      { id: "GB", label: { zh: "GB", en: "GB",
+      tw: "GB" }, factor: 8 * 1024 ** 3 },
+      { id: "TB", label: { zh: "TB", en: "TB",
+      tw: "TB" }, factor: 8 * 1024 ** 4 },
+      { id: "PB", label: { zh: "PB", en: "PB",
+      tw: "PB" }, factor: 8 * 1024 ** 5 },
     ],
   },
 ];
