@@ -7,7 +7,6 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import UniBurnBoard from "./UniBurnBoard";
 import AdSlot from "./AdSlot";
-import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("uni-burn")!;
@@ -35,7 +34,6 @@ export default function UniBurnPanelClient({
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
-      <GroupBanner slug="uni-burn" small />
 
       {/* 看板本体：站内直接使用（与 /tag/burn 共用同一组件） */}
       <UniBurnBoard />

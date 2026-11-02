@@ -7,7 +7,6 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import PoetryBoard from "./PoetryBoard";
 import AdSlot from "./AdSlot";
-import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("poetry")!;
@@ -31,7 +30,6 @@ export default function PoetryPanelClient({ adsPreview = false }: { adsPreview?:
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
-      <GroupBanner slug="poetry" small />
 
       {/* 工具本体：站内直接使用（与 /tag/poetry 共用同一组件） */}
       <PoetryBoard />

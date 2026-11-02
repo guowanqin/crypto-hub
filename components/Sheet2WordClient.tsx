@@ -7,7 +7,6 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import Sheet2WordTool from "./Sheet2WordTool";
 import AdSlot from "./AdSlot";
-import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("sheet2word")!;
@@ -31,7 +30,6 @@ export default function Sheet2WordClient({ adsPreview = false }: { adsPreview?: 
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
-      <GroupBanner slug="sheet2word" small />
 
       {/* 工具本体：站内直接使用 */}
       <Sheet2WordTool />

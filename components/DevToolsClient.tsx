@@ -7,7 +7,6 @@ import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME, SITE_NAME } from "@/lib/site";
 import DevToolbox from "./DevToolbox";
 import AdSlot from "./AdSlot";
-import GroupBanner from "./GroupBanner";
 import { useLang } from "./LangProvider";
 
 const tool = getTool("devtools")!;
@@ -31,7 +30,6 @@ export default function DevToolsClient({ adsPreview = false }: { adsPreview?: bo
         <h1 className="detail-title">{tool.name[lang]}</h1>
         <p className="detail-oneliner">{tool.oneLiner[lang]}</p>
       </section>
-      <GroupBanner slug="devtools" small />
 
       {/* 工具箱本体：站内直接使用 */}
       <DevToolbox />
