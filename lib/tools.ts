@@ -1464,6 +1464,36 @@ export const TOOLS: ToolDef[] = [
       tw: "收錄說明：免 root、可還原是它敢推薦的底氣，桌面客戶端插上手機點幾下就能做；動系統元件總有風險，動手前先看官方說明，改動保留備份別手滑全清。",
     },
   },
+  {
+    slug: "arb-scanner",
+    name: { zh: "跨链套利扫描", en: "Cross-Chain Arb Scanner",
+    tw: "跨鏈套利掃描" },
+    url: "https://18btc.cc/tool/arb-scanner",
+    tags: ["defi"],
+    addedAt: "2026-11-02",
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "跨链套利扫描：同资产在 Solana 与 BSC 的价差监控，扣成本看净价差。",
+      en: "Cross-chain arb scanner: same-asset price gaps between Solana and BSC, net of swap, bridge and slippage costs.",
+      tw: "跨鏈套利掃描：同資產在 Solana 與 BSC 的價差監控，扣成本看淨價差。",
+    },
+    detail: {
+      zh: "每 60 秒从 DexScreener 拉取 SOL、ETH、BTC、USDT、USDC 在 Solana 与 BSC 两条链上的报价：每条链都取该资产流动性最大的美元（稳定币计价）交易对，DEX、交易对与流动性逐行标注；自动算毛价差（按低价链计）和方向（低买→高卖），再按可编辑的成本参数——买入、卖出各一次兑换费、跨链桥费、滑点——算出净价差，参数只存在本地浏览器。资产性质逐项如实标注：SOL 的 BSC 版是币安锚定代币、ETH 的 Solana 版经 Wormhole 桥接、BTC 两侧是 Coinbase 的 cbBTC 与币安锚定的 BTCB。BNB 未收录：它在 Solana 上没有公认的官方或锚定代币，搜到的同名代币报价彼此打架，无法给出可信价格。口径提醒：池子报价是边际价格不是成交价，跨链搬运要数分钟到数十分钟、期间价差会变，净价差为正不等于能赚到。本工具只做监控，不连钱包、不下单、不执行交易，不构成投资建议。",
+      en: "Every 60 seconds it pulls quotes for SOL, ETH, BTC, USDT and USDC on Solana and BSC from DexScreener: on each chain it takes the asset's largest USD (stablecoin-quoted) pair, with the DEX, pair and liquidity shown on every row. It computes the gross spread (against the cheaper chain) and the direction (buy low → sell high), then a net spread using editable cost parameters — one swap fee on the buy and one on the sell, a bridge fee and slippage — stored only in your browser. Each asset's nature is labelled honestly: SOL on BSC is a Binance-pegged token, ETH on Solana arrived via Wormhole, and BTC is Coinbase's cbBTC on one side and Binance-pegged BTCB on the other. BNB is not listed: it has no recognised official or pegged token on Solana, and the same-name tokens there quote wildly different prices, so no honest price exists. Mind the caliber: a pool quote is a marginal price, not a fill; bridging takes minutes to tens of minutes and the spread can move meanwhile; a positive net spread is not a guaranteed profit. This tool only monitors — it connects no wallet, places no orders and executes no trades. Not investment advice.",
+      tw: "每 60 秒從 DexScreener 拉取 SOL、ETH、BTC、USDT、USDC 在 Solana 與 BSC 兩條鏈上的報價：每條鏈都取該資產流動性最大的美元（穩定幣計價）交易對，DEX、交易對與流動性逐行標註；自動算毛價差（按低價鏈計）和方向（低買→高賣），再按可編輯的成本參數——買入、賣出各一次兌換費、跨鏈橋費、滑點——算出淨價差，參數只存在本地瀏覽器。資產性質逐項如實標註：SOL 的 BSC 版是幣安錨定代幣、ETH 的 Solana 版經 Wormhole 橋接、BTC 兩側是 Coinbase 的 cbBTC 與幣安錨定的 BTCB。BNB 未收錄：它在 Solana 上沒有公認的官方或錨定代幣，搜到的同名代幣報價彼此打架，無法給出可信價格。口徑提醒：池子報價是邊際價格不是成交價，跨鏈搬運要數分鐘到數十分鐘、期間價差會變，淨價差為正不等於能賺到。本工具只做監控，不連錢包、不下單、不執行交易，不構成投資建議。",
+    },
+    audience: {
+      zh: "在 Solana 与 BSC 两条链之间搬砖、对冲或做市，想先把价差扣完成本、再决定动不动手的人。",
+      en: "People moving size between Solana and BSC — arbitrageurs, hedgers and market makers — who want the spread net of costs before deciding whether a trade is worth doing at all.",
+      tw: "在 Solana 與 BSC 兩條鏈之間搬磚、對沖或做市，想先把價差扣完成本、再決定動不動手的人。",
+    },
+    take: {
+      zh: "多数时候净价差是负的，这正是它的用处：毛价差看着诱人，扣掉两次兑换费、桥费和滑点往往就没了。真要盯，优先盯稳定币——价差小，但两边都是硬通货、搬运风险最低；大币种突然冒出很大的净价差，先怀疑是某一边池子太薄或锚定出了问题，别急着冲。",
+      en: "Most of the time the net spread is negative, and that is exactly the point: a juicy gross spread usually evaporates once two swap fees, the bridge fee and slippage come out. If you watch anything, watch the stablecoins — small spreads, but hard currency on both sides and the lowest transport risk. When a major suddenly shows a fat net spread, suspect a thin pool or a wobbly peg before you rush in.",
+      tw: "多數時候淨價差是負的，這正是它的用處：毛價差看著誘人，扣掉兩次兌換費、橋費和滑點往往就沒了。真要盯，優先盯穩定幣——價差小，但兩邊都是硬通貨、搬運風險最低；大幣種突然冒出很大的淨價差，先懷疑是某一邊池子太薄或錨定出了問題，別急著衝。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
