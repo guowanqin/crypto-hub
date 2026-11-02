@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { TagDef } from "@/lib/tags";
 import { TOOLS, newestTools, toolsByTag, type ToolDef } from "@/lib/tools";
@@ -8,6 +9,11 @@ import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
+
+/** 标签页工具网格首屏展示数（AGENTS.md 第 5 节「分级展开」），超出部分逐级展开 */
+const TAG_PAGE_SIZE = 12;
+/** 分级展开步长：每次点击「显示更多」追加渲染的工具数（AGENTS.md 第 5 节） */
+const LIST_STEP = 12;
 
 export default function TagClient({
   tag,
@@ -20,6 +26,15 @@ export default function TagClient({
   const t = HUB_DICT[lang];
   const list = toolsByTag(tag.id);
   const otherLang = lang === "en" ? "zh" : "en";
+
+  // 工具网格分级展开：首屏 TAG_PAGE_SIZE 个，每次 +LIST_STEP，全显后可收起回首屏；
+  // 只渲染已显示的卡片，不全量挂 DOM。切换标签时计数重置回首屏。
+  const [shownCount, setShownCount] = useState(TAG_PAGE_SIZE);
+  useEffect(() => {
+    setShownCount(TAG_PAGE_SIZE);
+  }, [tag.id]);
+  const shownList = list.slice(0, shownCount);
+  const remaining = list.length - shownList.length;
 
   // 单工具标签页补位：工具数 < 3 时，底部用最新上架工具补到 4 个（排除本页已展示）；
   // 最新上架不足时再用其他站内可用工具补齐。工具数 ≥ 3 的标签页不渲染此区。
@@ -66,10 +81,35 @@ export default function TagClient({
       <AdSlot id="tag_top" preview={adsPreview} />
 
       <div className="card-grid">
-        {list.map((tool) => (
+        {shownList.map((tool) => (
           <ToolCard key={tool.slug} tool={tool} />
         ))}
       </div>
+
+      {/* 分级展开按钮：工具数 ≤ 首屏时不渲染；未全显时标注剩余数，全显后变「收起」 */}
+      {list.length > TAG_PAGE_SIZE && (
+        <div className="group-expand-row">
+          {remaining > 0 ? (
+            <button
+              type="button"
+              className="filter-chip filter-chip-more group-expand-btn"
+              aria-expanded={false}
+              onClick={() => setShownCount((c) => c + LIST_STEP)}
+            >
+              {t.showMoreRemaining.replace("{n}", String(remaining))}
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="filter-chip filter-chip-more group-expand-btn"
+              aria-expanded={true}
+              onClick={() => setShownCount(TAG_PAGE_SIZE)}
+            >
+              {t.hideTools}
+            </button>
+          )}
+        </div>
+      )}
 
       {/* 正文补厚：分类选购/使用指南（仅配了 guide 的标签渲染） */}
       {tag.guide && (

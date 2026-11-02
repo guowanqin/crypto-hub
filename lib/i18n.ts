@@ -31,7 +31,7 @@ export interface HubDict {
   categoriesTitle: string;
   allTagsTitle: string;
   newestTitle: string;
-  showAllTools: string; // {n}
+  showMoreRemaining: string; // {n} 剩余未显示数（分级展开按钮）
   hideTools: string;
   moreTags: string;
   lessTags: string;
@@ -71,7 +71,7 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     categoriesTitle: "按分类逛",
     allTagsTitle: "全部标签",
     newestTitle: "最新上架",
-    showAllTools: "展开全部 {n} 个 ▾",
+    showMoreRemaining: "显示更多（剩余 {n} 个）▾",
     hideTools: "收起 ▴",
     moreTags: "更多分类 ▾",
     lessTags: "收起 ▴",
@@ -109,7 +109,7 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     categoriesTitle: "Browse by category",
     allTagsTitle: "All tags",
     newestTitle: "Newest",
-    showAllTools: "Show all {n} ▾",
+    showMoreRemaining: "Show more ({n} left) ▾",
     hideTools: "Show less ▴",
     moreTags: "More categories ▾",
     lessTags: "Show less ▴",
@@ -147,7 +147,7 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     categoriesTitle: "按分類逛",
     allTagsTitle: "全部標籤",
     newestTitle: "最新上架",
-    showAllTools: "展開全部 {n} 個 ▾",
+    showMoreRemaining: "顯示更多（剩餘 {n} 個）▾",
     hideTools: "收起 ▴",
     moreTags: "更多分類 ▾",
     lessTags: "收起 ▴",

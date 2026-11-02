@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { TAG_MAP } from "@/lib/tags";
 import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
 import { TOOLS, newestTools, type ToolDef } from "@/lib/tools";
@@ -10,8 +10,10 @@ import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
-/** 首页每个大类默认展示的工具数（AGENTS.md 第 5 节），超出折叠、按钮原地展开 */
+/** 首页每个大类默认展示的工具数（AGENTS.md 第 5 节「分级展开」），超出部分逐级展开 */
 const GROUP_PAGE_SIZE = 6;
+/** 分级展开步长：每次点击「显示更多」追加渲染的工具数（AGENTS.md 第 5 节） */
+const LIST_STEP = 12;
 /** 首页「最新上架」展示数（AGENTS.md 第 5 节） */
 const NEWEST_SIZE = 6;
 
@@ -27,15 +29,20 @@ export default function HomeClient({
   const [query, setQuery] = useState(initialQuery);
   const [activeGroup, setActiveGroup] = useState<string>("all");
   const [activeType, setActiveType] = useState<"all" | "builtin" | "third">("all");
-  // 大类区块的展开状态（按组独立）：默认收起，只显示排序后的前 GROUP_PAGE_SIZE 个
-  const [expandedGroups, setExpandedGroups] = useState<ReadonlySet<string>>(new Set());
-  const toggleGroup = (id: string) =>
-    setExpandedGroups((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+  // 大类区块的分级展开计数（按组独立）：未记录的组按首屏 GROUP_PAGE_SIZE 显示，
+  // 每次点「显示更多」+LIST_STEP，全显后可「收起」回首屏。只渲染已显示的卡片，不全量挂 DOM。
+  const [groupShown, setGroupShown] = useState<Readonly<Record<string, number>>>({});
+  const showMoreInGroup = (id: string) =>
+    setGroupShown((prev) => ({
+      ...prev,
+      [id]: (prev[id] ?? GROUP_PAGE_SIZE) + LIST_STEP,
+    }));
+  const collapseGroup = (id: string) =>
+    setGroupShown((prev) => ({ ...prev, [id]: GROUP_PAGE_SIZE }));
+  // 搜索 / 筛选条件变化时各组计数重置回首屏，避免残留展开态对着新列表错位
+  useEffect(() => {
+    setGroupShown({});
+  }, [query, activeGroup, activeType]);
 
   // 最新上架：纯时间排序（addedAt 新 → 同日注册靠后），站内工具与第三方分享页一视同仁，取前 6
   const newestList = useMemo(() => newestTools(NEWEST_SIZE), []);
@@ -199,8 +206,9 @@ export default function HomeClient({
             </section>
           ) : (
             visibleSections.map(({ group, list }, idx) => {
-              const expanded = expandedGroups.has(group.id);
-              const shown = expanded ? list : list.slice(0, GROUP_PAGE_SIZE);
+              const shownCount = Math.min(groupShown[group.id] ?? GROUP_PAGE_SIZE, list.length);
+              const shown = list.slice(0, shownCount);
+              const remaining = list.length - shownCount;
               return (
                 <Fragment key={group.id}>
                   <section className="section" id={group.id}>
@@ -219,16 +227,25 @@ export default function HomeClient({
                     </div>
                     {list.length > GROUP_PAGE_SIZE && (
                       <div className="group-expand-row">
-                        <button
-                          type="button"
-                          className="filter-chip filter-chip-more group-expand-btn"
-                          aria-expanded={expanded}
-                          onClick={() => toggleGroup(group.id)}
-                        >
-                          {expanded
-                            ? t.hideTools
-                            : t.showAllTools.replace("{n}", String(list.length))}
-                        </button>
+                        {remaining > 0 ? (
+                          <button
+                            type="button"
+                            className="filter-chip filter-chip-more group-expand-btn"
+                            aria-expanded={false}
+                            onClick={() => showMoreInGroup(group.id)}
+                          >
+                            {t.showMoreRemaining.replace("{n}", String(remaining))}
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="filter-chip filter-chip-more group-expand-btn"
+                            aria-expanded={true}
+                            onClick={() => collapseGroup(group.id)}
+                          >
+                            {t.hideTools}
+                          </button>
+                        )}
                       </div>
                     )}
                   </section>
