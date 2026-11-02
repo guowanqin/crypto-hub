@@ -3,7 +3,7 @@
 import { Fragment, useMemo, useState } from "react";
 import { TAG_MAP } from "@/lib/tags";
 import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
-import { TOOLS, type ToolDef } from "@/lib/tools";
+import { TOOLS, compareTools, type ToolDef } from "@/lib/tools";
 import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
@@ -11,12 +11,32 @@ import ToolCard from "./ToolCard";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
+/** 首页每个大类默认展示的工具数（AGENTS.md 第 5 节），超出折叠、按钮原地展开 */
+const GROUP_PAGE_SIZE = 6;
+/** 首页「最新上架」展示数（AGENTS.md 第 5 节） */
+const NEWEST_SIZE = 6;
+
 export default function HomeClient({ adsPreview = false }: { adsPreview?: boolean }) {
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const [query, setQuery] = useState("");
   const [activeGroup, setActiveGroup] = useState<string>("all");
   const [activeType, setActiveType] = useState<"all" | "builtin" | "third">("all");
+  // 大类区块的展开状态（按组独立）：默认收起，只显示排序后的前 GROUP_PAGE_SIZE 个
+  const [expandedGroups, setExpandedGroups] = useState<ReadonlySet<string>>(new Set());
+  const toggleGroup = (id: string) =>
+    setExpandedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
+  // 最新上架：全站按统一排序（pin → 站内可用 → addedAt 新 → 同日注册靠后）取前 6
+  const newestTools = useMemo(
+    () => [...TOOLS].sort(compareTools).slice(0, NEWEST_SIZE),
+    []
+  );
 
   const q = query.trim().toLowerCase();
   const matches = useMemo(() => {
@@ -117,6 +137,20 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
             </section>
           )}
 
+          {/* 最新上架：显示条件同热门精选（无搜索词、大类=全部、类型=全部），取全站排序前 6 */}
+          {activeGroup === "all" && activeType === "all" && (
+            <section className="section newest-section">
+              <div className="section-head">
+                <h2 className="section-title">🆕 {t.newestTitle}</h2>
+              </div>
+              <div className="card-grid">
+                {newestTools.map((tool) => (
+                  <ToolCard key={tool.slug} tool={tool} />
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* 筛选：大类（方案一的 7 个大类）+ 类型（独立可用 / 第三方），可组合 */}
           <div className="filter-bar">
             <div className="filter-row" role="group" aria-label="Filter by category">
@@ -173,27 +207,45 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
               <p className="empty-note">{t.filterEmpty}</p>
             </section>
           ) : (
-            visibleSections.map(({ group, list }, idx) => (
-              <Fragment key={group.id}>
-                <section className="section" id={group.id}>
-                  <div className="section-head">
-                    <div className="section-head-row">
-                      <h2 className="section-title">{group.name[lang]}</h2>
-                      <span className="section-count">
-                        {t.toolsCount.replace("{n}", String(list.length))}
-                      </span>
+            visibleSections.map(({ group, list }, idx) => {
+              const expanded = expandedGroups.has(group.id);
+              const shown = expanded ? list : list.slice(0, GROUP_PAGE_SIZE);
+              return (
+                <Fragment key={group.id}>
+                  <section className="section" id={group.id}>
+                    <div className="section-head">
+                      <div className="section-head-row">
+                        <h2 className="section-title">{group.name[lang]}</h2>
+                        <span className="section-count">
+                          {t.toolsCount.replace("{n}", String(list.length))}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="card-grid">
-                    {list.map((tool) => (
-                      <ToolCard key={tool.slug} tool={tool} />
-                    ))}
-                  </div>
-                </section>
-                {/* 广告位：首页中部横幅（第 3 个大类区块之后） */}
-                {idx === 2 && <AdSlot id="home_mid" preview={adsPreview} />}
-              </Fragment>
-            ))
+                    <div className="card-grid">
+                      {shown.map((tool) => (
+                        <ToolCard key={tool.slug} tool={tool} />
+                      ))}
+                    </div>
+                    {list.length > GROUP_PAGE_SIZE && (
+                      <div className="group-expand-row">
+                        <button
+                          type="button"
+                          className="filter-chip filter-chip-more group-expand-btn"
+                          aria-expanded={expanded}
+                          onClick={() => toggleGroup(group.id)}
+                        >
+                          {expanded
+                            ? t.hideTools
+                            : t.showAllTools.replace("{n}", String(list.length))}
+                        </button>
+                      </div>
+                    )}
+                  </section>
+                  {/* 广告位：首页中部横幅（第 3 个大类区块之后） */}
+                  {idx === 2 && <AdSlot id="home_mid" preview={adsPreview} />}
+                </Fragment>
+              );
+            })
           )}
         </>
       )}

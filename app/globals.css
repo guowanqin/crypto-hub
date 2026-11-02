@@ -333,6 +333,13 @@ a:hover {
   margin-top: 4px;
 }
 
+/* 首页大类区块「展开全部 / 收起」按钮行 */
+.group-expand-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
 /* ---------- 首页 ---------- */
 .hero {
   text-align: center;
