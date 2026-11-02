@@ -4,7 +4,6 @@ import { Fragment, useMemo, useState } from "react";
 import { TAG_MAP } from "@/lib/tags";
 import { GROUPS, GROUP_BY_TAG, toolsByGroup } from "@/lib/groups";
 import { TOOLS, compareTools, type ToolDef } from "@/lib/tools";
-import { FEATURED_TOOLS } from "@/lib/featured";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
@@ -123,21 +122,7 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
         </section>
       ) : (
         <>
-          {/* 热门精选：仅默认视图（无搜索词、大类=全部、类型=全部）显示，避免与筛选结果重复 */}
-          {activeGroup === "all" && activeType === "all" && (
-            <section className="section featured-section">
-              <div className="section-head">
-                <h2 className="section-title">🔥 {t.featuredTitle}</h2>
-              </div>
-              <div className="card-grid">
-                {FEATURED_TOOLS.map((tool) => (
-                  <ToolCard key={tool.slug} tool={tool} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* 最新上架：显示条件同热门精选（无搜索词、大类=全部、类型=全部），取全站排序前 6 */}
+          {/* 最新上架：仅默认视图（无搜索词、大类=全部、类型=全部）显示，避免与筛选结果重复；取全站排序前 6 */}
           {activeGroup === "all" && activeType === "all" && (
             <section className="section newest-section">
               <div className="section-head">

@@ -29,7 +29,6 @@ export interface HubDict {
   disclaimer: string;
   footerNote: string;
   categoriesTitle: string;
-  featuredTitle: string;
   newestTitle: string;
   showAllTools: string; // {n}
   hideTools: string;
@@ -69,7 +68,6 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     disclaimer: "本站仅做工具收录与介绍，不构成投资建议。第三方工具由其运营方提供，使用前请自行核实官网地址。",
     footerNote: "18btc 币圈工具导航 · 实测收录 · 工具介绍均为原创，数据与功能以各工具官网为准",
     categoriesTitle: "按分类逛",
-    featuredTitle: "热门精选",
     newestTitle: "最新上架",
     showAllTools: "展开全部 {n} 个 ▾",
     hideTools: "收起 ▴",
@@ -107,7 +105,6 @@ export const HUB_DICT: Record<Lang, HubDict> = {
     disclaimer: "This site only catalogs and introduces tools; nothing here is investment advice. Third-party tools are run by their own operators — always verify the official URL before use.",
     footerNote: "18btc Crypto Tools Navigator · Field-tested picks · All intros are original; features and data follow each tool's official site",
     categoriesTitle: "Browse by category",
-    featuredTitle: "Featured",
     newestTitle: "Newest",
     showAllTools: "Show all {n} ▾",
     hideTools: "Show less ▴",

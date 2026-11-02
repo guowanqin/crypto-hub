@@ -1067,7 +1067,8 @@ const TOOL_INDEX: Record<string, number> = Object.fromEntries(
 
 /** 全站统一排序（AGENTS.md 第 5 节，定死，不许自创）：
  *  pin 高者在前 → 站内可用（embedded）在第三方前 → addedAt 新者在前 →
- *  同日按注册表顺序靠后者在前。大类区块、标签页列表、最新上架共用。 */
+ *  同日按注册表顺序靠后者在前。大类区块、标签页列表共用。
+ *  （首页「最新上架」不走此排序，见 compareNewest。） */
 export function compareTools(a: ToolDef, b: ToolDef): number {
   const pinDiff = (b.pin ?? 0) - (a.pin ?? 0);
   if (pinDiff !== 0) return pinDiff;
@@ -1075,6 +1076,21 @@ export function compareTools(a: ToolDef, b: ToolDef): number {
   if (embDiff !== 0) return embDiff;
   if (a.addedAt !== b.addedAt) return a.addedAt < b.addedAt ? 1 : -1;
   return TOOL_INDEX[b.slug] - TOOL_INDEX[a.slug];
+}
+
+/** 纯时间排序（AGENTS.md 第 5 节）：只按 addedAt 新者在前，同日按注册表顺序
+ *  靠后者在前；不分站内 / 第三方优先级。供首页「最新上架」与各处兜底补位使用。 */
+export function compareNewest(a: ToolDef, b: ToolDef): number {
+  if (a.addedAt !== b.addedAt) return a.addedAt < b.addedAt ? 1 : -1;
+  return TOOL_INDEX[b.slug] - TOOL_INDEX[a.slug];
+}
+
+/** 最新上架的 n 个工具（纯时间排序），可排除一批 slug（如当前工具自身、已展示的工具） */
+export function newestTools(n: number, excludeSlugs: string[] = []): ToolDef[] {
+  const exclude = new Set(excludeSlugs);
+  return TOOLS.filter((t) => !exclude.has(t.slug))
+    .sort(compareNewest)
+    .slice(0, n);
 }
 
 export function toolsByTag(tagId: string): ToolDef[] {

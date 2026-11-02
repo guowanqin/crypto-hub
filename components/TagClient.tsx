@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import type { TagDef } from "@/lib/tags";
-import { TOOLS, toolsByTag, type ToolDef } from "@/lib/tools";
-import { FEATURED_TOOLS } from "@/lib/featured";
+import { TOOLS, newestTools, toolsByTag, type ToolDef } from "@/lib/tools";
 import { HUB_DICT } from "@/lib/i18n";
 import { MASCOT_NAME } from "@/lib/site";
 import ToolCard from "./ToolCard";
@@ -22,17 +21,15 @@ export default function TagClient({
   const list = toolsByTag(tag.id);
   const otherLang = lang === "zh" ? "en" : "zh";
 
-  // 单工具标签页补位：工具数 < 3 时，底部用热门精选补到 4 个（排除本页已展示）；
-  // 精选不足时再用其他站内可用工具补齐。工具数 ≥ 3 的标签页不渲染此区。
+  // 单工具标签页补位：工具数 < 3 时，底部用最新上架工具补到 4 个（排除本页已展示）；
+  // 最新上架不足时再用其他站内可用工具补齐。工具数 ≥ 3 的标签页不渲染此区。
   const exploreList: ToolDef[] = [];
   if (list.length < 3) {
     const seen = new Set(list.map((x) => x.slug));
-    for (const f of FEATURED_TOOLS) {
+    for (const f of newestTools(4, [...seen])) {
       if (exploreList.length >= 4) break;
-      if (!seen.has(f.slug)) {
-        exploreList.push(f);
-        seen.add(f.slug);
-      }
+      exploreList.push(f);
+      seen.add(f.slug);
     }
     if (exploreList.length < 4) {
       for (const tool of TOOLS) {
