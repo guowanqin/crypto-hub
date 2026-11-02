@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { MarketData } from "@/lib/pershare/types";
 import { presetRange, lvForRange, type RangeSel } from "@/lib/pershare/range";
-import { FAQ_ITEMS_EN, FAQ_ITEMS_ZH } from "@/lib/pershare/faq";
+import { FAQ_ITEMS_EN, FAQ_ITEMS_TW, FAQ_ITEMS_ZH } from "@/lib/pershare/faq";
 import { DICT, type Lang } from "@/lib/pershare/i18n";
 import { PoolCard, RangeControl, SpreadCard, fmtInt, fmtPrice, fmtUsd } from "./pool-ui";
 
@@ -40,7 +40,7 @@ export default function Calculator(props: { lang: Lang }) {
   const [lpAmount, setLpAmount] = useState("10000");
 
   const t = DICT[lang];
-  const locale = lang === "en" ? "en-US" : "zh-CN";
+  const locale = lang === "en" ? "en-US" : lang === "tw" ? "zh-TW" : "zh-CN";
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -133,7 +133,7 @@ export default function Calculator(props: { lang: Lang }) {
   }, [data, lpPoolKey, lpAmount, rangeOf]);
 
   const errorText = error ? t.fetchError : null;
-  const faqItems = lang === "en" ? FAQ_ITEMS_EN : FAQ_ITEMS_ZH;
+  const faqItems = lang === "en" ? FAQ_ITEMS_EN : lang === "tw" ? FAQ_ITEMS_TW : FAQ_ITEMS_ZH;
 
   return (
     <div>

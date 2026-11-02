@@ -8,7 +8,7 @@ import type {
   MarginSource,
 } from "@/lib/flows";
 import { HUB_DICT } from "@/lib/i18n";
-import type { Lang } from "@/lib/site";
+import { LOCALE, type Lang } from "@/lib/site";
 import { useLang } from "./LangProvider";
 
 const DICT: Record<
@@ -169,6 +169,57 @@ const DICT: Record<
     ],
     toolsTitle: "Exchange Flows · Tools in this shelf",
   },
+  tw: {
+    boardKicker: "交易所資金流 · 儲備與保證金看板",
+    sourceLine: "資料來源：DeFiLlama（儲備與淨流入）· OKX / Hyperliquid 官方介面 · CoinGecko 衍生品聚合（保證金）· 取數 {t}",
+    loading: "正在拉取交易所儲備與合約資料…",
+    loadError: "資料暫時拉取失敗，請稍後重新整理重試。",
+    secFlows: "01 · 資金流總覽（儲備與淨流入）",
+    flowsIntro: "儲備總額是 DeFiLlama 追蹤到的各交易所已標記錢包資產（clean reserves，已剔除各所自家代幣，如幣安剔除 BNB）；淨流入/流出是其按錢包轉賬計算的淨流量，正數綠色為淨流入、負數紅色為淨流出。點任意一行展開該交易所的主要幣種構成與近 35 日儲備走勢。",
+    colExchange: "交易所",
+    colReserves: "儲備總額",
+    colFlow24h: "24h 淨流入",
+    colFlow7d: "7d 淨流入",
+    colFlow30d: "30d 淨流入",
+    flowsFail: "資金流資料暫時拉取失敗（DeFiLlama 源異常），保證金區塊不受影響。",
+    expandHint: "展開構成",
+    detailLoading: "正在拉取該交易所的鏈上構成（資料量較大，稍候）…",
+    detailFail: "該交易所明細暫時拉取失敗，稍後再試。",
+    detailTokensTitle: "{name} · 主要幣種構成",
+    detailTokensNote: "構成按 clean reserves 口徑（已剔除自家代幣 {own}）計算佔比；資料來自 DeFiLlama updatedProtocol 聚合的各鏈標記錢包。",
+    detailSeriesTitle: "近 35 日儲備走勢（clean reserves，日線）",
+    detailBalanceTitle: "按日線儲備序列算的餘額變化（交叉核對）",
+    detailBalanceNote: "注意：這組數字是相鄰日儲備餘額之差，包含持倉價格漲跌因素，與上方總覽由 DeFiLlama 淨流入引擎算出的淨流量口徑不同，兩者不一致是正常的——總覽看淨流量，明細看餘額變化。",
+    bal24h: "24h",
+    bal7d: "7d",
+    bal30d: "30d",
+    secMargin: "02 · 保證金（合約未平倉與資金費率）",
+    marginIntro: "未平倉總額（OI）是各交易所全部合約的名義價值合計；資金費率取 BTC 永續合約，按各合約自身結算週期計（主流為 8 小時，Hyperliquid、Deribit、Kraken、Crypto.com 為 1 小時，單元格內已標註）。資料來源逐行標註：OKX、Hyperliquid 為官方介面直取，其餘為 CoinGecko 衍生品聚合（官方介面對機房與部分地域 IP 受限）。",
+    colOi: "未平倉總額 (OI)",
+    colFunding: "BTC 永續資金費率",
+    colLs: "多空比",
+    colSource: "資料來源",
+    marginFail: "保證金資料暫時全部拉取失敗，資金流區塊不受影響。",
+    unavailable: "暫不可用",
+    sources: {
+      okx: "OKX 官方介面",
+      hyperliquid: "Hyperliquid 官方介面",
+      coingecko: "CoinGecko 聚合",
+    },
+    caliberTitle: "03 · 口徑說明",
+    caliberFlows: [
+      "儲備與淨流入只覆蓋 DeFiLlama 已標記的交易所錢包地址：未標記地址、場外交易、內部錢包劃轉都不在統計內，因此淨流入不等於使用者淨申購/贖回，更不等於交易所的真實財務狀況。",
+      "Coinbase、Kraken、Upbit 等交易所的錢包未被該資料集追蹤（無儲備資料），故不在總覽表內——不是它們沒有儲備，而是這套公開資料看不到。",
+      "clean reserves 會剔除各所自家平臺幣（如 BNB、OKB、MNT），避免自家代幣價格波動汙染儲備口徑；展開明細裡的幣種構成與儲備走勢用同一口徑。",
+    ],
+    caliberMargin: [
+      "OI 口徑：OKX 為其全部永續+交割合約 oiUsd 求和（官方），Hyperliquid 為全品種未平倉量 × 標記價格求和（官方），其餘各所為 CoinGecko 衍生品聚合的 open_interest_btc 按 BTC 現價換算美元——不同來源的統計範圍（是否含期權、交割合約）略有差異，跨所比較時留有餘地。",
+      "資金費率為 BTC 永續當前一期費率（百分數）：正值表示多頭付空頭、負值相反；結算週期不同（8 小時 / 1 小時）時數值不可直接橫比，年化換算請自行按週期折算。",
+      "多空比暫不提供數值：Binance、Bybit 的官方統計介面對機房與部分地域 IP 受限，OKX 對應的 rubik 多空比介面已經下線，免費公開源沒有可靠口徑——寧可空著，不編數字。",
+      "資金流資料快取約 1 小時、保證金約 10 分鐘；本頁所有數字都是鏈上與公開市場資料的整理，不構成投資建議。",
+    ],
+    toolsTitle: "交易所資金流 · 本類工具",
+  },
 };
 
 export { DICT as FLOWS_DICT };
@@ -204,7 +255,7 @@ function fmtFunding(pct: number | null, period: "8h" | "1h" | null): string {
 
 function fmtTime(iso: string, lang: Lang): string {
   try {
-    return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en-US", {
+    return new Intl.DateTimeFormat(LOCALE[lang], {
       month: "2-digit",
       day: "2-digit",
       hour: "2-digit",

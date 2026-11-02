@@ -6,8 +6,9 @@ import { downloadBlob } from "@/lib/engine";
 import { IMGBOX_DICT, type ImgBoxDict } from "@/lib/imagebox-i18n";
 import { formatBytes, type LoadedImage } from "@/lib/imagebox-utils";
 import { useLang } from "../LangProvider";
+import type { Lang } from "@/lib/site";
 
-export function useImgDict(): { lang: "zh" | "en"; t: ImgBoxDict } {
+export function useImgDict(): { lang: Lang; t: ImgBoxDict } {
   const { lang } = useLang();
   return { lang, t: IMGBOX_DICT[lang] };
 }

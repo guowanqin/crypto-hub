@@ -134,6 +134,56 @@ const NC = {
       "Holiday data is the 2026 schedule published by the General Office of the State Council, built into this page rather than fetched live; it will be updated once the 2027 schedule is published.",
     ],
   },
+  tw: {
+    weekdays: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+    progressTitle: "今日牛馬進度",
+    statusOff: "今天不上班",
+    statusOffSub: "週末或假期，好好躺平，牛馬也要吃草。",
+    statusBefore: "還沒上工",
+    statusBeforeSub: (t: string) => `離上工還有 ${t}，先把草料備好。`,
+    statusWorking: "搬磚進行中",
+    statusLunch: "午休中",
+    statusLunchSub: "秒錶暫停，吃草時間不計入工時。",
+    statusDone: "今日已解放",
+    statusDoneSub: "下班了，今天的磚搬完了。",
+    workedLabel: "已搬磚",
+    leftLabel: "還剩",
+    cdOffwork: "距離下班",
+    cdWeekend: "距離週末",
+    cdPayday: "距離發工資",
+    cdHoliday: "距離下一個假期",
+    weekendNow: "週末進行中",
+    offworkTarget: (d: string) => `${d} 下班`,
+    weekendTarget: (d: string) => `${d} 週五下班即週末`,
+    weekendNowSub: (d: string) => `週一 ${d} 重新上工`,
+    paydayTarget: (d: string) => `發薪日 ${d}`,
+    holidayIn: (name: string) => `正在放${name}假期`,
+    holidayInSub: (range: string, days: number) => `${range} · 共 ${days} 天`,
+    holidayNextSub: (range: string, days: number) => `${range} · 放 ${days} 天`,
+    holidayNone: "2026 年假期已休完",
+    holidayNoneSub: "等 2027 年安排公佈後更新",
+    dayUnit: "天",
+    earnedTitle: "工資秒錶",
+    earnedToday: "今日已賺",
+    salaryGuide: "在下方設定裡填上月薪，秒錶馬上開跑——看看你每秒掙多少錢。",
+    dailyWage: "日薪約",
+    perSecond: "每秒約",
+    monthEarned: "本月已賺約",
+    settingsTitle: "牛馬設定",
+    fStart: "上班時間",
+    fEnd: "下班時間",
+    fLunchStart: "午休開始（可空）",
+    fLunchEnd: "午休結束（可空）",
+    fPayday: "發薪日（每月幾號）",
+    fSalary: "月薪（稅前，元，可空）",
+    settingsNote: "設定只儲存在這臺裝置的瀏覽器裡，不上傳、不統計，關掉頁面也不會丟。",
+    noteTitle: "口徑說明",
+    notes: [
+      "工資秒錶是估算玩法：日薪 = 月薪 ÷ 當月應出勤天數（週一至週五，扣除 2026 年法定放假、加上調休補班日），再按今日已工作秒數折算；不含社保、個稅、加班費與獎金，圖一樂，別拿它跟工資條對賬。",
+      "發薪倒計時按自然日計算，不考慮發薪日遇週末時銀行或公司的順延、提前規則。",
+      "節假日資料為《國務院辦公廳關於 2026 年部分節假日安排的通知》公佈的安排，內建在頁面裡、不聯網調取；2027 年安排公佈後會更新。",
+    ],
+  },
 } as const;
 
 /** "HH:MM" → 当天分钟数；非法输入返回 null */
@@ -252,11 +302,12 @@ function fmtDuration(totalSec: number, lang: Lang): string {
   const h = Math.floor(s / 3600);
   const m = Math.floor((s % 3600) / 60);
   if (lang === "zh") return h > 0 ? `${h} 小时 ${m} 分` : `${m} 分钟`;
+  if (lang === "tw") return h > 0 ? `${h} 小時 ${m} 分` : `${m} 分鐘`;
   return h > 0 ? `${h}h ${m}m` : `${m}m`;
 }
 
 function fmtDateShort(d: Date, lang: Lang): string {
-  if (lang === "zh") return `${d.getMonth() + 1}月${d.getDate()}日`;
+  if (lang !== "en") return `${d.getMonth() + 1}月${d.getDate()}日`;
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
@@ -364,7 +415,7 @@ export default function NiumaClock() {
   }, [now, settings]);
 
   const dateLine = now
-    ? lang === "zh"
+    ? lang !== "en"
       ? `${now.getFullYear()} 年 ${now.getMonth() + 1} 月 ${now.getDate()} 日 · ${t.weekdays[now.getDay()]}`
       : `${t.weekdays[now.getDay()]}, ${now.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`
     : "····";

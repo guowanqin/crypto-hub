@@ -21,7 +21,7 @@ export default function BtcCycleClient({
   const t = HUB_DICT[lang];
   const d = BTC_CYCLE_DICT[lang];
   const list = toolsByTag(tag.id);
-  const otherLang = lang === "zh" ? "en" : "zh";
+  const otherLang = lang === "en" ? "zh" : "en";
 
   return (
     <main className="page">

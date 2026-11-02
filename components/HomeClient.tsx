@@ -40,19 +40,22 @@ export default function HomeClient({ adsPreview = false }: { adsPreview?: boolea
     return TOOLS.filter((tool) =>
       [
         tool.name.zh,
+        tool.name.tw,
         tool.name.en,
         tool.oneLiner.zh,
+        tool.oneLiner.tw,
         tool.oneLiner.en,
         tool.detail.zh,
+        tool.detail.tw,
         tool.detail.en,
-        // 所属标签与所属大类的中英文名也纳入匹配：搜「销毁」「钱包」能命中整个分类的工具，
+        // 所属标签与所属大类的中英繁名也纳入匹配：搜「销毁」「錢包」能命中整个分类的工具，
         // 搜「定投」「安全」能命中对应大类（美股定投 / 钱包与安全）的工具
         ...tool.tags.flatMap((id) => {
           const tg = TAG_MAP[id];
           const gr = GROUP_BY_TAG[id];
           return [
-            ...(tg ? [tg.name.zh, tg.name.en] : []),
-            ...(gr ? [gr.name.zh, gr.name.en] : []),
+            ...(tg ? [tg.name.zh, tg.name.tw, tg.name.en] : []),
+            ...(gr ? [gr.name.zh, gr.name.tw, gr.name.en] : []),
           ];
         }),
       ]

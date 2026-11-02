@@ -15,8 +15,10 @@ import type { Lang } from "@/lib/site";
 import type { AssetTab } from "@/lib/pershare/i18n";
 
 const TAB_LABELS: Record<AssetTab, Record<Lang, string>> = {
-  bnc: { zh: "BNC · BNB 财库公司", en: "BNC · BNB Treasury" },
-  hype: { zh: "HYPE · PURR 财库公司", en: "HYPE · PURR Treasury" },
+  bnc: { zh: "BNC · BNB 财库公司", en: "BNC · BNB Treasury",
+  tw: "BNC · BNB 財庫公司" },
+  hype: { zh: "HYPE · PURR 财库公司", en: "HYPE · PURR Treasury",
+  tw: "HYPE · PURR 財庫公司" },
 };
 
 export default function PerShareShell() {

@@ -12,6 +12,7 @@ import {
   loadPdfSource,
   type PdfSource,
 } from "./shared";
+import { useLang } from "../LangProvider";
 
 type Pos = "tl" | "tc" | "tr" | "bl" | "bc" | "br";
 type Fmt = "num" | "of" | "zh";
@@ -19,6 +20,7 @@ type Fmt = "num" | "of" | "zh";
 const MARGIN = 28;
 
 export default function PageNumbersTool({ d }: { d: PdfDict }) {
+  const { lang } = useLang();
   const [src, setSrc] = useState<PdfSource | null>(null);
   const [pos, setPos] = useState<Pos>("bc");
   const [fmt, setFmt] = useState<Fmt>("of");
@@ -41,7 +43,7 @@ export default function PageNumbersTool({ d }: { d: PdfDict }) {
   function label(n: number, total: number): string {
     if (fmt === "num") return `${n}`;
     if (fmt === "of") return `${n} / ${total}`;
-    return `第 ${n} 页 共 ${total} 页`;
+    return lang === "tw" ? `第 ${n} 頁 共 ${total} 頁` : `第 ${n} 页 共 ${total} 页`;
   }
 
   async function apply() {

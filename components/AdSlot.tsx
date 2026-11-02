@@ -30,14 +30,16 @@ export default function AdSlot({
             {slot.id} · {slot.placement[lang]} ·{" "}
             {lang === "zh"
               ? `建议 ${slot.desktopSize} / 移动端 ${slot.mobileSize}`
-              : `Recommended ${slot.desktopSize} / mobile ${slot.mobileSize}`}
+              : lang === "tw"
+                ? `建議 ${slot.desktopSize} / 行動端 ${slot.mobileSize}`
+                : `Recommended ${slot.desktopSize} / mobile ${slot.mobileSize}`}
           </span>
         </div>
       </div>
     );
   }
 
-  const badge = !isHtmlAd(ad) && ad.label ? ad.label : lang === "zh" ? "广告" : "Ad";
+  const badge = !isHtmlAd(ad) && ad.label ? ad.label : lang === "zh" ? "广告" : lang === "tw" ? "廣告" : "Ad";
 
   return (
     <div className="ad-slot" data-ad-slot={slot.id}>

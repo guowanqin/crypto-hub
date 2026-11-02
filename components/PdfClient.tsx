@@ -54,6 +54,21 @@ const DICT: Record<
     ],
     toolsTitle: "PDF Tools · Tools in this shelf",
   },
+  tw: {
+    boardKicker: "PDF 工具箱 · 站內可用",
+    boardSub: "八個子工具都在這一頁跑：選頁籤、傳檔案、下載結果。檔案只在你的瀏覽器裡處理，不經過任何伺服器。",
+    aboutTitle: "和信創 PDF 工具箱是什麼關係",
+    aboutParas: [
+      "這個站內工具箱參考信創 PDF 工具箱（純前端、離線執行的單檔案 HTML 工具）的功能集整理實現：合併、拆分、頁面重排與刪除、插入空白頁、水印、頁碼、騎縫章、批註、圖片與 PDF 互轉這些日常功能都齊了。做法也一樣——純前端、本地處理：合同、證件、財務單據這類不該上傳的檔案，開啟頁面就能處理，斷網也照常工作。",
+      "實現上有個細節值得一提：水印、中文頁碼和批註文字都是先在瀏覽器裡繪成高畫質圖片再貼進 PDF 的，所以中文不會出現字型缺失的豆腐塊；純數字頁碼則以向量文字寫入，縮放列印都清晰。",
+    ],
+    scopeTitle: "一期邊界（不做的事，先說清）",
+    scopeParas: [
+      "PDF 轉 Word / Excel 不做：純前端無法把 PDF 的版式與表格可靠還原成可編輯文件，做出來也是廢檔案，不如不做。OCR 文字識別不做，需要雲端或大型模型，已有專門的識別工具。騎縫章是按傳統騎縫方式把印章圖片切片蓋到各頁邊緣，是圖片蓋章，不具 CA 電子簽章的法律效力，正式電子簽約請用有資質的電子籤平臺。",
+      "另外兩點如實說明：處理大檔案時瀏覽器記憶體佔用會明顯上升，幾百頁的大文件建議先拆分再處理；帶開啟密碼的加密 PDF 無法讀取，需要先在原軟體裡解除密碼。",
+    ],
+    toolsTitle: "PDF 工具 · 本類工具",
+  },
 };
 
 export default function PdfClient({
@@ -67,7 +82,7 @@ export default function PdfClient({
   const t = HUB_DICT[lang];
   const d = DICT[lang];
   const list = toolsByTag(tag.id);
-  const otherLang = lang === "zh" ? "en" : "zh";
+  const otherLang = lang === "en" ? "zh" : "en";
 
   return (
     <main className="page">

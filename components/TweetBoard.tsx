@@ -19,7 +19,7 @@ import {
   downloadBlob,
   downloadText,
 } from "@/lib/tweet-export";
-import type { Lang } from "@/lib/site";
+import { LOCALE, type Lang } from "@/lib/site";
 import { useLang } from "./LangProvider";
 
 export const TWEET_DICT: Record<
@@ -185,6 +185,57 @@ export const TWEET_DICT: Record<
     ],
     toolsTitle: "Twitter Tools · Tools in this shelf",
   },
+  tw: {
+    boardKicker: "推特下載工具箱 · 站內可用",
+    boardSub: "貼上一條公開推文的連結（twitter.com / x.com）或推文 ID，解析正文與全部媒體：圖片給原圖，影片逐檔列出解析度與位元速率的 MP4 直鏈，還能把推文或整串 Thread 匯出成檔案。",
+    inputPlaceholder: "貼上推文連結，如 https://x.com/NASA/status/… 或純推文 ID",
+    parseBtn: "解析推文",
+    parsing: "正在解析…",
+    errors: {
+      badformat: "沒認出這是推文連結：請貼上 twitter.com / x.com 的單條推文連結（形如 …/status/數字），或直接貼上推文 ID。",
+      notfound: "這條推文不存在或已被刪除：兩個公開資料來源都查不到它，請核對連結後再試。",
+      private: "這條推文不可公開訪問（私密賬號或受限內容）：本工具只能處理公開推文。",
+      sourcefail: "資料來源暫時都連不上（推特嵌入介面與 FxTwitter 均失敗），請稍等片刻再試。",
+    },
+    sourceLine: "資料由{src}返回 · 取數 {time}",
+    srcSynd: "推特公開嵌入介面",
+    srcFx: "FxTwitter 公開介面",
+    statsLabels: {
+      likes: "贊",
+      retweets: "轉推",
+      replies: "回覆",
+      views: "瀏覽",
+      bookmarks: "收藏",
+      quotes: "引用",
+    },
+    quotedTitle: "引用推文",
+    mediaTitle: "媒體下載",
+    photoOrig: "原圖 {w}×{h}",
+    openOrig: "開啟原圖",
+    download: "下載",
+    copyLink: "複製直鏈",
+    copied: "已複製",
+    videoLabel: "影片",
+    gifLabel: "GIF（MP4）",
+    bitrate: "{mbps} Mbps",
+    resUnknown: "解析度未知",
+    playlist: "HLS 播放列表（m3u8）",
+    directNote: "下載走推特 CDN 直鏈，本站伺服器不中轉檔案；個別瀏覽器點下載會先開始播放，長按或右鍵連結選「另存為」即可儲存。",
+    exportTitle: "匯出這條推文",
+    exportSub: "在本頁本地生成檔案，不經伺服器。",
+    pdfBtn: "PDF（列印另存）",
+    pdfBlocked: "瀏覽器攔下了列印頁彈窗，請允許彈窗後重試；也可以先匯出 HTML 再自行列印為 PDF。",
+    threadTitle: "Thread · 共 {n} 條",
+    threadNote: "整串由資料來源返回的同作者回復鏈組裝，條數與完整性以資料來源返回為準——它包含截至你貼上這條為止的同作者串，其後的新條目不在內。",
+    threadExport: "匯出整串 Thread",
+    boundaryTitle: "使用邊界（先說清）",
+    boundaryParas: [
+      "僅限公開推文：私密賬號、受限或已刪除的內容，任何公開資料來源都拿不到，本工具也不例外。",
+      "請只下載你有權使用的內容：圖片與影片的版權歸原作者，下載儲存不等於獲得轉載或商用授權。",
+      "資料來自推特公開嵌入介面與 FxTwitter 公開介面（免登入），互動數等欄位以源實際返回為準，源裡沒有的就不顯示；Thread 為回覆鏈組裝結果，不承諾與官方 Thread 檢視完全一致。",
+    ],
+    toolsTitle: "推特工具 · 本類工具",
+  },
 };
 
 type Dict = (typeof TWEET_DICT)[Lang];
@@ -192,7 +243,7 @@ type Dict = (typeof TWEET_DICT)[Lang];
 function fmtTime(iso: string, lang: Lang): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleString(lang === "zh" ? "zh-CN" : "en-US", { hour12: false });
+  return d.toLocaleString(LOCALE[lang], { hour12: false });
 }
 
 function CopyBtn({ url, d }: { url: string; d: Dict }) {

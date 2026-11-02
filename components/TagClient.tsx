@@ -19,7 +19,7 @@ export default function TagClient({
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const list = toolsByTag(tag.id);
-  const otherLang = lang === "zh" ? "en" : "zh";
+  const otherLang = lang === "en" ? "zh" : "en";
 
   // 单工具标签页补位：工具数 < 3 时，底部用最新上架工具补到 4 个（排除本页已展示）；
   // 最新上架不足时再用其他站内可用工具补齐。工具数 ≥ 3 的标签页不渲染此区。

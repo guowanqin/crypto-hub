@@ -238,6 +238,90 @@ const DICT: Record<
       "This page is a model projection from the four-year halving cycle and block height: past cycles are not guaranteed to repeat, and neither the bottom block nor its date is a prediction or promise. Nothing here is investment advice; the tiers are model trigger levels only — decide with your own judgment and risk tolerance.",
     toolsTitle: "Related tools",
   },
+  tw: {
+    boardKicker: "BTC 週期位置看板 · 實時鏈上區塊高度",
+    sourceLabel: "資料來源：實時鏈上（mempool.space）",
+    heightLabel: "區塊",
+    updatedAt: "取數",
+    loading: "正在讀取實時區塊高度…",
+    loadError: "區塊高度暫時拉取失敗，請稍後重新整理重試。",
+    positionLabel: "當前週期位置",
+    todayLabel: "今天",
+    heightChip: "高度",
+    progressLabelBear: "熊市進度（越接近 100% 越該動手）",
+    progressLabelBull: "牛市段進度（熊底 → 減半 → 牛頂）",
+    countdownToBottom: "距本輪熊底（抄底視窗）",
+    countdownToHalving: "距下一次減半（位置 0.5）",
+    targetLine: "目標區塊 {block} · ≈ {date} · 還剩 {days} 天",
+    daysLeft: "還剩 {n} 天",
+    daysAgo: "已過 {n} 天",
+    daysUnit: "天",
+    cdDays: "天",
+    cdHours: "時",
+    cdMins: "分",
+    cdSecs: "秒",
+    nodeToday: "今天",
+    nodeNow: "現在",
+    nodeBottom: "熊底（位置 0）",
+    nodeHalving: "第 {n} 次減半（位置 0.5）",
+    nodeTop: "牛頂（位置 1）",
+    nodeTodaySuffix: "",
+    tiersTitleBear: "分批建倉檔位（按週期位置倒推日期）",
+    tiersTitleBull: "分批建倉檔位（本輪已全部觸發）",
+    colTier: "檔位",
+    colTrigger: "觸發條件",
+    colBlock: "對應區塊",
+    colDate: "預計日期",
+    colEta: "距今",
+    triggerFmt: "位置 = {p}",
+    tierNames: [
+      "分批建倉 · 第一檔",
+      "分批建倉 · 第二檔",
+      "分批建倉 · 第三檔",
+      "黃金視窗臨近",
+      "黃金抄底視窗",
+    ],
+    tierPast: "已過 {n} 天",
+    tierFuture: "還有 {n} 天",
+    tierToday: "今天",
+    stages: {
+      downtrend: {
+        label: "▼ 熊市下行段",
+        title: "熊市下行段",
+        hint: "離熊底還遠，觀望為主，別急著動手。",
+      },
+      dca: {
+        label: "▼ 熊市下行段",
+        title: "分批建倉區",
+        hint: "進入末段，開始分批，控制節奏別梭哈。",
+      },
+      dcaLate: {
+        label: "▼ 熊市下行段",
+        title: "分批建倉後段",
+        hint: "已過半程，按檔位繼續分批，保持節奏。",
+      },
+      goldNear: {
+        label: "▼ 黃金視窗臨近",
+        title: "黃金視窗臨近",
+        hint: "接近熊底視窗，檔位密集觸發，留意最後一檔。",
+      },
+      gold: {
+        label: "▼ 黃金抄底視窗",
+        title: "黃金抄底視窗",
+        hint: "模型口徑下的熊底視窗內，按計劃執行，別猶豫也別上頭。",
+      },
+      recovery: {
+        label: "▲ 回升段",
+        title: "回升段",
+        hint: "熊底目標區塊已過，週期位置正向減半（0.5）推進，本輪分批檔位已全部觸發。",
+      },
+    },
+    caliberTitle: "模型口徑",
+    caliberBody: "錨點由減半區塊推導：減半間隔 210,000 塊、偏移 78,750 塊——上輪牛頂 = 減半塊 −131,250，本輪熊底 = 減半塊 −78,750（位置 0），減半本身在位置 0.5，下輪牛頂 = 減半塊 +78,750（位置 1）；當前週期減半塊為 1,050,000，即牛頂 918,750、熊底 971,250、牛頂 1,128,750。週期位置在段內按區塊線性插值；倒計時與預計日期一律按「剩餘塊數 × 10 分鐘」從取數時刻推算，實際出塊速度有波動，日期僅供參考。本頁直接讀取實時鏈上區塊高度（主用 mempool.space，備用 blockstream.info），服務端快取 5 分鐘。",
+    disclaimerTitle: "風險提示",
+    disclaimerBody: "本頁是按四年減半週期與區塊高度推演的模型估算：歷史週期不保證重演，熊底區塊與日期都不是預測承諾。本頁不構成投資建議，分批檔位僅為模型觸發位，請結合自身判斷與風險承受能力決策。",
+    toolsTitle: "相關工具",
+  },
 };
 
 function fmtInt(n: number): string {
@@ -246,7 +330,7 @@ function fmtInt(n: number): string {
 
 function fmtDate(ms: number, lang: Lang): string {
   const dt = new Date(ms);
-  if (lang === "zh") {
+  if (lang !== "en") {
     const p = (v: number) => String(v).padStart(2, "0");
     return `${dt.getFullYear()}-${p(dt.getMonth() + 1)}-${p(dt.getDate())}`;
   }

@@ -10,7 +10,8 @@ import AdSlot from "./AdSlot";
 import UniBurnBoard from "./UniBurnBoard";
 import { useLang } from "./LangProvider";
 
-const TOOLS_TITLE = { zh: "相关工具", en: "Related tools" } as const;
+const TOOLS_TITLE = { zh: "相关工具", en: "Related tools",
+tw: "相關工具" } as const;
 
 export default function UniBurnClient({
   tag,
@@ -22,7 +23,7 @@ export default function UniBurnClient({
   const { lang } = useLang();
   const t = HUB_DICT[lang];
   const list = toolsByTag(tag.id);
-  const otherLang = lang === "zh" ? "en" : "zh";
+  const otherLang = lang === "en" ? "zh" : "en";
 
   return (
     <main className="page">

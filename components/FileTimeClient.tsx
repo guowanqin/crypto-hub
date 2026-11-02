@@ -56,6 +56,22 @@ const DICT: Record<
     ],
     toolsTitle: "File Time · Tools in this shelf",
   },
+  tw: {
+    boardKicker: "照片 EXIF 時間修改 · 站內可用",
+    boardSub: "改的是照片內嵌的拍攝/建立/修改時間，本地處理不上傳；改前改後逐張對照，確認了再匯出。",
+    boundaryTitle: "先說清：這裡改的是哪種時間",
+    boundaryParas: [
+      "照片的時間分兩處：一處是電腦裡檔案的系統時間（資源管理器裡看到的建立/修改時間），另一處是照片檔案內嵌的 EXIF 時間（拍攝時間、建立時間、修改時間）。本工具改的是後一處，三個 EXIF 欄位同步修改，GPS、裝置等其餘資訊原樣保留。",
+      "網頁出於安全限制，改不了你硬碟上任何已有檔案的系統時間；而且透過瀏覽器下載回去的檔案，它的系統「修改時間」會變成下載那一刻——這是瀏覽器下載的統一行為，不是修改沒生效。相簿按時間排序、打卡系統補傳照片時，讀的都是 EXIF 時間，所以這些場景用本工具就夠。",
+      "如果你要改的正是電腦裡檔案的系統建立時間/修改時間，請用下方收錄的桌面版 NewFileTime（Windows 小工具，免安裝），它能在本地直接改檔案與資料夾的系統時間。",
+    ],
+    scenesTitle: "適合哪些場景",
+    scenesParas: [
+      "相機/手機時鐘設錯了一批照片：用「整體平移」按差值統一糾正；只有檔案時間的照片也能以檔案時間為基準平移。補打卡、補傳一組連續拍攝：用「按張遞增」從第一張的時間開始，每張自動加幾分鐘，排出自然的時間序列。整理掃描件與舊照片：用「統一設定」把一批照片對齊到實際拍攝日期。",
+      "小提醒：匯出前請逐張核對列表裡的「原時間 → 新時間」；個別平臺（如部分社交軟體）會二次壓縮並重寫照片，EXIF 可能被平臺再次改動，那種情況不在本工具能控制的範圍內。",
+    ],
+    toolsTitle: "檔案時間 · 本類工具",
+  },
 };
 
 export default function FileTimeClient({
@@ -69,7 +85,7 @@ export default function FileTimeClient({
   const t = HUB_DICT[lang];
   const d = DICT[lang];
   const list = toolsByTag(tag.id);
-  const otherLang = lang === "zh" ? "en" : "zh";
+  const otherLang = lang === "en" ? "zh" : "en";
 
   return (
     <main className="page">

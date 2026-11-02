@@ -117,6 +117,40 @@ const DICT: Record<
     caliberBody:
       "Every figure on this page is read directly from the UNI contract on Ethereum mainnet: total burned = the burn address balance (the UNI contract has no supply-reducing burn function, so total supply stays at 1 billion and effective supply = total supply − total burned). The 24h / 30d figures use mainnet crediting time and can lag burn-occurrence-date accounting by 1–7 days; the two bases must not be added together. Data is fetched server-side from public RPC endpoints and cached for 30 minutes.",
   },
+  tw: {
+    boardKicker: "UNI 銷燬看板 · 以太坊主網實時資料",
+    updatedAt: "資料更新",
+    blockHeight: "區塊高度",
+    loading: "正在從以太坊主網讀取銷燬資料…",
+    loadError: "銷燬資料暫時拉取失敗，請稍後重新整理重試。",
+    totalBurned: "累計銷燬總量",
+    totalBurnedSub: "銷燬地址 0x…dEaD 的 UNI 餘額",
+    burnedShare: "佔初始供應比例",
+    burnedShareSub: "初始供應 1,000,000,000 UNI",
+    totalSupply: "當前總供應（合約）",
+    totalSupplySub: "UNI 合約 totalSupply，銷燬不改變此值",
+    effectiveSupply: "有效供應",
+    effectiveSupplySub: "總供應 − 累計銷燬",
+    burn24h: "近 24 小時銷燬",
+    burn24hSub: "主網入賬口徑",
+    burn30d: "近 30 天銷燬",
+    burn30dSub: "主網入賬口徑",
+    annualized: "年化銷燬量",
+    annualizedSub: "按近 30 天速度折算（× 365/30）",
+    deflationRate: "年化通縮率",
+    deflationRateSub: "年化銷燬量 ÷ 有效供應",
+    unavailable: "暫不可用",
+    recentTitle: "最近銷燬記錄",
+    colTime: "時間（UTC）",
+    colAmount: "銷燬量",
+    colFrom: "傳送方",
+    colTx: "交易",
+    viewTx: "檢視",
+    mechTitle: "銷燬機制",
+    mechBody: "Uniswap 的 UNIfication 改革開啟協議費開關後，各鏈協議費收入經 TokenJar 歸集、跨鏈回到以太坊主網，兌換為 UNI 後轉入銷燬地址 0x000…dEaD 永久退出流通；2025 年 12 月底另有一筆約 1 億枚的一次性金庫銷燬同路入賬，佔累計銷燬的大頭，此後每日銷燬主要由協議費驅動。",
+    caliberTitle: "統計口徑",
+    caliberBody: "本頁所有數字直接讀取以太坊主網 UNI 合約：累計銷燬 = 銷燬地址餘額（UNI 合約沒有減少總供應的 burn 函式，總供應恆為 10 億，有效供應 = 總供應 − 累計銷燬）；近 24 小時 / 30 天銷燬按主網入賬時間統計，與按「銷燬發生日」記賬的多鏈口徑有 1–7 天時滯差異，兩者不可直接相加。資料由本站服務端讀取公共 RPC 節點，快取 30 分鐘重新整理。",
+  },
 };
 
 function fmtFull(n: number): string {
@@ -231,7 +265,7 @@ export default function UniBurnBoard() {
                   ? d.unavailable
                   : `${fmtFull(data.burn30d)} UNI · ${d.burn30dSub}${
                       data.burn7d !== null
-                        ? lang === "zh"
+                        ? lang !== "en"
                           ? ` · 近 7 天 ${fmtCompact(data.burn7d)} UNI`
                           : ` · 7d ${fmtCompact(data.burn7d)} UNI`
                         : ""
@@ -317,7 +351,7 @@ export default function UniBurnBoard() {
                 >
                   {shortAddr(UNI_ADDRESS)}
                 </a>{" "}
-                · {lang === "zh" ? "销毁地址" : "Burn address"}{" "}
+                · {lang === "zh" ? "销毁地址" : lang === "tw" ? "銷毀地址" : "Burn address"}{" "}
                 <a
                   href={`https://etherscan.io/token/${UNI_ADDRESS}?a=${DEAD_ADDRESS}`}
                   target="_blank"

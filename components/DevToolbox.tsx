@@ -11,7 +11,8 @@ import * as DT from "@/lib/devtools";
 
 function useL() {
   const { lang } = useLang();
-  return (zh: string, en: string) => (lang === "zh" ? zh : en);
+  return (zh: string, en: string, tw: string) =>
+    lang === "zh" ? zh : lang === "tw" ? tw : en;
 }
 
 function CopyBtn({ text, label }: { text: string; label?: string }) {
@@ -32,7 +33,7 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
         }
       }}
     >
-      {copied ? L("已复制 ✓", "Copied ✓") : (label ?? L("复制", "Copy"))}
+      {copied ? L("已复制 ✓", "Copied ✓", "已複製 ✓") : (label ?? L("复制", "Copy", "複製"))}
     </button>
   );
 }
@@ -89,7 +90,7 @@ function Base64Tool() {
     const r = mode === "encode" ? DT.base64Encode(input) : DT.base64Decode(input);
     return r.ok
       ? { out: r.value, err: "" }
-      : { out: "", err: L("解码失败：不是合法的 Base64（或解出内容不是 UTF-8 文本）", "Decode failed: not valid Base64 (or the result is not UTF-8 text)") };
+      : { out: "", err: L("解码失败：不是合法的 Base64（或解出内容不是 UTF-8 文本）", "Decode failed: not valid Base64 (or the result is not UTF-8 text)", "解碼失敗：不是合法的 Base64（或解出內容不是 UTF-8 文字）") };
   }, [input, mode, L]);
   return (
     <div>
@@ -97,8 +98,8 @@ function Base64Tool() {
         value={mode}
         onChange={setMode}
         options={[
-          { id: "encode", label: L("编码 →", "Encode →") },
-          { id: "decode", label: L("← 解码", "← Decode") },
+          { id: "encode", label: L("编码 →", "Encode →", "編碼 →") },
+          { id: "decode", label: L("← 解码", "← Decode", "← 解碼") },
         ]}
       />
       <textarea
@@ -106,7 +107,7 @@ function Base64Tool() {
         rows={4}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={mode === "encode" ? L("输入任意文本（支持中文）", "Type any text (UTF-8 supported)") : "Base64…"}
+        placeholder={mode === "encode" ? L("输入任意文本（支持中文）", "Type any text (UTF-8 supported)", "輸入任意文字（支援中文）") : "Base64…"}
       />
       <OutBox value={result.out} />
       <ErrLine msg={result.err} />
@@ -125,7 +126,7 @@ function UrlCodecTool() {
     const r = mode === "encode" ? DT.urlEncode(input) : DT.urlDecode(input);
     return r.ok
       ? { out: r.value, err: "" }
-      : { out: "", err: L("解码失败：% 转义序列不合法", "Decode failed: invalid % escape sequence") };
+      : { out: "", err: L("解码失败：% 转义序列不合法", "Decode failed: invalid % escape sequence", "解碼失敗：% 轉義序列不合法") };
   }, [input, mode, L]);
   return (
     <div>
@@ -133,8 +134,8 @@ function UrlCodecTool() {
         value={mode}
         onChange={setMode}
         options={[
-          { id: "encode", label: L("编码 →", "Encode →") },
-          { id: "decode", label: L("← 解码", "← Decode") },
+          { id: "encode", label: L("编码 →", "Encode →", "編碼 →") },
+          { id: "decode", label: L("← 解码", "← Decode", "← 解碼") },
         ]}
       />
       <textarea
@@ -160,7 +161,7 @@ function UnicodeTool() {
     if (!input) return { out: "", err: "" };
     if (mode === "escape") return { out: DT.unicodeEscape(input), err: "" };
     const r = DT.unicodeUnescape(input);
-    return r.ok ? { out: r.value, err: "" } : { out: "", err: L("还原失败", "Unescape failed") };
+    return r.ok ? { out: r.value, err: "" } : { out: "", err: L("还原失败", "Unescape failed", "還原失敗") };
   }, [input, mode, L]);
   return (
     <div>
@@ -168,8 +169,8 @@ function UnicodeTool() {
         value={mode}
         onChange={setMode}
         options={[
-          { id: "escape", label: L("转义 →", "Escape →") },
-          { id: "unescape", label: L("← 还原", "← Unescape") },
+          { id: "escape", label: L("转义 →", "Escape →", "轉義 →") },
+          { id: "unescape", label: L("← 还原", "← Unescape", "← 還原") },
         ]}
       />
       <textarea
@@ -177,7 +178,7 @@ function UnicodeTool() {
         rows={4}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={mode === "escape" ? L("输入含中文的文本", "Text with non-ASCII characters") : "\\u4e2d\\u6587"}
+        placeholder={mode === "escape" ? L("输入含中文的文本", "Text with non-ASCII characters", "輸入含中文的文字") : "\\u4e2d\\u6587"}
       />
       <OutBox value={result.out} />
       <ErrLine msg={result.err} />
@@ -201,7 +202,7 @@ function RadixTool() {
     });
   }, [input, from]);
   const errMsg = results?.find((r) => r.error)?.error
-    ? L("输入不合法：含超出所选进制的数字或字符", "Invalid input: digit out of range for the selected base")
+    ? L("输入不合法：含超出所选进制的数字或字符", "Invalid input: digit out of range for the selected base", "輸入不合法：含超出所選進位制的數字或字元")
     : "";
   return (
     <div>
@@ -210,12 +211,12 @@ function RadixTool() {
           className="dt-in dt-grow"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={L("输入数字（支持任意大整数）", "Enter a number (arbitrary precision)")}
+          placeholder={L("输入数字（支持任意大整数）", "Enter a number (arbitrary precision)", "輸入數字（支援任意大整數）")}
         />
         <select className="dt-sel" value={from} onChange={(e) => setFrom(Number(e.target.value))}>
           {RADIX_BASES.map((b) => (
             <option key={b} value={b}>
-              {b} {L("进制", "base")}
+              {b} {L("进制", "base", "進位制")}
             </option>
           ))}
         </select>
@@ -225,7 +226,7 @@ function RadixTool() {
         {results?.map((r) => (
           <div className="dt-kv-row" key={r.base}>
             <span className="dt-kv-k">
-              {r.base} {L("进制", "base")}
+              {r.base} {L("进制", "base", "進位制")}
             </span>
             <code className="dt-kv-v">{r.value ?? "—"}</code>
             {r.value ? <CopyBtn text={r.value} /> : null}
@@ -248,7 +249,7 @@ function HexTool() {
     const r = DT.hexToText(input);
     return r.ok
       ? { out: r.value, err: "" }
-      : { out: "", err: L("解码失败：十六进制格式不合法或不是 UTF-8 文本", "Decode failed: invalid hex or not UTF-8 text") };
+      : { out: "", err: L("解码失败：十六进制格式不合法或不是 UTF-8 文本", "Decode failed: invalid hex or not UTF-8 text", "解碼失敗：十六進位制格式不合法或不是 UTF-8 文字") };
   }, [input, mode, L]);
   return (
     <div>
@@ -256,8 +257,8 @@ function HexTool() {
         value={mode}
         onChange={setMode}
         options={[
-          { id: "encode", label: L("文本 → Hex", "Text → Hex") },
-          { id: "decode", label: L("Hex → 文本", "Hex → Text") },
+          { id: "encode", label: L("文本 → Hex", "Text → Hex", "文字 → Hex") },
+          { id: "decode", label: L("Hex → 文本", "Hex → Text", "Hex → 文字") },
         ]}
       />
       <textarea
@@ -265,7 +266,7 @@ function HexTool() {
         rows={4}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={mode === "encode" ? L("输入文本（按 UTF-8 字节转十六进制）", "Text (encoded as UTF-8 bytes)") : "e4 bd a0 e5 a5 bd"}
+        placeholder={mode === "encode" ? L("输入文本（按 UTF-8 字节转十六进制）", "Text (encoded as UTF-8 bytes)", "輸入文字（按 UTF-8 位元組轉十六進位制）") : "e4 bd a0 e5 a5 bd"}
       />
       <OutBox value={result.out} />
       <ErrLine msg={result.err} />
@@ -304,7 +305,7 @@ function HashTool() {
         rows={4}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={L("输入要计算哈希的文本", "Text to hash")}
+        placeholder={L("输入要计算哈希的文本", "Text to hash", "輸入要計算雜湊的文字")}
       />
       <div className="dt-kv">
         {["MD5", "SHA-1", "SHA-256", "SHA-512"].map((name) => (
@@ -331,8 +332,8 @@ function JwtTool() {
       return {
         err:
           r.error === "jwt-parts"
-            ? L("格式不对：JWT 应是三段以点分隔的字符串", "Invalid format: a JWT has three dot-separated parts")
-            : L("解码失败：header / payload 不是合法的 Base64Url JSON", "Decode failed: header / payload are not valid Base64Url JSON"),
+            ? L("格式不对：JWT 应是三段以点分隔的字符串", "Invalid format: a JWT has three dot-separated parts", "格式不對：JWT 應是三段以點分隔的字串")
+            : L("解码失败：header / payload 不是合法的 Base64Url JSON", "Decode failed: header / payload are not valid Base64Url JSON", "解碼失敗：header / payload 不是合法的 Base64Url JSON"),
         header: "",
         payload: "",
       };
@@ -364,7 +365,7 @@ function JwtTool() {
       <p className="privacy-note">
         {L(
           "只解码不验签：签名是否有效请以发证方的公钥/密钥在后端校验，这里看到的内容任何人都能伪造，不要据此信任 token。",
-          "Decoding only — no signature verification. Anyone can forge what you see here; always verify signatures server-side with the issuer's key."
+          "Decoding only — no signature verification. Anyone can forge what you see here; always verify signatures server-side with the issuer's key.", "只解碼不驗籤：簽名是否有效請以發證方的公鑰/金鑰在後端校驗，這裡看到的內容任何人都能偽造，不要據此信任 token。"
         )}
       </p>
     </div>
@@ -374,11 +375,16 @@ function JwtTool() {
 /* ---------------- 8. 密码强度 ---------------- */
 
 const PW_LEVELS = [
-  { zh: "很弱", en: "Very weak", color: "#dc2626" },
-  { zh: "弱", en: "Weak", color: "#ea580c" },
-  { zh: "中等", en: "Fair", color: "#ca8a04" },
-  { zh: "强", en: "Strong", color: "#65a30d" },
-  { zh: "很强", en: "Very strong", color: "#059669" },
+  { zh: "很弱", en: "Very weak",
+  tw: "很弱", color: "#dc2626" },
+  { zh: "弱", en: "Weak",
+  tw: "弱", color: "#ea580c" },
+  { zh: "中等", en: "Fair",
+  tw: "中等", color: "#ca8a04" },
+  { zh: "强", en: "Strong",
+  tw: "強", color: "#65a30d" },
+  { zh: "很强", en: "Very strong",
+  tw: "很強", color: "#059669" },
 ];
 
 function PasswordStrengthTool() {
@@ -395,7 +401,7 @@ function PasswordStrengthTool() {
         autoComplete="off"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={L("输入要检测的密码（不会上传）", "Type a password to check (never uploaded)")}
+        placeholder={L("输入要检测的密码（不会上传）", "Type a password to check (never uploaded)", "輸入要檢測的密碼（不會上傳）")}
       />
       {input && (
         <>
@@ -407,30 +413,30 @@ function PasswordStrengthTool() {
           </div>
           <div className="dt-kv">
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("等级", "Level")}</span>
+              <span className="dt-kv-k">{L("等级", "Level", "等級")}</span>
               <span className="dt-kv-v" style={{ color: lv.color, fontWeight: 700 }}>
-                {lang === "zh" ? lv.zh : lv.en}
+                {lv[lang]}
               </span>
             </div>
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("长度", "Length")}</span>
+              <span className="dt-kv-k">{L("长度", "Length", "長度")}</span>
               <span className="dt-kv-v">{s.length}</span>
             </div>
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("字符类", "Char classes")}</span>
+              <span className="dt-kv-k">{L("字符类", "Char classes", "字元類")}</span>
               <span className="dt-kv-v">
-                {s.classes}/4（{L("小写", "lower")} {s.hasLower ? "✓" : "✗"} · {L("大写", "upper")} {s.hasUpper ? "✓" : "✗"} · {L("数字", "digit")} {s.hasDigit ? "✓" : "✗"} · {L("符号", "symbol")} {s.hasSymbol ? "✓" : "✗"}）
+                {s.classes}/4（{L("小写", "lower", "小寫")} {s.hasLower ? "✓" : "✗"} · {L("大写", "upper", "大寫")} {s.hasUpper ? "✓" : "✗"} · {L("数字", "digit", "數字")} {s.hasDigit ? "✓" : "✗"} · {L("符号", "symbol", "符號")} {s.hasSymbol ? "✓" : "✗"}）
               </span>
             </div>
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("熵估算", "Entropy est.")}</span>
+              <span className="dt-kv-k">{L("熵估算", "Entropy est.", "熵估算")}</span>
               <span className="dt-kv-v">≈ {s.entropy} bit</span>
             </div>
           </div>
           <p className="privacy-note">
             {L(
               "熵是按字符集大小的理论估算，不代表真实安全性：含生日、姓名、常见词的密码再长也容易被字典猜中。",
-              "Entropy is a theoretical estimate from the character pool — it is not a security guarantee. Passwords containing birthdays, names or common words fall to dictionary attacks however long they are."
+              "Entropy is a theoretical estimate from the character pool — it is not a security guarantee. Passwords containing birthdays, names or common words fall to dictionary attacks however long they are.", "熵是按字符集大小的理論估算，不代表真實安全性：含生日、姓名、常見詞的密碼再長也容易被字典猜中。"
             )}
           </p>
         </>
@@ -455,7 +461,7 @@ function UuidTool() {
     <div>
       <div className="dt-row">
         <label className="dt-field">
-          {L("数量", "Count")}
+          {L("数量", "Count", "數量")}
           <input
             className="dt-in dt-num"
             type="number"
@@ -466,9 +472,9 @@ function UuidTool() {
           />
         </label>
         <button type="button" className="btn primary" onClick={() => gen(count)}>
-          {L("生成", "Generate")}
+          {L("生成", "Generate", "生成")}
         </button>
-        <CopyBtn text={list.join("\n")} label={L("复制全部", "Copy all")} />
+        <CopyBtn text={list.join("\n")} label={L("复制全部", "Copy all", "複製全部")} />
       </div>
       <OutBox value={list.join("\n")} rows={6} />
     </div>
@@ -492,7 +498,7 @@ function RandomPasswordTool() {
       setOutput(r.value);
       setErr("");
     } else {
-      setErr(L("至少勾选一类字符", "Select at least one character class"));
+      setErr(L("至少勾选一类字符", "Select at least one character class", "至少勾選一類字元"));
     }
   };
   useEffect(() => {
@@ -503,7 +509,7 @@ function RandomPasswordTool() {
     <div>
       <div className="dt-row dt-wrap">
         <label className="dt-field">
-          {L("长度", "Length")}
+          {L("长度", "Length", "長度")}
           <input
             className="dt-in dt-num"
             type="number"
@@ -523,16 +529,16 @@ function RandomPasswordTool() {
           <input type="checkbox" checked={digits} onChange={(e) => setDigits(e.target.checked)} /> 0-9
         </label>
         <label className="dt-check">
-          <input type="checkbox" checked={symbols} onChange={(e) => setSymbols(e.target.checked)} /> {L("符号", "Symbols")}
+          <input type="checkbox" checked={symbols} onChange={(e) => setSymbols(e.target.checked)} /> {L("符号", "Symbols", "符號")}
         </label>
         <button type="button" className="btn primary" onClick={gen}>
-          {L("生成", "Generate")}
+          {L("生成", "Generate", "生成")}
         </button>
       </div>
       <ErrLine msg={err} />
       <OutBox value={output} rows={2} />
       <p className="privacy-note">
-        {L("用 crypto.getRandomValues 生成，密码只出现在你的屏幕上。", "Generated with crypto.getRandomValues — the password only ever exists on your screen.")}
+        {L("用 crypto.getRandomValues 生成，密码只出现在你的屏幕上。", "Generated with crypto.getRandomValues — the password only ever exists on your screen.", "用 crypto.getRandomValues 生成，密碼只出現在你的螢幕上。")}
       </p>
     </div>
   );
@@ -555,29 +561,29 @@ function RandomNumberTool() {
       setErr("");
     } else {
       setOutput("");
-      setErr(L("参数不合法：需要最大值 > 最小值、数量 1–1000", "Invalid parameters: max must exceed min, count 1–1000"));
+      setErr(L("参数不合法：需要最大值 > 最小值、数量 1–1000", "Invalid parameters: max must exceed min, count 1–1000", "引數不合法：需要最大值 > 最小值、數量 1–1000"));
     }
   };
   return (
     <div>
       <div className="dt-row dt-wrap">
         <label className="dt-field">
-          {L("最小", "Min")}
+          {L("最小", "Min", "最小")}
           <input className="dt-in dt-num" type="number" value={min} onChange={(e) => setMin(Number(e.target.value))} />
         </label>
         <label className="dt-field">
-          {L("最大", "Max")}
+          {L("最大", "Max", "最大")}
           <input className="dt-in dt-num" type="number" value={max} onChange={(e) => setMax(Number(e.target.value))} />
         </label>
         <label className="dt-field">
-          {L("数量", "Count")}
+          {L("数量", "Count", "數量")}
           <input className="dt-in dt-num" type="number" min={1} max={1000} value={count} onChange={(e) => setCount(Number(e.target.value))} />
         </label>
         <label className="dt-check">
-          <input type="checkbox" checked={integer} onChange={(e) => setInteger(e.target.checked)} /> {L("整数", "Integers")}
+          <input type="checkbox" checked={integer} onChange={(e) => setInteger(e.target.checked)} /> {L("整数", "Integers", "整數")}
         </label>
         <button type="button" className="btn primary" onClick={gen}>
-          {L("生成", "Generate")}
+          {L("生成", "Generate", "生成")}
         </button>
       </div>
       <ErrLine msg={err} />
@@ -600,7 +606,7 @@ function JsonTool() {
       setErr("");
       if (mode === "validate") {
         setOutput("");
-        setOkMsg(L("✓ 合法 JSON", "✓ Valid JSON"));
+        setOkMsg(L("✓ 合法 JSON", "✓ Valid JSON", "✓ 合法 JSON"));
       } else {
         setOkMsg("");
         setOutput(r.value);
@@ -611,8 +617,8 @@ function JsonTool() {
       const e = (r as { error: DT.JsonError }).error;
       setErr(
         e.line
-          ? `${L("语法错误", "Syntax error")}：${L("第", "line")} ${e.line} ${L("行第", ", column")} ${e.column} ${L("列附近", "")} — ${e.message}`
-          : `${L("语法错误", "Syntax error")}：${e.message}`
+          ? `${L("语法错误", "Syntax error", "語法錯誤")}：${L("第", "line", "第")} ${e.line} ${L("行第", ", column", "行第")} ${e.column} ${L("列附近", "", "列附近")} — ${e.message}`
+          : `${L("语法错误", "Syntax error", "語法錯誤")}：${e.message}`
       );
     }
   };
@@ -627,13 +633,13 @@ function JsonTool() {
       />
       <div className="dt-row">
         <button type="button" className="btn primary" onClick={() => run("format")}>
-          {L("格式化", "Format")}
+          {L("格式化", "Format", "格式化")}
         </button>
         <button type="button" className="btn" onClick={() => run("minify")}>
-          {L("压缩", "Minify")}
+          {L("压缩", "Minify", "壓縮")}
         </button>
         <button type="button" className="btn" onClick={() => run("validate")}>
-          {L("校验", "Validate")}
+          {L("校验", "Validate", "校驗")}
         </button>
       </div>
       {okMsg && <p className="ok">{okMsg}</p>}
@@ -659,10 +665,10 @@ function TimestampTool() {
   const tsResult = useMemo(() => {
     if (!tsInput.trim()) return null;
     const num = Number(tsInput.trim());
-    if (!Number.isFinite(num)) return { err: L("不是合法数字", "Not a valid number") };
+    if (!Number.isFinite(num)) return { err: L("不是合法数字", "Not a valid number", "不是合法數字") };
     const u = unit === "auto" ? DT.guessTsUnit(num) : unit;
     const r = DT.timestampToDate(num, u);
-    if (!r.ok) return { err: L("超出可表示的日期范围", "Out of representable date range") };
+    if (!r.ok) return { err: L("超出可表示的日期范围", "Out of representable date range", "超出可表示的日期範圍") };
     return { local: r.value.local, iso: r.value.iso, unitUsed: u };
   }, [tsInput, unit, L]);
   const dtResult = useMemo(() => {
@@ -675,17 +681,17 @@ function TimestampTool() {
     <div>
       <div className="dt-kv">
         <div className="dt-kv-row">
-          <span className="dt-kv-k">{L("当前时间戳（秒）", "Now (seconds)")}</span>
+          <span className="dt-kv-k">{L("当前时间戳（秒）", "Now (seconds)", "當前時間戳（秒）")}</span>
           <code className="dt-kv-v">{now ? Math.floor(now.getTime() / 1000) : "—"}</code>
           {now && <CopyBtn text={String(Math.floor(now.getTime() / 1000))} />}
         </div>
         <div className="dt-kv-row">
-          <span className="dt-kv-k">{L("当前时间戳（毫秒）", "Now (milliseconds)")}</span>
+          <span className="dt-kv-k">{L("当前时间戳（毫秒）", "Now (milliseconds)", "當前時間戳（毫秒）")}</span>
           <code className="dt-kv-v">{now ? now.getTime() : "—"}</code>
           {now && <CopyBtn text={String(now.getTime())} />}
         </div>
       </div>
-      <p className="dt-label">{L("时间戳 → 日期", "Timestamp → Date")}</p>
+      <p className="dt-label">{L("时间戳 → 日期", "Timestamp → Date", "時間戳 → 日期")}</p>
       <div className="dt-row">
         <input
           className="dt-in dt-grow"
@@ -694,9 +700,9 @@ function TimestampTool() {
           placeholder="1700000000"
         />
         <select className="dt-sel" value={unit} onChange={(e) => setUnit(e.target.value as "auto" | "s" | "ms")}>
-          <option value="auto">{L("自动识别", "Auto")}</option>
-          <option value="s">{L("秒", "Seconds")}</option>
-          <option value="ms">{L("毫秒", "Milliseconds")}</option>
+          <option value="auto">{L("自动识别", "Auto", "自動識別")}</option>
+          <option value="s">{L("秒", "Seconds", "秒")}</option>
+          <option value="ms">{L("毫秒", "Milliseconds", "毫秒")}</option>
         </select>
       </div>
       {tsResult && "err" in tsResult && <ErrLine msg={tsResult.err ?? ""} />}
@@ -704,7 +710,7 @@ function TimestampTool() {
         <div className="dt-kv">
           <div className="dt-kv-row">
             <span className="dt-kv-k">
-              {L("本地时间", "Local")}（{tsResult.unitUsed === "s" ? L("按秒", "as seconds") : L("按毫秒", "as ms")}）
+              {L("本地时间", "Local", "本地時間")}（{tsResult.unitUsed === "s" ? L("按秒", "as seconds", "按秒") : L("按毫秒", "as ms", "按毫秒")}）
             </span>
             <code className="dt-kv-v">{tsResult.local}</code>
             <CopyBtn text={tsResult.local ?? ""} />
@@ -716,7 +722,7 @@ function TimestampTool() {
           </div>
         </div>
       )}
-      <p className="dt-label">{L("日期 → 时间戳", "Date → Timestamp")}</p>
+      <p className="dt-label">{L("日期 → 时间戳", "Date → Timestamp", "日期 → 時間戳")}</p>
       <input
         className="dt-in dt-full"
         type="datetime-local"
@@ -727,12 +733,12 @@ function TimestampTool() {
       {dtResult && (
         <div className="dt-kv">
           <div className="dt-kv-row">
-            <span className="dt-kv-k">{L("秒", "Seconds")}</span>
+            <span className="dt-kv-k">{L("秒", "Seconds", "秒")}</span>
             <code className="dt-kv-v">{dtResult.s}</code>
             <CopyBtn text={String(dtResult.s)} />
           </div>
           <div className="dt-kv-row">
-            <span className="dt-kv-k">{L("毫秒", "Milliseconds")}</span>
+            <span className="dt-kv-k">{L("毫秒", "Milliseconds", "毫秒")}</span>
             <code className="dt-kv-v">{dtResult.ms}</code>
             <CopyBtn text={String(dtResult.ms)} />
           </div>
@@ -758,7 +764,7 @@ function ColorTool() {
       setRgb(r.value);
       setHexErr("");
     } else if (v.trim().length >= 4) {
-      setHexErr(L("不是合法的 HEX 颜色（#RGB 或 #RRGGBB）", "Invalid HEX color (#RGB or #RRGGBB)"));
+      setHexErr(L("不是合法的 HEX 颜色（#RGB 或 #RRGGBB）", "Invalid HEX color (#RGB or #RRGGBB)", "不是合法的 HEX 顏色（#RGB 或 #RRGGBB）"));
     } else {
       setHexErr("");
     }
@@ -897,7 +903,7 @@ function UrlParseTool() {
       setErr("");
     } else {
       setBase(null);
-      setErr(L("不是合法的 URL（记得带 https:// 前缀）", "Not a valid URL (include the https:// prefix)"));
+      setErr(L("不是合法的 URL（记得带 https:// 前缀）", "Not a valid URL (include the https:// prefix)", "不是合法的 URL（記得帶 https:// 字首）"));
     }
   };
   const output = base ? DT.buildUrl(base, params) : "";
@@ -914,7 +920,7 @@ function UrlParseTool() {
           placeholder="https://example.com/path?a=1&b=2#top"
         />
         <button type="button" className="btn primary" onClick={parse}>
-          {L("解析", "Parse")}
+          {L("解析", "Parse", "解析")}
         </button>
       </div>
       <ErrLine msg={err} />
@@ -922,15 +928,15 @@ function UrlParseTool() {
         <>
           <div className="dt-kv">
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("协议", "Protocol")}</span>
+              <span className="dt-kv-k">{L("协议", "Protocol", "協議")}</span>
               <code className="dt-kv-v">{base.protocol}</code>
             </div>
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("主机", "Host")}</span>
+              <span className="dt-kv-k">{L("主机", "Host", "主機")}</span>
               <code className="dt-kv-v">{base.host}</code>
             </div>
             <div className="dt-kv-row">
-              <span className="dt-kv-k">{L("路径", "Path")}</span>
+              <span className="dt-kv-k">{L("路径", "Path", "路徑")}</span>
               <code className="dt-kv-v">{base.pathname}</code>
             </div>
             {base.hash && (
@@ -940,7 +946,7 @@ function UrlParseTool() {
               </div>
             )}
           </div>
-          <p className="dt-label">{L("查询参数（可编辑，下方链接实时拼回）", "Query params (editable — the URL below rebuilds live)")}</p>
+          <p className="dt-label">{L("查询参数（可编辑，下方链接实时拼回）", "Query params (editable — the URL below rebuilds live)", "查詢引數（可編輯，下方連結實時拼回）")}</p>
           <div className="dt-params">
             {params.map((p, i) => (
               <div className="dt-row" key={i}>
@@ -956,7 +962,7 @@ function UrlParseTool() {
               </div>
             ))}
             <button type="button" className="btn small" onClick={() => setParams((prev) => [...prev, ["", ""]])}>
-              {L("＋ 加一行", "＋ Add row")}
+              {L("＋ 加一行", "＋ Add row", "＋ 加一行")}
             </button>
           </div>
           <OutBox value={output} rows={3} />
@@ -973,12 +979,12 @@ function TextStatsTool() {
   const [input, setInput] = useState("");
   const s = useMemo(() => DT.textStats(input), [input]);
   const rows: [string, number][] = [
-    [L("总字符", "Characters"), s.chars],
-    [L("不计空格", "Without spaces"), s.charsNoSpace],
-    [L("汉字", "Chinese chars"), s.chineseChars],
-    [L("英文单词", "English words"), s.englishWords],
-    [L("行数", "Lines"), s.lines],
-    [L("段落", "Paragraphs"), s.paragraphs],
+    [L("总字符", "Characters", "總字元"), s.chars],
+    [L("不计空格", "Without spaces", "不計空格"), s.charsNoSpace],
+    [L("汉字", "Chinese chars", "漢字"), s.chineseChars],
+    [L("英文单词", "English words", "英文單詞"), s.englishWords],
+    [L("行数", "Lines", "行數"), s.lines],
+    [L("段落", "Paragraphs", "段落"), s.paragraphs],
   ];
   return (
     <div>
@@ -987,7 +993,7 @@ function TextStatsTool() {
         rows={6}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={L("粘贴文本，实时统计", "Paste text — stats update live")}
+        placeholder={L("粘贴文本，实时统计", "Paste text — stats update live", "貼上文字，實時統計")}
       />
       <div className="dt-stats">
         {rows.map(([label, v]) => (
@@ -1003,15 +1009,23 @@ function TextStatsTool() {
 
 /* ---------------- 18. 大小写转换 ---------------- */
 
-const CASE_MODES: { id: string; zh: string; en: string; example: string }[] = [
-  { id: "upper", zh: "全大写", en: "UPPERCASE", example: "HELLO WORLD" },
-  { id: "lower", zh: "全小写", en: "lowercase", example: "hello world" },
-  { id: "capitalize", zh: "句首大写", en: "Sentence case", example: "Hello world." },
-  { id: "title", zh: "单词首字母大写", en: "Title Case", example: "Hello World" },
-  { id: "camel", zh: "小驼峰", en: "camelCase", example: "helloWorld" },
-  { id: "pascal", zh: "大驼峰", en: "PascalCase", example: "HelloWorld" },
-  { id: "snake", zh: "下划线", en: "snake_case", example: "hello_world" },
-  { id: "kebab", zh: "连字符", en: "kebab-case", example: "hello-world" },
+const CASE_MODES: { id: string; zh: string; tw: string; en: string; example: string }[] = [
+  { id: "upper", zh: "全大写", en: "UPPERCASE",
+  tw: "全大寫", example: "HELLO WORLD" },
+  { id: "lower", zh: "全小写", en: "lowercase",
+  tw: "全小寫", example: "hello world" },
+  { id: "capitalize", zh: "句首大写", en: "Sentence case",
+  tw: "句首大寫", example: "Hello world." },
+  { id: "title", zh: "单词首字母大写", en: "Title Case",
+  tw: "單詞首字母大寫", example: "Hello World" },
+  { id: "camel", zh: "小驼峰", en: "camelCase",
+  tw: "小駝峰", example: "helloWorld" },
+  { id: "pascal", zh: "大驼峰", en: "PascalCase",
+  tw: "大駝峰", example: "HelloWorld" },
+  { id: "snake", zh: "下划线", en: "snake_case",
+  tw: "下劃線", example: "hello_world" },
+  { id: "kebab", zh: "连字符", en: "kebab-case",
+  tw: "連字元", example: "hello-world" },
 ];
 
 function CaseTool() {
@@ -1037,7 +1051,7 @@ function CaseTool() {
             onClick={() => setMode(m.id)}
             title={m.example}
           >
-            {lang === "zh" ? m.zh : m.en}
+            {m[lang]}
           </button>
         ))}
       </div>
@@ -1048,13 +1062,19 @@ function CaseTool() {
 
 /* ---------------- 19. 行处理 ---------------- */
 
-const LINE_OPS: { id: DT.LineOp; zh: string; en: string }[] = [
-  { id: "dedupe", zh: "去重", en: "Dedupe" },
-  { id: "sortAsc", zh: "升序排序", en: "Sort A→Z" },
-  { id: "sortDesc", zh: "降序排序", en: "Sort Z→A" },
-  { id: "removeEmpty", zh: "去空行", en: "Remove empty" },
-  { id: "trim", zh: "去首尾空格", en: "Trim lines" },
-  { id: "reverse", zh: "行序反转", en: "Reverse" },
+const LINE_OPS: { id: DT.LineOp; zh: string; tw: string; en: string }[] = [
+  { id: "dedupe", zh: "去重", en: "Dedupe",
+  tw: "去重" },
+  { id: "sortAsc", zh: "升序排序", en: "Sort A→Z",
+  tw: "升序排序" },
+  { id: "sortDesc", zh: "降序排序", en: "Sort Z→A",
+  tw: "降序排序" },
+  { id: "removeEmpty", zh: "去空行", en: "Remove empty",
+  tw: "去空行" },
+  { id: "trim", zh: "去首尾空格", en: "Trim lines",
+  tw: "去首尾空格" },
+  { id: "reverse", zh: "行序反转", en: "Reverse",
+  tw: "行序反轉" },
 ];
 
 function LinesTool() {
@@ -1070,19 +1090,19 @@ function LinesTool() {
         rows={6}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder={L("一行一条，粘贴进来处理", "One item per line")}
+        placeholder={L("一行一条，粘贴进来处理", "One item per line", "一行一條，貼上進來處理")}
       />
       <div className="dt-row dt-wrap">
         {LINE_OPS.map((op) => (
           <button key={op.id} type="button" className="btn small" onClick={() => apply(op.id)}>
-            {lang === "zh" ? op.zh : op.en}
+            {op[lang]}
           </button>
         ))}
       </div>
       {output !== "" && (
         <>
           <p className="privacy-note">
-            {L("处理前", "Before")} {input === "" ? 0 : input.split("\n").length} {L("行 → 处理后", "lines → after")} {output.split("\n").length} {L("行", "lines")}
+            {L("处理前", "Before", "處理前")} {input === "" ? 0 : input.split("\n").length} {L("行 → 处理后", "lines → after", "行 → 處理後")} {output.split("\n").length} {L("行", "lines", "行")}
           </p>
           <OutBox value={output} rows={6} />
         </>
@@ -1101,16 +1121,16 @@ function DiffTool() {
   return (
     <div>
       <div className="dt-diff-inputs">
-        <textarea className="dt-ta" rows={6} value={a} onChange={(e) => setA(e.target.value)} placeholder={L("原文（左）", "Original (left)")} />
-        <textarea className="dt-ta" rows={6} value={b} onChange={(e) => setB(e.target.value)} placeholder={L("新文（右）", "Revised (right)")} />
+        <textarea className="dt-ta" rows={6} value={a} onChange={(e) => setA(e.target.value)} placeholder={L("原文（左）", "Original (left)", "原文（左）")} />
+        <textarea className="dt-ta" rows={6} value={b} onChange={(e) => setB(e.target.value)} placeholder={L("新文（右）", "Revised (right)", "新文（右）")} />
       </div>
       <div className="dt-row">
         <button type="button" className="btn primary" onClick={() => setDiff(DT.diffLines(a, b))}>
-          {L("按行对比", "Compare lines")}
+          {L("按行对比", "Compare lines", "按行對比")}
         </button>
         {diff && (
           <span className="privacy-note" style={{ margin: 0 }}>
-            {L("删除", "Removed")} {diff.filter((d) => d.type === "remove").length} {L("行 · 新增", "· Added")} {diff.filter((d) => d.type === "add").length} {L("行", "lines")}
+            {L("删除", "Removed", "刪除")} {diff.filter((d) => d.type === "remove").length} {L("行 · 新增", "· Added", "行 · 新增")} {diff.filter((d) => d.type === "add").length} {L("行", "lines", "行")}
           </span>
         )}
       </div>
@@ -1141,34 +1161,79 @@ interface ToolMeta {
 }
 
 const GROUPS: { id: string; name: Record<Lang, string> }[] = [
-  { id: "encoding", name: { zh: "编码转换", en: "Encoding" } },
-  { id: "crypto", name: { zh: "加密与校验", en: "Hash & Verify" } },
-  { id: "generators", name: { zh: "生成器", en: "Generators" } },
-  { id: "format", name: { zh: "格式化与转换", en: "Format & Convert" } },
-  { id: "text", name: { zh: "文本工具", en: "Text Tools" } },
+  { id: "encoding", name: { zh: "编码转换", en: "Encoding",
+  tw: "編碼轉換" } },
+  { id: "crypto", name: { zh: "加密与校验", en: "Hash & Verify",
+  tw: "加密與校驗" } },
+  { id: "generators", name: { zh: "生成器", en: "Generators",
+  tw: "生成器" } },
+  { id: "format", name: { zh: "格式化与转换", en: "Format & Convert",
+  tw: "格式化與轉換" } },
+  { id: "text", name: { zh: "文本工具", en: "Text Tools",
+  tw: "文字工具" } },
 ];
 
 const TOOL_META: ToolMeta[] = [
-  { id: "base64", group: "encoding", icon: "🔤", name: { zh: "Base64 编码 / 解码", en: "Base64 Encode / Decode" }, desc: { zh: "文本与 Base64 互转，中文按 UTF-8 处理不乱码。", en: "Text ↔ Base64 with proper UTF-8 handling." }, kw: "base64 encode decode 编码 解码", Comp: Base64Tool },
-  { id: "url-codec", group: "encoding", icon: "🔗", name: { zh: "URL 编码 / 解码", en: "URL Encode / Decode" }, desc: { zh: "encodeURIComponent 口径，处理链接里的中文与特殊字符。", en: "encodeURIComponent semantics for links with special characters." }, kw: "url encode decode 编码 解码 percent", Comp: UrlCodecTool },
-  { id: "unicode", group: "encoding", icon: "🔣", name: { zh: "Unicode 转义互转", en: "Unicode Escape Converter" }, desc: { zh: "中文 ↔ \\uXXXX 转义，粘贴代码里的转义串也能还原。", en: "Text ↔ \\uXXXX escapes, both ways." }, kw: "unicode escape 转义 \\u", Comp: UnicodeTool },
-  { id: "radix", group: "encoding", icon: "🔢", name: { zh: "进制转换", en: "Radix Converter" }, desc: { zh: "2 / 8 / 10 / 16 / 36 进制互转，BigInt 支持任意大整数。", en: "Base 2 / 8 / 10 / 16 / 36 with BigInt arbitrary precision." }, kw: "进制 radix binary hex decimal 进制转换", Comp: RadixTool },
-  { id: "hex", group: "encoding", icon: "#️⃣", name: { zh: "Hex ↔ 文本", en: "Hex ↔ Text" }, desc: { zh: "文本按 UTF-8 字节转十六进制串，也能反向解回。", en: "Text to hex bytes (UTF-8) and back." }, kw: "hex hexadecimal 十六进制 文本", Comp: HexTool },
-  { id: "hash", group: "crypto", icon: "🧬", name: { zh: "哈希计算", en: "Hash Calculator" }, desc: { zh: "MD5 / SHA-1 / SHA-256 / SHA-512 一次算齐，输入即出。", en: "MD5 / SHA-1 / SHA-256 / SHA-512, computed as you type." }, kw: "hash md5 sha 哈希 摘要", Comp: HashTool },
-  { id: "jwt", group: "crypto", icon: "🎫", name: { zh: "JWT 解码", en: "JWT Decoder" }, desc: { zh: "拆开 header 与 payload 看内容，只解码、不验签。", en: "Inspect header and payload — decode only, no verification." }, kw: "jwt token decode 解码 bearer", Comp: JwtTool },
-  { id: "pw-strength", group: "crypto", icon: "💪", name: { zh: "密码强度检测", en: "Password Strength Checker" }, desc: { zh: "长度、字符类与熵估算一起看，给等级不给绝对结论。", en: "Length, character classes and entropy estimate with a grade." }, kw: "password strength 密码 强度 熵 entropy", Comp: PasswordStrengthTool },
-  { id: "uuid", group: "generators", icon: "🆔", name: { zh: "UUID 生成", en: "UUID Generator" }, desc: { zh: "v4 随机 UUID，一次最多生成 50 个，可整批复制。", en: "Random v4 UUIDs, up to 50 at a time." }, kw: "uuid guid 生成 v4", Comp: UuidTool },
-  { id: "random-password", group: "generators", icon: "🔑", name: { zh: "随机密码生成", en: "Random Password Generator" }, desc: { zh: "长度与字符集可调，安全随机源生成，只出现在你屏幕上。", en: "Adjustable length and charset, generated with a secure RNG." }, kw: "random password 随机 密码 生成", Comp: RandomPasswordTool },
-  { id: "random-number", group: "generators", icon: "🎲", name: { zh: "随机数生成", en: "Random Number Generator" }, desc: { zh: "指定范围批量出整数或小数，抽号、造测试数据都行。", en: "Batch integers or decimals in any range." }, kw: "random number 随机数 抽号", Comp: RandomNumberTool },
-  { id: "json", group: "format", icon: "🧾", name: { zh: "JSON 格式化 / 校验", en: "JSON Formatter / Validator" }, desc: { zh: "美化、压缩、校验三合一，写错了指出第几行第几列。", en: "Format, minify and validate — errors pinpoint line and column." }, kw: "json format validate 格式化 压缩 校验", Comp: JsonTool },
-  { id: "timestamp", group: "format", icon: "⏱️", name: { zh: "时间戳转换", en: "Timestamp Converter" }, desc: { zh: "秒 / 毫秒与日期时间互转，当前时间戳实时跳动。", en: "Seconds / milliseconds ↔ date-time, with a live current timestamp." }, kw: "timestamp unix 时间戳 日期 epoch", Comp: TimestampTool },
-  { id: "color", group: "format", icon: "🎨", name: { zh: "颜色转换", en: "Color Converter" }, desc: { zh: "HEX / RGB / HSL 互转，滑杆调色、色块实时预览。", en: "HEX / RGB / HSL conversion with sliders and a live swatch." }, kw: "color hex rgb hsl 颜色 转换", Comp: ColorTool },
-  { id: "unit", group: "format", icon: "📏", name: { zh: "单位换算", en: "Unit Converter" }, desc: { zh: "长度、重量、数据容量三类常用单位互转。", en: "Length, weight and data-size units." }, kw: "unit convert 单位 换算 长度 重量 容量", Comp: UnitTool },
-  { id: "url-parse", group: "format", icon: "🧩", name: { zh: "URL 参数解析", en: "URL Parser" }, desc: { zh: "把链接拆成协议、主机、路径与参数表，改完实时拼回。", en: "Split a URL into protocol, host, path and an editable query table." }, kw: "url parse query params 解析 参数", Comp: UrlParseTool },
-  { id: "text-stats", group: "text", icon: "🔢", name: { zh: "字数统计", en: "Text Counter" }, desc: { zh: "字符、汉字、英文单词、行数与段落，边打边数。", en: "Characters, Chinese chars, words, lines and paragraphs — live." }, kw: "字数 统计 count words chars", Comp: TextStatsTool },
-  { id: "case", group: "text", icon: "🔠", name: { zh: "大小写转换", en: "Case Converter" }, desc: { zh: "全大 / 全小 / 句首 / 驼峰 / 下划线等八种写法互转。", en: "UPPER, lower, Sentence, camel, Pascal, snake, kebab and Title." }, kw: "case 大小写 camel snake 驼峰", Comp: CaseTool },
-  { id: "lines", group: "text", icon: "📋", name: { zh: "行处理", en: "Line Tools" }, desc: { zh: "去重、排序、去空行、反转、去首尾空格，一键处理一列文本。", en: "Dedupe, sort, drop blanks, reverse and trim a list of lines." }, kw: "lines dedupe sort 行 去重 排序", Comp: LinesTool },
-  { id: "diff", group: "text", icon: "🔀", name: { zh: "文本对比", en: "Text Diff" }, desc: { zh: "双栏粘贴，按行 diff 高亮新增与删除的行。", en: "Paste two texts — line diff with additions and removals highlighted." }, kw: "diff compare 对比 文本 差异", Comp: DiffTool },
+  { id: "base64", group: "encoding", icon: "🔤", name: { zh: "Base64 编码 / 解码", en: "Base64 Encode / Decode",
+  tw: "Base64 編碼 / 解碼" }, desc: { zh: "文本与 Base64 互转，中文按 UTF-8 处理不乱码。", en: "Text ↔ Base64 with proper UTF-8 handling.",
+  tw: "文字與 Base64 互轉，中文按 UTF-8 處理不亂碼。" }, kw: "base64 encode decode 编码 解码", Comp: Base64Tool },
+  { id: "url-codec", group: "encoding", icon: "🔗", name: { zh: "URL 编码 / 解码", en: "URL Encode / Decode",
+  tw: "URL 編碼 / 解碼" }, desc: { zh: "encodeURIComponent 口径，处理链接里的中文与特殊字符。", en: "encodeURIComponent semantics for links with special characters.",
+  tw: "encodeURIComponent 口徑，處理連結裡的中文與特殊字元。" }, kw: "url encode decode 编码 解码 percent", Comp: UrlCodecTool },
+  { id: "unicode", group: "encoding", icon: "🔣", name: { zh: "Unicode 转义互转", en: "Unicode Escape Converter",
+  tw: "Unicode 轉義互轉" }, desc: { zh: "中文 ↔ \\uXXXX 转义，粘贴代码里的转义串也能还原。", en: "Text ↔ \\uXXXX escapes, both ways.",
+  tw: "中文 ↔ \\uXXXX 轉義，貼上程式碼裡的轉義串也能還原。" }, kw: "unicode escape 转义 \\u", Comp: UnicodeTool },
+  { id: "radix", group: "encoding", icon: "🔢", name: { zh: "进制转换", en: "Radix Converter",
+  tw: "進位制轉換" }, desc: { zh: "2 / 8 / 10 / 16 / 36 进制互转，BigInt 支持任意大整数。", en: "Base 2 / 8 / 10 / 16 / 36 with BigInt arbitrary precision.",
+  tw: "2 / 8 / 10 / 16 / 36 進位制互轉，BigInt 支援任意大整數。" }, kw: "进制 radix binary hex decimal 进制转换", Comp: RadixTool },
+  { id: "hex", group: "encoding", icon: "#️⃣", name: { zh: "Hex ↔ 文本", en: "Hex ↔ Text",
+  tw: "Hex ↔ 文字" }, desc: { zh: "文本按 UTF-8 字节转十六进制串，也能反向解回。", en: "Text to hex bytes (UTF-8) and back.",
+  tw: "文字按 UTF-8 位元組轉十六進位制串，也能反向解回。" }, kw: "hex hexadecimal 十六进制 文本", Comp: HexTool },
+  { id: "hash", group: "crypto", icon: "🧬", name: { zh: "哈希计算", en: "Hash Calculator",
+  tw: "雜湊計算" }, desc: { zh: "MD5 / SHA-1 / SHA-256 / SHA-512 一次算齐，输入即出。", en: "MD5 / SHA-1 / SHA-256 / SHA-512, computed as you type.",
+  tw: "MD5 / SHA-1 / SHA-256 / SHA-512 一次算齊，輸入即出。" }, kw: "hash md5 sha 哈希 摘要", Comp: HashTool },
+  { id: "jwt", group: "crypto", icon: "🎫", name: { zh: "JWT 解码", en: "JWT Decoder",
+  tw: "JWT 解碼" }, desc: { zh: "拆开 header 与 payload 看内容，只解码、不验签。", en: "Inspect header and payload — decode only, no verification.",
+  tw: "拆開 header 與 payload 看內容，只解碼、不驗籤。" }, kw: "jwt token decode 解码 bearer", Comp: JwtTool },
+  { id: "pw-strength", group: "crypto", icon: "💪", name: { zh: "密码强度检测", en: "Password Strength Checker",
+  tw: "密碼強度檢測" }, desc: { zh: "长度、字符类与熵估算一起看，给等级不给绝对结论。", en: "Length, character classes and entropy estimate with a grade.",
+  tw: "長度、字元類與熵估算一起看，給等級不給絕對結論。" }, kw: "password strength 密码 强度 熵 entropy", Comp: PasswordStrengthTool },
+  { id: "uuid", group: "generators", icon: "🆔", name: { zh: "UUID 生成", en: "UUID Generator",
+  tw: "UUID 生成" }, desc: { zh: "v4 随机 UUID，一次最多生成 50 个，可整批复制。", en: "Random v4 UUIDs, up to 50 at a time.",
+  tw: "v4 隨機 UUID，一次最多生成 50 個，可整批覆制。" }, kw: "uuid guid 生成 v4", Comp: UuidTool },
+  { id: "random-password", group: "generators", icon: "🔑", name: { zh: "随机密码生成", en: "Random Password Generator",
+  tw: "隨機密碼生成" }, desc: { zh: "长度与字符集可调，安全随机源生成，只出现在你屏幕上。", en: "Adjustable length and charset, generated with a secure RNG.",
+  tw: "長度與字符集可調，安全隨機源生成，只出現在你螢幕上。" }, kw: "random password 随机 密码 生成", Comp: RandomPasswordTool },
+  { id: "random-number", group: "generators", icon: "🎲", name: { zh: "随机数生成", en: "Random Number Generator",
+  tw: "隨機數生成" }, desc: { zh: "指定范围批量出整数或小数，抽号、造测试数据都行。", en: "Batch integers or decimals in any range.",
+  tw: "指定範圍批次出整數或小數，抽號、造測試資料都行。" }, kw: "random number 随机数 抽号", Comp: RandomNumberTool },
+  { id: "json", group: "format", icon: "🧾", name: { zh: "JSON 格式化 / 校验", en: "JSON Formatter / Validator",
+  tw: "JSON 格式化 / 校驗" }, desc: { zh: "美化、压缩、校验三合一，写错了指出第几行第几列。", en: "Format, minify and validate — errors pinpoint line and column.",
+  tw: "美化、壓縮、校驗三合一，寫錯了指出第幾行第幾列。" }, kw: "json format validate 格式化 压缩 校验", Comp: JsonTool },
+  { id: "timestamp", group: "format", icon: "⏱️", name: { zh: "时间戳转换", en: "Timestamp Converter",
+  tw: "時間戳轉換" }, desc: { zh: "秒 / 毫秒与日期时间互转，当前时间戳实时跳动。", en: "Seconds / milliseconds ↔ date-time, with a live current timestamp.",
+  tw: "秒 / 毫秒與日期時間互轉，當前時間戳實時跳動。" }, kw: "timestamp unix 时间戳 日期 epoch", Comp: TimestampTool },
+  { id: "color", group: "format", icon: "🎨", name: { zh: "颜色转换", en: "Color Converter",
+  tw: "顏色轉換" }, desc: { zh: "HEX / RGB / HSL 互转，滑杆调色、色块实时预览。", en: "HEX / RGB / HSL conversion with sliders and a live swatch.",
+  tw: "HEX / RGB / HSL 互轉，滑桿調色、色塊實時預覽。" }, kw: "color hex rgb hsl 颜色 转换", Comp: ColorTool },
+  { id: "unit", group: "format", icon: "📏", name: { zh: "单位换算", en: "Unit Converter",
+  tw: "單位換算" }, desc: { zh: "长度、重量、数据容量三类常用单位互转。", en: "Length, weight and data-size units.",
+  tw: "長度、重量、資料容量三類常用單位互轉。" }, kw: "unit convert 单位 换算 长度 重量 容量", Comp: UnitTool },
+  { id: "url-parse", group: "format", icon: "🧩", name: { zh: "URL 参数解析", en: "URL Parser",
+  tw: "URL 引數解析" }, desc: { zh: "把链接拆成协议、主机、路径与参数表，改完实时拼回。", en: "Split a URL into protocol, host, path and an editable query table.",
+  tw: "把連結拆成協議、主機、路徑與參數列，改完實時拼回。" }, kw: "url parse query params 解析 参数", Comp: UrlParseTool },
+  { id: "text-stats", group: "text", icon: "🔢", name: { zh: "字数统计", en: "Text Counter",
+  tw: "字數統計" }, desc: { zh: "字符、汉字、英文单词、行数与段落，边打边数。", en: "Characters, Chinese chars, words, lines and paragraphs — live.",
+  tw: "字元、漢字、英文單詞、行數與段落，邊打邊數。" }, kw: "字数 统计 count words chars", Comp: TextStatsTool },
+  { id: "case", group: "text", icon: "🔠", name: { zh: "大小写转换", en: "Case Converter",
+  tw: "大小寫轉換" }, desc: { zh: "全大 / 全小 / 句首 / 驼峰 / 下划线等八种写法互转。", en: "UPPER, lower, Sentence, camel, Pascal, snake, kebab and Title.",
+  tw: "全大 / 全小 / 句首 / 駝峰 / 下劃線等八種寫法互轉。" }, kw: "case 大小写 camel snake 驼峰", Comp: CaseTool },
+  { id: "lines", group: "text", icon: "📋", name: { zh: "行处理", en: "Line Tools",
+  tw: "行處理" }, desc: { zh: "去重、排序、去空行、反转、去首尾空格，一键处理一列文本。", en: "Dedupe, sort, drop blanks, reverse and trim a list of lines.",
+  tw: "去重、排序、去空行、反轉、去首尾空格，一鍵處理一列文字。" }, kw: "lines dedupe sort 行 去重 排序", Comp: LinesTool },
+  { id: "diff", group: "text", icon: "🔀", name: { zh: "文本对比", en: "Text Diff",
+  tw: "文字對比" }, desc: { zh: "双栏粘贴，按行 diff 高亮新增与删除的行。", en: "Paste two texts — line diff with additions and removals highlighted.",
+  tw: "雙欄貼上，按行 diff 高亮新增與刪除的行。" }, kw: "diff compare 对比 文本 差异", Comp: DiffTool },
 ];
 
 export default function DevToolbox() {
@@ -1178,6 +1243,7 @@ export default function DevToolbox() {
   const matches = (m: ToolMeta) =>
     !q ||
     m.name.zh.toLowerCase().includes(q) ||
+    m.name.tw.toLowerCase().includes(q) ||
     m.name.en.toLowerCase().includes(q) ||
     m.kw.includes(q);
   const visible = TOOL_META.filter(matches);
@@ -1185,7 +1251,7 @@ export default function DevToolbox() {
     <div className="tool-embed devtools">
       <div className="badges">
         <span className="badge badge-embedded">
-          🔒 {lang === "zh" ? "全部在浏览器本地运行，输入不上传" : "Everything runs locally in your browser — nothing is uploaded"}
+          🔒 {lang === "zh" ? "全部在浏览器本地运行，输入不上传" : lang === "tw" ? "全部在瀏覽器本地運行，輸入不上傳" : "Everything runs locally in your browser — nothing is uploaded"}
         </span>
       </div>
       <div className="dt-searchrow">
@@ -1194,7 +1260,7 @@ export default function DevToolbox() {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={lang === "zh" ? "搜索 20 件工具，如：哈希 / JSON / 时间戳…" : "Search 20 tools: hash / JSON / timestamp…"}
+          placeholder={lang === "zh" ? "搜索 20 件工具，如：哈希 / JSON / 时间戳…" : lang === "tw" ? "搜尋 20 件工具，如：雜湊 / JSON / 時間戳…" : "Search 20 tools: hash / JSON / timestamp…"}
           aria-label="Search dev tools"
         />
       </div>
@@ -1206,7 +1272,7 @@ export default function DevToolbox() {
         ))}
       </nav>
       {visible.length === 0 && (
-        <p className="empty-note">{lang === "zh" ? "没有匹配的工具，换个词试试" : "No matching tools — try another keyword"}</p>
+        <p className="empty-note">{lang === "zh" ? "没有匹配的工具，换个词试试" : lang === "tw" ? "沒有匹配的工具，換個詞試試" : "No matching tools — try another keyword"}</p>
       )}
       {GROUPS.map((g) => {
         const items = visible.filter((m) => m.group === g.id);

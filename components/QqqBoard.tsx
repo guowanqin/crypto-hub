@@ -263,6 +263,88 @@ const DICT: Record<
       "Prices come from Yahoo Finance daily bars (15-minute server cache, automatically falling back to Cboe delayed quotes when datacenter IPs are blocked): the price is the latest daily close and the change is versus the previous session; the 52-week high/low use the last 252 trading days' closes; MA200 is the mean of the last 200 closes; the ATH is the highest close across the full monthly history and recent daily bars (closing basis, not intraday highs). Backtest monthly bars and dividends come from Yahoo Finance's full history (monthly from 1999-03, with 1999-03 seeded from the daily month-end close; 90+ dividend events since records began, paid quarterly). If Yahoo is unavailable the page automatically falls back to a stored full-history data file (its as-of month is labelled in the backtest section), topped up with Cboe monthly bars and stockanalysis dividends. P/E comes from stockanalysis.com (12-hour cache; omitted entirely when unavailable). Everything here is a mechanical computation over public data and is not investment advice.",
     toolsTitle: "Tools in this shelf",
   },
+  tw: {
+    boardKicker: "QQQ 資料看板 · Invesco QQQ Trust（納斯達克 100 ETF）",
+    sourceLine: "資料來源：{ps}（股價）· {hs}（回測月線與分紅）· 取數 {qt}",
+    loading: "正在拉取 QQQ 行情與全史月線資料…",
+    loadError: "資料暫時拉取失敗，請稍後重新整理重試。",
+    quoteMeta: "Nasdaq（QQQ）· 日線截至 {date} · 1999-03-10 上市",
+    priceAsOf: "最新收盤價",
+    statDrawdown: "距 ATH 回撤",
+    statDrawdownSub: "ATH {ath} · {date}（收盤口徑）",
+    statAth: "歷史最高收盤（ATH）",
+    statAthSub: "全史月線與近端日線中的最高收盤",
+    statHigh52: "52 周最高收盤 · {d}",
+    statLow52: "52 周最低收盤 · {d}",
+    statMa200: "MA200 偏離",
+    statMa200Sub: "200 日均線 {v}",
+    statPe: "市盈率（PE）",
+    statPeSub: "stockanalysis.com · 基金口徑",
+    pos52Label: "52 周水位 {p}（低→高）",
+    quoteFail: "股價資料暫時拉取失敗，行情與估值溫度區塊先隱藏；回測不受影響。",
+    historyFail: "回測歷史資料暫時不可用，定投回測器先隱藏；行情不受影響。",
+    secTemp: "01 · 估值溫度（價格指標刻度）",
+    tempIntro: "QQQ 沒有便宜或貴的官方答案，這把刻度只把三件可核查的價格事實拼在一起：股價離 200 日均線多遠、離歷史最高收盤跌了多少、在 52 周區間裡處於什麼水位。PE 取得到時作為第四項計入。每項 0–100 分（越高表示越偏「冷」——即越靠近歷史上的低位一側），綜合分取平均。",
+    tempScore: "綜合 {s} 分",
+    bands: {
+      cold: "偏冷",
+      cool: "中性偏冷",
+      warm: "中性偏熱",
+      hot: "偏熱",
+    },
+    partMa200: "MA200 偏離：現價 {v}（子分 {s}）",
+    partAth: "距 ATH 回撤：{dd}（子分 {s}）",
+    partPos52: "52 周水位：{p}（子分 {s}）",
+    partPe: "PE：{v}（子分 {s}）",
+    partPeOff: "PE：暫時取不到，本次不計入",
+    zoneHot: "偏熱 <35",
+    zoneWarm: "中性偏熱 35–50",
+    zoneCool: "中性偏冷 50–65",
+    zoneCold: "偏冷 ≥65",
+    tempRules: "定檔與子分規則（全部口徑）：MA200 偏離子分 = 50 − 偏離% ÷ 15 × 50，限幅 0–100（偏離 −15% 得 100 分、+15% 得 0 分）；回撤子分 = 回撤% ÷ 30 × 100，限幅 0–100（回撤 ≥30% 得滿分、在 ATH 處得 0 分）；52 周水位子分 = 100 − 水位%（區間底部 100 分、頂部 0 分）；PE 子分 = (35 − PE) ÷ 13 × 100，限幅 0–100（PE ≤22 滿分、≥35 零分）。綜合 ≥65 偏冷、50–65 中性偏冷、35–50 中性偏熱、<35 偏熱。說清楚：這是指標刻度，不是預測——偏冷不等於不會繼續跌，歷史上 QQQ 從「偏冷」位置再腰斬並不罕見；定投的意義本來就是不靠猜底。",
+    secBacktest: "02 · 定投回測器",
+    btIntro: "用 QQQ 上市以來的真實月線回測「按月定投」：選一個起始年月，輸入每月金額，看看一路投到最新完整月份的期末股數、年化與最慘回撤，再和「同一筆錢在起點一次性買入」對照。",
+    btDataLine: "回測資料截至 {through} 月末收盤 · {srcNote}",
+    inStartYear: "起始年份",
+    inStartMonth: "起始月份",
+    inMonthly: "每月定投金額（USD）",
+    inReinvest: "分紅再投入",
+    reinvestOn: "開（分紅當月買回）",
+    reinvestOff: "關（分紅留作現金）",
+    outContrib: "累計投入",
+    outShares: "期末股數",
+    outAvgCost: "攤薄成本",
+    outAvgCostSub: "期末月收盤 {p}",
+    outAssets: "期末總資產",
+    outAssetsSub: "股票市值 {sv} + 現金分紅 {cd}",
+    outDivs: "累計分紅",
+    outXirr: "年化收益率（XIRR）",
+    outXirrSub: "按月現金流近似",
+    outMaxDd: "期間最大回撤（標的）",
+    outMaxDdSub: "月線總回報口徑，非賬戶淨值",
+    lumpLine: "對比線：同樣的 {total} 若在 {start} 按當月收盤一次性買入（分紅同口徑處理），期末總資產 {assets}、年化 {ann}，比定投{diff}。",
+    lumpLineNoAnn: "對比線：同樣的 {total} 若在 {start} 按當月收盤一次性買入（分紅同口徑處理），期末總資產 {assets}，比定投{diff}。",
+    diffMore: "多 {d}",
+    diffLess: "少 {d}",
+    colYear: "年份",
+    colContrib: "年投入",
+    colDivYear: "年內分紅",
+    colShares: "年末股數",
+    colAssets: "年末總資產",
+    btCaliber: "回測口徑：每月按當月收盤價買入（股數可小數）；當月分紅按上月末持股計算（除息日在月內的先後以月線粒度分辨不了，定投與一次性買入一致套用），再投入開則按除息月收盤價買回、關則現金累計，期末總資產含這筆現金。年化為按月現金流的 XIRR 近似；最大回撤為標的本身在月線總回報（收盤+分紅復投）序列上的峰谷回撤，不是你的賬戶淨值回撤（定投持續買入會把淨值曲線攤平）。攤薄成本 = 累計投入 ÷ 期末股數，再投入的分紅買入的股數未另計投入。未計稅費、買賣價差與匯率；QQQ 的基金費率已含在價格裡。歷史回測不代表未來表現。",
+    btNeedHistory: "回測需要全史月線資料，資料恢復後自動可用。",
+    btNeedAmount: "把每月定投金額填成大於 0 的數字，這裡就會跑出回測結果。",
+    secRisk: "03 · 風險與口徑",
+    riskParas: [
+      "波動是真的：QQQ 隨納指 100 走，歷史上出現過 2000–2002 年科網泡沫破裂期超 80% 的峰谷回撤（月線總回報口徑回測區可見）、2008 年與 2022 年的深跌。定投攤平的是買入成本，不是波動本身，賬戶浮虧三四成在長週期裡是常態而非意外。",
+      "高度集中：納指 100 本質是美股大型科技成長股的集合，前十大權重常年佔一半以上——買 QQQ 是對美國科技龍頭下重注，不是買「全市場」，與寬基指數（如標普 500）的分散程度不是一回事。",
+      "分紅不是重點：QQQ 季度分紅、當前分紅率不足 1%，它是指數增值型工具不是收息工具；回測裡的分紅再投入對結果的影響遠小於價格本身，別按收息邏輯理解它。",
+      "匯率與稅務：以人民幣出入金的投資者還要承擔 USD/CNY 匯率波動；分紅與資本利得的稅務處理因人而異，回測未計這些。",
+    ],
+    caliberTitle: "資料口徑",
+    caliberBody: "股價來自 Yahoo Finance 日線（服務端 15 分鐘快取，被機房 IP 攔截時自動切換 Cboe 延遲行情兜底）：現價為最新日線收盤價，漲跌幅對前一交易日收盤；52 周高低按最近 252 個交易日收盤；MA200 為近 200 個交易日收盤均值；ATH 為全史月收盤與近端日線收盤的最高者（收盤口徑，不是盤中高點）。回測月線與分紅來自 Yahoo Finance 全史（月線自 1999-03，1999-03 用日線月末收盤補種；分紅事件自分紅記錄以來共 90 餘次，季度派發）；Yahoo 不可用時自動切換為站內儲存的全史資料檔案作底（截至日期在回測區標註）、再以 Cboe 月線與 stockanalysis 分紅補新。PE 來自 stockanalysis.com（12 小時快取，取不到則整項不出）。本頁所有數字均為公開資料的機械計算，不構成投資建議。",
+    toolsTitle: "本類工具",
+  },
 };
 
 function fmtPrice(v: number): string {
@@ -381,12 +463,16 @@ export default function QqqBoard() {
     histSrcLabel =
       lang === "zh"
         ? `站内兜底数据（截至 ${hist.bundledAsOf}）`
-        : `stored fallback data (as of ${hist.bundledAsOf})`;
+        : lang === "tw"
+          ? `站內兜底資料（截至 ${hist.bundledAsOf}）`
+          : `stored fallback data (as of ${hist.bundledAsOf})`;
   } else if (hist?.source === "bundled+cboe") {
     histSrcLabel =
       lang === "zh"
         ? `站内兜底数据（截至 ${hist.bundledAsOf}）+ Cboe/stockanalysis 补新`
-        : `stored fallback data (as of ${hist.bundledAsOf}) topped up via Cboe/stockanalysis`;
+        : lang === "tw"
+          ? `站內兜底資料（截至 ${hist.bundledAsOf}）+ Cboe/stockanalysis 補新`
+          : `stored fallback data (as of ${hist.bundledAsOf}) topped up via Cboe/stockanalysis`;
   }
   let sourceText = d.sourceLine.replace("{ps}", priceSrcLabel);
   if (hist) {
@@ -402,7 +488,7 @@ export default function QqqBoard() {
 
   const athDateLabel = q
     ? q.ath.date.length === 7
-      ? lang === "zh"
+      ? lang !== "en"
         ? `${q.ath.date} 月末`
         : `${q.ath.date} month-end`
       : q.ath.date

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { ChainDauPayload, ChainDauRow } from "@/lib/chaindau";
-import type { Lang } from "@/lib/site";
+import { LOCALE, type Lang } from "@/lib/site";
 import { useLang } from "./LangProvider";
 
 const DICT: Record<
@@ -108,6 +108,41 @@ const DICT: Record<
     ],
     toolsTitle: "Chain Activity · Tools in this shelf",
   },
+  tw: {
+    boardKicker: "公鏈日活 · 每日活躍地址排行",
+    sourceLine: "資料來源：DeFiLlama（日活與 TVL）· 取數 {t}",
+    loading: "正在拉取各鏈日活與 TVL 資料…",
+    loadError: "資料暫時拉取失敗，請稍後重新整理重試。",
+    secBoard: "01 · 公鏈日活排行",
+    boardIntro: "一天之內真有人在用的鏈，從多到少排一排。日活是過去 24 小時在鏈上發起交易的去重地址數；人均鎖倉 = 該鏈 TVL ÷ 24h 日活，看的是每個活躍地址背後墊了多少錢。預設顯示前 20 名，可搜尋鏈名、點列頭換排序。",
+    statTopLabel: "今日日活第一",
+    statTopSub: "24h 活躍地址 {n} 個",
+    statTotalLabel: "全榜 24h 日活合計",
+    statTotalSub: "共 {n} 條鏈有日活資料（跨鏈重複計算同一人）",
+    statPerCapLabel: "人均鎖倉最高（日活 ≥10 萬的鏈）",
+    statPerCapSub: "TVL {tvl} · 日活 {dau}",
+    searchPlaceholder: "搜鏈名，如 BSC / 波場 / Solana…",
+    colRank: "#",
+    colChain: "公鏈",
+    colDau: "24h 日活",
+    colChange7d: "日活 7 日變化",
+    colTvl: "TVL",
+    colPerCap: "人均鎖倉",
+    sortHint: "點選按此列排序",
+    showAll: "顯示全部 {n} 條",
+    showTop: "只看前 20 名",
+    noMatch: "沒有匹配的鏈。",
+    caliberTitle: "02 · 口徑說明",
+    caliber: [
+      "資料來源：DeFiLlama 的 active-users 指標（與其官網 /chains 頁同管線）。「日活」指過去 24 小時內在該鏈上發起交易的去重地址數：主流鏈（Ethereum、BSC、Tron、Arbitrum、Polygon、Base 等）由 Allium 索引原始交易表按傳送地址去重統計，Solana 數交易簽名者，比特幣系（Bitcoin、Litecoin、Doge 等）用 CoinMetrics 的活躍地址口徑，個別鏈用其瀏覽器官方統計——是大方向一致的全量活躍地址口徑，但逐鏈資料來源不同、細節有別，跨鏈嚴絲合縫對比並不存在。",
+      "地址 ≠ 真人：一個人可以有很多地址，機器人、女巫地址、交易所熱錢包都算在活躍地址裡；跨鏈合計時同一個人會被重複計算。所以日活看的是「鏈上真實使用強度」，不是註冊使用者數。",
+      "為什麼沒有「7 日活躍地址」列：DeFiLlama 源資料不提供 7 日 / 30 日的去重活躍地址總數（其 /chains 頁的同名列目前同樣為空），逐日曲線的口徑又與 24h 總數對不上，本站不拿口徑不同的數硬拼。本頁的 7 日維度只給源裡真實存在的「日活較 7 天前的變化率」。",
+      "人均鎖倉 = TVL ÷ 24h 日活。TVL 是 DeFiLlama 統計的該鏈 DeFi 協議鎖倉總額；這個比值只是資金密度參考——TVL 裡有大量不活躍的沉澱資金，日活裡也有大量小額地址，它不等於「每個使用者平均持有多少錢」，更不等於鏈的質量排名。",
+      "覆蓋範圍：只收錄 DeFiLlama 已統計日活的鏈。Robinhood Chain（羅賓漢鏈）有 TVL 記錄（約 $10.9 億）但其日活尚未被該資料集統計，故不在榜內；個別小鏈有日活、無 TVL 記錄，人均鎖倉顯示為 —。",
+      "與海報類榜單（如 Artemis 等其他口徑）數值不同是正常的：統計源、地址歸集方式與時間窗都不同。本頁資料快取約 1 小時後自動重新整理；鏈上資料整理僅供參考，不構成投資建議。",
+    ],
+    toolsTitle: "公鏈日活 · 本類工具",
+  },
 };
 
 export { DICT as CHAINDAU_DICT };
@@ -115,10 +150,10 @@ export { DICT as CHAINDAU_DICT };
 type SortKey = "dau24h" | "change7d" | "tvlUsd" | "perCapitaUsd";
 
 function fmtDau(v: number, lang: Lang): string {
-  if (lang === "zh") {
+  if (lang !== "en") {
     if (v >= 10000) {
       const w = v / 10000;
-      return `${w >= 100 ? Math.round(w) : w.toFixed(1).replace(/\.0$/, "")}万`;
+      return `${w >= 100 ? Math.round(w) : w.toFixed(1).replace(/\.0$/, "")}${lang === "tw" ? "萬" : "万"}`;
     }
     return v.toLocaleString("en-US");
   }
@@ -152,7 +187,7 @@ function changeClass(v: number | null): string {
 
 function fmtTime(iso: string, lang: Lang): string {
   try {
-    return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en-US", {
+    return new Intl.DateTimeFormat(LOCALE[lang], {
       month: "2-digit",
       day: "2-digit",
       hour: "2-digit",
@@ -355,7 +390,7 @@ export default function ChainDauBoard() {
                       </td>
                       <td title={row.dau24h.toLocaleString("en-US")}>
                         {fmtDau(row.dau24h, lang)}
-                        {lang === "zh" ? "个地址" : ""}
+                        {lang === "zh" ? "个地址" : lang === "tw" ? "個地址" : ""}
                       </td>
                       <td className={changeClass(row.change7d)}>
                         {fmtChange(row.change7d)}

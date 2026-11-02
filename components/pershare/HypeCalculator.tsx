@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { HypeMarketData } from "@/lib/pershare/types";
 import { presetRange, lvForRange, type RangeSel } from "@/lib/pershare/range";
-import { FAQ_HYPE_EN, FAQ_HYPE_ZH } from "@/lib/pershare/faq-hype";
+import { FAQ_HYPE_EN, FAQ_HYPE_TW, FAQ_HYPE_ZH } from "@/lib/pershare/faq-hype";
 import { DICT_HYPE } from "@/lib/pershare/i18n-hype";
 import type { Lang } from "@/lib/pershare/i18n";
 import { PoolCard, RangeControl, SpreadCard, fmtInt, fmtPrice, fmtUsd } from "./pool-ui";
@@ -49,7 +49,7 @@ export default function HypeCalculator(props: { lang: Lang }) {
   const [lpAmount, setLpAmount] = useState("10000");
 
   const t = DICT_HYPE[lang];
-  const locale = lang === "en" ? "en-US" : "zh-CN";
+  const locale = lang === "en" ? "en-US" : lang === "tw" ? "zh-TW" : "zh-CN";
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -168,7 +168,7 @@ export default function HypeCalculator(props: { lang: Lang }) {
   }, [data, lpPoolKey, lpAmount, rangeOf]);
 
   const errorText = error ? t.fetchError : null;
-  const faqItems = lang === "en" ? FAQ_HYPE_EN : FAQ_HYPE_ZH;
+  const faqItems = lang === "en" ? FAQ_HYPE_EN : lang === "tw" ? FAQ_HYPE_TW : FAQ_HYPE_ZH;
 
   return (
     <div>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { IpCheckPayload } from "@/lib/ipcheck";
-import type { Lang } from "@/lib/site";
+import { LOCALE, type Lang } from "@/lib/site";
 import { useLang } from "./LangProvider";
 
 export const IPCHECK_DICT: Record<
@@ -342,6 +342,128 @@ export const IPCHECK_DICT: Record<
     toolsTitle: "IP Check · Tools in this shelf",
     queryErrorFallback: "The check failed. Please try again shortly.",
   },
+  tw: {
+    boardKicker: "IP 風險檢測 · 網路環境自查",
+    boardSub: "開啟頁面先自動查你自己的出口 IP；也可以輸入任意 IP 或域名。地理、ASN 與風險標記由服務端多源調取，WebRTC、瀏覽器環境與延遲測試全部在你的瀏覽器本地完成、不上傳。",
+    placeholder: "輸入 IP 或域名，如 8.8.8.8 或 github.com",
+    queryBtn: "查詢",
+    selfBtn: "查我自己",
+    querying: "查詢中…",
+    loadingSelf: "正在自查你的出口 IP…",
+    selfPrivateNote: "當前讀到的出口地址是本機/內網地址（多見於本地測試環境），公網環境下開啟本頁會直接顯示你的真實出口 IP 與完整報告。",
+    resultFor: "查詢結果 · {ip}",
+    kindSelf: "自查（你的出口 IP）",
+    kindIp: "IP 查詢",
+    kindDomain: "域名 {domain} → 解析為 {ip}",
+    fetchedAt: "取數時間 {t}",
+    statCountry: "國家 / 地區",
+    statCity: "城市",
+    statAsn: "ASN",
+    statIsp: "運營商 / ISP",
+    statOrg: "組織",
+    statTimezone: "時區",
+    statCoords: "經緯度（約）",
+    statReverse: "反向解析",
+    sourceNote: "情報來源：{src}；地理庫之間存在誤差，城市一級僅供參考。",
+    secVerdict: "01 · 屬性判定與風險評分",
+    typeLabel: "網路型別",
+    types: {
+      idc: "IDC 機房",
+      residential: "家寬住宅",
+      mobile: "行動網路",
+      unknown: "無法確定",
+    },
+    evidenceTitle: "判定證據",
+    scoreLabel: "風險分（0–100，越高越像代理/機房出口）",
+    bands: { low: "低", mid: "中", high: "高" },
+    scoreItemsTitle: "評分明細",
+    colRule: "規則",
+    colHit: "命中",
+    colPoints: "分值",
+    hitYes: "命中",
+    hitNo: "未命中",
+    hitNa: "無資料",
+    itemNames: {
+      proxy: "代理標記 proxy",
+      hosting: "機房標記 hosting",
+      cloudAsn: "雲廠商 ASN 名單",
+      mobile: "行動網路 mobile（減分項）",
+    },
+    nativeTitle: "原生 IP 參考判斷",
+    secRules: "評分規則（全公開）",
+    rulesIntro: "本站的風險分是基於公開訊號的規則評分，衡量「像不像代理/機房出口」，不是商業風控庫的欺詐評分。規則就這四條，權重如下，頁面上的每一分都能對回這裡：",
+    rulesRows: [
+      { rule: "代理標記 proxy = true", points: "+45", desc: "該 IP 被標記源（ip-api 主源、proxycheck.io 兜底）識別為代理 / VPN 類出口" },
+      { rule: "機房標記 hosting = true", points: "+35", desc: "IP 位於託管 / IDC 機房網段（兜底源由其 type 分類對映）" },
+      { rule: "ASN / 組織名命中雲廠商名單", points: "+15", desc: "Google、Amazon、Microsoft、Cloudflare、OVH、Hetzner、阿里雲、騰訊雲等（輔助訊號）" },
+      { rule: "移動標記 mobile = true", points: "−20", desc: "移動運營商出口更像真實使用者網路，命中減分" },
+    ],
+    rulesNote: "總分夾在 0–100：0–29 低、30–59 中、60–100 高。Tor 出口節點沒有可靠的免費標記源，本站不計 Tor、不假裝能測。分數高只說明機房/代理特徵強——很多正規服務（公共 DNS、CDN、公司 VPN）天然就是機房 IP，不等於「有問題」。",
+    secWhois: "02 · Whois（RDAP）",
+    whoisLabels: {
+      name: "網段名 / 域名",
+      org: "註冊組織",
+      registrar: "註冊商",
+      country: "註冊國家",
+      range: "網段範圍",
+      registered: "註冊日期",
+      expires: "到期日期",
+      status: "狀態",
+    },
+    whoisSource: "來源：RDAP（經 rdap.org 跳轉至權威註冊局 {src}）",
+    whoisFail: "RDAP 暫時沒有返回該物件的註冊資訊，稍後再試；不影響上面的情報與評分。",
+    secRtc: "03 · WebRTC 洩露檢測（本地）",
+    rtcIntro: "WebRTC 會透過 STUN 拿到你的公網對映地址：如果你掛了代理/VPN，這裡露出的地址和瀏覽器 HTTP 出口不一致，就說明 WebRTC 正在繞過代理洩露真實出口。檢測只在本機瀏覽器內進行，結果不上傳。",
+    rtcRunning: "正在收集 ICE candidate…",
+    rtcPublic: "WebRTC 看到的公網地址",
+    rtcNone: "沒有收集到公網（srflx）candidate：可能被瀏覽器設定、擴充套件或網路策略擋住，這本身就是一種防洩露狀態，不代表出錯。",
+    rtcSame: "與本站讀到的你的出口 IP 一致（{ip}）：WebRTC 沒有洩露出別的出口。",
+    rtcDiff: "注意：WebRTC 露出的公網地址（{ips}）與本站讀到的你的出口 IP 不一致——如果你在用代理/VPN，這就是典型的 WebRTC 洩露，真實出口可能已暴露。",
+    rtcNoSelf: "暫時拿不到你的出口 IP 基準（自查未完成），先只列出 WebRTC 公網地址，不做對比結論。",
+    rtcMdns: "瀏覽器用 mDNS 隱藏了本地地址（candidate 為 *.local），這是現代瀏覽器的預設隱私保護。",
+    rtcLocalOnly: "全程本地檢測，不上傳伺服器。",
+    rerun: "重新檢測",
+    secEnv: "04 · 瀏覽器環境（本地）",
+    envIntro: "網站能被動讀到的瀏覽器環境如下——時區、語言與 IP 地理對不上，是很多風控系統眼裡的異常訊號，自查時可以順手核對。全程本地讀取，不上傳。",
+    envLabels: {
+      timezone: "時區",
+      language: "語言",
+      languages: "語言列表",
+      ua: "User-Agent",
+      platform: "平臺",
+      screen: "螢幕解析度",
+      viewport: "視窗尺寸",
+      colorDepth: "色彩深度",
+      webgl: "WebGL 渲染器",
+      cores: "CPU 核數",
+      memory: "裝置記憶體（約）",
+      touch: "觸控點數",
+      cookies: "Cookie 啟用",
+      dnt: "Do Not Track",
+      online: "聯網狀態",
+    },
+    secPing: "05 · 延遲測試（HTTP，非 ICMP Ping）",
+    pingIntro: "瀏覽器發不了 ICMP 包，所以這裡測的是向各端點發 HTTP 請求的往返耗時（每端點測 5 次取中位），和系統 ping 不是一回事，但足夠橫向比較你到各地的網路通暢程度。",
+    pingRun: "開始測速",
+    pingRunning: "測試中…",
+    pingPending: "待測",
+    pingFail: "無響應",
+    pingEndpoints: {
+      site: "本站（18btc.cc）",
+      cloudflare: "Cloudflare（全球 Anycast）",
+      google: "Google（全球）",
+      github: "GitHub（美國）",
+    },
+    secNotes: "口徑與邊界",
+    notes: [
+      "地理位置來自公開庫的合併結果（ipwho.is 為主源；標記由 ip-api 主源、proxycheck.io 兜底提供，實際供數源標在結果上方），不同庫對同一 IP 的城市定位經常不一致，精確到城市的結果只當參考；國家與 ASN 一般可靠。",
+      "風險評分只用頁面上列出的四條公開規則，不接商業風控庫：它能識別「機房 / 代理特徵強不強」，識別不了「這個 IP 乾沒幹過壞事」——後者需要付費的威脅情報名單，本站不做也不裝。",
+      "原生 IP 只能給參考判斷：公開資料能比對的只有地理歸屬與 RDAP 註冊國是否一致、是否 Anycast，任何聲稱能「確證原生」的免費工具都是在猜。",
+      "本頁的服務端查詢會把待查 IP/域名發給上述公開情報源（這是查詢的必要代價）；WebRTC、瀏覽器環境、延遲三節則完全在本地，不經過伺服器。頁面結構參考了 pingip.co 的自查思路，資料來源與評分規則為本站自建並在上方全量公開。",
+    ],
+    toolsTitle: "IP 檢測 · 本類工具",
+    queryErrorFallback: "查詢失敗，請稍後重試。",
+  },
 };
 
 const STUN_SERVERS = [
@@ -613,7 +735,7 @@ export default function IpCheckBoard() {
               <p className="ipc-fetched">
                 {d.fetchedAt.replace(
                   "{t}",
-                  new Date(payload.fetchedAt).toLocaleString(lang === "zh" ? "zh-CN" : "en-US")
+                  new Date(payload.fetchedAt).toLocaleString(LOCALE[lang])
                 )}
               </p>
             </div>

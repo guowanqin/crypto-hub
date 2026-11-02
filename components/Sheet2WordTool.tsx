@@ -173,9 +173,9 @@ export default function Sheet2WordTool() {
 
   const loadSamples = async () => {
     const tbuf = await sampleTemplateArrayBuffer();
-    await loadTemplate(tbuf, lang === "zh" ? "录用通知书-示例模板.docx" : "sample-template.docx");
+    await loadTemplate(tbuf, lang === "zh" ? "录用通知书-示例模板.docx" : lang === "tw" ? "錄用通知書-示例模板.docx" : "sample-template.docx");
     const ebuf = sampleExcelArrayBuffer();
-    await loadExcel(ebuf, lang === "zh" ? "员工名单-示例.xlsx" : "sample-data.xlsx");
+    await loadExcel(ebuf, lang === "zh" ? "员工名单-示例.xlsx" : lang === "tw" ? "員工名單-示例.xlsx" : "sample-data.xlsx");
   };
 
   return (
