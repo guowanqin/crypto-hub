@@ -1,5 +1,5 @@
 import type { Lang } from "./site";
-import { toolsByTag, type ToolDef } from "./tools";
+import { compareTools, toolsByTag, type ToolDef } from "./tools";
 
 // 首页大类（方案一）：21 个细标签归并为 7 个大类。
 // 大类只影响首页分组、首页分类筛选与页脚导航；标签本身、全部 /tag/* 页面、
@@ -58,7 +58,7 @@ export const GROUP_BY_TAG: Record<string, GroupDef> = Object.fromEntries(
   GROUPS.flatMap((g) => g.tags.map((tagId) => [tagId, g] as const))
 );
 
-// 组内工具：成员标签的工具按成员顺序拼接、按 slug 去重
+// 组内工具：成员标签的工具拼接、按 slug 去重，最后按全站统一排序（compareTools）排定
 export function toolsByGroup(group: GroupDef): ToolDef[] {
   const seen = new Set<string>();
   const list: ToolDef[] = [];
@@ -70,5 +70,5 @@ export function toolsByGroup(group: GroupDef): ToolDef[] {
       }
     }
   }
-  return list;
+  return list.sort(compareTools);
 }

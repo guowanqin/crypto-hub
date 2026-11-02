@@ -13,6 +13,10 @@ export interface ToolDef {
   embedded?: boolean;
   /** 数据是否自动取数/自动更新（卡片上显示「数据自动更新」标识），只给确实自动调取实时数据的条目打标 */
   liveData?: boolean;
+  /** 实际上架日期（YYYY-MM-DD），必填：首页「最新上架」与统一排序都靠它 */
+  addedAt: string;
+  /** 人工置顶权重（数字越大越靠前），只有站长点名要推的才设，一般留空 */
+  pin?: number;
   oneLiner: Record<Lang, string>;
   detail: Record<Lang, string>;
   audience: Record<Lang, string>;
@@ -26,6 +30,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "PerShare 每股含币量计算器", en: "PerShare — Crypto per Share Calculator" },
     url: "https://pershare.cc",
     tags: ["market"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     liveData: true,
@@ -51,6 +56,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Excel 批量生成 Word（Sheet2Word）", en: "Excel to Word Batch Generator (Sheet2Word)" },
     url: "https://18btc.cc/tool/sheet2word",
     tags: ["office"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -75,6 +81,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "图片工具箱", en: "Image Toolbox" },
     url: "https://18btc.cc/tool/imagebox",
     tags: ["office"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -99,6 +106,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "CoinGecko", en: "CoinGecko" },
     url: "https://www.coingecko.com",
     tags: ["market"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "全球币种行情总站：价格、市值、交易所分布与新币发现。",
@@ -122,6 +130,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "CoinMarketCap", en: "CoinMarketCap" },
     url: "https://coinmarketcap.com",
     tags: ["market"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "老牌币圈行情站：市值排行榜、恐惧贪婪指数与空投资讯。",
@@ -145,6 +154,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "DexScreener", en: "DexScreener" },
     url: "https://dexscreener.com",
     tags: ["market"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "DEX 实时行情利器：新池子与新代币的链上第一发现地。",
@@ -168,6 +178,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "GeckoTerminal", en: "GeckoTerminal" },
     url: "https://www.geckoterminal.com",
     tags: ["market"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "CoinGecko 出品的 DEX 数据站：池子、交易对与链上行情。",
@@ -191,6 +202,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "DeFiLlama", en: "DeFiLlama" },
     url: "https://defillama.com",
     tags: ["defi"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "DeFi 数据中枢：全链 TVL、协议收入与稳定币全景。",
@@ -214,6 +226,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Dune", en: "Dune" },
     url: "https://dune.com",
     tags: ["onchain"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "链上数据 SQL 查询平台：可视化面板与社区查询宝库。",
@@ -237,6 +250,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Arkham", en: "Arkham" },
     url: "https://arkham.com",
     tags: ["onchain"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "实体标签情报平台：看懂大地址和机构在链上的一举一动。",
@@ -260,6 +274,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Bubblemaps", en: "Bubblemaps" },
     url: "https://bubblemaps.io",
     tags: ["onchain"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "气泡图可视化持币分布：一眼识破筹码集中和关联钱包的藏身处。",
@@ -283,6 +298,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Etherscan", en: "Etherscan" },
     url: "https://etherscan.io",
     tags: ["onchain"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "以太坊区块浏览器：查交易、查地址、读合约的源头工具。",
@@ -306,6 +322,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Rabby Wallet", en: "Rabby Wallet" },
     url: "https://rabby.io",
     tags: ["wallet"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "多链 EVM 钱包：交易前先给你算风险、看余额变化。",
@@ -329,6 +346,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Revoke.cash", en: "Revoke.cash" },
     url: "https://revoke.cash",
     tags: ["security"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "代币授权管理工具：查清并撤销你给过的全部授权，降低被盗风险。",
@@ -352,6 +370,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "FolderLock 文件夹加密", en: "FolderLock Folder Encryption" },
     url: "https://github.com/ns2250225/FolderLock",
     tags: ["security"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "Windows 文件夹加密：AES-256 加密连文件名一起锁，右键一键上锁。",
@@ -375,6 +394,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "文件夹加密保险箱", en: "Folder Vault" },
     url: "https://18btc.cc/tool/foldervault",
     tags: ["security"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -399,6 +419,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "UNI 销毁看板", en: "UNI Burn Tracker" },
     url: "https://18btc.cc/tool/uni-burn",
     tags: ["burn"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     liveData: true,
@@ -424,6 +445,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "DeFiBurn", en: "DeFiBurn" },
     url: "https://www.defiburn.com",
     tags: ["burn"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "UNI 销毁数据终端：逐笔追踪 Uniswap 协议费销毁与各链销毁分布。",
@@ -447,6 +469,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Filee 文件格式转换器", en: "Filee File Converter" },
     url: "https://filee.sh",
     tags: ["office"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "免费开源格式转换器：本地拖拽即转 255 种格式，文件不上传。",
@@ -470,6 +493,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "BTC 抄底倒计时", en: "BTC Bottom Countdown" },
     url: "https://18btc.cc/tool/btc-cycle",
     tags: ["btc-bottom"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     liveData: true,
@@ -495,6 +519,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "CRCL 买入估值面板", en: "CRCL Buy & Valuation Panel" },
     url: "https://18btc.cc/tool/crcl-panel",
     tags: ["crcl"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     liveData: true,
@@ -520,6 +545,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "QQQI 攒股收息定投计算器", en: "QQQI Income DCA Calculator" },
     url: "https://18btc.cc/tool/qqqi-panel",
     tags: ["qqqi"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     liveData: true,
@@ -545,6 +571,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "交易所资金流与保证金看板", en: "Exchange Flows & Margin Board" },
     url: "https://18btc.cc/tool/flows-panel",
     tags: ["flows"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     liveData: true,
@@ -570,6 +597,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "公链日活排行看板", en: "Chain Daily Activity Ranking" },
     url: "https://18btc.cc/tool/chain-dau-panel",
     tags: ["chain-dau"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     liveData: true,
@@ -595,6 +623,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "QQQ 定投回测计算器", en: "QQQ DCA Backtest Calculator" },
     url: "https://18btc.cc/tool/qqq-panel",
     tags: ["qqq"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     liveData: true,
@@ -620,6 +649,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "照片/文件时间修改", en: "Photo & File Time Editor" },
     url: "https://18btc.cc/tool/filetime",
     tags: ["filetime"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -644,6 +674,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "NewFileTime（桌面版）", en: "NewFileTime (Desktop)" },
     url: "https://www.softwareok.com/?seite=Freeware/NewFileTime",
     tags: ["filetime"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "Windows 便携时间工具：改文件的创建、修改、访问时间，免安装。",
@@ -667,6 +698,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "PDF 工具箱", en: "PDF Toolbox" },
     url: "https://18btc.cc/tool/pdfbox",
     tags: ["pdf"],
+    addedAt: "2026-11-01",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -691,6 +723,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "红果短剧桌面版（第三方客户端）", en: "Hongguo Short Drama Desktop (Third-party Client)" },
     url: "https://github.com/waligoraamodio288-rgb/hongguo-desktop-releases",
     tags: ["video"],
+    addedAt: "2026-11-01",
     type: "third-party",
     oneLiner: {
       zh: "红果短剧第三方客户端：把短剧搬上电脑和电视，找剧续播都方便。",
@@ -714,6 +747,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "图片文字识别 OCR（本地版）", en: "Image OCR — Local, In-Browser" },
     url: "https://18btc.cc/tool/ocr-tool",
     tags: ["ocr"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -738,6 +772,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "ImgPeel 图片文字识别", en: "ImgPeel — Image to Text OCR" },
     url: "https://imgpeel.toolooz.com/zh-CN",
     tags: ["ocr"],
+    addedAt: "2026-11-02",
     type: "third-party",
     oneLiner: {
       zh: "在线图片文字识别：浏览器本地 OCR 不上传，多语种可导出。",
@@ -761,6 +796,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "二手黑话词典", en: "Secondhand Slang Dictionary" },
     url: "https://18btc.cc/tool/slang-dict",
     tags: ["slang"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -785,6 +821,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "Awesome 二手黑话开源词库", en: "Awesome Chinese Secondhand Slang (Open Source)" },
     url: "https://github.com/Domainsun/awesome-chinese-secondhand-slang",
     tags: ["slang"],
+    addedAt: "2026-11-02",
     type: "third-party",
     oneLiner: {
       zh: "开源二手黑话词库：本站词典数据源，MIT 许可、结构化开放。",
@@ -808,6 +845,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "IP 风险检测", en: "IP Risk Check" },
     url: "https://18btc.cc/tool/ip-check",
     tags: ["ip-check"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -832,6 +870,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "PingIP", en: "PingIP" },
     url: "https://pingip.co",
     tags: ["ip-check"],
+    addedAt: "2026-11-02",
     type: "third-party",
     oneLiner: {
       zh: "在线 IP 情报站：风险评分、WebRTC 检测与 Whois 一站查齐。",
@@ -855,6 +894,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "古籍诗词精选", en: "Classical Poetry Picks" },
     url: "https://18btc.cc/tool/poetry",
     tags: ["poetry"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -879,6 +919,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "文籍典册", en: "Wendian" },
     url: "https://wendian.dicomp.net",
     tags: ["poetry"],
+    addedAt: "2026-11-02",
     type: "third-party",
     oneLiner: {
       zh: "传统文化全量资料库：85 万首古诗词全文检索，古籍成语齐全。",
@@ -902,6 +943,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "推特下载工具箱", en: "Tweet Toolbox" },
     url: "https://18btc.cc/tool/tweetbox",
     tags: ["twitter-tools"],
+    addedAt: "2026-11-02",
     type: "own",
     embedded: true,
     oneLiner: {
@@ -926,6 +968,7 @@ export const TOOLS: ToolDef[] = [
     name: { zh: "TwiFlux", en: "TwiFlux" },
     url: "https://twiflux.com",
     tags: ["twitter-tools"],
+    addedAt: "2026-11-02",
     type: "third-party",
     oneLiner: {
       zh: "推特视频下载站：粘贴推文链接取各画质 MP4，免注册免费下。",
@@ -954,8 +997,25 @@ export function getTool(slug: string): ToolDef | undefined {
   return TOOL_MAP[slug];
 }
 
+/** 注册表原始下标：统一排序最后一级「同日按注册表顺序靠后者在前」用 */
+const TOOL_INDEX: Record<string, number> = Object.fromEntries(
+  TOOLS.map((t, i) => [t.slug, i])
+);
+
+/** 全站统一排序（AGENTS.md 第 5 节，定死，不许自创）：
+ *  pin 高者在前 → 站内可用（embedded）在第三方前 → addedAt 新者在前 →
+ *  同日按注册表顺序靠后者在前。大类区块、标签页列表、最新上架共用。 */
+export function compareTools(a: ToolDef, b: ToolDef): number {
+  const pinDiff = (b.pin ?? 0) - (a.pin ?? 0);
+  if (pinDiff !== 0) return pinDiff;
+  const embDiff = Number(b.embedded ?? false) - Number(a.embedded ?? false);
+  if (embDiff !== 0) return embDiff;
+  if (a.addedAt !== b.addedAt) return a.addedAt < b.addedAt ? 1 : -1;
+  return TOOL_INDEX[b.slug] - TOOL_INDEX[a.slug];
+}
+
 export function toolsByTag(tagId: string): ToolDef[] {
-  return TOOLS.filter((t) => t.tags.includes(tagId));
+  return TOOLS.filter((t) => t.tags.includes(tagId)).sort(compareTools);
 }
 
 /** /go/[slug] 的跳转目标：站内可用工具 → 站内页；其余 → 官网。
