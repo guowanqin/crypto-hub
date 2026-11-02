@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import PerShareClient from "@/components/PerShareClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -9,7 +10,7 @@ const path = "/tool/pershare";
 
 const TITLE = `每股含币量计算器｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接计算 BNC、PURR 每股含币量与折溢价：BNC 每股含 BNB（基本口径）、PURR 每股含 HYPE（官方摊薄口径），含币价对股价的价差（折价 / 溢价）与 mNAV 实时呈现，并可查询 BNCB、HYPE 池子年化收益率（默认 ±5% 区间，支持全区间、自定义区间与 LP 收益测算）。数据实时刷新，免注册。";
+  "在 18btc 站内直接计算 BNC、PURR 每股含币量与折溢价：BNC 每股含 BNB（基本口径）、PURR 每股含 HYPE（官方摊薄口径），价差（折价 / 溢价）与 mNAV 实时呈现，并可查 BNCB、HYPE 池子年化收益率（默认 ±5% 区间，支持自定义区间与 LP 收益测算）。数据实时刷新，免注册。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -60,6 +61,7 @@ export default async function PerSharePage({
     <>
       <PerShareClient adsPreview={ads === "preview"} />
       <RelatedTools slug="pershare" />
+      <ToolJsonLd slug="pershare" />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import ImageBoxClient from "@/components/ImageBoxClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -51,6 +52,7 @@ export default async function ImageBoxPage({
     <>
       <ImageBoxClient adsPreview={ads === "preview"} />
       <RelatedTools slug="imagebox" />
+      <ToolJsonLd slug="imagebox" />
     </>
   );
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { HUB_DICT } from "@/lib/i18n";
 import { GROUPS } from "@/lib/groups";
+import { TAGS } from "@/lib/tags";
 import AdSlot from "./AdSlot";
 import { useLang } from "./LangProvider";
 
@@ -31,6 +32,18 @@ export default function SiteFooter() {
             {GROUPS.map((group) => (
               <Link key={group.id} href={`/#${group.id}`} className="footer-cat-link">
                 {group.name[lang]}
+              </Link>
+            ))}
+          </div>
+        </nav>
+        {/* 全部标签直达（SEO 审计 P1-4）：给 21 个有独立 SEO 的标签页补上含首页在内的全站入链，
+            名称直接用注册表的三语文案 */}
+        <nav className="footer-cats" aria-label={t.allTagsTitle}>
+          <p className="footer-cats-title">{t.allTagsTitle}</p>
+          <div className="footer-cats-grid">
+            {TAGS.map((tag) => (
+              <Link key={tag.id} href={`/tag/${tag.id}`} className="footer-cat-link">
+                {tag.name[lang]}
               </Link>
             ))}
           </div>

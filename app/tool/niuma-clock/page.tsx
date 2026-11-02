@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import NiumaClockClient from "@/components/NiumaClockClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/niuma-clock";
 
 const TITLE = `牛马时钟｜下班倒计时、发薪日倒计时、工资秒表｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接使用的牛马时钟：大字实时时钟、按你的上下班时间计算的今日牛马进度，以及距离下班、距离周末、距离发工资、距离下一个法定节假日四个倒计时同屏；填上月薪还有工资秒表按秒跳钱，日薪按当月应出勤天数折算（扣除 2026 年法定假期、计入调休补班日）。上下班时间、午休、发薪日、月薪都可改，设置只保存在本机浏览器，免费免注册。";
+  "在 18btc 站内直接使用的牛马时钟：大字实时时钟、按你的上下班时间计算的今日牛马进度，距离下班、周末、发工资与下一个法定节假日四个倒计时同屏；填上月薪还有工资秒表按秒跳钱，日薪按当月应出勤天数折算（扣除 2026 年法定假期、计入调休补班日）。设置只保存在本机浏览器，免费免注册。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -61,6 +62,7 @@ export default async function NiumaClockPage({
     <>
       <NiumaClockClient adsPreview={ads === "preview"} />
       <RelatedTools slug="niuma-clock" />
+      <ToolJsonLd slug="niuma-clock" />
     </>
   );
 }

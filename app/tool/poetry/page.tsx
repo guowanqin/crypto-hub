@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import PoetryPanelClient from "@/components/PoetryPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -58,6 +59,7 @@ export default async function PoetryToolPage({
     <>
       <PoetryPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="poetry" />
+      <ToolJsonLd slug="poetry" />
     </>
   );
 }

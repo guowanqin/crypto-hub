@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import QqqPanelClient from "@/components/QqqPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/qqq-panel";
 
 const TITLE = `QQQ 定投回测计算器｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接使用 QQQ 定投回测计算器：现价、距 ATH 回撤、52 周水位、MA200 偏离自动调取，估值温度按全公开的子分规则定档（偏冷/中性偏冷/中性偏热/偏热）；回测器用 1999 年上市以来全史月线与季度分红，任选起始年月与每月定投金额，算出期末股数、年化、期间最大回撤与逐年汇总，并对比同额一次性买入。历史回测不代表未来，不构成投资建议。";
+  "在 18btc 站内直接使用 QQQ 定投回测计算器：现价、距 ATH 回撤、52 周水位、MA200 偏离自动调取，估值温度按全公开规则定档；回测器用 1999 年上市以来全史月线与季度分红，任选起始年月与每月金额，算出期末股数、年化、最大回撤与逐年汇总，并对比一次性买入。历史回测不代表未来，不构成投资建议。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,6 +58,7 @@ export default async function QqqPanelPage({
     <>
       <QqqPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="qqq-panel" />
+      <ToolJsonLd slug="qqq-panel" />
     </>
   );
 }

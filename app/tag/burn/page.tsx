@@ -3,6 +3,7 @@ import UniBurnClient from "@/components/UniBurnClient";
 import { getTag } from "@/lib/tags";
 import { toolsByTag } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { TagJsonLd } from "@/components/SeoJsonLd";
 
 // 专属标签页：/tag/burn 不走通用标签模板，主体是 UNI 销毁数据看板。
 // SEO 标题由需求指定：「UNI 销毁数据｜18btc 币圈工具导航」。
@@ -41,5 +42,10 @@ export default async function BurnTagPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <UniBurnClient tag={tag} adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <UniBurnClient tag={tag} adsPreview={ads === "preview"} />
+      <TagJsonLd tagId={tag.id} />
+    </>
+  );
 }

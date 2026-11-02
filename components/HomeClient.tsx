@@ -15,10 +15,16 @@ const GROUP_PAGE_SIZE = 6;
 /** 首页「最新上架」展示数（AGENTS.md 第 5 节） */
 const NEWEST_SIZE = 6;
 
-export default function HomeClient({ adsPreview = false }: { adsPreview?: boolean }) {
+export default function HomeClient({
+  adsPreview = false,
+  initialQuery = "",
+}: {
+  adsPreview?: boolean;
+  initialQuery?: string;
+}) {
   const { lang } = useLang();
   const t = HUB_DICT[lang];
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [activeGroup, setActiveGroup] = useState<string>("all");
   const [activeType, setActiveType] = useState<"all" | "builtin" | "third">("all");
   // 大类区块的展开状态（按组独立）：默认收起，只显示排序后的前 GROUP_PAGE_SIZE 个

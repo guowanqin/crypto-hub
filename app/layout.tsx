@@ -5,7 +5,6 @@ import LangProvider from "@/components/LangProvider";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL, type Lang } from "@/lib/site";
-import { TOOLS } from "@/lib/tools";
 
 // SITE_URL 为空（域名未定）时不输出 canonical / og:url / metadataBase，域名定了填常量即可生效。
 const hasSiteUrl = SITE_URL !== "";
@@ -52,6 +51,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+// 站点级结构化数据只保留 WebSite 本体 + 站内搜索动作（SEO 审计 P1-2）：
+// 原先每页逐字节重复的 43 工具 ItemList 已移除，页面级信息改由各页的
+// BreadcrumbList / SoftwareApplication / FAQPage 承担（components/SeoJsonLd.tsx）。
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -60,16 +62,18 @@ const jsonLd = {
   ...(hasSiteUrl ? { url: SITE_URL + "/" } : {}),
   inLanguage: ["zh-CN", "zh-TW", "en"],
   description: SITE_DESCRIPTION.zh,
-  mainEntity: {
-    "@type": "ItemList",
-    numberOfItems: TOOLS.length,
-    itemListElement: TOOLS.map((tool, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: tool.name.zh,
-      ...(hasSiteUrl ? { url: `${SITE_URL}/tool/${tool.slug}` } : {}),
-    })),
-  },
+  ...(hasSiteUrl
+    ? {
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+      }
+    : {}),
 };
 
 /** 按访客 IP 国家（Vercel 注入的 x-vercel-ip-country）映射首次访问默认语言：

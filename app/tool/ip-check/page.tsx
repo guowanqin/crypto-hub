@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import IpCheckPanelClient from "@/components/IpCheckPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/ip-check";
 
 const TITLE = `IP 风险检测｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接使用 IP 风险检测：打开自动自查出口 IP，也可查任意 IP 或域名的地理位置、ASN、运营商与网段，按公开规则判定机房/家宽/移动属性并给出逐项列明的风险分，附 RDAP Whois、WebRTC 泄露检测、浏览器环境与 HTTP 延迟测试。WebRTC 与环境检测在浏览器本地完成，不上传服务器。";
+  "在 18btc 站内直接使用 IP 风险检测：打开自动自查出口 IP，也可查任意 IP 或域名的地理位置、ASN、运营商与网段，按公开规则判定机房 / 家宽 / 移动属性并给出逐项列明的风险分，附 RDAP Whois、WebRTC 泄露与浏览器环境检测。后两项在浏览器本地完成，不上传服务器。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -56,6 +57,7 @@ export default async function IpCheckToolPage({
     <>
       <IpCheckPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="ip-check" />
+      <ToolJsonLd slug="ip-check" />
     </>
   );
 }

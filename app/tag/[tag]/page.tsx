@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import TagClient from "@/components/TagClient";
+import { TagJsonLd } from "@/components/SeoJsonLd";
 import { TAGS, getTag } from "@/lib/tags";
 import { toolsByTag } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -52,5 +53,10 @@ export default async function TagPage({ params, searchParams }: Props) {
   const { ads } = await searchParams;
   const tag = getTag(tagId);
   if (!tag) notFound();
-  return <TagClient tag={tag} adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <TagClient tag={tag} adsPreview={ads === "preview"} />
+      <TagJsonLd tagId={tag.id} />
+    </>
+  );
 }

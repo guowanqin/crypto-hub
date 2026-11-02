@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import ChainDauPanelClient from "@/components/ChainDauPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -60,6 +61,7 @@ export default async function ChainDauPanelPage({
     <>
       <ChainDauPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="chain-dau-panel" />
+      <ToolJsonLd slug="chain-dau-panel" />
     </>
   );
 }

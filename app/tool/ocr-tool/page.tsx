@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import OcrToolClient from "@/components/OcrToolClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/ocr-tool";
 
 const TITLE = `图片文字识别 OCR｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接使用本地 OCR：基于 Tesseract 引擎在浏览器里识别图片文字，图片不上传。批量导入最多 20 张，中英混合识别（简体中文 + 英文），结果按行展示、点击行可在原图上高亮定位、逐行可编辑纠错，导出 TXT、Markdown、Word 文档或按图打包 ZIP。首次使用需联网下载识别模型（几十 MB），之后浏览器缓存、离线可用。印刷体与截图效果好，手写与复杂表格明显弱于云端 OCR。";
+  "在 18btc 站内直接使用本地 OCR：基于 Tesseract 引擎在浏览器里识别图片文字，图片不上传。批量导入最多 20 张，中英混合识别（简体中文 + 英文），结果按行展示、可在原图高亮定位、逐行编辑纠错，导出 TXT、Markdown、Word 或 ZIP。印刷体与截图效果好，手写与复杂表格弱于云端 OCR。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -58,6 +59,7 @@ export default async function OcrToolPage({
     <>
       <OcrToolClient adsPreview={ads === "preview"} />
       <RelatedTools slug="ocr-tool" />
+      <ToolJsonLd slug="ocr-tool" />
     </>
   );
 }

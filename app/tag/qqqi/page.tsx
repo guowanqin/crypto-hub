@@ -3,15 +3,16 @@ import QqqiClient from "@/components/QqqiClient";
 import { getTag } from "@/lib/tags";
 import { toolsByTag } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { TagJsonLd } from "@/components/SeoJsonLd";
 
 // 专属标签页：/tag/qqqi 不走通用标签模板，主体是 QQQI 攒股收息定投估值看板。
 // SEO 标题由需求指定：「QQQI 攒股收息定投计算器｜18btc 币圈工具导航」。
 const tag = getTag("qqqi")!;
 const path = "/tag/qqqi";
 
-const TITLE = `QQQI 攒股收息定投计算器｜${SITE_NAME.zh}`;
+const TITLE = `QQQI 收息定投工具合集｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "QQQI（NEOS Nasdaq-100 High Income ETF）攒股收息定投估值工具：现价、52 周水位、最近派息、TTM 派息合计与当前分红率自动调取，附最近 24 次派息历史、分红率自身历史分位估值参考，以及逐月模拟的攒股收息定投计算器（定投金额、年限、分红率、股价增速、分红再投入可调）。QQQI 2024 年 1 月才上市、历史短，派息含期权金与可能的资本返还（ROC）成分，分红率不等于总回报，不构成投资建议。";
+  "QQQI（NEOS Nasdaq-100 High Income ETF）攒股收息定投估值工具：现价、52 周水位、TTM 派息合计与当前分红率自动调取，附 24 次派息历史、分红率历史分位参考与逐月定投模拟计算器。2024 年上市、历史短，派息含期权金与资本返还（ROC）成分，分红率不等于总回报，不构成投资建议。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -41,5 +42,10 @@ export default async function QqqiTagPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <QqqiClient tag={tag} adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <QqqiClient tag={tag} adsPreview={ads === "preview"} />
+      <TagJsonLd tagId={tag.id} />
+    </>
+  );
 }

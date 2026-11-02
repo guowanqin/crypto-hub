@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import TweetPanelClient from "@/components/TweetPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/tweetbox";
 
 const TITLE = `推特下载工具箱｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接使用推特下载工具箱：粘贴公开推文链接，自动解析作者、正文、发布时间与互动数，图片给原图直链、视频逐档列出分辨率与码率的 MP4 直链下载（推特 CDN 直链，本站服务器不中转）；推文一键导出 TXT、Markdown、HTML、JSON、CSV 与 PDF，同作者 Thread 识别后可整串导出 TXT、Markdown、JSON 与 EPUB。仅限公开推文，媒体版权归原作者。";
+  "18btc 站内使用推特下载工具箱：粘贴公开推文链接，自动解析作者、正文与互动数，图片给原图直链、视频逐档列出分辨率与码率的 MP4 直链（推特 CDN 直链，本站不中转）；推文可导出 TXT、Markdown、HTML、JSON、CSV、PDF，Thread 可整串导出（含 EPUB）。仅限公开推文，版权归作者。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -56,6 +57,7 @@ export default async function TweetboxPage({
     <>
       <TweetPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="tweetbox" />
+      <ToolJsonLd slug="tweetbox" />
     </>
   );
 }

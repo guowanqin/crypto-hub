@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import FileTimeToolClient from "@/components/FileTimeToolClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -54,6 +55,7 @@ export default async function FileTimeToolPage({
     <>
       <FileTimeToolClient adsPreview={ads === "preview"} />
       <RelatedTools slug="filetime" />
+      <ToolJsonLd slug="filetime" />
     </>
   );
 }

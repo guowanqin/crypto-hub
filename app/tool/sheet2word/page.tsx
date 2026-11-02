@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import Sheet2WordClient from "@/components/Sheet2WordClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -46,6 +47,7 @@ export default async function Sheet2WordPage({
     <>
       <Sheet2WordClient adsPreview={ads === "preview"} />
       <RelatedTools slug="sheet2word" />
+      <ToolJsonLd slug="sheet2word" />
     </>
   );
 }

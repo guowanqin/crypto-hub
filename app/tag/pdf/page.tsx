@@ -3,6 +3,7 @@ import PdfClient from "@/components/PdfClient";
 import { getTag } from "@/lib/tags";
 import { toolsByTag } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { TagJsonLd } from "@/components/SeoJsonLd";
 
 // 专属标签页：/tag/pdf 不走通用标签模板，主体是站内可用的 PDF 工具箱
 //（合并 / 拆分 / 页面管理 / 水印 / 页码 / 骑缝章 / 批注 / 转换，纯前端本地处理）。
@@ -10,7 +11,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
 const tag = getTag("pdf")!;
 const path = "/tag/pdf";
 
-const TITLE = `PDF 工具箱｜${SITE_NAME.zh}`;
+const TITLE = `PDF 在线工具合集｜${SITE_NAME.zh}`;
 const DESCRIPTION =
   "纯前端在线 PDF 工具箱：PDF 合并、按页码范围拆分或逐页拆分、页面删除/旋转/重排/插入空白页、文字水印、页码添加、骑缝章、指定页文字批注、图片转 PDF、PDF 转图片。参考信创 PDF 工具箱功能集，全部处理在浏览器本地完成，文件不上传服务器，离线可用，免费无需注册。";
 
@@ -42,5 +43,10 @@ export default async function PdfTagPage({
   searchParams: Promise<{ ads?: string }>;
 }) {
   const { ads } = await searchParams;
-  return <PdfClient tag={tag} adsPreview={ads === "preview"} />;
+  return (
+    <>
+      <PdfClient tag={tag} adsPreview={ads === "preview"} />
+      <TagJsonLd tagId={tag.id} />
+    </>
+  );
 }

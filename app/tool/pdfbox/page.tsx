@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import PdfBoxClient from "@/components/PdfBoxClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -56,6 +57,7 @@ export default async function PdfBoxPage({
     <>
       <PdfBoxClient adsPreview={ads === "preview"} />
       <RelatedTools slug="pdfbox" />
+      <ToolJsonLd slug="pdfbox" />
     </>
   );
 }

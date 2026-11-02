@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RelatedTools from "@/components/RelatedTools";
+import { ToolJsonLd } from "@/components/SeoJsonLd";
 import UniBurnPanelClient from "@/components/UniBurnPanelClient";
 import { getTool } from "@/lib/tools";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -10,7 +11,7 @@ const path = "/tool/uni-burn";
 
 const TITLE = `UNI 销毁进度追踪｜Uniswap 销毁了多少 UNI｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 币圈工具导航站内直接追踪 UNI 销毁进度：直接读取以太坊主网 UNI 合约，给出累计销毁量、销毁占初始供应（10 亿枚）的比例、有效供应、近 24 小时与近 30 天销毁量、按近 30 天速度折算的年化销毁量与年化通缩率，并逐笔列出最近销毁记录，附交易哈希可在 Etherscan 核对。Uniswap 协议费驱动的 UNI 通缩进度，一页看清；口径为主网入账时间，与多链发生日口径有 1–7 天时滞，不构成投资建议。";
+  "在 18btc 站内直接追踪 UNI 销毁进度：直读以太坊主网 UNI 合约，给出累计销毁量、占初始供应（10 亿枚）比例、有效供应、近 24 小时与 30 天销毁量、年化销毁量与年化通缩率，逐笔列出最近销毁记录，附交易哈希可在 Etherscan 核对。口径为主网入账时间，不构成投资建议。";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,6 +58,7 @@ export default async function UniBurnPage({
     <>
       <UniBurnPanelClient adsPreview={ads === "preview"} />
       <RelatedTools slug="uni-burn" />
+      <ToolJsonLd slug="uni-burn" />
     </>
   );
 }
