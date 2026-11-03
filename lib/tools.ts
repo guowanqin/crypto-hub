@@ -1645,6 +1645,96 @@ export const TOOLS: ToolDef[] = [
       tw: "介面完成度比預期高，能開啟 PSD 這一條就值得放進收藏夾；但 alpha 兩個字要當真——重要稿件先拿小圖試，別拿客戶檔案冒險。",
     },
   },
+  {
+    slug: "geolibre",
+    name: { zh: "GeoLibre 浏览器 GIS", en: "GeoLibre Browser GIS",
+    tw: "GeoLibre 瀏覽器 GIS" },
+    url: "https://web.geolibre.app",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/geolibre.webp",
+    oneLiner: {
+      zh: "浏览器里的完整 GIS：1000 多个地理处理工具全部本地运行。",
+      en: "A full GIS in your browser: 1,000+ geoprocessing tools running locally.",
+      tw: "瀏覽器裡的完整 GIS：1000 多個地理處理工具全部本地執行。",
+    },
+    detail: {
+      zh: "GeoLibre 是免费开源的轻量云原生 GIS 平台（MIT，GitHub 约 8400 星，2026-11-03 复核时已发布 3.5.0 版），最大的卖点是整个 GIS 可以在浏览器里跑：打开网页版就用，不用安装、不用注册，数据只在你自己的浏览器里处理，不上传到服务器。它内置 1000 多个地理处理工具（矢量、栅格、遥感、水文、地形、LiDAR 等），通过 WebAssembly 在本地执行；还能用 DuckDB 空间 SQL 直接查 GeoJSON、GeoParquet、GeoPackage 等数据。地图可以在 MapLibre、Mapbox、Cesium、ArcGIS 四个渲染引擎之间切换，默认用 MapLibre。除了网页版，它也有 Windows、macOS、Linux 桌面版和安卓、iOS 应用，以及可嵌入 Jupyter 的 Python 包；官网还陈列了 100 多个用公开数据做的示例项目，拿来就能改。",
+      en: "GeoLibre is a free, open-source, lightweight cloud-native GIS platform (MIT, about 8,400 GitHub stars, at version 3.5.0 when we checked on 2026-11-03) whose biggest selling point is that the whole GIS runs in your browser: open the web app and start, no install, no account, and your data is processed only in your own browser — nothing is uploaded to a server. It ships 1,000+ geoprocessing tools (vector, raster, remote sensing, hydrology, terrain, LiDAR and more) executed locally through WebAssembly, and lets you query GeoJSON, GeoParquet, GeoPackage and similar data with DuckDB Spatial SQL. Maps switch between four rendering engines — MapLibre, Mapbox, Cesium and ArcGIS — with MapLibre as the default. Beyond the web app there are Windows, macOS and Linux desktop builds, Android and iOS apps, and a Python package for Jupyter; the official site also showcases 100+ example projects built from public open data, ready to fork and adapt.",
+      tw: "GeoLibre 是免費開源的輕量雲原生 GIS 平臺（MIT，GitHub 約 8400 星，2026-11-03 複核時已釋出 3.5.0 版），最大的賣點是整個 GIS 可以在瀏覽器裡跑：開啟網頁版就用，不用安裝、不用註冊，資料只在你自己的瀏覽器裡處理，不上傳到伺服器。它內建 1000 多個地理處理工具（向量、柵格、遙感、水文、地形、LiDAR 等），透過 WebAssembly 在本地執行；還能用 DuckDB 空間 SQL 直接查 GeoJSON、GeoParquet、GeoPackage 等資料。地圖可以在 MapLibre、Mapbox、Cesium、ArcGIS 四個渲染引擎之間切換，預設用 MapLibre。除了網頁版，它也有 Windows、macOS、Linux 桌面版和安卓、iOS 應用，以及可嵌入 Jupyter 的 Python 包；官網還陳列了 100 多個用公開資料做的示例專案，拿來就能改。",
+    },
+    audience: {
+      zh: "需要处理地图、遥感、地形数据的学生、研究者、GIS 从业者，以及不想装 QGIS、ArcGIS 重型软件，只想在浏览器里快速做一次空间分析的人。",
+      en: "Students, researchers and GIS practitioners who work with maps, remote sensing or terrain data — and anyone who wants one quick spatial analysis in a browser instead of installing a heavyweight QGIS or ArcGIS setup.",
+      tw: "需要處理地圖、遙感、地形資料的學生、研究者、GIS 從業者，以及不想裝 QGIS、ArcGIS 重型軟體，只想在瀏覽器裡快速做一次空間分析的人。",
+    },
+    take: {
+      zh: "浏览器打开即用、数据不出本机，是它最打动人的两点；重度用户再考虑桌面版，功能与网页版是同一套。",
+      en: "Open it in a browser and your data never leaves your machine — those two points sell it. Power users can graduate to the desktop build, which is the same app.",
+      tw: "瀏覽器開啟即用、資料不出本機，是它最打動人的兩點；重度使用者再考慮桌面版，功能與網頁版是同一套。",
+    },
+  },
+  {
+    slug: "wordcraft",
+    name: { zh: "WordCraft 开源文字处理", en: "WordCraft",
+    tw: "WordCraft 開源文書處理" },
+    url: "https://getartcraft.com/apps/wordcraft",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/wordcraft.webp",
+    oneLiner: {
+      zh: "纯 Rust 写的开源 Word 替代品：读写 docx，离线运行。",
+      en: "An open-source Word alternative in pure Rust: reads and writes docx, fully offline.",
+      tw: "純 Rust 寫的開源 Word 替代品：讀寫 docx，離線執行。",
+    },
+    detail: {
+      zh: "WordCraft 是用纯 Rust 从零写的开源文字处理器（MIT / Apache-2.0 双许可证，GitHub 约 1.7 万星，2026-11-03 复核），目标是做一个免费、离线、属于用户自己的 Word 替代品：熟悉的功能区界面、样式、表格、修订与批注、目录与脚注、引文与参考文献、邮件合并都有，能直接读写 docx，还能导入老格式 doc、odt、rtf、html、md、txt，导出带可选文字的 PDF。拼写与语法检查全部离线完成，不联网；界面支持简体中文在内的二十多种语言。原生应用覆盖 macOS、Windows、Linux 与 BSD，官网也提供浏览器 Web 版入口。必须如实提醒：官方页面标注它仍“在开发中”，功能和稳定性都在快速迭代，重要稿件先备份再试，别拿唯一一份文件冒险。",
+      en: "WordCraft is an open-source word processor written from scratch in pure Rust (dual-licensed MIT / Apache-2.0, about 17k GitHub stars when we checked on 2026-11-03), aiming to be a free, offline Word alternative that belongs to its users: the familiar ribbon interface, styles, tables, track changes and comments, tables of contents and footnotes, citations and bibliographies, and mail merge are all there. It reads and writes docx natively, imports legacy doc, odt, rtf, html, md and txt, and exports PDFs with selectable text. Spelling and grammar checks run entirely offline, and the interface ships in 20+ languages including Simplified Chinese. Native apps cover macOS, Windows, Linux and BSD, and the official site offers a web version too. One honest caveat: the official page marks it as still in development, with features and stability changing fast — back up important documents before trying it, and do not gamble your only copy.",
+      tw: "WordCraft 是用純 Rust 從零寫的開源文書處理器（MIT / Apache-2.0 雙許可證，GitHub 約 1.7 萬星，2026-11-03 複核），目標是做一個免費、離線、屬於使用者自己的 Word 替代品：熟悉的功能區介面、樣式、表格、修訂與批註、目錄與腳註、引文與參考文獻、郵件合併都有，能直接讀寫 docx，還能匯入老格式 doc、odt、rtf、html、md、txt，匯出帶可選文字的 PDF。拼寫與語法檢查全部離線完成，不聯網；介面支援簡體中文在內的二十多種語言。原生應用覆蓋 macOS、Windows、Linux 與 BSD，官網也提供瀏覽器 Web 版入口。必須如實提醒：官方頁面標註它仍“在開發中”，功能和穩定性都在快速迭代，重要稿件先備份再試，別拿唯一一份檔案冒險。",
+    },
+    audience: {
+      zh: "不想订阅 Microsoft 365、又需要 docx 兼容的文字处理用户；对开源原生软件感兴趣、愿意尝鲜开发中版本的人。",
+      en: "Word users who do not want a Microsoft 365 subscription but still need docx compatibility, and open-source enthusiasts happy to try software that is still in development.",
+      tw: "不想訂閱 Microsoft 365、又需要 docx 相容的文書處理使用者；對開源原生軟體感興趣、願意嚐鮮開發中版本的人。",
+    },
+    take: {
+      zh: "docx 读写加离线运行，这两条就值得放进收藏夹；但“在开发中”四个字要当真——重要文档先备份，确认无误再替换主力软件。",
+      en: "Native docx support plus fully offline operation already earn it a bookmark. Just take the “in development” label seriously — back up important documents and confirm it handles them before it replaces your main word processor.",
+      tw: "docx 讀寫加離線執行，這兩條就值得放進收藏夾；但“在開發中”四個字要當真——重要文件先備份，確認無誤再替換主力軟體。",
+    },
+  },
+  {
+    slug: "noir",
+    name: { zh: "NOIR 安卓隐私审计", en: "NOIR Android Privacy Audit",
+    tw: "NOIR 安卓隱私審計" },
+    url: "https://verlintas.dev/noir/",
+    tags: ["security"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/noir.webp",
+    oneLiner: {
+      zh: "插线扫安卓手机：权限、上报端点与数据流向一次说清，还给可回滚处置。",
+      en: "Plug in an Android phone and audit it: permissions, reporting endpoints and data flows, plus reversible fixes.",
+      tw: "插線掃安卓手機：許可權、上報端點與資料流向一次說清，還給可回滾處置。",
+    },
+    detail: {
+      zh: "NOIR 是跑在电脑上的安卓隐私审计工具（MIT，GitHub 约 1500 星，2026-11-03 复核时为 0.1.1 版），回答一个很具体的问题：这台手机上的应用到底能拿到什么、又可能发到哪里。它通过 adb 读取已连接安卓设备的应用清单与权限，在设备端直接从 APK 里抽取网络端点（只回传几 KB，不把整包拉回电脑），再按厂商与类别（遥测、广告、定位、输入法等）分类打分，把“能拿到的数据”和“上报域名”配对成数据流向，并检查清单里的导出组件、明文流量、备份与 debuggable 等风险项；需要时还能用 jadx 对单个应用做反编译深挖。输出包括结构化报告、可导入 DNS 拦截的域名分级清单、处置计划与回滚命令。默认全程只读，执行处置也只改应用权限级别，每条都能还原。必须如实提醒：它非常新（2026-10-31 才创建，0.1.1 版），只支持安卓，需要开 USB 调试并连 adb；它给出的是静态证据——能证明“应用具备这个能力并且代码里有这个端点”，不能证明某次具体传输真的发生过；未签名安装包首次运行会被 Gatekeeper 或 SmartScreen 拦一次。",
+      en: "NOIR is a desktop Android privacy audit tool (MIT, about 1,500 GitHub stars, at version 0.1.1 when we checked on 2026-11-03) that answers one concrete question: what can the apps on this phone collect, and where might they send it? Over adb it reads the connected Android device's app inventory and permissions, extracts network endpoints from APKs right on the device (only a few KB come back — the whole package is never pulled to your computer), then classifies by vendor and category (telemetry, ads, location, keyboards and more), scores the risk, and pairs “data it can read” with “hosts it can reach” into data flows. It also checks manifests for exported components, cleartext traffic, backup flags and debuggable builds, and can deep-scan a single app with jadx when needed. Output includes a structured report, tiered domain lists ready for DNS blocking, an action plan and rollback commands. The default run is fully read-only, and even applied fixes only change app-ops — each one reversible. Honest caveats: it is very new (created 2026-10-31, version 0.1.1), Android-only, and needs USB debugging plus adb; its evidence is static — it proves an app has a capability and an endpoint in its code, not that a particular transfer actually happened; and the unsigned builds will trip Gatekeeper or SmartScreen once on first launch.",
+      tw: "NOIR 是跑在電腦上的安卓隱私審計工具（MIT，GitHub 約 1500 星，2026-11-03 複核時為 0.1.1 版），回答一個很具體的問題：這臺手機上的應用到底能拿到什麼、又可能發到哪裡。它透過 adb 讀取已連線安卓裝置的應用清單與許可權，在裝置端直接從 APK 裡抽取網路端點（只回傳幾 KB，不把整包拉回電腦），再按廠商與類別（遙測、廣告、定位、輸入法等）分類打分，把“能拿到的資料”和“上報域名”配對成資料流向，並檢查清單裡的匯出元件、明文流量、備份與 debuggable 等風險項；需要時還能用 jadx 對單個應用做反編譯深挖。輸出包括結構化報告、可匯入 DNS 攔截的域名分級清單、處置計劃與回滾命令。預設全程只讀，執行處置也只改應用許可權級別，每條都能還原。必須如實提醒：它非常新（2026-10-31 才建立，0.1.1 版），只支援安卓，需要開 USB 除錯並連 adb；它給出的是靜態證據——能證明“應用具備這個能力並且程式碼裡有這個端點”，不能證明某次具體傳輸真的發生過；未簽名安裝包首次執行會被 Gatekeeper 或 SmartScreen 攔一次。",
+    },
+    audience: {
+      zh: "用国产安卓手机、想知道应用把数据发到哪里的人；有动手能力、愿意开 USB 调试做一次手机体检的隐私在意者。",
+      en: "Android users — especially on Chinese vendor phones — who want to know where their apps send data, and who are comfortable enabling USB debugging for a privacy checkup.",
+      tw: "用國產安卓手機、想知道應用把資料發到哪裡的人；有動手能力、願意開 USB 除錯做一次手機體檢的隱私在意者。",
+    },
+    take: {
+      zh: "默认只读、每条处置都给回滚命令，是它最值得信任的设计；但版本很新，建议先在备用机上跑，或充分备份后再对主力机执行处置。",
+      en: "Read-only by default, with a rollback command for every fix — that is the design choice that earns trust. But the version is very new: try it on a spare phone first, or back up thoroughly before applying fixes to your daily driver.",
+      tw: "預設只讀、每條處置都給回滾命令，是它最值得信任的設計；但版本很新，建議先在備用機上跑，或充分備份後再對主力機執行處置。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
