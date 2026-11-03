@@ -15,6 +15,8 @@ export interface ToolDef {
   addedAt: string;
   /** 人工置顶权重（数字越大越靠前），只有站长点名要推的才设，一般留空 */
   pin?: number;
+  /** 详情页配图（本地路径，如 /tools/<slug>.webp）；可选，无此字段的工具不渲染配图 */
+  image?: string;
   oneLiner: Record<Lang, string>;
   detail: Record<Lang, string>;
   audience: Record<Lang, string>;
@@ -1551,6 +1553,96 @@ export const TOOLS: ToolDef[] = [
       zh: "收录说明：找中文群和频道时，它比在 Telegram 里逐个翻快得多，三个机器人互为备份也少了连不上的尴尬；但结果是机器索引的公开内容，广告、引流和质量差的群不少，点进去先看内容再决定加不加。官网宣称的用户量未经独立核实，当个参考就好。",
       en: "Listing notes: for finding Chinese-language groups and channels it is much faster than digging through Telegram manually, and the three mirror bots spare you the dead end when one is down. But results are a machine-built index of public content — expect plenty of ads, traffic-farming and low-quality groups, so look before you join. The user numbers on its official site are unverified; treat them as a rough reference only.",
       tw: "收錄說明：找中文群和頻道時，它比在 Telegram 裡逐個翻快得多，三個機器人互為備份也少了連不上的尷尬；但結果是機器索引的公開內容，廣告、引流和品質差的群不少，點進去先看內容再決定加不加。官網宣稱的用戶量未經獨立核實，當個參考就好。",
+    },
+  },
+  {
+    slug: "freqtrade",
+    name: { zh: "Freqtrade 量化交易机器人", en: "Freqtrade",
+    tw: "Freqtrade 量化交易機器人" },
+    url: "https://www.freqtrade.io/en/stable/",
+    tags: ["market"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/freqtrade.webp",
+    oneLiner: {
+      zh: "开源量化交易机器人：策略回测、模拟与实盘一体，配网页控制台。",
+      en: "Open-source crypto trading bot: backtesting, dry-run and live trading in one, with a web dashboard.",
+      tw: "開源量化交易機器人：策略回測、模擬與實盤一體，配網頁控制台。",
+    },
+    detail: {
+      zh: "Freqtrade 是用 Python 写的开源加密货币交易机器人（GPL-3.0，GitHub 约 5.6 万星，2026-11-03 复核时当天仍在更新）。把策略写成 Python 类之后，它能连上 Binance、OKX、Bybit 等主流交易所（经 ccxt 统一接口）跑现货与合约：先用历史数据回测，再开模拟盘（dry-run）空跑验证，最后才切实盘；自带网页控制台 FreqUI，可以看持仓、K 线与盈亏，也能用 Telegram 远程下指令，还内置 FreqAI 用机器学习调策略参数。它不能在网页里直接用——需要一台长期开机的电脑或服务器自己部署，并填入你自己的交易所 API 密钥。把话说在前面：机器人只是执行工具，不保证盈利，上实盘前务必先回测加模拟盘；API 密钥只开交易权限、不要开提现权限。入口说明：其官网首页目前打不开（返回 404），本站入口指向官方维护的文档站，安装与策略文档都在那里。",
+      en: "Freqtrade is an open-source crypto trading bot written in Python (GPL-3.0, about 56k GitHub stars, still updated on the day we checked, 2026-11-03). Write your strategy as a Python class and it connects to major exchanges such as Binance, OKX and Bybit (through the unified ccxt interface) for spot and futures: backtest on historical data first, validate with a dry-run that trades fake money, and only then switch to live trading. It ships with a web dashboard, FreqUI, for positions, charts and profit/loss, can be remote-controlled over Telegram, and includes FreqAI for machine-learning parameter tuning. It cannot run inside this page — you deploy it yourself on an always-on computer or server and plug in your own exchange API keys. Plainly stated: a bot is an execution tool, not a profit guarantee; always backtest and dry-run before going live, and never enable withdrawals on the API key. Entry note: the project's homepage currently returns 404, so our link points to its officially maintained documentation site, where installation and strategy docs live.",
+      tw: "Freqtrade 是用 Python 寫的開源加密貨幣交易機器人（GPL-3.0，GitHub 約 5.6 萬星，2026-11-03 複核時當天仍在更新）。把策略寫成 Python 類別之後，它能連上 Binance、OKX、Bybit 等主流交易所（經 ccxt 統一介面）跑現貨與合約：先用歷史資料回測，再開模擬盤（dry-run）空跑驗證，最後才切實盤；自帶網頁控制台 FreqUI，可以看持倉、K 線與盈虧，也能用 Telegram 遠端下指令，還內建 FreqAI 用機器學習調策略參數。它不能在網頁裡直接用——需要一臺長期開機的電腦或伺服器自己部署，並填入你自己的交易所 API 金鑰。把話說在前面：機器人只是執行工具，不保證盈利，上實盤前務必先回測加模擬盤；API 金鑰只開交易權限、不要開提現權限。入口說明：其官網首頁目前打不開（返回 404），本站入口指向官方維護的文件站，安裝與策略文件都在那裡。",
+    },
+    audience: {
+      zh: "有 Python 基础、想把自己的交易策略自动化，又不想把资金和 API 密钥交给闭源付费机器人的量化玩家。",
+      en: "Quant-minded traders with some Python who want to automate their own strategies instead of handing funds and API keys to a closed-source paid bot.",
+      tw: "有 Python 基礎、想把自己的交易策略自動化，又不想把資金和 API 金鑰交給閉源付費機器人的量化玩家。",
+    },
+    take: {
+      zh: "它是这个领域最经得起看的开源选项：先回测、再模拟、最后才小钱实盘，顺序反了，机器人只会帮你更快地亏钱。",
+      en: "It is the most battle-tested open-source option in this space: backtest, dry-run, then small money live — reverse that order and the bot just helps you lose faster.",
+      tw: "它是這個領域最經得起看的開源選項：先回測、再模擬、最後才小錢實盤，順序反了，機器人只會幫你更快地虧錢。",
+    },
+  },
+  {
+    slug: "umami",
+    name: { zh: "Umami 网站统计", en: "Umami Analytics",
+    tw: "Umami 網站統計" },
+    url: "https://umami.is",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/umami.webp",
+    oneLiner: {
+      zh: "隐私优先的网站统计：不用 Cookie、不收个人数据，自托管或云端。",
+      en: "Privacy-first website analytics: no cookies, no personal data — self-host it or use the cloud.",
+      tw: "隱私優先的網站統計：不用 Cookie、不收個人資料，自託管或雲端。",
+    },
+    detail: {
+      zh: "Umami 是开源的网站与产品分析平台（MIT，GitHub 约 4 万星，2026-11-03 复核时当天仍在更新），定位是 Google Analytics 的轻量替代：给网站加一段统计代码，就能看访问量、来源、热门页面、访客路径、转化漏斗与留存。它不用 Cookie、不收集个人数据，多数网站因此可以省掉 Cookie 同意横幅，也更贴合 GDPR 一类隐私法规。两种用法：自托管版免费开源，需要一台服务器跑 Node.js 加 PostgreSQL / MySQL 数据库；或者直接用官方云服务 Umami Cloud，免部署、打开就用（云端是官方商业服务，具体免费与付费档位以官网为准）。数据始终握在自己手里，不会被打包卖给广告商——这正是很多独立站长从 GA 迁过来的原因。",
+      en: "Umami is an open-source web and product analytics platform (MIT, about 40k GitHub stars, still updated on the day we checked, 2026-11-03), positioned as a lightweight Google Analytics alternative: add one tracking snippet to your site and you can see traffic, acquisition sources, top pages, visitor journeys, conversion funnels and retention. It uses no cookies and collects no personal data, so most sites can drop the cookie-consent banner entirely, and it fits privacy regimes like GDPR by design. Two ways to run it: self-host the free open-source version on a server with Node.js and a PostgreSQL/MySQL database, or use the official Umami Cloud with zero deployment (the cloud is the project's commercial service — check its site for the current free and paid tiers). Your data stays in your hands and is never packaged for advertisers, which is exactly why many independent site owners migrate from GA.",
+      tw: "Umami 是開源的網站與產品分析平臺（MIT，GitHub 約 4 萬星，2026-11-03 複核時當天仍在更新），定位是 Google Analytics 的輕量替代：給網站加一段統計程式碼，就能看瀏覽量、來源、熱門頁面、訪客路徑、轉化漏斗與留存。它不用 Cookie、不收集個人資料，多數網站因此可以省掉 Cookie 同意橫幅，也更貼合 GDPR 一類隱私法規。兩種用法：自託管版免費開源，需要一臺伺服器跑 Node.js 加 PostgreSQL / MySQL 資料庫；或者直接用官方雲端服務 Umami Cloud，免部署、開啟就用（雲端是官方商業服務，具體免費與付費檔位以官網為準）。資料始終握在自己手裡，不會被打包賣給廣告商——這正是很多獨立站長從 GA 遷過來的原因。",
+    },
+    audience: {
+      zh: "有自己网站或产品的站长、独立开发者，想知道流量从哪来、用户在哪一步流失，又不想装臃肿统计、挂 Cookie 横幅的人。",
+      en: "Site owners and indie developers who want to know where traffic comes from and where users drop off, without a bloated analytics suite or a cookie banner.",
+      tw: "有自己網站或產品的站長、獨立開發者，想知道流量從哪來、使用者在哪一步流失，又不想裝臃腫統計、掛 Cookie 橫幅的人。",
+    },
+    take: {
+      zh: "自托管版真免费、真开源，装在自己的小服务器上就够用；怕运维就用云端版。比 GA 轻得多，也干净得多。",
+      en: "The self-hosted version is genuinely free and open source — a small server of your own is plenty; if you hate ops, take the cloud. Either way it is far lighter and cleaner than GA.",
+      tw: "自託管版真免費、真開源，裝在自己的小伺服器上就夠用；怕運維就用雲端版。比 GA 輕得多，也乾淨得多。",
+    },
+  },
+  {
+    slug: "photocraft",
+    name: { zh: "PhotoCraft 开源修图", en: "PhotoCraft",
+    tw: "PhotoCraft 開源修圖" },
+    url: "https://getartcraft.com/apps/photocraft",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    image: "/tools/photocraft.webp",
+    oneLiner: {
+      zh: "开源版 Photoshop 挑战者：图层、蒙版与真实 PSD 支持，离线运行。",
+      en: "An open-source Photoshop challenger: layers, masks and real PSD files, fully offline.",
+      tw: "開源版 Photoshop 挑戰者：圖層、遮罩與真實 PSD 支援，離線運行。",
+    },
+    detail: {
+      zh: "PhotoCraft 是从零用纯 Rust 写的开源图像编辑器（MIT / Apache-2.0 双许可证，GitHub 约 7.6 万星，2026-11-03 复核时当天仍在更新），目标是做一个免费、离线、属于用户自己的 Photoshop 替代品：图层、蒙版、调整图层、图层样式、文字、矢量、画笔一应俱全，而且能直接打开和保存真实的 PSD 文件，方便和用 Photoshop 的人交换工程文件。原生应用支持 macOS、Windows、Linux 与 FreeBSD，官网也提供 Web 版入口。必须如实提醒：官方自己标注它仍处于早期 alpha 阶段，功能和稳定性都在快速迭代，现在更适合尝鲜和轻量修图，别急着拿它替换生产环境里的主力软件。",
+      en: "PhotoCraft is an open-source image editor written from scratch in pure Rust (dual-licensed MIT / Apache-2.0, about 76k GitHub stars, still updated on the day we checked, 2026-11-03), aiming to be a free, offline Photoshop alternative that belongs to its users: layers, masks, adjustment layers, layer styles, type, vectors and brushes — and it opens and saves real PSD files, so you can exchange project files with Photoshop users. The native app runs on macOS, Windows, Linux and FreeBSD, and the official site also offers a web version. One honest caveat, in the project's own words: it is still early alpha, with features and stability changing fast — great for trying out and for light editing today, not yet a drop-in replacement for the main tool in a production workflow.",
+      tw: "PhotoCraft 是從零用純 Rust 寫的開源圖片編輯器（MIT / Apache-2.0 雙授權，GitHub 約 7.6 萬星，2026-11-03 複核時當天仍在更新），目標是做一個免費、離線、屬於使用者自己的 Photoshop 替代品：圖層、遮罩、調整圖層、圖層樣式、文字、向量、筆刷一應俱全，而且能直接開啟和儲存真實的 PSD 檔案，方便和用 Photoshop 的人交換工程檔案。原生應用支援 macOS、Windows、Linux 與 FreeBSD，官網也提供 Web 版入口。必須如實提醒：官方自己標註它仍處於早期 alpha 階段，功能和穩定性都在快速迭代，現在更適合嘗鮮和輕量修圖，別急著拿它替換生產環境裡的主力軟體。",
+    },
+    audience: {
+      zh: "不想订阅 Adobe、又需要图层与 PSD 兼容的修图用户；对开源原生软件感兴趣、愿意尝鲜早期版本的人。",
+      en: "Image editors who do not want an Adobe subscription but still need layers and PSD compatibility, and open-source enthusiasts happy to try early software.",
+      tw: "不想訂閱 Adobe、又需要圖層與 PSD 相容的修圖使用者；對開源原生軟體感興趣、願意嘗鮮早期版本的人。",
+    },
+    take: {
+      zh: "界面完成度比预期高，能打开 PSD 这一条就值得放进收藏夹；但 alpha 两个字要当真——重要稿件先拿小图试，别拿客户文件冒险。",
+      en: "The interface is far more finished than you would expect, and real PSD support alone earns it a bookmark. Just take the alpha label seriously — rehearse on small files, never on a client's deliverable.",
+      tw: "介面完成度比預期高，能開啟 PSD 這一條就值得放進收藏夾；但 alpha 兩個字要當真——重要稿件先拿小圖試，別拿客戶檔案冒險。",
     },
   },
 ];

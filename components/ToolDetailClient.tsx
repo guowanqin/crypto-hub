@@ -48,6 +48,13 @@ export default function ToolDetailClient({
         </a>
       </section>
 
+      {tool.image && (
+        <figure className="detail-image-wrap">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={tool.image} alt={tool.name[lang]} className="detail-image" />
+        </figure>
+      )}
+
       <section className="card">
         <h2>{t.detailTitle}</h2>
         <p className="body-text">{tool.detail[lang]}</p>

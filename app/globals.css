@@ -683,6 +683,20 @@ a:hover {
   max-width: 760px;
 }
 
+/* 工具详情页配图（仅带 image 字段的工具渲染） */
+.detail-image-wrap {
+  margin: 0 0 18px;
+}
+
+.detail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
 .take-card {
   display: flex;
   gap: 16px;
