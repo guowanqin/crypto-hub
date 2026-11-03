@@ -1524,6 +1524,35 @@ export const TOOLS: ToolDef[] = [
       tw: "實測提醒：背離信號出現時價格通常已經離開高低點一段距離，它更適合當「該去看圖了」的提醒，而不是進場按鈕；15 分鐘級別噪聲明顯，先看 4 小時和 1 小時的大週期信號，再用小週期找節奏。同一標的連續報背離卻不反轉，就是背離鈍化，別一根筋反著做。",
     },
   },
+  {
+    slug: "jisou",
+    name: { zh: "极搜", en: "Jisou",
+    tw: "極搜" },
+    url: "https://t.me/jisou?start=a_7847144671",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "third-party",
+    oneLiner: {
+      zh: "Telegram 中文资源搜索机器人：对话里发关键词，搜公开群组与频道。",
+      en: "A Chinese search bot inside Telegram: send a keyword in chat to search its index of public groups and channels.",
+      tw: "Telegram 中文資源搜尋機器人：對話裡發關鍵詞，搜公開群組與頻道。",
+    },
+    detail: {
+      zh: "极搜（Jisou）是 Telegram 内的中文搜索机器人 @jisou：在机器人对话里发送关键词，即可检索它收录的 Telegram 公开群组、频道、机器人，以及视频、音乐、新闻等内容索引。它的官网 jisou.cc 本身不设搜索框，搜索全部在机器人里完成。官方公告频道是 @JISOU1，交流群是 @jisou0；自 2024 年起另有 @jisou2、@jisou3 两个功能相同的机器人与主号互为容错，一个连不上时可换另一个。第三方机器人目录 findmini 记载的常用命令包括 /reso（近期热搜）、/daoh（分类导航）、/help（教程）。据其官网介绍，每天有 500 多万人使用（用户量数字来自官方自述，无法独立核实，本站仅作转述）。收录提醒：搜索结果是公开内容的索引，质量参差，广告与引流内容不少，需要自行甄别；部分敏感关键词会被屏蔽；机器人内可能有广告位与推广内容；使用前需要先有 Telegram 账号。",
+      en: "Jisou is a Chinese-language search bot inside Telegram (@jisou): send a keyword in the chat and it searches its index of public Telegram groups, channels and bots, plus content indexes for video, music and news. Its official site, jisou.cc, has no search box of its own — searching happens entirely inside the bot. The official announcement channel is @JISOU1 and the community group is @jisou0; since 2024, two identical fallback bots, @jisou2 and @jisou3, mirror the main bot in case one is unreachable. Common commands recorded by the third-party bot directory findmini include /reso (recent hot searches), /daoh (category navigation) and /help (tutorial). Its official site states that more than five million people use it daily; that user figure is the operator's own claim, cannot be independently verified, and is repeated here only as attribution. Listing notes: results are an index of public content of mixed quality, with a fair amount of advertising and traffic-farming entries, so judge for yourself; some sensitive keywords are blocked; the bot itself may carry ad slots and promoted content; and you need a Telegram account to use it.",
+      tw: "極搜（Jisou）是 Telegram 內的中文搜尋機器人 @jisou：在機器人對話裡傳送關鍵詞，即可檢索它收錄的 Telegram 公開群組、頻道、機器人，以及影片、音樂、新聞等內容索引。它的官網 jisou.cc 本身不設搜尋框，搜尋全部在機器人裡完成。官方公告頻道是 @JISOU1，交流群是 @jisou0；自 2024 年起另有 @jisou2、@jisou3 兩個功能相同的機器人與主號互為容錯，一個連不上時可換另一個。第三方機器人目錄 findmini 記載的常用命令包括 /reso（近期熱搜）、/daoh（分類導覽）、/help（教學）。據其官網介紹，每天有 500 多萬人使用（用戶量數字來自官方自述，無法獨立核實，本站僅作轉述）。收錄提醒：搜尋結果是公開內容的索引，品質參差，廣告與引流內容不少，需要自行甄別；部分敏感關鍵詞會被屏蔽；機器人內可能有廣告位與推廣內容；使用前需要先有 Telegram 帳號。",
+    },
+    audience: {
+      zh: "想在 Telegram 里找中文群组、频道和资源的人；刚上手 Telegram、不知道去哪找群和频道的新用户。",
+      en: "People looking for Chinese-language groups, channels and resources on Telegram, and newcomers who have just installed Telegram and do not know where to find communities.",
+      tw: "想在 Telegram 裡找中文群組、頻道和資源的人；剛上手 Telegram、不知道去哪找群和頻道的新使用者。",
+    },
+    take: {
+      zh: "收录说明：找中文群和频道时，它比在 Telegram 里逐个翻快得多，三个机器人互为备份也少了连不上的尴尬；但结果是机器索引的公开内容，广告、引流和质量差的群不少，点进去先看内容再决定加不加。官网宣称的用户量未经独立核实，当个参考就好。",
+      en: "Listing notes: for finding Chinese-language groups and channels it is much faster than digging through Telegram manually, and the three mirror bots spare you the dead end when one is down. But results are a machine-built index of public content — expect plenty of ads, traffic-farming and low-quality groups, so look before you join. The user numbers on its official site are unverified; treat them as a rough reference only.",
+      tw: "收錄說明：找中文群和頻道時，它比在 Telegram 裡逐個翻快得多，三個機器人互為備份也少了連不上的尷尬；但結果是機器索引的公開內容，廣告、引流和品質差的群不少，點進去先看內容再決定加不加。官網宣稱的用戶量未經獨立核實，當個參考就好。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
