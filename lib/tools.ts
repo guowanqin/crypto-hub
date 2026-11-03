@@ -1766,6 +1766,37 @@ export const TOOLS: ToolDef[] = [
       tw: "盯錢包不用連錢包：貼上公開地址，餘額和最近出入賬一目瞭然，異動先於損失被看見——前提是隻貼地址，私鑰助記詞永遠不進任何網頁。",
     },
   },
+  {
+    slug: "marketing-skills",
+    name: { zh: "出海营销技能库", en: "Marketing Skill Hub",
+    tw: "出海營銷技能庫" },
+    url: "https://18btc.cc/tool/marketing-skills",
+    tags: ["office"],
+    addedAt: "2026-11-03",
+    type: "own",
+    embedded: true,
+    image: "/tools/marketing-skills.webp",
+    oneLiner: {
+      zh: "出海营销技能库：9 个海外营销技能全文站内读，配术语表与新手百问。",
+      en: "A marketing skill library: nine overseas-growth skills readable in full on-site, plus a glossary and a 100-question beginner FAQ.",
+      tw: "出海營銷技能庫：9 個海外營銷技能全文站內讀，配術語表與新手百問。",
+    },
+    detail: {
+      zh: "把 GitHub 开源仓库 marketing-skill-hub 的 9 个海外营销技能镜像到站内免费阅读：增长战略、广告投放、广告文案、UGC 视频、投放优化、冷邮件外联、邮件营销、私域成交、社媒运营。每个技能都能在站内读全文（中文版与英文版正文）并打开配套参考文档（详细打法、检查清单、模板与案例），另外附带中英对照术语表（88 条）与出海新手 100 问，全部支持搜索，技能可按功能分组筛选。内容是作者 Aron 厚玉的开源作品，按 CC BY-NC 4.0 许可发布；本站同步时已剥离原文中的 Pro 版推销与社交引流成分，只做免费镜像阅读，同步日期与上游版本标注在页面下方。",
+      en: "This page mirrors the nine overseas-marketing agent skills from the open-source GitHub repo marketing-skill-hub for free on-site reading: growth strategy, paid ads, ad copy, UGC video, ads optimization, cold outreach, email marketing, conversational sales and social media. Every skill opens in full on-site (Chinese and English texts) together with its reference docs — playbooks, checklists, templates and worked examples — and the page also carries the bilingual glossary (88 terms) and the 100-question beginner FAQ, all searchable, with skills filterable by function group. The content is Aron Houyu's open-source work under CC BY-NC 4.0; the sync strips the original's Pro upsells and social follow-bait and keeps only the knowledge content plus the attribution the licence requires. Sync date and upstream revision are shown at the bottom of the page.",
+      tw: "把 GitHub 開源倉庫 marketing-skill-hub 的 9 個海外營銷技能映象到站內免費閱讀：增長戰略、廣告投放、廣告文案、UGC 影片、投放最佳化、冷郵件外聯、郵件營銷、私域成交、社媒運營。每個技能都能在站內讀全文（中文版與英文版正文）並開啟配套參考文件（詳細打法、檢查清單、模板與案例），另外附帶中英對照術語表（88 條）與出海新手 100 問，全部支援搜尋，技能可按功能分組篩選。內容是作者 Aron 厚玉的開源作品，按 CC BY-NC 4.0 許可釋出；本站同步時已剝離原文中的 Pro 版推銷與社交引流成分，只做免費映象閱讀，同步日期與上游版本標註在頁面下方。",
+    },
+    audience: {
+      zh: "做跨境电商、独立站和海外广告投放的运营与创业者；想系统补齐出海营销打法、随手查术语和模板的新手与小团队。",
+      en: "Operators and founders doing cross-border e-commerce, independent stores and overseas ad buying; beginners and small teams who want the full go-global marketing playbook plus a desk reference for terms and templates.",
+      tw: "做跨境電商、獨立站和海外廣告投放的運營與創業者；想系統補齊出海營銷打法、隨手查術語和模板的新手與小團隊。",
+    },
+    take: {
+      zh: "收录说明：从战略、投放、文案到私域成交一整套，还配了中文正文和术语表，当案头手册查很顺手；涉及税务、关税与平台政策的内容时效性强，照着做之前先核对最新规定。",
+      en: "Listing notes: a rare complete set — strategy, ads, copy, all the way to private-traffic closing — with Chinese texts and a glossary, handy as a desk manual. Tax, tariff and platform-policy passages age fast, so check the current rules before acting on them.",
+      tw: "收錄說明：從戰略、投放、文案到私域成交一整套，還配了中文正文和術語表，當案頭手冊查很順手；涉及稅務、關稅與平臺政策的內容時效性強，照著做之前先核對最新規定。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

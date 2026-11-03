@@ -6226,3 +6226,334 @@ a:hover {
   line-height: 1.75;
   color: var(--muted);
 }
+
+/* ---------- 出海营销技能库（/tool/marketing-skills） ---------- */
+.msh-attr {
+  margin-top: 16px;
+}
+.msh-attr-meta {
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.msh-section {
+  margin-top: 34px;
+}
+.msh-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 18px 0 12px;
+}
+.msh-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.msh-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 16px;
+  padding: 12px 16px;
+  outline: none;
+}
+.msh-search input:focus {
+  border-color: var(--gold);
+}
+.msh-chiprow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.msh-meta-line {
+  color: var(--faint);
+  font-size: 13.5px;
+  margin: 8px 0 12px;
+}
+.msh-empty {
+  color: var(--muted);
+  padding: 22px 0;
+}
+.msh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+.msh-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.msh-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.msh-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+.msh-card-summary {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin: 0;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.msh-card-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.msh-card-refs {
+  color: var(--faint);
+  font-size: 13px;
+}
+.msh-hit {
+  font-size: 12px;
+  color: var(--gold-strong);
+  background: var(--gold-dim);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.msh-read-btn {
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: var(--gold-strong);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.msh-read-btn:hover {
+  text-decoration: underline;
+}
+.msh-back {
+  border: none;
+  background: none;
+  color: var(--gold-strong);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.msh-doc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.msh-doc {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+.msh-doc .msh-p {
+  margin: 0 0 12px;
+}
+.msh-h {
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 20px 0 10px;
+}
+.msh-h:first-child {
+  margin-top: 0;
+}
+.msh-h2 {
+  font-size: 19px;
+}
+.msh-h3 {
+  font-size: 16.5px;
+}
+.msh-h4 {
+  font-size: 15.5px;
+}
+.msh-hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 18px 0;
+}
+.msh-quote {
+  margin: 0 0 14px;
+  padding: 10px 16px;
+  border-left: 3px solid var(--gold);
+  background: var(--panel-soft);
+  border-radius: 0 10px 10px 0;
+  color: var(--muted);
+}
+.msh-quote p {
+  margin: 0 0 8px;
+}
+.msh-quote p:last-child {
+  margin-bottom: 0;
+}
+.msh-list {
+  margin: 0 0 12px;
+  padding-left: 22px;
+}
+.msh-list li {
+  margin-bottom: 5px;
+}
+.msh-list .msh-list {
+  margin: 5px 0 2px;
+}
+.msh-task {
+  color: var(--gold-strong);
+}
+.msh-code {
+  background: #292524;
+  color: #f5f0e6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+.msh-doc code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.msh-p code,
+.msh-list code,
+.msh-table code,
+.msh-quote code {
+  background: var(--panel-2);
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: 0.92em;
+}
+.msh-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 14px;
+}
+.msh-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.msh-table th,
+.msh-table td {
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.msh-table th {
+  background: var(--panel-soft);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.msh-img-alt {
+  color: var(--faint);
+}
+.msh-term-list,
+.msh-faq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.msh-term {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  position: relative;
+}
+.msh-term-main {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.msh-term-en {
+  color: var(--gold-strong);
+  font-size: 13.5px;
+}
+.msh-term-def {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 4px 0 0;
+}
+.msh-term-cat {
+  font-size: 12px;
+  color: var(--faint);
+  background: var(--panel-soft);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.msh-term > .msh-term-cat {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+}
+.msh-faq {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.msh-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  padding: 13px 16px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+.msh-faq-n {
+  color: var(--gold-strong);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.msh-faq-qtext {
+  flex: 1 1 auto;
+  font-weight: 600;
+}
+.msh-faq-arrow {
+  color: var(--faint);
+  flex: 0 0 auto;
+}
+.msh-faq-a {
+  border-top: 1px solid var(--border);
+  padding: 6px 16px 10px;
+}
+.msh-faq-a .msh-doc {
+  border: none;
+  padding: 6px 0 4px;
+  background: none;
+}
+.msh .group-expand-row {
+  margin-top: 14px;
+}

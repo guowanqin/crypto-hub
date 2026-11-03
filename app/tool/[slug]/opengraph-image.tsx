@@ -32,6 +32,7 @@ const DEDICATED_PAGES = new Set([
   "tweetbox",
   "devtools",
   "niuma-clock",
+  "marketing-skills",
 ]);
 
 export function generateStaticParams() {
