@@ -5851,3 +5851,296 @@ a:hover {
   color: var(--text);
   padding-bottom: 8px;
 }
+
+/* ---------- 策略信号扫描（/tool/signal-scanner） ---------- */
+.sig-source {
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.sig-error,
+.sig-warn {
+  color: var(--red, #dc2626);
+}
+
+.sig-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 16px 0 6px;
+}
+
+.sig-stat {
+  flex: 1 1 150px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sig-stat-num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sig-stat-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sig-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0 18px;
+}
+
+.sig-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sig-chip {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sig-chip:hover {
+  border-color: var(--gold);
+}
+
+.sig-chip-on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sig-chip-sep {
+  width: 10px;
+}
+
+.sig-search {
+  flex: 1 1 180px;
+  max-width: 280px;
+}
+
+.sig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+  gap: 14px;
+}
+
+.sig-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sig-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sig-symbol {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sig-name {
+  margin-left: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sig-kind {
+  font-size: 12px;
+  color: var(--faint);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 9px;
+  white-space: nowrap;
+}
+
+.sig-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sig-price {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sig-chg {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.sig-pos {
+  color: var(--green);
+}
+
+.sig-neg {
+  color: var(--red, #dc2626);
+}
+
+.sig-spark {
+  margin-left: auto;
+  width: 96px;
+  height: 28px;
+  flex: none;
+}
+
+.sig-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 26px;
+  align-content: flex-start;
+}
+
+.sig-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.sig-badge-bull {
+  color: var(--green);
+  border-color: rgba(5, 150, 105, 0.45);
+  background: rgba(5, 150, 105, 0.07);
+  font-weight: 600;
+}
+
+.sig-badge-bear {
+  color: var(--red, #dc2626);
+  border-color: rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.06);
+  font-weight: 600;
+}
+
+.sig-badge-flat {
+  color: var(--muted);
+}
+
+.sig-vol-tag {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.sig-none {
+  font-size: 13px;
+  color: var(--faint);
+  padding: 3px 0;
+}
+
+.sig-meta {
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.sig-evidence {
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+
+.sig-ev-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: var(--gold);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sig-ev-body {
+  margin-top: 6px;
+}
+
+.sig-ev-line {
+  margin: 3px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sig-feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sig-feed-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.sig-feed-sym {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sig-feed-time {
+  color: var(--faint);
+}
+
+.sig-feed-price {
+  margin-left: auto;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sig-more-btn {
+  display: block;
+  margin: 16px auto 4px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 9px 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sig-more-btn:hover {
+  border-color: var(--gold);
+}

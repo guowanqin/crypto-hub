@@ -1494,6 +1494,36 @@ export const TOOLS: ToolDef[] = [
       tw: "多數時候淨價差是負的，這正是它的用處：毛價差看著誘人，扣掉兩次兌換費、橋費和滑點往往就沒了。真要盯，優先盯穩定幣——價差小，但兩邊都是硬通貨、搬運風險最低；大幣種突然冒出很大的淨價差，先懷疑是某一邊池子太薄或錨定出了問題，別急著衝。",
     },
   },
+  {
+    slug: "signal-scanner",
+    name: { zh: "策略信号扫描", en: "Strategy Signal Scanner",
+    tw: "策略信號掃描" },
+    url: "https://18btc.cc/tool/signal-scanner",
+    tags: ["market"],
+    addedAt: "2026-11-03",
+    type: "own",
+    embedded: true,
+    oneLiner: {
+      zh: "策略信号扫描：主流币与美股的 MACD 背离与横盘突破，自动扫描出信号。",
+      en: "Strategy signal scanner: MACD divergences and range breakouts across major crypto and US stocks, scanned automatically on closed candles.",
+      tw: "策略信號掃描：主流幣與美股的 MACD 背離與橫盤突破，自動掃描出信號。",
+    },
+    detail: {
+      zh: "每轮扫描 30 个主流币（Binance 现货，备用 OKX）和 20 只美股（含 SPY、QQQ 等 ETF，数据来自 Yahoo Finance 公开接口），在 15 分钟、1 小时、4 小时三个周期上用 MACD(12,26,9) 与摆动点识别顶背离、底背离（含平顶 / 平底动能背离子标签），并检测收盘价对前 20 根 K 线区间的横盘突破（放量另有标记）与区间整理。所有计算只用已收盘 K 线，正在形成的那根不参与；每条背离信号都附 P1/P2 两个摆动点的价格与 DIF 值，点开「证据」即可逐项复核。页面同时给出全池上涨广度与信号动态流，可按资产类型、周期、信号类型筛选。口径提醒：摆动点要等右侧 5 根 K 线收盘才能确认，背离信号天然滞后于高低点；美股为公开延迟数据，非交易时段信号停留在上一交易时段；美股涨跌按最近两个交易日收盘价推算，与官方单日涨跌幅口径不同。本工具只做公开数据的机械扫描，不构成投资建议。",
+      en: "Each round scans 30 major crypto pairs (Binance spot, OKX fallback) and 20 US stocks and ETFs such as SPY and QQQ (Yahoo Finance public data) on the 15-minute, 1-hour and 4-hour timeframes, using MACD (12, 26, 9) and swing points to spot bearish and bullish divergences — including flat-top / flat-bottom momentum subtypes — plus range breakouts beyond the previous 20 candles (with a volume-surge tag) and range-bound tags. Everything is computed on closed candles only; the candle still forming never counts. Every divergence carries the P1/P2 swing prices and DIF values, expandable under “Evidence” for manual verification. The page also shows pool-wide advancers breadth and a live signal feed, filterable by asset class, timeframe and signal type. Caliber notes: a swing point needs 5 more closed candles to confirm, so divergence signals inherently lag the actual high or low; US-stock data is delayed public data and outside market hours stock signals stay at the previous session's result; stock change is derived from the last two trading days' closes and is not the same caliber as an official one-day change. This tool mechanically scans public data only and is not investment advice.",
+      tw: "每輪掃描 30 個主流幣（Binance 現貨，備用 OKX）和 20 只美股（含 SPY、QQQ 等 ETF，資料來自 Yahoo Finance 公開介面），在 15 分鐘、1 小時、4 小時三個週期上用 MACD(12,26,9) 與擺動點識別頂背離、底背離（含平頂 / 平底動能背離子標籤），並檢測收盤價對前 20 根 K 線區間的橫盤突破（放量另有標記）與區間整理。所有計算只用已收盤 K 線，正在形成的那根不參與；每條背離信號都附 P1/P2 兩個擺動點的價格與 DIF 值，點開「證據」即可逐項復核。頁面同時給出全池上漲廣度與信號動態流，可按資產類型、週期、信號類型篩選。口徑提醒：擺動點要等右側 5 根 K 線收盤才能確認，背離信號天然滯後於高低點；美股為公開延遲資料，非交易時段信號停留在上一交易時段；美股漲跌按最近兩個交易日收盤價推算，與官方單日漲跌幅口徑不同。本工具只做公開資料的機械掃描，不構成投資建議。",
+    },
+    audience: {
+      zh: "同时盯主流币和美股、做波段或日内交易，不想逐个翻图找背离和突破，希望先被信号推着去看图的人。",
+      en: "Swing and intraday traders watching both major crypto and US stocks who do not want to flip through charts one by one, and would rather have divergence and breakout signals surface first.",
+      tw: "同時盯主流幣和美股、做波段或日內交易，不想逐個翻圖找背離和突破，希望先被信號推著去看圖的人。",
+    },
+    take: {
+      zh: "实测提醒：背离信号出现时价格通常已经离开高低点一段距离，它更适合当「该去看图了」的提醒，而不是进场按钮；15 分钟级别噪声明显，先看 4 小时和 1 小时的大周期信号，再用小周期找节奏。同一标的连续报背离却不反转，就是背离钝化，别一根筋反着做。",
+      en: "Field notes: when a divergence signal appears, price has usually already moved away from the high or low — treat it as a “go look at the chart” reminder, not an entry button. The 15-minute timeframe is noisy; read the 4h and 1h signals first and use the small timeframe for timing. If a symbol keeps printing divergences without reversing, that is divergence exhaustion — do not keep fading it on autopilot.",
+      tw: "實測提醒：背離信號出現時價格通常已經離開高低點一段距離，它更適合當「該去看圖了」的提醒，而不是進場按鈕；15 分鐘級別噪聲明顯，先看 4 小時和 1 小時的大週期信號，再用小週期找節奏。同一標的連續報背離卻不反轉，就是背離鈍化，別一根筋反著做。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
