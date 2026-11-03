@@ -565,6 +565,12 @@ function yahooToCandles(chart: YahooChart, intervalSec: number): Candle[] {
     out.push({ t, o, h, l, c, v: quote.volume[i] ?? 0 });
   }
   out.sort((a, b) => a.t - b.t);
+  // Yahoo 会在收盘时刻尾随一根成交量为 0 的占位根（无任何成交，不是真实 K 线，
+  // 2026-11-03 实测 AAPL 15m/60m 尾根 vol=0）：只剥尾部连续的零量根，
+  // 序列中段的零量根保持原样不动。
+  if (out.some((b) => b.v > 0)) {
+    while (out.length > 0 && out[out.length - 1].v === 0) out.pop();
+  }
   return out;
 }
 
