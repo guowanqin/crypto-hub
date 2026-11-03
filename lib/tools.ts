@@ -1735,6 +1735,37 @@ export const TOOLS: ToolDef[] = [
       tw: "預設只讀、每條處置都給回滾命令，是它最值得信任的設計；但版本很新，建議先在備用機上跑，或充分備份後再對主力機執行處置。",
     },
   },
+  {
+    slug: "wallet-watch",
+    name: { zh: "钱包只读监控", en: "Wallet Watch — Read-Only Address Monitor",
+    tw: "錢包只讀監控" },
+    url: "https://18btc.cc/tool/wallet-watch",
+    tags: ["wallet", "security"],
+    addedAt: "2026-11-03",
+    type: "own",
+    embedded: true,
+    image: "/tools/wallet-watch.webp",
+    oneLiner: {
+      zh: "钱包只读监控：粘贴公开地址，看余额、出入账与异常转出。",
+      en: "Read-only wallet watch: paste a public address to see its balance, in/out flows and notable outflows.",
+      tw: "錢包只讀監控：貼上公開地址，看餘額、出入賬與異常轉出。",
+    },
+    detail: {
+      zh: "粘贴任意 Bitcoin、Ethereum 或 Solana 公开地址即可查询：当前余额、最近 20–25 笔原生币转账（时间、方向、金额、对方地址，点哈希直达区块浏览器）、所列交易的转入 / 转出 / 净流入汇总，有转出时置顶提示最大一笔。数据全部来自链上公开接口（BTC 走 mempool.space、ETH 走 Blockscout 公共实例、SOL 走 Solana 公共 RPC），经本站服务器调取，不需要任何 API Key，更不需要连接钱包。如实说明三点：一，本页只做即查即看，不提供定时扫描和出账报警（那种功能需要账号与后台服务）；二，只统计原生币转账，代币转账（如 ERC-20）与合约内部交易不在统计内，Solana 的对方地址按余额变动推断、复杂交易可能不准；三，本站不保存你查询过的地址。特别提醒：只粘贴公开地址，任何情况下都不要在任何网站输入私钥或助记词。",
+      en: "Paste any Bitcoin, Ethereum or Solana public address to see its current balance, its latest 20–25 native-coin transfers (time, direction, amount, counterparty, with hashes linked straight to a block explorer) and in/out/net totals for the listed transactions, with the largest outflow called out at the top. All data comes from public chain APIs (mempool.space for BTC, the public Blockscout instance for ETH, public Solana RPC for SOL), fetched through this site's server — no API key, and never a wallet connection. Three honest caveats: first, this page is check-on-demand only — no scheduled scans and no outflow alerts, which would need accounts and a backend service; second, only native-coin transfers are counted, token transfers (e.g. ERC-20) and internal contract transactions are out of scope, and Solana counterparties are inferred from balance changes so complex transactions may be off; third, this site does not store the addresses you check. And the standing warning: only ever paste a public address — never type a private key or seed phrase into any website.",
+      tw: "貼上任意 Bitcoin、Ethereum 或 Solana 公開地址即可查詢：當前餘額、最近 20–25 筆原生幣轉帳（時間、方向、金額、對方地址，點雜湊直達區塊瀏覽器）、所列交易的轉入 / 轉出 / 淨流入彙總，有轉出時置頂提示最大一筆。資料全部來自鏈上公開介面（BTC 走 mempool.space、ETH 走 Blockscout 公共例項、SOL 走 Solana 公共 RPC），經本站伺服器調取，不需要任何 API Key，更不需要連線錢包。如實說明三點：一，本頁只做即查即看，不提供定時掃描和出賬報警（那種功能需要賬號與後臺服務）；二，只統計原生幣轉帳，代幣轉帳（如 ERC-20）與合約內部交易不在統計內，Solana 的對方地址按餘額變動推斷、複雜交易可能不準；三，本站不儲存你查詢過的地址。特別提醒：只貼上公開地址，任何情況下都不要在任何網站輸入私鑰或助記詞。",
+    },
+    audience: {
+      zh: "想盯自家冷钱包、交易所提币地址有没有异动，或要核对某个公开地址资金流向的用户。",
+      en: "Anyone watching a cold wallet or an exchange withdrawal address for unexpected movement, or checking where a public address's funds flow.",
+      tw: "想盯自家冷錢包、交易所提幣地址有沒有異動，或要核對某個公開地址資金流向的使用者。",
+    },
+    take: {
+      zh: "盯钱包不用连钱包：贴上公开地址，余额和最近出入账一目了然，异动先于损失被看见——前提是只贴地址，私钥助记词永远不进任何网页。",
+      en: "Watch a wallet without connecting one: paste the public address and the balance and recent flows are right there, so trouble is seen before it becomes loss — as long as only the address ever goes into a web page, never the key or seed phrase.",
+      tw: "盯錢包不用連錢包：貼上公開地址，餘額和最近出入賬一目瞭然，異動先於損失被看見——前提是隻貼地址，私鑰助記詞永遠不進任何網頁。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

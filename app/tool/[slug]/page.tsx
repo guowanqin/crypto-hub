@@ -39,7 +39,7 @@ function buildDescription(tool: ToolDef): string {
   return desc;
 }
 
-// sheet2word、pershare、imagebox、foldervault、crcl-panel、qqqi-panel、qqq-panel、btc-cycle、filetime、pdfbox、ip-check、uni-burn、devtools、niuma-clock、arb-scanner、signal-scanner 有专属静态页（app/tool/<slug>），不走动态路由。
+// sheet2word、pershare、imagebox、foldervault、crcl-panel、qqqi-panel、qqq-panel、btc-cycle、filetime、pdfbox、ip-check、uni-burn、devtools、niuma-clock、arb-scanner、signal-scanner、wallet-watch 有专属静态页（app/tool/<slug>），不走动态路由。
 const DEDICATED_PAGES = new Set([
   "sheet2word",
   "pershare",
@@ -63,6 +63,7 @@ const DEDICATED_PAGES = new Set([
   "tweetbox",
   "devtools",
   "niuma-clock",
+  "wallet-watch",
 ]);
 
 export function generateStaticParams() {

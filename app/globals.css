@@ -6158,3 +6158,71 @@ a:hover {
 .sig-more-btn:hover {
   border-color: var(--gold);
 }
+
+/* 钱包只读监控（/tool/wallet-watch） */
+.ww-warn {
+  margin: 12px 0 2px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--gold-strong);
+  background: var(--gold-dim);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.ww-chain-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.ww-select {
+  padding: 10px 12px;
+  font-size: 14.5px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+.ww-address {
+  word-break: break-all;
+  font-size: clamp(15px, 3.4vw, 21px) !important;
+}
+.ww-alert {
+  margin: 16px 0 4px;
+  padding: 12px 16px;
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: 12px;
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.ww-alert-title {
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 2px;
+}
+.ww-dir {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ww-caliber {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.ww-caliber h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.ww-caliber ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--muted);
+}
