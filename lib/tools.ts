@@ -1797,6 +1797,37 @@ export const TOOLS: ToolDef[] = [
       tw: "收錄說明：從戰略、投放、文案到私域成交一整套，還配了中文正文和術語表，當案頭手冊查很順手；涉及稅務、關稅與平臺政策的內容時效性強，照著做之前先核對最新規定。",
     },
   },
+  {
+    slug: "arc-panel",
+    name: { zh: "Arc 链数据看板", en: "Arc Chain Dashboard",
+    tw: "Arc 鏈資料看板" },
+    url: "https://18btc.cc/tool/arc-panel",
+    tags: ["onchain", "defi"],
+    addedAt: "2026-11-04",
+    type: "own",
+    embedded: true,
+    image: "/tools/arc-panel.webp",
+    oneLiner: {
+      zh: "Arc 链数据看板：TVL 与稳定币供应双线趋势，看资金到位与 DeFi 承接。",
+      en: "Arc chain dashboard: TVL vs stablecoin supply on twin trend lines — has the money arrived, and has it entered DeFi?",
+      tw: "Arc 鏈資料看板：TVL 與穩定幣供應雙線趨勢，看資金到位與 DeFi 承接。",
+    },
+    detail: {
+      zh: "一页看清 Circle 稳定币原生链 Arc 的资金面：DeFiLlama 统计的该链 DeFi 协议总锁仓（TVL）历史曲线、链上稳定币流通供应历史曲线，两者同屏对照，附当前值、稳定币供应与 TVL 的比值、近 7 天与 30 天变化额与变化率，以及稳定币按锚定币种（美元、欧元、英镑等）拆分的构成。顶部结论卡把比值翻译成一句话：当供应约为 TVL 的两倍上下时，意味着钱已经桥进链上、多数还躺在钱包里没有进入协议。口径如实交代：TVL 只算进入 DeFi 协议的锁仓，不含钱包里闲置的桥接稳定币；稳定币供应是该链稳定币流通总量（各锚定币种折 USD 合计），两个数统计对象不同、不可直接相减。Arc 是新兴链，TVL 历史自 2026 年 5 月起、早期有一段 0 值（图中已剔除），稳定币历史自 2026 年 9 月中旬起，样本尚短。数据走 DeFiLlama 公开接口，每 10 分钟重新取数。本工具不构成投资建议。",
+      en: "Arc's money picture on one page: the Circle-built stablecoin-native chain's total value locked in DeFi protocols (TVL) and its on-chain stablecoin circulating supply, both as history curves from DeFiLlama, shown side by side — with current values, the supply-to-TVL ratio, 7-day and 30-day changes in amount and percent, and the supply split by peg currency (USD, EUR, GBP and others). The verdict card at the top translates the ratio into one sentence: when supply runs at roughly twice TVL, the money has bridged in but mostly sits in wallets instead of protocols. The calibers, stated plainly: TVL counts only funds inside DeFi protocols, not idle bridged stablecoins in wallets; stablecoin supply is the chain's total circulating stablecoins converted to USD across peg currencies — the two measure different things and cannot simply be subtracted. Arc is a young chain: TVL history starts in May 2026 with an early zero stretch (trimmed from the chart) and stablecoin history starts in mid-September 2026, so samples are still short. Data comes from DeFiLlama's public APIs and is re-fetched every 10 minutes. Not investment advice.",
+      tw: "一頁看清 Circle 穩定幣原生鏈 Arc 的資金面：DeFiLlama 統計的該鏈 DeFi 協議總鎖倉（TVL）歷史曲線、鏈上穩定幣流通供應歷史曲線，兩者同屏對照，附當前值、穩定幣供應與 TVL 的比值、近 7 天與 30 天變化額與變化率，以及穩定幣按錨定幣種（美元、歐元、英鎊等）拆分的構成。頂部結論卡把比值翻譯成一句話：當供應約為 TVL 的兩倍上下時，意味著錢已經橋進鏈上、多數還躺在錢包裡沒有進入協議。口徑如實交代：TVL 只算進入 DeFi 協議的鎖倉，不含錢包裡閒置的橋接穩定幣；穩定幣供應是該鏈穩定幣流通總量（各錨定幣種折 USD 合計），兩個數統計物件不同、不可直接相減。Arc 是新興鏈，TVL 歷史自 2026 年 5 月起、早期有一段 0 值（圖中已剔除），穩定幣歷史自 2026 年 9 月中旬起，樣本尚短。資料走 DeFiLlama 公開介面，每 10 分鐘重新取數。本工具不構成投資建議。",
+    },
+    audience: {
+      zh: "关注稳定币赛道与新兴公链生态、想判断 Arc 上资金是「已到位」还是「已开工」的观察者、研究者与准备上链交互的使用者。",
+      en: "Observers, researchers and prospective users tracking the stablecoin sector and young-chain ecosystems, who want to tell whether Arc's money has merely arrived or has actually gone to work.",
+      tw: "關注穩定幣賽道與新興公鏈生態、想判斷 Arc 上資金是「已到位」還是「已開工」的觀察者、研究者與準備上鍊互動的使用者。",
+    },
+    take: {
+      zh: "资金先到、应用未跟上，是新兴稳定币链的常态：Arc 的稳定币供应目前约为 DeFi TVL 的两倍上下，钱桥进来之后大多躺在钱包里，借贷与交易协议还没把它们用起来。这个比值现阶段更适合当观察指标看趋势——什么时候供应涨、TVL 跟着涨，生态才算真启动；拿它当交易信号就太早了。",
+      en: "Money first, apps later is the normal state of a young stablecoin chain: Arc's stablecoin supply currently runs at roughly twice its DeFi TVL — most of what bridged in is still sitting in wallets, not yet put to work by lending or trading protocols. For now the ratio is an observation gauge, not a trading signal: the ecosystem has really started when supply rises and TVL rises with it.",
+      tw: "資金先到、應用未跟上，是新興穩定幣鏈的常態：Arc 的穩定幣供應目前約為 DeFi TVL 的兩倍上下，錢橋進來之後大多躺在錢包裡，借貸與交易協議還沒把它們用起來。這個比值現階段更適合當觀察指標看趨勢——什麼時候供應漲、TVL 跟著漲，生態才算真啟動；拿它當交易訊號就太早了。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
