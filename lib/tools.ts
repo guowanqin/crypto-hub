@@ -2248,6 +2248,37 @@ export const TOOLS: ToolDef[] = [
       tw: "收錄說明：把它當段子倉庫逛最對味：一本正經地討論不存在的病毒，這種幽默只有中文網際網路玩得出來；真遇到電腦中毒，請去安全軟體與專業論壇，別在這裡找藥方。",
     },
   },
+  {
+    slug: "pattern-scanner",
+    name: { zh: "形态选标的", en: "Pattern Screener",
+    tw: "形態選標的" },
+    url: "https://18btc.cc/tool/pattern-scanner",
+    tags: ["market"],
+    addedAt: "2026-11-04",
+    type: "own",
+    embedded: true,
+    image: "/tools/pattern-scanner.webp",
+    oneLiner: {
+      zh: "形态选标的：先选 K 线形态，筛出今日命中的币与美股，附历史回测胜率。",
+      en: "Pattern screener: pick a candlestick pattern, see today's crypto and US-stock matches, with historical backtest win rates.",
+      tw: "形態選標的：先選 K 線形態，篩出今日命中的幣與美股，附歷史回測勝率。",
+    },
+    detail: {
+      zh: "先选形态、再看标的：内置 6 个日线 K 线形态——均线金叉、放量突破、下跌后长下影、缩量整理、缩量回踩均线、超跌后转强——切换形态即可看到当前命中的主流币与美股名单（30 个 USDT 现货对加 20 只美股与 ETF），每条命中附量比、突破幅度、距均线幅度等关键数值。每个形态同时给出全标的池的历史回测：过去数年里该形态在全部标的上触发过多少次（同一标的 10 个交易日内重复触发只计第一次），以及触发后 5、10、20 个交易日的胜率、平均收益与中位数收益，未走完周期的触发不计入分母。所有判定只用已收盘的日线，盘中不刷新结论；回测未计手续费与滑点，加密与美股混池统计只能看大概率，历史表现不代表未来。本工具只做公开数据的机械扫描与统计，不构成投资建议。",
+      en: "Pick a pattern first, then see the symbols: six built-in daily candlestick patterns — MA golden cross, volume breakout, long lower shadow after a decline, low-volume consolidation, low-volume pullback to the moving average, and oversold reversal. Switch patterns to see which of the 30 USDT spot pairs and 20 US stocks/ETFs match right now, each hit with its key numbers (volume ratio, breakout size, distance to the moving average). Every pattern also comes with a pool-wide historical backtest: how many times it has triggered across all symbols over the past years (repeat triggers on the same symbol within 10 trading days count only once), and the win rate, average and median returns 5, 10 and 20 trading days after each trigger, with unmatured triggers excluded from the denominators. Everything is judged on closed daily candles only, so conclusions do not change intraday. The backtest deducts no fees or slippage, pools crypto and US stocks into one statistic that only gives a rough probability, and past performance does not predict future results. This tool mechanically scans and summarises public data only and is not investment advice.",
+      tw: "先選形態、再看標的：內建 6 個日線 K 線形態——均線金叉、放量突破、下跌後長下影、縮量整理、縮量回踩均線、超跌後轉強——切換形態即可看到當前命中的主流幣與美股名單（30 個 USDT 現貨對加 20 只美股與 ETF），每條命中附量比、突破幅度、距均線幅度等關鍵數值。每個形態同時給出全標的池的歷史回測：過去數年裡該形態在全部標的上觸發過多少次（同一標的 10 個交易日內重複觸發只計第一次），以及觸發後 5、10、20 個交易日的勝率、平均收益與中位數收益，未走完週期的觸發不計入分母。所有判定只用已收盤的日線，盤中不重新整理結論；回測未計手續費與滑點，加密與美股混池統計只能看大機率，歷史表現不代表未來。本工具只做公開資料的機械掃描與統計，不構成投資建議。",
+    },
+    audience: {
+      zh: "习惯先定形态、再找标的的波段交易者；想知道均线金叉、放量突破到底靠不靠谱，要拿历史胜率与平均收益验证形态的人。",
+      en: "Swing traders who like to pick a pattern first and find symbols second; anyone who wants to check whether golden crosses and volume breakouts actually work, using historical win rates and average returns.",
+      tw: "習慣先定形態、再找標的的波段交易者；想知道均線金叉、放量突破到底靠不靠譜，要拿歷史勝率與平均收益驗證形態的人。",
+    },
+    take: {
+      zh: "形态是概率工具，不是预测：看回测时胜率必须连同平均收益一起看——胜率高但平均收益薄，扣掉手续费和滑点可能就白忙；胜率一般但单次盈亏比好的形态也别急着否定。还有一句实话：这份回测是 30 个币和 20 只美股混池算的，两个市场脾气不一样，数字只能当大方向参考，别当成对某个标的的承诺。",
+      en: "Patterns are probability tools, not predictions: always read the win rate together with the average return — a high win rate with a thin average return can be eaten alive by fees and slippage, while a mediocre win rate with a good payoff ratio should not be dismissed either. One honest caveat: this backtest pools 30 crypto pairs and 20 US stocks, and the two markets behave very differently, so treat the numbers as a rough compass, never as a promise about any single symbol.",
+      tw: "形態是機率工具，不是預測：看回測時勝率必須連同平均收益一起看——勝率高但平均收益薄，扣掉手續費和滑點可能就白忙；勝率一般但單次盈虧比好的形態也別急著否定。還有一句實話：這份回測是 30 個幣和 20 只美股混池算的，兩個市場脾氣不一樣，數字只能當大方向參考，別當成對某個標的的承諾。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
