@@ -2351,6 +2351,37 @@ export const TOOLS: ToolDef[] = [
     take: { zh: "适合怕折腾的人：找模型、配引擎、算显存这些最劝退的环节它都包了，免费、免注册、数据不出本机。不适合两类人：macOS 与 Linux 用户（只支持 Windows 10/11 x64）；另外提醒一句，它跑的是开源模型，软件本身未见开源声明，冲着「开源软件」来的先看清楚。", en: "For people who hate setup: finding models, configuring the engine and juggling VRAM — the parts that scare everyone off — are all handled, free, no account, data stays on your machine. Not for macOS or Linux users (Windows 10/11 x64 only). One clarification: it runs open-source models, but we found no open-source claim for the software itself.",
     tw: "適合怕折騰的人：找模型、配引擎、算顯存這些最勸退的環節它都包了，免費、免註冊、資料不出本機。不適合兩類人：macOS 與 Linux 使用者（只支援 Windows 10/11 x64）；另外提醒一句，它跑的是開源模型，軟體本身未見開源聲明，衝著「開源軟體」來的先看清楚。" },
   },
+  {
+    slug: "likong-index",
+    name: { zh: "利空出尽指数", en: "Bad-News Exhaustion Index",
+    tw: "利空出盡指數" },
+    url: "https://18btc.cc/tool/likong-index",
+    tags: ["market"],
+    addedAt: "2026-11-04",
+    type: "own",
+    embedded: true,
+    image: "/tools/likong-index.webp",
+    oneLiner: {
+      zh: "利空出尽指数：盯「利空出尽」在新闻里被喊多响，喊声高潮当底部参考。",
+      en: "Bad-news exhaustion index: tracks how loudly the news repeats “the bad news is out” — peak noise as a bottom reference.",
+      tw: "利空出盡指數：盯「利空出盡」在新聞裡被喊多響，喊聲高潮當底部參考。",
+    },
+    detail: {
+      zh: "利空出尽指数把一句市场老话做成可验证的逆向情绪指标：当「利空出尽」在媒体上被喊得越响，越说明坏消息已被反复讨论、恐慌接近极值，阶段底部往往不远——但这话在阴跌里会被反复喊，准不准要拿数据说话。本页统计词族共 6 个词（主词条利空出尽，扩展词利空落地、坏消息出尽、该跌不跌，绝望组割肉离场、爆仓潮）在 GDELT 全球新闻数据库中每天的提及量占比，各组相对过去 90 天基线算偏离、按权重合成为 0–100 的指数并做 3 日平滑，70 以上为高潮区。主图可叠加比特币、以太坊、标普 500 与纳斯达克综合指数的价格走势；事件表把样本期内每一次高潮（一轮上穿 70 只取一个峰值，峰值相距不到 10 天的合并）全部列出，附各标的其后 7 天、30 天的实际涨跌与汇总统计——上涨占比、平均涨跌都在，不挑样本。必须说明：数据源是新闻媒体的提及量，不是社交媒体全量，X（推特）全量搜索需要付费 API，本版未接入；指数是相对热度的分位值，高潮区标记的是样本期内喊得最响的一批日子。本工具只做公开数据的统计与展示，不构成投资建议。",
+      en: "The Bad-News Exhaustion Index turns a market saying into a testable contrarian sentiment gauge: the louder the media repeats “the bad news is exhausted” (利空出尽), the more thoroughly bad news has been chewed over and the closer panic may be to an extreme — but in a grinding downtrend the phrase gets shouted again and again, so whether it works is a question for data, not folklore. The page tracks six phrase groups (the main phrase 利空出尽; extensions 利空落地 “bad news landed”, 坏消息出尽 “all bad news out”, 该跌不跌 “won't fall when it should”; and a despair group 割肉离场 “cut losses and leave”, 爆仓潮 “liquidation wave”) as daily shares of all news volume in the GDELT global news database. Each group is scored against its trailing 90-day baseline, combined by weight into a 0–100 index with 3-day smoothing; above 70 is the climax zone. The main chart overlays Bitcoin, Ethereum, the S&P 500 and the Nasdaq Composite, and the event table lists every climax in the sample (one peak per excursion, peaks less than 10 days apart merged) with each asset's actual +7d / +30d returns and summary statistics — up share and averages included, nothing cherry-picked. Plainly stated: the source is news-media mentions, not full social-media volume — full X (Twitter) search requires a paid API and is not connected in this version. The index is a percentile of relative heat, so the climax zone simply marks the loudest days inside the sample. This tool only compiles and presents public data; it is not investment advice.",
+      tw: "利空出盡指數把一句市場老話做成可驗證的逆向情緒指標：當「利空出盡」在媒體上被喊得越響，越說明壞消息已被反覆討論、恐慌接近極值，階段底部往往不遠——但這話在陰跌裡會被反覆喊，準不準要拿資料說話。本頁統計詞族共 6 個詞（主詞條利空出盡，擴展詞利空落地、壞消息出盡、該跌不跌，絕望組割肉離場、爆倉潮）在 GDELT 全球新聞資料庫中每天的提及量佔比，各組相對過去 90 天基線算偏離、按權重合成為 0–100 的指數並做 3 日平滑，70 以上為高潮區。主圖可疊加比特幣、以太坊、標普 500 與納斯達克綜合指數的價格走勢；事件表把樣本期內每一次高潮（一輪上穿 70 只取一個峰值，峰值相距不到 10 天的合併）全部列出，附各標的其後 7 天、30 天的實際漲跌與彙總統計——上漲佔比、平均漲跌都在，不挑樣本。必須說明：資料來源是新聞媒體的提及量，不是社交媒體全量，X（推特）全量搜尋需要付費 API，本版未接入；指數是相對熱度的分位值，高潮區標記的是樣本期內喊得最響的一批日子。本工具只做公開資料的統計與展示，不構成投資建議。",
+    },
+    audience: {
+      zh: "相信「利空出尽就是利好」、想知道这句话历史上到底灵不灵的投资者；做仓位决策前想先看一眼市场情绪温度的人。",
+      en: "Investors who believe “once the bad news is exhausted, it's bullish” and want to know whether the saying has actually worked in history; anyone who likes to check a sentiment thermometer before sizing a position.",
+      tw: "相信「利空出盡就是利好」、想知道這句話歷史上到底靈不靈的投資者；做倉位決策前想先看一眼市場情緒溫度的人。",
+    },
+    take: {
+      zh: "实话先说：这个指数最容易被误用的地方，是把「高潮区」当成买入信号本身——分位算法注定了样本里总有一批日子在 70 以上，阴跌中继照样能喊出高潮。它真正的用法是配合事件表看胜率与赔率：先看历次高潮后 30 天的上涨占比和平均涨跌，再决定这一回值不值得信。另外它测的是媒体喊声，不是散户情绪，和社交平台上的真实绝望程度隔着一层，别把两件事混为一谈。",
+      en: "Honestly first: the easiest way to misuse this index is treating the climax zone as a buy signal by itself — a percentile method guarantees a batch of days above 70 in any sample, and mid-downtrend bounces shout just as loud. Its real use is with the event table: weigh the +30d up share and average return across all past climaxes before deciding whether to trust this one. And remember it measures media volume, not retail sentiment — the two are separated by a layer, so don't conflate them.",
+      tw: "實話先說：這個指數最容易被誤用的地方，是把「高潮區」當成買入訊號本身——分位演算法注定了樣本裡總有一批日子在 70 以上，陰跌中繼照樣能喊出高潮。它真正的用法是配合事件表看勝率與賠率：先看歷次高潮後 30 天的上漲佔比和平均漲跌，再決定這一回值不值得信。另外它測的是媒體喊聲，不是散戶情緒，和社交平台上的真實絕望程度隔著一層，別把兩件事混為一談。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

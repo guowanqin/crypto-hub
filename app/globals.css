@@ -6700,3 +6700,259 @@ a:hover {
 .pat-pending {
   color: var(--faint);
 }
+
+/* 利空出尽指数（/tool/likong-index） */
+.lik-h2 {
+  font-size: 16px;
+  margin: 2px 0 10px;
+}
+
+.lik-h3 {
+  font-size: 14.5px;
+  margin: 18px 0 8px;
+}
+
+.lik-sec {
+  color: var(--faint);
+  font-size: 12.5px;
+}
+
+.lik-kicker {
+  color: var(--accent-strong, var(--gold));
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.lik-hero {
+  margin-top: 16px;
+}
+
+.lik-hero-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.lik-hero-main {
+  margin-top: 10px;
+}
+
+.lik-hero-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lik-hero-num {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lik-chip {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+}
+
+.lik-chip-calm {
+  color: #4c7245;
+  background: rgba(90, 140, 70, 0.1);
+  border-color: rgba(90, 140, 70, 0.35);
+}
+
+.lik-chip-warming {
+  color: #97791f;
+  background: rgba(184, 145, 43, 0.12);
+  border-color: rgba(184, 145, 43, 0.45);
+}
+
+.lik-chip-climax {
+  color: #b02a1e;
+  background: rgba(217, 45, 32, 0.09);
+  border-color: rgba(217, 45, 32, 0.4);
+}
+
+.lik-hero-sub {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.lik-verdict {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.lik-chart-card {
+  margin-top: 16px;
+}
+
+.lik-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lik-asset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 10px;
+}
+
+.lik-chip-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.lik-chip-btn-on {
+  background: var(--gold-dim);
+  color: var(--accent-strong);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+.lik-note {
+  margin-top: 10px;
+  color: var(--faint);
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.lik-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.lik-group-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.lik-group-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.lik-group-name {
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.lik-kind {
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--faint);
+  font-size: 11px;
+}
+
+.lik-group-value {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.lik-group-num {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.lik-group-unit {
+  color: var(--faint);
+  font-size: 12px;
+}
+
+.lik-spark {
+  display: block;
+  width: 100%;
+  height: 36px;
+  margin-top: 9px;
+}
+
+.lik-group-raw {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.lik-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.lik-table th,
+.lik-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.lik-table th {
+  color: var(--muted);
+  font-weight: 600;
+  text-align: right;
+}
+
+.lik-table th:first-child,
+.lik-table td:first-child {
+  text-align: left;
+}
+
+.lik-td-date {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.lik-pos {
+  color: #2e7d32;
+}
+
+.lik-neg {
+  color: #c0392b;
+}
+
+.lik-error {
+  color: #b02a1e;
+  font-size: 14px;
+}
+
+.lik-loading {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.lik-social-raw {
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--muted);
+}
