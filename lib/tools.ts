@@ -2333,6 +2333,24 @@ export const TOOLS: ToolDef[] = [
     take: { zh: "站内开发者工具箱能 cover 日常二十件小事，但要解多层嵌套编码、拆恶意样本里的混淆串，还得是它：Magic 自动猜解法那一下，是真省时间。", en: "This site’s own dev toolbox covers the twenty everyday jobs, but for peeling multi-layer encodings or deobfuscating a string out of a suspicious sample, this is the tool — the Magic operation guessing the recipe for you genuinely saves time.",
     tw: "站內開發者工具箱能 cover 日常二十件小事，但要解多層巢狀編碼、拆惡意樣本里的混淆串，還得是它：Magic 自動猜解法那一下，是真省時間。" },
   },
+  {
+    slug: "locmodel",
+    name: { zh: "LocModel 本地 AI 部署", en: "LocModel",
+    tw: "LocModel 本地 AI 部署" },
+    url: "https://www.locmodel.com",
+    tags: ["office"],
+    addedAt: "2026-11-04",
+    type: "third-party",
+    image: "/tools/locmodel.webp",
+    oneLiner: { zh: "本地大模型一键部署：先看硬件再荐模型，引擎自动配好，点一下就能跑。", en: "One-click local LLM deployment: it reads your hardware, recommends models that fit, and sets up the inference engine for you.",
+    tw: "本地大模型一鍵部署：先看硬體再薦模型，引擎自動配好，點一下就能跑。" },
+    detail: { zh: "LocModel 是面向 Windows 的本地大模型部署工具，当前版本 v2.1.0，官网标注免费下载。它先做一遍硬件体检——显卡型号与显存、处理器核心、可用内存与磁盘空间一次读清，再按显存和内存推荐能流畅运行的开源模型，并标出预计速度与适配程度。推理引擎不用自己折腾：它会自动下载与硬件匹配的 llama.cpp 官方版本，NVIDIA、AMD、Intel 与纯 CPU 四种后端都覆盖；显存放不下时，还会把部分层自动分层到内存与硬盘。模型可以在线从 HuggingFace 按硬件与用途筛选下载，也能直接导入本地 GGUF 文件，点一下启动推理，上下文长度与思考模式可切换。新版还加入了本地画图（Z-Image 等模型）、视频生成（Wan2.2）与 Agent 本地调用（在指定文件夹内读写文件、执行脚本，文件夹外操作会先询问）。全部推理在本机完成，无需注册账号，提示词与生成内容不离开电脑。它只支持 Windows 10/11 x64，macOS 与 Linux 暂时用不了。", en: "LocModel is a local LLM deployment tool for Windows — currently v2.1.0 and listed as a free download on its official site. It starts with a hardware checkup: GPU model and VRAM, CPU cores, available RAM and disk space are read in one pass, then it recommends open-source models your machine can run smoothly, each labelled with estimated speed and fit. The inference engine needs no manual setup: it downloads the official llama.cpp build matching your hardware, covering NVIDIA, AMD, Intel and CPU-only backends, and when VRAM is not enough it automatically tiers some layers into RAM and disk. Models can be downloaded from HuggingFace filtered by hardware and use case, or imported as local GGUF files, then started with one click, with context length and thinking mode switchable. Recent versions add local image generation (the Z-Image family), video generation (Wan2.2) and a local Agent that reads and writes files and runs scripts inside a folder you choose, asking first before touching anything outside it. All inference runs on your own machine — no account needed, and prompts and outputs never leave the computer. Windows 10/11 x64 only; macOS and Linux are not supported.",
+    tw: "LocModel 是面向 Windows 的本地大模型部署工具，當前版本 v2.1.0，官網標註免費下載。它先做一遍硬體體檢——顯示卡型號與顯存、處理器核心、可用記憶體與磁碟空間一次讀清，再按顯存和記憶體推薦能流暢運行的開源模型，並標出預計速度與適配程度。推理引擎不用自己折騰：它會自動下載與硬體匹配的 llama.cpp 官方版本，NVIDIA、AMD、Intel 與純 CPU 四種後端都覆蓋；顯存放不下時，還會把部分層自動分層到記憶體與硬碟。模型可以線上從 HuggingFace 按硬體與用途篩選下載，也能直接匯入本地 GGUF 檔案，點一下啟動推理，上下文長度與思考模式可切換。新版還加入了本地畫圖（Z-Image 等模型）、影片生成（Wan2.2）與 Agent 本地調用（在指定資料夾內讀寫檔案、執行腳本，資料夾外操作會先詢問）。全部推理在本機完成，無需註冊帳號，提示詞與生成內容不離開電腦。它只支援 Windows 10/11 x64，macOS 與 Linux 暫時用不了。" },
+    audience: { zh: "想在自己的 Windows 电脑上跑 Qwen、Gemma 等开源大模型，又不想配环境、记参数、手动编译引擎的人；也适合在意隐私、希望对话与文件都不上传云端的用户。", en: "Windows users who want to run open-source models such as Qwen or Gemma on their own PC without setting up environments, memorising parameters or compiling engines by hand — and anyone who would rather keep chats and files off the cloud.",
+    tw: "想在自己的 Windows 電腦上跑 Qwen、Gemma 等開源大模型，又不想配環境、記參數、手動編譯引擎的人；也適合在意隱私、希望對話與檔案都不上傳雲端的使用者。" },
+    take: { zh: "适合怕折腾的人：找模型、配引擎、算显存这些最劝退的环节它都包了，免费、免注册、数据不出本机。不适合两类人：macOS 与 Linux 用户（只支持 Windows 10/11 x64）；另外提醒一句，它跑的是开源模型，软件本身未见开源声明，冲着「开源软件」来的先看清楚。", en: "For people who hate setup: finding models, configuring the engine and juggling VRAM — the parts that scare everyone off — are all handled, free, no account, data stays on your machine. Not for macOS or Linux users (Windows 10/11 x64 only). One clarification: it runs open-source models, but we found no open-source claim for the software itself.",
+    tw: "適合怕折騰的人：找模型、配引擎、算顯存這些最勸退的環節它都包了，免費、免註冊、資料不出本機。不適合兩類人：macOS 與 Linux 使用者（只支援 Windows 10/11 x64）；另外提醒一句，它跑的是開源模型，軟體本身未見開源聲明，衝著「開源軟體」來的先看清楚。" },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
