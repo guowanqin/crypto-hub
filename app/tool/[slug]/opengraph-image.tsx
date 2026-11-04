@@ -33,6 +33,7 @@ const DEDICATED_PAGES = new Set([
   "devtools",
   "niuma-clock",
   "marketing-skills",
+  "arc-panel",
 ]);
 
 export function generateStaticParams() {

@@ -6557,3 +6557,63 @@ a:hover {
 .msh .group-expand-row {
   margin-top: 14px;
 }
+
+/* Arc 链看板：范围切换、趋势图卡、构成条 */
+.arc-range {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 14px;
+}
+.arc-range-btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.arc-range-btn-on {
+  background: var(--gold-dim);
+  color: var(--accent-strong);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.arc-chart-card {
+  padding: 14px 16px 10px;
+  margin-top: 12px;
+}
+.arc-chart-title {
+  margin: 0 0 8px;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.arc-chart {
+  display: block;
+  width: 100%;
+  height: 216px;
+}
+.arc-note {
+  margin-top: 10px;
+  color: var(--faint);
+  font-size: 12.5px;
+}
+.arc-mix-bar {
+  display: flex;
+  width: 100%;
+  height: 14px;
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 6px 0 14px;
+  background: var(--panel-2);
+}
+.arc-mix-seg {
+  height: 100%;
+}
+.arc-mix-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
