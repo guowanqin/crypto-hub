@@ -2652,6 +2652,37 @@ export const TOOLS: ToolDef[] = [
     take: { zh: "适合先试色再决定：来源正规、条款写在明处，能不能商用一句话说清（限下载者本人的项目）。它只是 5 款样本、不是大合集，指望一包打天下会失望；试中了哪款风格，再去考虑它的付费整包。", en: "Try the looks first, then decide: a legitimate source with the terms printed on the page, including the commercial answer in one line (the downloader's own projects). It is a five-look sample, not a mega-bundle — if one style clicks, the paid full packs are the follow-up.",
     tw: "適合先試色再決定：來源正規、條款寫在明處，能不能商用一句話說清（限下載者本人的專案）。它只是 5 款樣本、不是大合集，指望一包打天下會失望；試中了哪款風格，再去考慮它的付費整包。" },
   },
+  {
+    slug: "market-mood",
+    name: { zh: "市场倾向看板", en: "Market Sentiment Board",
+    tw: "市場傾向看板" },
+    url: "https://18btc.cc/tool/market-mood",
+    tags: ["market"],
+    addedAt: "2026-11-09",
+    type: "own",
+    embedded: true,
+    image: "/tools/market-mood.webp",
+    oneLiner: {
+      zh: "多指标合成市场倾向：看涨看跌、目标区间与置信得分一次看清。",
+      en: "A multi-indicator market-sentiment composite: direction, target range, confidence and score in one view.",
+      tw: "多指標合成市場傾向：看漲看跌、目標區間與置信得分一次看清。",
+    },
+    detail: {
+      zh: "把多个公开免费指标合成一个市场倾向：每个指标先按自己的口径打分，再按权重合成总分，由总分定倾向（看涨 / 中性 / 看跌），并给出目标区间与置信度。指标清单、每项的来源与权重都在本页方法区公开，口径固定、不随心情改。先把话说在前面：合成结果是概率倾向，不是价格预测，更不构成投资建议；看涨不代表一定会涨，看跌也不代表一定会跌，它只帮你把「现在顺风还是逆风」说清楚。",
+      en: "Several public, free indicators are combined into one market tilt: each indicator is scored on its own terms, then combined by weight into a total that sets the tilt (bullish / neutral / bearish), with a target range and a confidence level. The indicator list, each source and each weight are published in this page's method section, and the rules stay fixed — they don't change with anyone's mood. Up front: the composite is a probability tilt, not a price prediction and not investment advice. Bullish doesn't mean it will rise; bearish doesn't mean it will fall. It only tells you whether the wind is at your back or in your face right now.",
+      tw: "把多個公開免費指標合成一個市場傾向：每個指標先按自己的口徑打分，再按權重合成總分，由總分定傾向（看漲 / 中性 / 看跌），並給出目標區間與置信度。指標清單、每項的來源與權重都在本頁方法區公開，口徑固定、不隨心情改。先把話說在前面：合成結果是機率傾向，不是價格預測，更不構成投資建議；看漲不代表一定會漲，看跌也不代表一定會跌，它只幫你把「現在順風還是逆風」說清楚。",
+    },
+    audience: {
+      zh: "每天动手前想先看一眼大盘风向、再决定观望还是行动的币圈投资者；以及想用一套固定规则代替凭感觉判断多空的人。",
+      en: "Crypto investors who want a read on the market's direction before acting each day — and anyone who would rather follow one fixed set of rules than judge long or short by feel.",
+      tw: "每天動手前想先看一眼大盤風向、再決定觀望還是行動的幣圈投資者；以及想用一套固定規則代替憑感覺判斷多空的人。",
+    },
+    take: {
+      zh: "倾向是概率，不是保证：分数只告诉你现在顺风还是逆风，仓位大小和止损位置还得自己定，别把分数当成买卖指令。",
+      en: "A tilt is a probability, not a guarantee: the score only tells you whether the wind is at your back or in your face. Position size and stop placement are still yours to set — don't treat the score as a buy or sell order.",
+      tw: "傾向是機率，不是保證：分數只告訴你現在順風還是逆風，倉位大小和止損位置還得自己定，別把分數當成買賣指令。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

@@ -6956,3 +6956,47 @@ a:hover {
   word-break: break-all;
   color: var(--muted);
 }
+
+/* 市场倾向看板（market-mood）作用域样式：只用主题变量，不改配色 */
+.mood-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px 16px;
+  margin-top: 16px;
+}
+
+.mood-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.mood-controls select,
+.mood-controls input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 6px 10px;
+  font-size: 14px;
+  color: var(--text);
+  min-width: 110px;
+}
+
+.mood-price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.mood-spark {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 8px;
+}

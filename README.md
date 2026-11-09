@@ -28,10 +28,10 @@
 或第三方代码 `{ html }`），不用改任何组件；`ad` 为 null 时页面上完全不渲染、不占位。
 任意页面 URL 加 `?ads=preview` 可预览全部广告位的分布（虚线占位框）。
 
-## 域名（待定）
+## 域名
 
-`lib/site.ts` 的 `SITE_URL` 暂留空：填入正式域名后，各页 canonical / og:url 与
-sitemap 的绝对地址自动生效（留空时不输出 canonical；sitemap 为站内路径，仅供本地核对）。
+正式域名：`https://18btc.cc`（`lib/site.ts` 的 `SITE_URL` 已填入）。
+各页 canonical / og:url 与 sitemap 的绝对地址自动生效。
 
 ## 开发
 

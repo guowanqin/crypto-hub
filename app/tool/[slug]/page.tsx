@@ -68,6 +68,7 @@ const DEDICATED_PAGES = new Set([
   "arc-panel",
   "pattern-scanner",
   "likong-index",
+  "market-mood",
 ]);
 
 export function generateStaticParams() {
