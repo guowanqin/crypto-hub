@@ -2745,6 +2745,37 @@ export const TOOLS: ToolDef[] = [
       tw: "年化不是利息：榜單只告訴你今天哪個池子年化高，別因為數字高就衝紅標池，先看 30 日均值和鎖定期，再決定放不放。",
     },
   },
+  {
+    slug: "sidu-chishui",
+    name: { zh: "四渡赤水", en: "Four Crossings of the Chishui",
+    tw: "四渡赤水" },
+    url: "https://18btc.cc/tool/sidu-chishui",
+    tags: ["video"],
+    addedAt: "2026-11-10",
+    type: "own",
+    embedded: true,
+    image: "/tools/sidu-chishui.webp",
+    oneLiner: {
+      zh: "核心定位：回合制走格子，四渡赤水、摆脱围追，活着走到云南。",
+      en: "A turn-based strategy game: cross the Chishui four times, shake off the pursuit, and reach Yunnan alive.",
+      tw: "核心定位：回合制走格子，四渡赤水、擺脫圍追，活著走到雲南。",
+    },
+    detail: {
+      zh: "1935年，红军四渡赤水、跳出重围，这段历史被做成了一盘回合制棋：你在地图上指挥红军走格子，每回合走一格，敌军随后逼近一格；渡河只能走渡口连线，渡完四次才能南下云南。士气、粮草都要算计：进城镇补给，夺回娄山关、重占遵义提士气，佯攻贵阳一生一次、能把敌军调开。每次渡河后都有按史实写的战史小注——日期、渡口、战果都对得上史料。能赢，但走错两步就会被追上。",
+      en: "In 1935 the Red Army crossed the Chishui four times and broke out of the encirclement — and that campaign is now a turn-based board game. You move the Red Army one node per turn on the map while enemy columns close in one node behind; the river can only be crossed at the ferry links, and only after four crossings can you head south to Yunnan. Mind morale and supplies: towns resupply you, retaking Loushan Pass and Zunyi lifts morale, and the feint on Guiyang — usable once — draws the enemy away. Every crossing comes with a history note whose dates, ferries and outcomes match the record. It can be won, but two wrong moves and the pursuit catches you.",
+      tw: "1935年，紅軍四渡赤水、跳出重圍，這段歷史被做成了一盤回合制棋：你在地圖上指揮紅軍走格子，每回合走一格，敵軍隨後逼近一格；渡河只能走渡口連線，渡完四次才能南下雲南。士氣、糧草都要算計：進城鎮補給，奪回婁山關、重佔遵義提士氣，佯攻貴陽一生一次、能把敵軍調開。每次渡河後都有按史實寫的戰史小注——日期、渡口、戰果都對得上史料。能贏，但走錯兩步就會被追上。",
+    },
+    audience: {
+      zh: "喜欢历史、策略棋和长征故事的人；以及想用一局棋记住四渡赤水时间线的人。",
+      en: "Anyone who likes history, strategy board games and the Long March — and anyone who wants to learn the Four Crossings timeline by playing one game.",
+      tw: "喜歡歷史、策略棋和長征故事的人；以及想用一局棋記住四渡赤水時間線的人。",
+    },
+    take: {
+      zh: "能赢，但不白给：按史实路线走、渡河后抓紧敌军停顿的空当，十七回合就能脱险；乱走两步，敌军马上贴上来。战史小注写得扎实，玩一局就把四渡的时间线记住了。",
+      en: "Winnable, but not free: follow the historical route, use the pause after each crossing while the enemy finds boats, and you can break out in seventeen turns. Wander two moves off course and the pursuit is on top of you. The history notes are solid — one game and the timeline sticks.",
+      tw: "能贏，但不白給：按史實路線走、渡河後抓緊敵軍停頓的空當，十七回合就能脫險；亂走兩步，敵軍馬上貼上來。戰史小注寫得紮實，玩一局就把四渡的時間線記住了。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

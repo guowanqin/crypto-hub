@@ -316,12 +316,14 @@ export default function StablecoinYieldsBoard() {
     return sortPools(out, sortKey);
   }, [rows, symbol, minTvl, hideVolatile, sortKey]);
 
-  const top = rows.length > 0 ? [...rows].sort((a, b) => b.apy - a.apy)[0] : null;
+  // 顶上三张卡片跟随当前筛选（币种 / TVL / 只看稳健池），与表格显示一致：
+  // 以前 top/steadiest 是按全部池子算的，开了「只看稳健池」最高年化卡片仍显示 HLP。
+  const top = filtered.length > 0 ? [...filtered].sort((a, b) => b.apy - a.apy)[0] : null;
   const steadiest = useMemo(() => {
-    const steady = rows.filter((r) => !r.volatile);
+    const steady = filtered.filter((r) => !r.volatile);
     if (steady.length === 0) return null;
     return [...steady].sort((a, b) => b.apy - a.apy)[0];
-  }, [rows]);
+  }, [filtered]);
   const control = useMemo(
     () => rows.find((r) => r.id === CONTROL_POOL_ID) ?? null,
     [rows]

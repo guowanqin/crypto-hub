@@ -71,6 +71,7 @@ const DEDICATED_PAGES = new Set([
   "market-mood",
   "cashflow-daily",
   "stablecoin-yields",
+  "sidu-chishui",
 ]);
 
 export function generateStaticParams() {
