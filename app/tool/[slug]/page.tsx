@@ -72,6 +72,7 @@ const DEDICATED_PAGES = new Set([
   "cashflow-daily",
   "stablecoin-yields",
   "sidu-chishui",
+  "english-typing",
 ]);
 
 export function generateStaticParams() {

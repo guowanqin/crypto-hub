@@ -7000,3 +7000,320 @@ a:hover {
   display: block;
   margin-top: 8px;
 }
+
+/* 打字学英语（/tool/english-typing）：全部规则收在 .et-tool 作用域内，
+   变量继承本站 :root 哑光金米白主题，不污染全站同名类。 */
+.et-tool {
+  margin-top: 16px;
+}
+
+.et-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.et-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.et-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.et-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 16px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+
+.et-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.et-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 12px 14px;
+  margin: 8px 0;
+  resize: vertical;
+}
+
+.et-inline-input {
+  margin: 4px 0;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.et-list {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+}
+
+.et-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.et-list-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: baseline;
+  min-width: 0;
+  flex: 1;
+}
+
+.et-list-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.et-sentence-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.et-sent-en {
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.et-word-sm {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.et-ipa-sm {
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.et-badge {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.et-badge-learning {
+  background: rgba(184, 145, 43, 0.12);
+  border-color: rgba(184, 145, 43, 0.4);
+  color: var(--gold-strong);
+}
+
+.et-badge-mastered {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.35);
+  color: #047857;
+}
+
+.et-wrong-count {
+  color: #b91c1c;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.et-session {
+  margin-top: 8px;
+}
+
+.et-progress-line {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.et-word {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 4px 0;
+  letter-spacing: 0.5px;
+}
+
+.et-ipa {
+  color: var(--faint);
+  font-size: 16px;
+  margin: 4px 0;
+}
+
+.et-zh {
+  font-size: 17px;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.et-ex {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 6px 0;
+}
+
+.et-ex-zh {
+  color: var(--faint);
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.et-sentence {
+  font-size: 19px;
+  line-height: 1.9;
+  margin: 10px 0;
+}
+
+.et-blank {
+  display: inline-block;
+  min-width: 72px;
+  border-bottom: 2px solid var(--gold);
+  color: var(--gold-strong);
+  text-align: center;
+}
+
+.et-done-chunk {
+  color: #047857;
+  font-weight: 600;
+}
+
+.et-todo-chunk {
+  color: var(--faint);
+}
+
+.et-step {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.et-hint {
+  color: var(--faint);
+  font-size: 15px;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 1px;
+  margin: 6px 0;
+}
+
+.et-note {
+  color: var(--faint);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.et-ok {
+  color: #047857;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.et-bad {
+  color: #b91c1c;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.et-item-actions {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 16px;
+}
+
+.et-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.et-stat {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.et-stat-num {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.et-level-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  overflow: hidden;
+  margin: 4px 0 12px;
+}
+
+.et-level-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+
+.et-bar {
+  display: inline-block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--gold);
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .et-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .et-word {
+    font-size: 26px;
+  }
+
+  .et-sentence {
+    font-size: 17px;
+  }
+
+  .et-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -2776,6 +2776,36 @@ export const TOOLS: ToolDef[] = [
       tw: "能贏，但不白給：按史實路線走、渡河後抓緊敵軍停頓的空當，十七回合就能脫險；亂走兩步，敵軍馬上貼上來。戰史小注寫得紮實，玩一局就把四渡的時間線記住了。",
     },
   },
+  {
+    slug: "english-typing",
+    name: { zh: "打字学英语", tw: "打字學英語", en: "Typing English" },
+    url: "https://18btc.cc/tool/english-typing",
+    tags: ["office"],
+    addedAt: "2026-11-11",
+    type: "own",
+    embedded: true,
+    image: "/tools/english-typing.webp",
+    oneLiner: {
+      zh: "核心定位：打字练单词、背句子，记忆曲线复习，错词自动进本。",
+      tw: "核心定位：打字練單詞、背句子，記憶曲線複習，錯詞自動進本。",
+      en: "Type to learn English: spell words, type sentences, and review on a memory curve — mistakes go straight into your wrong-word book.",
+    },
+    detail: {
+      zh: "不用下载 App，在站内打字学英语：240 个核心单词分日常高频、高中核心、四级核心、雅思核心 4 包练拼写，跟读拼写、听写、自测三种练法；60 个句子分入门日常、进阶生活、职场沟通、四六级、雅思托福 5 包练打字，单词填空、语块、整句默写三种练法。每道题答完自己打分（再来一次、困难、掌握了），记忆曲线自动算下次复习时间，到期的进复习队列；答错的自动进错词本，可以收藏、标记已掌握。还能粘贴一段英文，逐句填翻译，练自己的句子。发音来自 dictionaryapi.dev 免费接口，取不到时用浏览器朗读或音标代替；不用登录，所有进度只存在你的浏览器里。玩法参考句乐部与开源项目 TypeWords，内容与实现均为本站原创。",
+      tw: "不用下載 App，在站內打字學英語：240 個核心單詞分日常高頻、高中核心、四級核心、雅思核心 4 包練拼寫，跟讀拼寫、聽寫、自測三種練法；60 個句子分入門日常、進階生活、職場溝通、四六級、雅思託福 5 包練打字，單詞填空、語塊、整句默寫三種練法。每道題答完自己打分（再來一次、困難、掌握了），記憶曲線自動算下次複習時間，到期的進複習佇列；答錯的自動進錯詞本，可以收藏、標記已掌握。還能貼上一段英文，逐句填翻譯，練自己的句子。發音來自 dictionaryapi.dev 免費介面，取不到時用瀏覽器朗讀或音標代替；不用登入，所有進度只存在你的瀏覽器裡。玩法參考句樂部與開源專案 TypeWords，內容與實現均為本站原創。",
+      en: "Learn English by typing, right here in the site — no app to install: 240 core words in 4 packs (daily, high school, CET-4, IELTS) with three spelling drills (spell-it, dictation, self-test), and 60 sentences in 5 packs (beginner, intermediate, workplace, CET, IELTS/TOEFL) with three typing drills (word by word, chunk by chunk, whole sentence). After each item you grade yourself (again / hard / got it) and a memory curve schedules the next review; due items join a review queue, and mistakes go into a wrong-word book where you can favorite items or mark them mastered. You can also paste English text, add your own translations, and practice your own sentences. Pronunciation comes from dictionaryapi.dev's free API, falling back to browser speech or phonetics when unavailable. No login — all progress lives in your browser. Gameplay inspired by Julebu and the open-source project TypeWords; all content and code are original to this site.",
+    },
+    audience: {
+      zh: "想靠打字练英语的人：备考四级、雅思的学生，每天想练十来分钟的上班族，以及想把自己的文章、台词变成练习题的人。",
+      tw: "想靠打字練英語的人：備考四級、雅思的學生，每天想練十來分鐘的上班族，以及想把自己的文章、臺詞變成練習題的人。",
+      en: "Anyone who wants to learn English by typing: students preparing for CET-4 or IELTS, workers who want ten minutes of practice a day, and anyone who wants to turn their own articles or TV lines into drills.",
+    },
+    take: {
+      zh: "真能在站内练起来：拼写三种练法各有分工，听写会调接口拿真人发音，错词进本、复习按记忆曲线排，比单纯刷单词表扎实。词包目前是精选的 240 词 60 句，想练更多就自己导入。",
+      tw: "真能在站內練起來：拼寫三種練法各有分工，聽寫會調介面拿真人發音，錯詞進本、複習按記憶曲線排，比單純刷單詞表紮實。詞包目前是精選的 240 詞 60 句，想練更多就自己匯入。",
+      en: "It really works in-site: the three spelling drills each have a job, dictation pulls real pronunciation from an API, wrong words go into the book and reviews follow a memory curve — sturdier than drilling a bare word list. The built-in packs are a curated 240 words and 60 sentences; import your own to go further.",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
