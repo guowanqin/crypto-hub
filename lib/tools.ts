@@ -2683,6 +2683,68 @@ export const TOOLS: ToolDef[] = [
       tw: "傾向是機率，不是保證：分數只告訴你現在順風還是逆風，倉位大小和止損位置還得自己定，別把分數當成買賣指令。",
     },
   },
+  {
+    slug: "cashflow-daily",
+    name: { zh: "每日加密现金流榜", en: "Daily Crypto Cash-Flow Board",
+    tw: "每日加密現金流榜" },
+    url: "https://18btc.cc/tool/cashflow-daily",
+    tags: ["defi"],
+    addedAt: "2026-11-09",
+    type: "own",
+    embedded: true,
+    image: "/tools/cashflow-daily.webp",
+    oneLiner: {
+      zh: "核心定位：每天看谁在真正赚钱，协议手续费收入按日排名。",
+      en: "A daily ranking of who is actually earning, by protocol fee revenue.",
+      tw: "核心定位：每天看誰在真正賺錢，協議手續費收入按日排名。",
+    },
+    detail: {
+      zh: "每天打开，先看谁在真正赚钱：本页按 DefiLlama 的协议手续费与收入数据，把精选的 10 个主流协议按 24 小时收入排名，附日环比、7 日与 30 日收入、1 年与历史累计，以及每个协议近 30 日的收入走势。先把口径说清楚：榜上数字是协议收到的手续费与收入，不是持币人分到的现金流，更不是买卖信号——价格跌的时候收入也可能涨，反过来也一样；Metaplanet、Circle 这类上市公司不在榜内。数据来自 DefiLlama 免费接口，每天更新；个别协议某日收入可能接近零，对照 7 日与 30 日一起看更稳。",
+      en: "Before anything else each day, see who is actually earning: this page ranks 10 major protocols by 24-hour fee and revenue data from DefiLlama, with day-on-day change, 7-day and 30-day totals, 1-year and all-time figures, and each protocol's last-30-day revenue trend. The definitions up front: the numbers are fees and revenue collected by the protocol — not cash paid to token holders, and not a trading signal. Revenue can rise while prices fall, and the other way round; listed stocks such as Metaplanet and Circle are not in this board. Data comes from DefiLlama's free API and updates daily; a single protocol's daily figure can be close to zero on a given day, so read it alongside the 7-day and 30-day totals.",
+      tw: "每天打開，先看誰在真正賺錢：本頁按 DefiLlama 的協議手續費與收入資料，把精選的 10 個主流協議按 24 小時收入排名，附日環比、7 日與 30 日收入、1 年與歷史累計，以及每個協議近 30 日的收入走勢。先把口徑說清楚：榜上數字是協議收到的手續費與收入，不是持幣人分到的現金流，更不是買賣訊號——價格跌的時候收入也可能漲，反過來也一樣；Metaplanet、Circle 這類上市公司不在榜內。資料來自 DefiLlama 免費介面，每天更新；個別協議某日收入可能接近零，對照 7 日與 30 日一起看更穩。",
+    },
+    audience: {
+      zh: "每天盯着加密现金流的人：想知道熊市里谁还在赚钱、牛市里谁赚得最多的人，以及做赛道研究前先看收入基本面的人。",
+      en: "People who watch crypto cash flow every day: investors who want to know who still earns in a bear market and who earns most in a bull market, and anyone who checks revenue fundamentals before researching a sector.",
+      tw: "每天盯著加密現金流的人：想知道熊市裡誰還在賺錢、牛市裡誰賺得最多的人，以及做賽道研究前先看收入基本面的人。",
+    },
+    take: {
+      zh: "收入是基本面，不是买卖信号：榜单只告诉你钱流向了谁的协议，别因为某协议今天第一就追它的币，仓位和止损还是自己定。",
+      en: "Revenue is a fundamental, not a trading signal: the board only shows whose protocol the money flows to. Don't chase a token just because its protocol tops the board today — position size and stops are still yours to set.",
+      tw: "收入是基本面，不是買賣訊號：榜單只告訴你錢流向了誰的協議，別因為某協議今天第一就追它的幣，倉位和止損還是自己定。",
+    },
+  },
+  {
+    slug: "stablecoin-yields",
+    name: { zh: "稳定币收益榜", en: "Stablecoin Yields Board",
+    tw: "穩定幣收益榜" },
+    url: "https://18btc.cc/tool/stablecoin-yields",
+    tags: ["defi"],
+    addedAt: "2026-11-10",
+    type: "own",
+    embedded: true,
+    image: "/tools/stablecoin-yields.webp",
+    oneLiner: {
+      zh: "核心定位：稳定币放哪收益最高，按年化排名每天更新，一目了然。",
+      en: "A daily ranking of stablecoin yields — where parked stables earn most, by APY.",
+      tw: "核心定位：穩定幣放哪收益最高，按年化排名每天更新，一目了然。",
+    },
+    detail: {
+      zh: "每天打开，先看手里的稳定币放哪收益最高：本页按 DefiLlama 的池子收益数据，把精选的 20 个主流稳定币池按当前年化排名，附基础与奖励拆分、30 日均值、7 日与 30 日变化和 TVL，可按币种、最低 TVL 筛选，也能一键只看稳健池。先把口径说清楚：APY 是年化收益率，不是固定利息——今天 25% 的池子，下个月可能只有 3%；红标的是高波动金库，收益主要来自做市或策略盈亏，波动大，先看风险再看数字；借贷池收益低但稳。榜上数字不构成投资建议。",
+      en: "Each day, first check where your stablecoins earn most: this page ranks 20 major stablecoin pools by current APY from DefiLlama's yield data, with base vs reward split, 30-day mean, 7-day and 30-day change and TVL — filterable by coin and minimum TVL, with a one-click steady-pools-only view. The definitions up front: APY is an annualised yield, not fixed interest — a pool at 25% today can be near 3% next month; red-flagged pools are high-volatility vaults whose yield comes mostly from market-making or strategy P&L, so check the risk before the number; lending pools pay less but stay steadier. Nothing here is investment advice.",
+      tw: "每天打開，先看手裡的穩定幣放哪收益最高：本頁按 DefiLlama 的池子收益資料，把精選的 20 個主流穩定幣池按當前年化排名，附基礎與獎勵拆分、30 日均值、7 日與 30 日變化和 TVL，可按幣種、最低 TVL 篩選，也能一鍵只看穩健池。先把口徑說清楚：APY 是年化收益率，不是固定利息——今天 25% 的池子，下個月可能只有 3%；紅標的是高波動金庫，收益主要來自做市或策略盈虧，波動大，先看風險再看數字；借貸池收益低但穩。榜上數字不構成投資建議。",
+    },
+    audience: {
+      zh: "手里拿着稳定币、想找地方放着生息的人：比较借贷与金库收益差别的人，以及每天看一眼年化变化、再决定要不要换池子的人。",
+      en: "People holding stablecoins and looking for somewhere to park them for yield: anyone comparing lending vs vault returns, and anyone who checks APY daily before deciding whether to move pools.",
+      tw: "手裡拿著穩定幣、想找地方放著生息的人：比較借貸與金庫收益差別的人，以及每天看一眼年化變化、再決定要不要換池子的人。",
+    },
+    take: {
+      zh: "年化不是利息：榜单只告诉你今天哪个池子年化高，别因为数字高就冲红标池，先看 30 日均值和锁定期，再决定放不放。",
+      en: "APY is not interest: the board only shows which pool pays most today. Don't chase a red-flagged pool for its number — check the 30-day mean and lock-up first, then decide whether to deposit.",
+      tw: "年化不是利息：榜單只告訴你今天哪個池子年化高，別因為數字高就衝紅標池，先看 30 日均值和鎖定期，再決定放不放。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(

@@ -69,6 +69,8 @@ const DEDICATED_PAGES = new Set([
   "pattern-scanner",
   "likong-index",
   "market-mood",
+  "cashflow-daily",
+  "stablecoin-yields",
 ]);
 
 export function generateStaticParams() {

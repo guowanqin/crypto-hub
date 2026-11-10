@@ -35,6 +35,8 @@ const DEDICATED_PAGES = new Set([
   "marketing-skills",
   "arc-panel",
   "market-mood",
+  "cashflow-daily",
+  "stablecoin-yields",
 ]);
 
 export function generateStaticParams() {
