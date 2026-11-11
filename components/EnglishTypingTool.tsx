@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLang } from "./LangProvider";
-import { WORD_PACKS, SENTENCE_PACKS, type EtWord, type EtSentence } from "@/lib/english-typing-data";
+import { SENTENCE_PACKS, PATTERNS, type EtSentence, type EtPattern } from "@/lib/english-typing-data";
 import {
   ET_STR,
   STORAGE_KEY,
@@ -16,7 +16,9 @@ import {
   normAnswer,
   splitChunks,
   splitSentences,
+  splitChineseLines,
   firstLetterHint,
+  keywordHints,
   todayKey,
   yesterdayKey,
   type EtProgress,
@@ -24,20 +26,26 @@ import {
   type CustomSentencePack,
 } from "@/lib/english-typing";
 
-type Tab = "words" | "sentences" | "review" | "book" | "mine" | "stats";
-type WordMode = "spell" | "dict" | "self";
+type Tab = "make" | "patterns" | "sentences" | "review" | "book" | "mine" | "stats";
 type SentenceMode = "word" | "chunk" | "full";
+type PracticeMode = "make" | SentenceMode;
 type StatusFilter = "all" | "new" | "learning" | "mastered" | "wrong";
 
 interface SessionItem {
   key: string;
-  kind: "word" | "sentence";
-  word?: EtWord;
-  sentence?: EtSentence;
+  sentence: EtSentence;
   packId: string;
 }
 
-const WORD_MODES: WordMode[] = ["spell", "dict", "self"];
+interface Lookup {
+  word: string;
+  ipa: string;
+  meanings: string[];
+  audio: string;
+  loading: boolean;
+  error: boolean;
+}
+
 const SENT_MODES: SentenceMode[] = ["word", "chunk", "full"];
 const PAGE = 12;
 
@@ -63,23 +71,23 @@ export default function EnglishTypingTool() {
   const t = (k: keyof typeof ET_STR) => ET_STR[k][lang];
 
   const [prog, setProg] = useState<EtProgress | null>(null);
-  const [tab, setTab] = useState<Tab>("words");
+  const [tab, setTab] = useState<Tab>("make");
 
-  // 单词浏览
-  const [wPack, setWPack] = useState("daily");
-  const [wMode, setWMode] = useState<WordMode>("spell");
-  const [wStatus, setWStatus] = useState<StatusFilter>("all");
-  const [wSearch, setWSearch] = useState("");
-  const [wShown, setWShown] = useState(PAGE);
+  // 造句浏览
+  const [mPack, setMPack] = useState("s1");
+  const [mStatus, setMStatus] = useState<StatusFilter>("all");
+  const [mSearch, setMSearch] = useState("");
+  const [mShown, setMShown] = useState(PAGE);
+  const [shownEn, setShownEn] = useState<Record<string, boolean>>({});
 
-  // 句子浏览
+  // 句子打字浏览
   const [sPack, setSPack] = useState("s1");
   const [sMode, setSMode] = useState<SentenceMode>("word");
   const [sStatus, setSStatus] = useState<StatusFilter>("all");
   const [sSearch, setSSearch] = useState("");
   const [sShown, setSShown] = useState(PAGE);
 
-  // 错词本展开
+  // 错句本展开
   const [bookShown, setBookShown] = useState(PAGE);
   const [bookTab, setBookTab] = useState<"wrong" | "fav">("wrong");
 
@@ -94,18 +102,20 @@ export default function EnglishTypingTool() {
     lastCorrect: boolean | null;
     firstTry: boolean;
     showHint: boolean;
-    showAnswer: boolean;
+    showKeywords: boolean;
     done: number;
     correct: number;
     xp: number;
     startedAt: number;
     finished: boolean;
-    sMode: SentenceMode;
+    mode: PracticeMode;
+    modeId: string;
   } | null>(null);
 
   const [audioBusy, setAudioBusy] = useState(false);
   const [audioNote, setAudioNote] = useState(false);
-  const audioCache = useRef<Map<string, string>>(new Map());
+  const [lookup, setLookup] = useState<Lookup | null>(null);
+  const lookupCache = useRef<Map<string, Lookup>>(new Map());
 
   // 注意：所有 Hook 必须在 if (!prog) 提前返回之前声明，否则 Hook 顺序会变
   const inputRef = useRef<HTMLInputElement>(null);
@@ -117,6 +127,7 @@ export default function EnglishTypingTool() {
   }, [session?.idx, session?.step, session?.phase, session]);
 
   // 导入
+  const [importMode, setImportMode] = useState<"en" | "zh">("en");
   const [importText, setImportText] = useState("");
   const [importName, setImportName] = useState("");
   const [importList, setImportList] = useState<{ en: string; zh: string }[]>([]);
@@ -131,53 +142,98 @@ export default function EnglishTypingTool() {
     if (prog) saveProgress(prog);
   }, [prog]);
 
-  // ---- 发音：dictionaryapi.dev 取音频，失败用浏览器朗读，再失败显示音标 ----
-  async function playWord(word: string) {
+  // ---- 生词查询：dictionaryapi.dev 取释义与发音，失败用浏览器朗读 ----
+  async function lookupWord(word: string) {
+    const core = word.replace(/[^A-Za-z'-]/g, "").toLowerCase();
+    if (!core) return;
     setAudioNote(false);
-    const cached = audioCache.current.get(word);
+    const cached = lookupCache.current.get(core);
     if (cached) {
-      try {
-        await new Audio(cached).play();
-        return;
-      } catch {
-        audioCache.current.delete(word);
-      }
+      setLookup({ ...cached, loading: false, error: false });
+      return;
     }
-    setAudioBusy(true);
+    setLookup({ word: core, ipa: "", meanings: [], audio: "", loading: true, error: false });
     try {
       const res = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(core)}`
       );
       if (!res.ok) throw new Error("api");
       const data = await res.json();
+      const entry = data?.[0];
+      const ipa: string =
+        entry?.phonetic ??
+        (entry?.phonetics ?? []).find((p: { text?: string }) => p.text)?.text ??
+        "";
       let audio = "";
-      for (const entry of data) {
-        for (const ph of entry.phonetics ?? []) {
-          if (ph.audio) {
-            audio = ph.audio;
-            break;
-          }
+      for (const ph of entry?.phonetics ?? []) {
+        if (ph.audio) {
+          audio = ph.audio;
+          break;
         }
-        if (audio) break;
       }
-      if (audio) {
-        audioCache.current.set(word, audio);
-        await new Audio(audio).play();
-        return;
+      const meanings: string[] = [];
+      for (const m of entry?.meanings ?? []) {
+        for (const d of m.definitions ?? []) {
+          if (d.definition) {
+            meanings.push(m.partOfSpeech ? `${m.partOfSpeech} · ${d.definition}` : d.definition);
+          }
+          if (meanings.length >= 3) break;
+        }
+        if (meanings.length >= 3) break;
       }
-      throw new Error("no-audio");
+      if (meanings.length === 0 && !ipa) throw new Error("empty");
+      const def: Lookup = { word: core, ipa, meanings, audio, loading: false, error: false };
+      lookupCache.current.set(core, def);
+      setLookup(def);
     } catch {
-      try {
-        const u = new SpeechSynthesisUtterance(word);
-        u.lang = "en-US";
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
-      } catch {
-        setAudioNote(true);
-      }
-    } finally {
-      setAudioBusy(false);
+      setLookup({ word: core, ipa: "", meanings: [], audio: "", loading: false, error: true });
     }
+  }
+
+  async function playLookupAudio() {
+    if (!lookup) return;
+    setAudioNote(false);
+    if (lookup.audio) {
+      setAudioBusy(true);
+      try {
+        await new Audio(lookup.audio).play();
+        return;
+      } catch {
+        // 掉到浏览器朗读
+      } finally {
+        setAudioBusy(false);
+      }
+    }
+    try {
+      const u = new SpeechSynthesisUtterance(lookup.word);
+      u.lang = "en-US";
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch {
+      setAudioNote(true);
+    }
+  }
+
+  /** 句子按词渲染，每个词可点查释义。 */
+  function renderClickableEn(en: string, anchorKey: string) {
+    const toks = sentenceTokens(en);
+    return (
+      <span>
+        {toks.map((tok, i) => (
+          <span key={`${anchorKey}-${i}`}>
+            <button
+              type="button"
+              className="et-word-btn"
+              title={t("wordLookupTip")}
+              onClick={() => lookupWord(tok)}
+            >
+              {tok}
+            </button>
+            {i < toks.length - 1 ? " " : ""}
+          </span>
+        ))}
+      </span>
+    );
   }
 
   // ---- 进度更新 ----
@@ -264,7 +320,7 @@ export default function EnglishTypingTool() {
   }
 
   // ---- 会话 ----
-  function startSession(items: SessionItem[], modeId: string, sModeOverride?: SentenceMode) {
+  function startSession(items: SessionItem[], mode: PracticeMode, modeId: string) {
     if (items.length === 0) return;
     markMode(modeId);
     setSession({
@@ -277,29 +333,41 @@ export default function EnglishTypingTool() {
       lastCorrect: null,
       firstTry: true,
       showHint: false,
-      showAnswer: false,
+      showKeywords: false,
       done: 0,
       correct: 0,
       xp: 0,
       startedAt: Date.now(),
       finished: false,
-      sMode: sModeOverride ?? sMode,
+      mode,
+      modeId,
     });
   }
 
   function currentTarget(): string {
     if (!session) return "";
     const it = session.items[session.idx];
-    if (it.kind === "word") return it.word!.w;
-    if (session.sMode === "word") {
-      const toks = sentenceTokens(it.sentence!.en).filter((x) => tokenCore(x));
+    if (session.mode === "word") {
+      const toks = sentenceTokens(it.sentence.en).filter((x) => tokenCore(x));
       return tokenCore(toks[Math.min(session.step, toks.length - 1)] ?? "");
     }
-    if (session.sMode === "chunk") {
-      const ch = splitChunks(it.sentence!.en);
+    if (session.mode === "chunk") {
+      const ch = splitChunks(it.sentence.en);
       return ch[Math.min(session.step, ch.length - 1)] ?? "";
     }
-    return it.sentence!.en;
+    return it.sentence.en;
+  }
+
+  function totalSteps(): number {
+    if (!session) return 1;
+    const it = session.items[session.idx];
+    if (session.mode === "word") {
+      return sentenceTokens(it.sentence.en).filter((x) => tokenCore(x)).length;
+    }
+    if (session.mode === "chunk") {
+      return splitChunks(it.sentence.en).length;
+    }
+    return 1;
   }
 
   function submitAnswer() {
@@ -328,33 +396,26 @@ export default function EnglishTypingTool() {
     const it = session.items[session.idx];
     recordAttempt(it.key, false, 5);
     setSession((s) =>
-      s ? { ...s, phase: "feedback", lastCorrect: false, firstTry: false, showAnswer: true } : s
+      s ? { ...s, phase: "feedback", lastCorrect: false, firstTry: false, showAnswer: false } : s
     );
   }
 
   function advance() {
     if (!session) return;
     const it = session.items[session.idx];
-    const totalSteps =
-      it.kind === "word"
-        ? 1
-        : session.sMode === "word"
-          ? sentenceTokens(it.sentence!.en).filter((x) => tokenCore(x)).length
-          : session.sMode === "chunk"
-            ? splitChunks(it.sentence!.en).length
-            : 1;
-    if (session.step + 1 < totalSteps) {
+    const steps = totalSteps();
+    if (session.step + 1 < steps) {
       // 下一步：把刚打对的词/语块记下来
       const done = session.lastCorrect
         ? [...session.typed, session.phase === "feedback" ? currentTarget() : ""].filter(Boolean)
         : session.typed;
       setSession((s) =>
-        s ? { ...s, step: s.step + 1, typed: done, input: "", phase: "answer", lastCorrect: null, showAnswer: false } : s
+        s ? { ...s, step: s.step + 1, typed: done, input: "", phase: "answer", lastCorrect: null } : s
       );
       return;
     }
     // 本题完成：按是否一次答对给经验
-    const base = it.kind === "sentence" && session.sMode === "full" ? 15 : 10;
+    const base = session.mode === "make" || session.mode === "full" ? 15 : 10;
     const xp = session.firstTry ? base + 5 : base;
     addXp(xp);
     setSession((s) => (s ? { ...s, xp: s.xp + xp } : s));
@@ -370,7 +431,7 @@ export default function EnglishTypingTool() {
     } else {
       setSession((s) =>
         s
-          ? { ...s, idx: s.idx + 1, step: 0, typed: [], input: "", phase: "answer", lastCorrect: null, firstTry: true, showHint: false, showAnswer: false }
+          ? { ...s, idx: s.idx + 1, step: 0, typed: [], input: "", phase: "answer", lastCorrect: null, firstTry: true, showHint: false, showKeywords: false }
           : s
       );
     }
@@ -381,21 +442,18 @@ export default function EnglishTypingTool() {
     const custom = (prog?.customPacks ?? []).map((c) => ({
       id: c.id,
       name: c.name,
-      desc: `${c.sentences.length} ${t("sentencesUnit")}`,
+      desc: `${c.sentences.length} ${t("sentencesUnit")}${c.source === "zh" ? ` · ${t("makeOnly")}` : ""}`,
       sentences: c.sentences,
+      source: c.source as "en" | "zh",
     }));
-    return [...SENTENCE_PACKS, ...custom];
+    const builtin = SENTENCE_PACKS.map((p) => ({ ...p, source: "en" as const }));
+    return [...builtin, ...custom];
   }, [prog?.customPacks]);
 
-  const wPackWords = useMemo(() => {
-    const pack = WORD_PACKS.find((p) => p.id === wPack) ?? WORD_PACKS[0];
-    return pack.words.map((w) => ({ w, key: `w:${w.w}` }));
-  }, [wPack]);
-
-  const sPackSentences = useMemo(() => {
-    const pack = allSentencePacks.find((p) => p.id === sPack) ?? allSentencePacks[0];
+  function packSentences(packId: string): { s: EtSentence; key: string }[] {
+    const pack = allSentencePacks.find((p) => p.id === packId) ?? allSentencePacks[0];
     return pack.sentences.map((s, i) => ({ s, key: `s:${pack.id}:${i}` }));
-  }, [sPack, allSentencePacks]);
+  }
 
   function filterByStatus<T extends { key: string }>(
     list: T[],
@@ -415,36 +473,36 @@ export default function EnglishTypingTool() {
     });
   }
 
-  const filteredWords = useMemo(
-    () => filterByStatus(wPackWords, wStatus, wSearch, (x) => `${x.w.w} ${x.w.zh} ${x.w.ex}`),
+  const filteredMake = useMemo(
+    () => filterByStatus(packSentences(mPack), mStatus, mSearch, (x) => `${x.s.en} ${x.s.zh}`),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [wPackWords, wStatus, wSearch, prog]
+    [mPack, mStatus, mSearch, prog, allSentencePacks]
   );
   const filteredSentences = useMemo(
-    () => filterByStatus(sPackSentences, sStatus, sSearch, (x) => `${x.s.en} ${x.s.zh}`),
+    () => filterByStatus(packSentences(sPack), sStatus, sSearch, (x) => `${x.s.en} ${x.s.zh}`),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sPackSentences, sStatus, sSearch, prog]
+    [sPack, sStatus, sSearch, prog, allSentencePacks]
   );
 
   const dueItems = useMemo(() => {
     if (!prog) return [];
     const now = Date.now();
     const out: SessionItem[] = [];
-    for (const pack of WORD_PACKS) {
-      for (const w of pack.words) {
-        const key = `w:${w.w}`;
-        const st = itemState(prog, key);
-        if (st.due > 0 && st.due <= now && st.status !== "mastered") {
-          out.push({ key, kind: "word", word: w, packId: pack.id });
-        }
-      }
-    }
     for (const pack of allSentencePacks) {
       pack.sentences.forEach((s, i) => {
         const key = `s:${pack.id}:${i}`;
         const st = itemState(prog, key);
         if (st.due > 0 && st.due <= now && st.status !== "mastered") {
-          out.push({ key, kind: "sentence", sentence: s, packId: pack.id });
+          out.push({ key, sentence: s, packId: pack.id });
+        }
+      });
+    }
+    for (const p of PATTERNS) {
+      p.examples.forEach((s, i) => {
+        const key = `p:${p.id}:${i}`;
+        const st = itemState(prog, key);
+        if (st.due > 0 && st.due <= now && st.status !== "mastered") {
+          out.push({ key, sentence: s, packId: p.id });
         }
       });
     }
@@ -454,17 +512,17 @@ export default function EnglishTypingTool() {
 
   const wrongItems = useMemo(() => {
     if (!prog) return [];
-    const out: { key: string; kind: "word" | "sentence"; word?: EtWord; sentence?: EtSentence; wrong: number }[] = [];
-    for (const pack of WORD_PACKS) {
-      for (const w of pack.words) {
-        const st = itemState(prog, `w:${w.w}`);
-        if (st.wrong > 0) out.push({ key: `w:${w.w}`, kind: "word", word: w, wrong: st.wrong });
-      }
-    }
+    const out: { key: string; sentence: EtSentence; wrong: number }[] = [];
     for (const pack of allSentencePacks) {
       pack.sentences.forEach((s, i) => {
         const st = itemState(prog, `s:${pack.id}:${i}`);
-        if (st.wrong > 0) out.push({ key: `s:${pack.id}:${i}`, kind: "sentence", sentence: s, wrong: st.wrong });
+        if (st.wrong > 0) out.push({ key: `s:${pack.id}:${i}`, sentence: s, wrong: st.wrong });
+      });
+    }
+    for (const p of PATTERNS) {
+      p.examples.forEach((s, i) => {
+        const st = itemState(prog, `p:${p.id}:${i}`);
+        if (st.wrong > 0) out.push({ key: `p:${p.id}:${i}`, sentence: s, wrong: st.wrong });
       });
     }
     out.sort((a, b) => b.wrong - a.wrong);
@@ -473,15 +531,19 @@ export default function EnglishTypingTool() {
 
   const favItems = useMemo(() => {
     if (!prog) return [];
-    const out: { key: string; kind: "word" | "sentence"; word?: EtWord; sentence?: EtSentence; wrong: number }[] = [];
-    for (const pack of WORD_PACKS) {
-      for (const w of pack.words) {
-        if (itemState(prog, `w:${w.w}`).fav) out.push({ key: `w:${w.w}`, kind: "word", word: w, wrong: 0 });
-      }
-    }
+    const out: { key: string; sentence: EtSentence; wrong: number }[] = [];
     for (const pack of allSentencePacks) {
       pack.sentences.forEach((s, i) => {
-        if (itemState(prog, `s:${pack.id}:${i}`).fav) out.push({ key: `s:${pack.id}:${i}`, kind: "sentence", sentence: s, wrong: 0 });
+        if (itemState(prog, `s:${pack.id}:${i}`).fav) {
+          out.push({ key: `s:${pack.id}:${i}`, sentence: s, wrong: 0 });
+        }
+      });
+    }
+    for (const p of PATTERNS) {
+      p.examples.forEach((s, i) => {
+        if (itemState(prog, `p:${p.id}:${i}`).fav) {
+          out.push({ key: `p:${p.id}:${i}`, sentence: s, wrong: 0 });
+        }
       });
     }
     return out;
@@ -496,8 +558,6 @@ export default function EnglishTypingTool() {
   const lv = levelOf(prog.xp);
   const lvProg = xpForNextLevel(prog.xp);
 
-  // ---------- 会话界面 ----------
-
   function statusBadge(key: string) {
     const st = itemState(prog!, key);
     if (st.status === "mastered") return <span className="et-badge et-badge-mastered">{t("mastered")}</span>;
@@ -505,18 +565,71 @@ export default function EnglishTypingTool() {
     return <span className="et-badge">{t("notLearned")}</span>;
   }
 
+  function statusFiltersRow(status: StatusFilter, setStatus: (v: StatusFilter) => void, onPick: () => void) {
+    const filters: { id: StatusFilter; label: string }[] = [
+      { id: "all", label: t("all") },
+      { id: "new", label: t("notLearned") },
+      { id: "learning", label: t("learning") },
+      { id: "mastered", label: t("mastered") },
+      { id: "wrong", label: t("wrongOnly") },
+    ];
+    return (
+      <div className="et-chips">
+        {filters.map((f) => (
+          <button
+            key={f.id}
+            className={`btn small ${status === f.id ? "primary" : "ghost"}`}
+            onClick={() => {
+              setStatus(f.id);
+              onPick();
+            }}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  function renderLookupPanel() {
+    if (!lookup) return null;
+    return (
+      <section className="card et-lookup">
+        <div className="et-list-main">
+          <span className="et-word-sm">{lookup.word}</span>
+          {lookup.ipa && <span className="et-ipa-sm">{lookup.ipa}</span>}
+          <button className="btn small ghost" onClick={() => setLookup(null)}>
+            {t("closeBtn")}
+          </button>
+        </div>
+        {lookup.loading && <p className="body-text">{t("lookupLoading")}</p>}
+        {lookup.error && <p className="et-bad">{t("lookupFail")}</p>}
+        {!lookup.loading && !lookup.error && (
+          <div>
+            {lookup.meanings.map((m, i) => (
+              <p key={i} className="body-text">
+                {t("lookupMeaning")} {i + 1}：{m}
+              </p>
+            ))}
+            <div className="et-row">
+              <button className="btn small" onClick={playLookupAudio} disabled={audioBusy}>
+                🔊 {audioBusy ? "…" : t("listen")}
+              </button>
+            </div>
+            {audioNote && <p className="et-note">{t("pronUnavailable")}</p>}
+          </div>
+        )}
+      </section>
+    );
+  }
+
+  // ---------- 会话界面 ----------
+
   function renderSession() {
     if (!session) return null;
     if (!prog) return null;
     if (session.finished) {
-      const total = session.items.length;
       const acc = session.done > 0 ? Math.round((session.correct / session.done) * 100) : 0;
-      const modeId: string =
-        session.items.every((i) => i.kind === "word")
-          ? wMode
-          : session.items.every((i) => i.kind === "sentence")
-            ? `s${session.sMode}`
-            : "review";
       return (
         <section className="card et-session">
           <h2>{t("sessionDone")}</h2>
@@ -526,7 +639,7 @@ export default function EnglishTypingTool() {
           <div className="et-row">
             <button
               className="btn primary"
-              onClick={() => startSession(session.items, modeId)}
+              onClick={() => startSession(session.items, session.mode, session.modeId)}
             >
               {t("againBtn")}
             </button>
@@ -539,24 +652,43 @@ export default function EnglishTypingTool() {
     }
 
     const it = session.items[session.idx];
-    const isWord = it.kind === "word";
-    const mode = isWord ? wMode : session.sMode;
-    const totalSteps = isWord
-      ? 1
-      : session.sMode === "word"
-        ? sentenceTokens(it.sentence!.en).filter((x) => tokenCore(x)).length
-        : session.sMode === "chunk"
-          ? splitChunks(it.sentence!.en).length
-          : 1;
+    const steps = totalSteps();
     const target = currentTarget();
 
-    // 句子：按当前步骤渲染填空句
     function renderSentencePrompt(sess: NonNullable<typeof session>) {
-      const en = it.sentence!.en;
-      if (sess.sMode === "full") {
+      const en = it.sentence.en;
+      if (sess.mode === "make") {
         return (
           <div>
-            <p className="et-zh">{it.sentence!.zh}</p>
+            <p className="body-text">{t("makePrompt")}</p>
+            <p className="et-zh et-make-zh">{it.sentence.zh}</p>
+            {sess.showKeywords && (
+              <p className="et-hint">
+                {t("keywordsHint")}：{keywordHints(en).join(" · ")}
+              </p>
+            )}
+            {sess.showHint && <p className="et-hint">{firstLetterHint(en)}</p>}
+            <div className="et-row">
+              <button
+                className="btn small ghost"
+                onClick={() => setSession((s) => (s ? { ...s, showKeywords: !s.showKeywords } : s))}
+              >
+                {sess.showKeywords ? t("hideKeywords") : t("showKeywords")}
+              </button>
+              <button
+                className="btn small ghost"
+                onClick={() => setSession((s) => (s ? { ...s, showHint: !s.showHint } : s))}
+              >
+                {sess.showHint ? t("hideHint") : t("showHint")}
+              </button>
+            </div>
+          </div>
+        );
+      }
+      if (sess.mode === "full") {
+        return (
+          <div>
+            <p className="et-zh">{it.sentence.zh}</p>
             {sess.showHint && <p className="et-hint">{firstLetterHint(en)}</p>}
             <button
               className="btn small ghost"
@@ -567,11 +699,11 @@ export default function EnglishTypingTool() {
           </div>
         );
       }
-      if (sess.sMode === "chunk") {
+      if (sess.mode === "chunk") {
         const chunks = splitChunks(en);
         return (
           <div>
-            <p className="et-zh">{it.sentence!.zh}</p>
+            <p className="et-zh">{it.sentence.zh}</p>
             <p className="et-sentence">
               {chunks.map((c, i) => (
                 <span key={i}>
@@ -600,7 +732,7 @@ export default function EnglishTypingTool() {
       const cur = coreIdx[Math.min(sess.step, coreIdx.length - 1)];
       return (
         <div>
-          <p className="et-zh">{it.sentence!.zh}</p>
+          <p className="et-zh">{it.sentence.zh}</p>
           <p className="et-sentence">
             {toks.map((tok, i) => (
               <span key={i}>
@@ -623,48 +755,12 @@ export default function EnglishTypingTool() {
       <section className="card et-session">
         <p className="et-progress-line">
           {t("itemOf")} {session.idx + 1} {t("itemOf2")} {session.items.length} {t("itemOf3")}
-          {totalSteps > 1 ? ` · ${t("chunkOf")} ${session.step + 1} / ${totalSteps}` : ""}
+          {steps > 1 ? ` · ${t("chunkOf")} ${session.step + 1} / ${steps}` : ""}
           {" · "}
           {t("accuracy")} {session.done > 0 ? Math.round((session.correct / session.done) * 100) : 100}% · {t("xpLabel")} +{session.xp}
         </p>
 
-        {isWord ? (
-          <div>
-            {mode === "spell" && (
-              <div>
-                <p className="et-word">{it.word!.w}</p>
-                <p className="et-ipa">{it.word!.ipa}</p>
-                <p className="et-zh">{it.word!.zh}</p>
-                <p className="et-ex">{it.word!.ex}</p>
-                <p className="et-ex-zh">{it.word!.exzh}</p>
-              </div>
-            )}
-            {mode === "dict" && (
-              <div>
-                <p className="et-zh">{t("meaningIs")}：{it.word!.zh}</p>
-                <p className="body-text">{t("listenFirst")}</p>
-                <div className="et-row">
-                  <button className="btn" onClick={() => playWord(it.word!.w)} disabled={audioBusy}>
-                    🔊 {audioBusy ? "…" : t("listen")}
-                  </button>
-                  <button className="btn ghost" onClick={() => playWord(it.word!.w)} disabled={audioBusy}>
-                    {t("listenAgain")}
-                  </button>
-                </div>
-                {audioNote && <p className="et-note">{t("pronUnavailable")}</p>}
-                <p className="et-ipa">{it.word!.ipa}</p>
-              </div>
-            )}
-            {mode === "self" && (
-              <div>
-                <p className="et-zh">{t("meaningIs")}：{it.word!.zh}</p>
-                <p className="et-ex">{t("example")}：{it.word!.exzh}</p>
-              </div>
-            )}
-          </div>
-        ) : (
-          renderSentencePrompt(session)
-        )}
+        {renderSentencePrompt(session)}
 
         {session.phase === "answer" ? (
           <div>
@@ -673,13 +769,11 @@ export default function EnglishTypingTool() {
               className="et-input"
               value={session.input}
               placeholder={
-                isWord
-                  ? t("typeWordHere")
-                  : session.sMode === "word"
+                session.mode === "chunk"
+                  ? t("typeChunkHere")
+                  : session.mode === "word"
                     ? t("typeWordHere")
-                    : session.sMode === "chunk"
-                      ? t("typeChunkHere")
-                      : t("typeSentenceHere")
+                    : t("typeSentenceHere")
               }
               autoCapitalize="off"
               autoCorrect="off"
@@ -712,20 +806,18 @@ export default function EnglishTypingTool() {
               {session.firstTry && session.lastCorrect ? ` · ${t("firstTry")}` : ""}
             </p>
             <p className="body-text">
-              {t("correctIs")}：<strong>{target}</strong>
+              {t("correctIs")}：<strong>{renderClickableEn(target, `${it.key}-ans`)}</strong>
             </p>
             {!session.lastCorrect && (
               <p className="body-text">
                 {t("yourAnswer")}：{session.input || "—"}
               </p>
             )}
-            {isWord && (
-              <p className="et-ex">
-                {t("example")}：{it.word!.ex}（{it.word!.exzh}）
-              </p>
-            )}
-            {!isWord && <p className="et-ex">{t("grammarNote")}：{it.sentence!.note}</p>}
-            {session.step + 1 < totalSteps ? (
+            <p className="et-ex">
+              {t("grammarNote")}：{it.sentence.note}
+            </p>
+            <p className="et-note">{t("wordLookupTip")}</p>
+            {session.step + 1 < steps ? (
               <div className="et-row">
                 <button className="btn primary" onClick={advance}>
                   {t("nextItem")}
@@ -780,96 +872,70 @@ export default function EnglishTypingTool() {
     );
   }
 
-  // ---------- 单词浏览 ----------
-  function renderWordsTab() {
+  // ---------- 造句 ----------
+  function renderMakeTab() {
     if (!prog) return null;
-    const pack = WORD_PACKS.find((p) => p.id === wPack) ?? WORD_PACKS[0];
-    const shown = filteredWords.slice(0, wShown);
-    const remaining = filteredWords.length - shown.length;
-    const statusFilters: { id: StatusFilter; label: string }[] = [
-      { id: "all", label: t("all") },
-      { id: "new", label: t("notLearned") },
-      { id: "learning", label: t("learning") },
-      { id: "mastered", label: t("mastered") },
-      { id: "wrong", label: t("wrongOnly") },
-    ];
+    const pack = allSentencePacks.find((p) => p.id === mPack) ?? allSentencePacks[0];
+    const shown = filteredMake.slice(0, mShown);
+    const remaining = filteredMake.length - shown.length;
     return (
       <div>
+        <p className="body-text">{t("makeIntro")}</p>
         <div className="et-chips">
-          {WORD_PACKS.map((p) => (
+          {allSentencePacks.map((p) => (
             <button
               key={p.id}
-              className={`btn small ${wPack === p.id ? "primary" : "ghost"}`}
+              className={`btn small ${mPack === p.id ? "primary" : "ghost"}`}
               onClick={() => {
-                setWPack(p.id);
-                setWShown(PAGE);
+                setMPack(p.id);
+                setMShown(PAGE);
               }}
             >
-              {p.name}（{p.words.length}）
+              {p.name}（{p.sentences.length}）
             </button>
           ))}
         </div>
         <p className="body-text">{pack.desc}</p>
-        <div className="et-chips">
-          {WORD_MODES.map((m) => (
-            <button
-              key={m}
-              className={`btn small ${wMode === m ? "primary" : "ghost"}`}
-              onClick={() => setWMode(m)}
-            >
-              {m === "spell" ? t("modeSpell") : m === "dict" ? t("modeDict") : t("modeSelf")}
-            </button>
-          ))}
-        </div>
-        <div className="et-chips">
-          {statusFilters.map((f) => (
-            <button
-              key={f.id}
-              className={`btn small ${wStatus === f.id ? "primary" : "ghost"}`}
-              onClick={() => {
-                setWStatus(f.id);
-                setWShown(PAGE);
-              }}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
+        {statusFiltersRow(mStatus, setMStatus, () => setMShown(PAGE))}
         <input
           className="et-input"
-          value={wSearch}
+          value={mSearch}
           placeholder={t("searchPh")}
           onChange={(e) => {
-            setWSearch(e.target.value);
-            setWShown(PAGE);
+            setMSearch(e.target.value);
+            setMShown(PAGE);
           }}
         />
         <div className="et-row">
           <button
             className="btn primary"
-            disabled={filteredWords.length === 0}
+            disabled={filteredMake.length === 0}
             onClick={() =>
               startSession(
-                filteredWords.map((x) => ({ key: x.key, kind: "word" as const, word: x.w, packId: wPack })),
-                wMode
+                filteredMake.map((x) => ({ key: x.key, sentence: x.s, packId: mPack })),
+                "make",
+                "make"
               )
             }
           >
-            {t("startPractice")}（{filteredWords.length}）
+            {t("startPractice")}（{filteredMake.length}）
           </button>
         </div>
-        {filteredWords.length === 0 ? (
+        {filteredMake.length === 0 ? (
           <p className="body-text">{t("noResult")}</p>
         ) : (
           <ul className="et-list">
             {shown.map((x, i) => {
               const st = itemState(prog, x.key);
+              const enOpen = !!shownEn[x.key];
               return (
                 <li key={x.key} className="et-list-item">
-                  <div className="et-list-main">
-                    <span className="et-word-sm">{x.w.w}</span>
-                    <span className="et-ipa-sm">{x.w.ipa}</span>
-                    <span>{x.w.zh}</span>
+                  <div className="et-list-main et-sentence-row">
+                    <span className="et-zh">{x.s.zh}</span>
+                    <span className="et-note">{x.s.note}</span>
+                    {enOpen && (
+                      <span className="et-sent-en">{renderClickableEn(x.s.en, x.key)}</span>
+                    )}
                     {statusBadge(x.key)}
                     {st.wrong > 0 && (
                       <span className="et-wrong-count">
@@ -881,14 +947,23 @@ export default function EnglishTypingTool() {
                     <button
                       className="btn small"
                       onClick={() => {
-                        const rest = filteredWords.slice(i);
+                        const rest = filteredMake.slice(i);
                         startSession(
-                          rest.map((y) => ({ key: y.key, kind: "word" as const, word: y.w, packId: wPack })),
-                          wMode
+                          rest.map((y) => ({ key: y.key, sentence: y.s, packId: mPack })),
+                          "make",
+                          "make"
                         );
                       }}
                     >
                       {t("practiceFromHere")}
+                    </button>
+                    <button
+                      className="btn small ghost"
+                      onClick={() =>
+                        setShownEn((prev) => ({ ...prev, [x.key]: !prev[x.key] }))
+                      }
+                    >
+                      {enOpen ? t("hideEn") : t("showEn")}
                     </button>
                     <button className="btn small ghost" onClick={() => toggleFav(x.key)}>
                       {st.fav ? "★" : "☆"}
@@ -900,12 +975,12 @@ export default function EnglishTypingTool() {
           </ul>
         )}
         {remaining > 0 && (
-          <button className="btn" onClick={() => setWShown((n) => n + PAGE)}>
+          <button className="btn" onClick={() => setMShown((n) => n + PAGE)}>
             {t("showMore")}（{t("remaining")} {remaining} {t("ofTotal")}）
           </button>
         )}
-        {wShown > PAGE && filteredWords.length > PAGE && (
-          <button className="btn ghost" onClick={() => setWShown(PAGE)}>
+        {mShown > PAGE && filteredMake.length > PAGE && (
+          <button className="btn ghost" onClick={() => setMShown(PAGE)}>
             {t("collapse")}
           </button>
         )}
@@ -913,19 +988,66 @@ export default function EnglishTypingTool() {
     );
   }
 
-  // ---------- 句子浏览 ----------
+  // ---------- 句型练习 ----------
+  function renderPatternsTab() {
+    if (!prog) return null;
+    return (
+      <div>
+        <p className="body-text">{t("patternIntro")}</p>
+        <p className="body-text">
+          {PATTERNS.length} {t("patternCount")}
+        </p>
+        <ul className="et-list">
+          {PATTERNS.map((p) => (
+            <li key={p.id} className="et-list-item et-pattern">
+              <div className="et-list-main">
+                <span className="et-pattern-name">{p.name}</span>
+                <span className="et-pattern-struct">{p.pattern}</span>
+                <span>{p.explain}</span>
+                <span className="et-note">
+                  {t("patternExamples")}：
+                </span>
+                {p.examples.map((ex, i) => (
+                  <span key={i} className="et-pattern-ex">
+                    <span className="et-sent-en">{renderClickableEn(ex.en, `${p.id}-${i}`)}</span>
+                    <span>
+                      {ex.zh}（{ex.note}）
+                    </span>
+                  </span>
+                ))}
+              </div>
+              <div className="et-list-actions">
+                <button
+                  className="btn small primary"
+                  onClick={() =>
+                    startSession(
+                      p.examples.map((ex, i) => ({
+                        key: `p:${p.id}:${i}`,
+                        sentence: ex,
+                        packId: p.id,
+                      })),
+                      "make",
+                      "pattern"
+                    )
+                  }
+                >
+                  {t("patternPractice")}
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  // ---------- 句子打字 ----------
   function renderSentencesTab() {
     if (!prog) return null;
     const pack = allSentencePacks.find((p) => p.id === sPack) ?? allSentencePacks[0];
+    const packIsZh = pack.source === "zh";
     const shown = filteredSentences.slice(0, sShown);
     const remaining = filteredSentences.length - shown.length;
-    const statusFilters: { id: StatusFilter; label: string }[] = [
-      { id: "all", label: t("all") },
-      { id: "new", label: t("notLearned") },
-      { id: "learning", label: t("learning") },
-      { id: "mastered", label: t("mastered") },
-      { id: "wrong", label: t("wrongOnly") },
-    ];
     return (
       <div>
         <div className="et-chips">
@@ -943,31 +1065,20 @@ export default function EnglishTypingTool() {
           ))}
         </div>
         <p className="body-text">{pack.desc}</p>
-        <div className="et-chips">
-          {SENT_MODES.map((m) => (
-            <button
-              key={m}
-              className={`btn small ${sMode === m ? "primary" : "ghost"}`}
-              onClick={() => setSMode(m)}
-            >
-              {m === "word" ? t("modeSWord") : m === "chunk" ? t("modeSChunk") : t("modeSFull")}
-            </button>
-          ))}
-        </div>
-        <div className="et-chips">
-          {statusFilters.map((f) => (
-            <button
-              key={f.id}
-              className={`btn small ${sStatus === f.id ? "primary" : "ghost"}`}
-              onClick={() => {
-                setSStatus(f.id);
-                setSShown(PAGE);
-              }}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
+        {!packIsZh && (
+          <div className="et-chips">
+            {SENT_MODES.map((m) => (
+              <button
+                key={m}
+                className={`btn small ${sMode === m ? "primary" : "ghost"}`}
+                onClick={() => setSMode(m)}
+              >
+                {m === "word" ? t("modeSWord") : m === "chunk" ? t("modeSChunk") : t("modeSFull")}
+              </button>
+            ))}
+          </div>
+        )}
+        {statusFiltersRow(sStatus, setSStatus, () => setSShown(PAGE))}
         <input
           className="et-input"
           value={sSearch}
@@ -983,8 +1094,9 @@ export default function EnglishTypingTool() {
             disabled={filteredSentences.length === 0}
             onClick={() =>
               startSession(
-                filteredSentences.map((x) => ({ key: x.key, kind: "sentence" as const, sentence: x.s, packId: sPack })),
-                `s${sMode}`
+                filteredSentences.map((x) => ({ key: x.key, sentence: x.s, packId: sPack })),
+                packIsZh ? "make" : sMode,
+                packIsZh ? "make" : `s${sMode}`
               )
             }
           >
@@ -1000,7 +1112,7 @@ export default function EnglishTypingTool() {
               return (
                 <li key={x.key} className="et-list-item">
                   <div className="et-list-main et-sentence-row">
-                    <span className="et-sent-en">{x.s.en}</span>
+                    <span className="et-sent-en">{renderClickableEn(x.s.en, x.key)}</span>
                     <span>{x.s.zh}</span>
                     {statusBadge(x.key)}
                     {st.wrong > 0 && (
@@ -1015,8 +1127,9 @@ export default function EnglishTypingTool() {
                       onClick={() => {
                         const rest = filteredSentences.slice(i);
                         startSession(
-                          rest.map((y) => ({ key: y.key, kind: "sentence" as const, sentence: y.s, packId: sPack })),
-                          `s${sMode}`
+                          rest.map((y) => ({ key: y.key, sentence: y.s, packId: sPack })),
+                          packIsZh ? "make" : sMode,
+                          packIsZh ? "make" : `s${sMode}`
                         );
                       }}
                     >
@@ -1061,10 +1174,7 @@ export default function EnglishTypingTool() {
             <div className="et-row">
               <button
                 className="btn primary"
-                onClick={() => {
-                  setWMode("self");
-                  startSession(dueItems, "review", "full");
-                }}
+                onClick={() => startSession(dueItems, "make", "review")}
               >
                 {t("reviewStart")}（{dueItems.length}）
               </button>
@@ -1075,8 +1185,8 @@ export default function EnglishTypingTool() {
                 return (
                   <li key={x.key} className="et-list-item">
                     <div className="et-list-main">
-                      <span>{x.kind === "word" ? x.word!.w : x.sentence!.en}</span>
-                      <span>{x.kind === "word" ? x.word!.zh : x.sentence!.zh}</span>
+                      <span className="et-sent-en">{x.sentence.en}</span>
+                      <span>{x.sentence.zh}</span>
                       <span className="et-note">
                         {t("dueIn")}：{new Date(st.due).toLocaleDateString()}
                       </span>
@@ -1092,7 +1202,7 @@ export default function EnglishTypingTool() {
     );
   }
 
-  // ---------- 错词本 ----------
+  // ---------- 错句本 ----------
   function renderBookTab() {
     if (!prog) return null;
     const shownWrong = wrongItems.slice(0, bookShown);
@@ -1118,20 +1228,13 @@ export default function EnglishTypingTool() {
           <div className="et-row">
             <button
               className="btn primary"
-              onClick={() => {
-                setWMode("self");
+              onClick={() =>
                 startSession(
-                  wrongItems.map((x) => ({
-                    key: x.key,
-                    kind: x.kind,
-                    word: x.word,
-                    sentence: x.sentence,
-                    packId: "",
-                  })),
-                  "review",
-                  "full"
-                );
-              }}
+                  wrongItems.map((x) => ({ key: x.key, sentence: x.sentence, packId: "" })),
+                  "make",
+                  "review"
+                )
+              }
             >
               {t("practiceWrong")}（{wrongItems.length}）
             </button>
@@ -1144,8 +1247,8 @@ export default function EnglishTypingTool() {
             {(bookTab === "wrong" ? shownWrong : list).map((x) => (
               <li key={x.key} className="et-list-item">
                 <div className="et-list-main">
-                  <span>{x.kind === "word" ? x.word!.w : x.sentence!.en}</span>
-                  <span>{x.kind === "word" ? x.word!.zh : x.sentence!.zh}</span>
+                  <span className="et-sent-en">{x.sentence.en}</span>
+                  <span>{x.sentence.zh}</span>
                   {bookTab === "wrong" && (
                     <span className="et-wrong-count">
                       {t("wrongCount")} {x.wrong} {t("timesUnit")}
@@ -1155,14 +1258,13 @@ export default function EnglishTypingTool() {
                 <div className="et-list-actions">
                   <button
                     className="btn small"
-                    onClick={() => {
-                      setWMode("self");
+                    onClick={() =>
                       startSession(
-                        [{ key: x.key, kind: x.kind, word: x.word, sentence: x.sentence, packId: "" }],
-                        "review",
-                        "full"
-                      );
-                    }}
+                        [{ key: x.key, sentence: x.sentence, packId: "" }],
+                        "make",
+                        "review"
+                      )
+                    }
                   >
                     {t("practiceFromHere")}
                   </button>
@@ -1194,35 +1296,68 @@ export default function EnglishTypingTool() {
     );
   }
 
-  // ---------- 我的词包 ----------
+  // ---------- 我的句包 ----------
   function renderMineTab() {
     if (!prog) return null;
     return (
       <div>
         <h3 className="sub-title">{t("importTitle")}</h3>
         <p className="body-text">{t("importDesc")}</p>
+        <div className="et-chips">
+          <button
+            className={`btn small ${importMode === "en" ? "primary" : "ghost"}`}
+            onClick={() => {
+              setImportMode("en");
+              setImportList([]);
+              setImportMsg("");
+            }}
+          >
+            {t("importModeEn")}
+          </button>
+          <button
+            className={`btn small ${importMode === "zh" ? "primary" : "ghost"}`}
+            onClick={() => {
+              setImportMode("zh");
+              setImportList([]);
+              setImportMsg("");
+            }}
+          >
+            {t("importModeZh")}
+          </button>
+        </div>
+        {importMode === "zh" && <p className="body-text">{t("importZhDesc")}</p>}
         <p className="et-note">{t("noAiNote")}</p>
         <textarea
           className="et-textarea"
           rows={5}
           value={importText}
-          placeholder={t("importPh")}
+          placeholder={importMode === "en" ? t("importPh") : t("importZhPh")}
           onChange={(e) => setImportText(e.target.value)}
         />
         <div className="et-row">
           <button
             className="btn primary"
             onClick={() => {
-              const parts = splitSentences(importText);
-              if (parts.length === 0) {
-                setImportMsg(t("importEmpty"));
-                return;
+              if (importMode === "en") {
+                const parts = splitSentences(importText);
+                if (parts.length === 0) {
+                  setImportMsg(t("importEmpty"));
+                  return;
+                }
+                setImportList(parts.map((en) => ({ en, zh: "" })));
+                setImportMsg("");
+              } else {
+                const lines = splitChineseLines(importText);
+                if (lines.length === 0) {
+                  setImportMsg(t("importZhEmpty"));
+                  return;
+                }
+                setImportList(lines.map((zh) => ({ en: "", zh })));
+                setImportMsg("");
               }
-              setImportList(parts.map((en) => ({ en, zh: "" })));
-              setImportMsg("");
             }}
           >
-            {t("importSplit")}
+            {importMode === "en" ? t("importSplit") : t("importZhSplit")}
           </button>
         </div>
         {importMsg && <p className="et-bad">{importMsg}</p>}
@@ -1238,17 +1373,35 @@ export default function EnglishTypingTool() {
               {importList.map((s, i) => (
                 <li key={i} className="et-list-item">
                   <div className="et-list-main et-sentence-row">
-                    <span className="et-sent-en">{s.en}</span>
-                    <input
-                      className="et-input et-inline-input"
-                      value={s.zh}
-                      placeholder={t("translation")}
-                      onChange={(e) =>
-                        setImportList((prev) =>
-                          prev.map((p, j) => (j === i ? { ...p, zh: e.target.value } : p))
-                        )
-                      }
-                    />
+                    {importMode === "en" ? (
+                      <>
+                        <span className="et-sent-en">{s.en}</span>
+                        <input
+                          className="et-input et-inline-input"
+                          value={s.zh}
+                          placeholder={t("translation")}
+                          onChange={(e) =>
+                            setImportList((prev) =>
+                              prev.map((p, j) => (j === i ? { ...p, zh: e.target.value } : p))
+                            )
+                          }
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <span className="et-zh">{s.zh}</span>
+                        <input
+                          className="et-input et-inline-input"
+                          value={s.en}
+                          placeholder={t("importEnAnswer")}
+                          onChange={(e) =>
+                            setImportList((prev) =>
+                              prev.map((p, j) => (j === i ? { ...p, en: e.target.value } : p))
+                            )
+                          }
+                        />
+                      </>
+                    )}
                   </div>
                 </li>
               ))}
@@ -1264,6 +1417,7 @@ export default function EnglishTypingTool() {
                   const pack: CustomSentencePack = {
                     id: `c${Date.now()}`,
                     name: importName.trim(),
+                    source: importMode,
                     sentences: importList.map((s) => ({ en: s.en, zh: s.zh, note: "" })),
                   };
                   updateProg((p) => ({ ...p, customPacks: [...p.customPacks, pack] }));
@@ -1271,8 +1425,9 @@ export default function EnglishTypingTool() {
                   setImportName("");
                   setImportList([]);
                   setImportMsg("");
+                  setMPack(pack.id);
                   setSPack(pack.id);
-                  setTab("sentences");
+                  setTab("make");
                 }}
               >
                 {t("importSave")}（{importList.length}）
@@ -1291,13 +1446,15 @@ export default function EnglishTypingTool() {
                   <span>
                     {c.name}（{c.sentences.length} {t("sentencesUnit")}）
                   </span>
+                  {c.source === "zh" && <span className="et-badge">{t("makeOnly")}</span>}
                 </div>
                 <div className="et-list-actions">
                   <button
                     className="btn small"
                     onClick={() => {
+                      setMPack(c.id);
                       setSPack(c.id);
-                      setTab("sentences");
+                      setTab("make");
                     }}
                   >
                     {t("practicePack")}
@@ -1343,8 +1500,10 @@ export default function EnglishTypingTool() {
       last7.push({ date: k.slice(5), items: day.items, correct: day.correct, minutes: Math.round(day.seconds / 60) });
     }
     const totalSeen = Object.values(prog.items).reduce((a, s) => a + s.seen, 0);
-    const firstPackDone = WORD_PACKS.some((p) => p.words.every((w) => itemState(prog, `w:${w.w}`).seen > 0));
-    const allModes = ["spell", "dict", "self", "sword", "schunk", "sfull"].every((m) =>
+    const firstPackDone = SENTENCE_PACKS.some((p) =>
+      p.sentences.every((_, i) => itemState(prog, `s:${p.id}:${i}`).seen > 0)
+    );
+    const allModes = ["make", "pattern", "sword", "schunk", "sfull"].every((m) =>
       prog.modesTried.includes(m)
     );
     const achievements = [
@@ -1354,7 +1513,7 @@ export default function EnglishTypingTool() {
       { id: "perfect", label: t("achPerfect"), done: prog.perfectSessions >= 1 },
       { id: "allModes", label: t("achAllModes"), done: allModes },
     ];
-    const weakestWords = wrongItems.filter((x) => x.kind === "word").slice(0, 5);
+    const weakestSentences = wrongItems.slice(0, 5);
     const maxDay = Math.max(1, ...last7.map((d) => d.items));
 
     return (
@@ -1409,15 +1568,15 @@ export default function EnglishTypingTool() {
         </ul>
 
         <h3 className="sub-title">{t("weakest")}</h3>
-        {weakestWords.length === 0 ? (
+        {weakestSentences.length === 0 ? (
           <p className="body-text">{t("weakestEmpty")}</p>
         ) : (
           <ul className="et-list">
-            {weakestWords.map((x) => (
+            {weakestSentences.map((x) => (
               <li key={x.key} className="et-list-item">
                 <div className="et-list-main">
-                  <span>{x.word!.w}</span>
-                  <span>{x.word!.zh}</span>
+                  <span className="et-sent-en">{x.sentence.en}</span>
+                  <span>{x.sentence.zh}</span>
                   <span className="et-wrong-count">
                     {t("wrongCount")} {x.wrong} {t("timesUnit")}
                   </span>
@@ -1506,7 +1665,8 @@ export default function EnglishTypingTool() {
   }
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: "words", label: t("tabWords") },
+    { id: "make", label: t("tabMake") },
+    { id: "patterns", label: t("tabPatterns") },
     { id: "sentences", label: t("tabSentences") },
     { id: "review", label: `${t("tabReview")}（${dueItems.length}）` },
     { id: "book", label: t("tabBook") },
@@ -1530,19 +1690,22 @@ export default function EnglishTypingTool() {
           </button>
         ))}
       </div>
+      {renderLookupPanel()}
       {session
         ? renderSession()
-        : tab === "words"
-          ? renderWordsTab()
-          : tab === "sentences"
-            ? renderSentencesTab()
-            : tab === "review"
-              ? renderReviewTab()
-              : tab === "book"
-                ? renderBookTab()
-                : tab === "mine"
-                  ? renderMineTab()
-                  : renderStatsTab()}
+        : tab === "make"
+          ? renderMakeTab()
+          : tab === "patterns"
+            ? renderPatternsTab()
+            : tab === "sentences"
+              ? renderSentencesTab()
+              : tab === "review"
+                ? renderReviewTab()
+                : tab === "book"
+                  ? renderBookTab()
+                  : tab === "mine"
+                    ? renderMineTab()
+                    : renderStatsTab()}
       <p className="et-note" style={{ marginTop: 16 }}>
         {t("sourceNote")}
       </p>

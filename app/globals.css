@@ -7317,3 +7317,53 @@ a:hover {
     align-items: flex-start;
   }
 }
+
+/* 句乐部路线（2026-11-11 重做）：造句、生词点查、句型卡片新增样式 */
+.et-make-zh {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.et-word-btn {
+  background: none;
+  border: none;
+  border-bottom: 1px dashed var(--gold);
+  padding: 0 1px;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.et-word-btn:hover {
+  color: var(--gold);
+}
+
+.et-lookup {
+  border-color: var(--gold);
+}
+
+.et-pattern {
+  align-items: flex-start;
+}
+
+.et-pattern-name {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.et-pattern-struct {
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.et-pattern-ex {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 6px 0 6px 10px;
+  border-left: 2px solid var(--gold);
+}
