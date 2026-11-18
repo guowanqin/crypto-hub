@@ -26,8 +26,6 @@ export interface Li18875786Item {
 export interface Li18875786Data {
   /** 快照日期 YYYY-MM-DD（拉取当天）。 */
   updated: string;
-  source: string;
-  account: string;
   items: Li18875786Item[];
 }
 
