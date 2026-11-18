@@ -283,8 +283,6 @@ def main() -> int:
     today = time.strftime("%Y-%m-%d")
     payload = {
         "updated": today,
-        "source": BASE_URL,
-        "account": ACCOUNT,
         "items": items,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
