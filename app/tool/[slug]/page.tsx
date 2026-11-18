@@ -75,6 +75,7 @@ const DEDICATED_PAGES = new Set([
   "english-typing",
   "quark-resources",
   "odds-board",
+  "unlocks-board",
 ]);
 
 export function generateStaticParams() {
