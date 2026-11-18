@@ -1,0 +1,53 @@
+{
+  "updated": "2026-11-17",
+  "source": "snapshot",
+  "sourceLabel": "DefiLlama Unlocks 公开页快照（2026-11-17）",
+  "totals": {
+    "next7dUsd": 414400000,
+    "next30dUsd": 969000000
+  },
+  "items": [
+    {
+      "tokenId": "monad",
+      "symbol": "MON",
+      "name": "Monad",
+      "date": "2026-11-24",
+      "dateEnd": null,
+      "amount": 16600000000,
+      "valueUsd": 251790000,
+      "pctCirc": 144.89,
+      "allocations": "",
+      "type": "cliff",
+      "pinned": true,
+      "note": "口径分歧：DefiLlama 按约 166 亿–171 亿枚计（约 $2.52 亿、占流通量 144.89%），本行采用此口径、解锁量取区间下限；Tokenomist 按约 66.6 亿枚计（约 $1.1 亿）。Monad 未公布完整解锁时间表，两家统计口径不同。"
+    },
+    {
+      "tokenId": "layerzero",
+      "symbol": "ZRO",
+      "name": "LayerZero",
+      "date": "2026-11-19",
+      "dateEnd": "2026-11-20",
+      "amount": null,
+      "valueUsd": 32620000,
+      "pctCirc": 5.83,
+      "allocations": "",
+      "type": "cliff",
+      "pinned": false,
+      "note": "日期口径不一致：DefiLlama 记 11 月 19 日，另一公开来源记 11 月 20 日，按区间显示。快照只确证美元估值与占流通量比例，逐枚数量待接入 API 后补全。"
+    },
+    {
+      "tokenId": "kaito",
+      "symbol": "KAITO",
+      "name": "Kaito",
+      "date": "2026-11-19",
+      "dateEnd": null,
+      "amount": null,
+      "valueUsd": 3190000,
+      "pctCirc": null,
+      "allocations": "",
+      "type": "cliff",
+      "pinned": false,
+      "note": "快照只确证日期与美元估值，解锁量与占流通量比例待接入 API 后补全。"
+    }
+  ]
+}
