@@ -196,9 +196,19 @@ def parse_cards(page_html: str) -> list[dict]:
     return cards
 
 
-def build_items(cards: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
-    """Keep one item per Quark id (site order); report skipped cards."""
+def build_items(
+    cards: list[dict],
+    prev_added: dict | None = None,
+    today: str = "",
+) -> tuple[list[dict], list[tuple[str, str]]]:
+    """Keep one item per Quark id (site order); report skipped cards.
+
+    `added` is the date THIS SITE first collected the item (the source
+    directory publishes no per-item dates). Dates are carried over from
+    the previous data file; brand-new ids get `today`.
+    """
     overrides = load_title_overrides()
+    prev_added = prev_added or {}
     seen: set[str] = set()
     items: list[dict] = []
     skipped: list[tuple[str, str]] = []
@@ -223,6 +233,7 @@ def build_items(cards: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
             {
                 "id": quark_id,
                 "title": overrides.get(quark_id) or clean_title(card["title"]),
+                "added": prev_added.get(quark_id) or today,
                 "url": f"https://pan.quark.cn/s/{quark_id}",
                 "category": classify(card["title"]),
             }
@@ -241,8 +252,23 @@ def main() -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
+    out_path = Path(args.out)
+    if not out_path.is_absolute():
+        out_path = REPO_ROOT / out_path
+    prev_added: dict = {}
+    if out_path.exists():
+        try:
+            prev = json.loads(out_path.read_text(encoding="utf-8"))
+            prev_added = {
+                it["id"]: it["added"]
+                for it in prev.get("items", [])
+                if it.get("id") and it.get("added")
+            }
+        except Exception as exc:  # noqa: BLE001 - dates are best-effort
+            print(f"WARN: previous data unreadable: {exc}", file=sys.stderr)
+
     cards = parse_cards(page_html)
-    items, skipped = build_items(cards)
+    items, skipped = build_items(cards, prev_added, time.strftime("%Y-%m-%d"))
     if not items:
         print(
             f"ERROR: parsed {len(cards)} cards but kept 0 items; "
