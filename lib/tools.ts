@@ -2684,6 +2684,37 @@ export const TOOLS: ToolDef[] = [
     },
   },
   {
+    slug: "odds-board",
+    name: { zh: "预测市场赔率榜", en: "Prediction Market Odds Board",
+    tw: "預測市場賠率榜" },
+    url: "https://18btc.cc/tool/odds-board",
+    tags: ["market"],
+    addedAt: "2026-11-18",
+    type: "own",
+    embedded: true,
+    image: "/tools/odds-board.webp",
+    oneLiner: {
+      zh: "核心定位：预测市场每日押注的 BTC、ETH 站上各价位概率，一榜看清。",
+      en: "The daily Polymarket odds ladder: implied probabilities of BTC and ETH closing above each price level.",
+      tw: "核心定位：預測市場每日押注的 BTC、ETH 站上各價位機率，一榜看清。",
+    },
+    detail: {
+      zh: "每天开盘前，先看市场在押注什么：本页把 Polymarket 每日 above/below 市场里 BTC、ETH 今天结算站上各价位的隐含概率一档一档列成阶梯，标出现价所在位置和隐含中位价位，再附 crypto 类事件 24 小时交易量前十。先把口径说清楚：概率是押注者用真金白银买出的 Yes 价格，不是任何人的预测，更不是投资建议；这些市场以 Binance 1 分钟 K 线在美东正午的收盘价结算。月度 reach 市场的概率疑似长时间未更新，本页不收录；Polymarket 在部分地区受限，本页只展示公开数据，不设交易入口。数据来自 Polymarket 的 Gamma 公开接口，约 10 分钟更新。",
+      en: "Before the day starts, see what the market is betting on: this page turns Polymarket's daily above/below markets into a ladder of implied probabilities — the chance BTC and ETH settle above each price level today — marks where the spot price sits, adds the implied median, and ranks the top 10 crypto events by 24h volume. The definitions up front: each probability is the Yes price bought with real money, not anyone's forecast and not investment advice; these markets settle on the Binance 1-minute candle closing at noon ET. Monthly reach markets look stale and are excluded; Polymarket is restricted in some regions, and this page only displays public data with no trading entry. Data comes from Polymarket's Gamma public API, refreshed about every 10 minutes.",
+      tw: "每天開盤前，先看市場在押注什麼：本頁把 Polymarket 每日 above/below 市場裡 BTC、ETH 今天結算站上各價位的隱含機率一檔一檔列成階梯，標出現價所在位置和隱含中位價位，再附 crypto 類事件 24 小時交易量前十。先把口徑說清楚：機率是押注者用真金白銀買出的 Yes 價格，不是任何人的預測，更不是投資建議；這些市場以 Binance 1 分鐘 K 線在美東正午的收盤價結算。月度 reach 市場的機率疑似長時間未更新，本頁不收錄；Polymarket 在部分地區受限，本頁只展示公開資料，不設交易入口。資料來自 Polymarket 的 Gamma 公開介面，約 10 分鐘更新。",
+    },
+    audience: {
+      zh: "每天动手前想先知道市场觉得今天能到多少的人：看多空预期分歧、找关键价位心理关口的人，以及跟踪预测市场热度与成交量的人。",
+      en: "Anyone who wants to know what the market thinks today's range is before acting: traders watching long/short expectation gaps and key psychological levels, and anyone tracking prediction-market heat and volume.",
+      tw: "每天動手前想先知道市場覺得今天能到多少的人：看多空預期分歧、找關鍵價位心理關口的人，以及跟蹤預測市場熱度與成交量的人。",
+    },
+    take: {
+      zh: "概率是共识，不是答案：70% 的事也会落空，30% 的事每天都在发生。把阶梯当成市场预期的温度计，别当成下单指令，仓位和止损还是自己定。",
+      en: "A probability is a consensus, not an answer: 70% chances fail and 30% chances happen every day. Treat the ladder as a thermometer for market expectations, not an order ticket — position size and stops are still yours to set.",
+      tw: "機率是共識，不是答案：70% 的事也會落空，30% 的事每天都在發生。把階梯當成市場預期的溫度計，別當成下單指令，倉位和止損還是自己定。",
+    },
+  },
+  {
     slug: "cashflow-daily",
     name: { zh: "每日加密现金流榜", en: "Daily Crypto Cash-Flow Board",
     tw: "每日加密現金流榜" },
