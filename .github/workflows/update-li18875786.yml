@@ -1,0 +1,33 @@
+name: update-li18875786
+
+# 每天 10:00 CST 拉取 X 账号 @li18875786 的公开资源目录站
+# https://zy.zcw20241221.workers.dev/，只收带夸克网盘链接的条目，
+# 更新 data/li18875786.json（夸克网盘资源的数据源）。目录站为公开静态页，
+# 无需登录、无需 key。
+# 注意：runner 能否直连 workers.dev 未在线上验证过；若 Action 失败，先看
+# 日志里的 fetch 错误（脚本失败时不提交，旧数据保持不动）。
+on:
+  schedule:
+    - cron: "0 2 * * *" # 每天 10:00 CST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Update @li18875786 quark resources
+        run: python3 scripts/update-li18875786.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/li18875786.json
+          git diff --cached --quiet || git commit -m "chore(data): update li18875786 resources $(date -u +%F)"
+          git push
