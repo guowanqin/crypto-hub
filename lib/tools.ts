@@ -2714,6 +2714,37 @@ export const TOOLS: ToolDef[] = [
       tw: "機率是共識，不是答案：70% 的事也會落空，30% 的事每天都在發生。把階梯當成市場預期的溫度計，別當成下單指令，倉位和止損還是自己定。",
     },
   },
+{
+    slug: "unlocks-board",
+    name: { zh: "代币解锁日历榜", en: "Token Unlock Calendar",
+    tw: "代幣解鎖日曆榜" },
+    url: "https://18btc.cc/tool/unlocks-board",
+    tags: ["market"],
+    addedAt: "2026-11-18",
+    type: "own",
+    embedded: true,
+    image: "/tools/unlocks-board.webp",
+    oneLiner: {
+      zh: "核心定位：未来 7 天与 30 天代币解锁日历，大额解锁提前标红。",
+      en: "A 7- and 30-day token unlock calendar, with large unlocks flagged red in advance.",
+      tw: "核心定位：未來 7 天與 30 天代幣解鎖日曆，大額解鎖提前標紅。",
+    },
+    detail: {
+      zh: "每天打开，先看哪天有大额解锁：本页把未来 7 天与 30 天的代币悬崖解锁按日期排成日历榜——解锁量、美元估值、占流通量比例、归属方一栏看清，占流通量 ≥5% 或金额 ≥$2,000 万的提前标红，Monad（MON）这类口径有分歧的条目置顶并把两个口径都标出来。数据走两条通道：Tokenomist API 免费试用每天自动更新未来 7 天（免费档每月 1,000 次调用、只看未来 7 天），未接入时用 DefiLlama 公开页标注日期的快照兜底；30 天窗口在免费档下只有合计与已确证条目，逐条明细待升级。先说清：解锁是供给端的事实，不是涨跌预测——解锁后可能被抛售，也可能转去质押或生态激励，本榜只帮你提前知道日子和量级，不构成投资建议。",
+      en: "Start the day by checking which day carries a big unlock: this page lines up the cliff unlocks of the next 7 and 30 days as a calendar board — amount, USD value, share of circulating supply and allocation in one row, with anything at ≥5% of circulating supply or ≥$20M flagged red in advance, and disputed entries such as Monad (MON) pinned with both sources' readings shown. Two data channels feed it: the Tokenomist API free trial refreshes the next 7 days automatically every day (the free tier allows 1,000 calls a month and only looks 7 days ahead), and until a key is connected a dated snapshot of the public DefiLlama Unlocks page fills in; under the free tier the 30-day window carries the published total and confirmed entries only, with a full per-event list awaiting a paid plan. Up front: an unlock is a supply-side fact, not a price prediction — unlocked tokens may be sold, or moved into staking or ecosystem incentives. This board only tells you the date and the size in advance, and is not investment advice.",
+      tw: "每天開啟，先看哪天有大額解鎖：本頁把未來 7 天與 30 天的代幣懸崖解鎖按日期排成日曆榜——解鎖量、美元估值、佔流通量比例、歸屬方一欄看清，佔流通量 ≥5% 或金額 ≥$2,000 萬的提前標紅，Monad（MON）這類口徑有分歧的條目置頂並把兩個口徑都標出來。資料走兩條通道：Tokenomist API 免費試用每天自動更新未來 7 天（免費檔每月 1,000 次呼叫、只看未來 7 天），未接入時用 DefiLlama 公開頁標註日期的快照兜底；30 天視窗在免費檔下只有合計與已確證條目，逐條明細待升級。先說清：解鎖是供給端的事實，不是漲跌預測——解鎖後可能被拋售，也可能轉去質押或生態激勵，本榜只幫你提前知道日子和量級，不構成投資建議。",
+    },
+    audience: {
+      zh: "持有或盯着待解锁代币的人：想提前知道哪天有大额解锁、好安排提醒与仓位的投资者，以及按日历做赛道跟踪的研究者。",
+      en: "Holders and watchers of tokens with unlocks ahead: investors who want to know in advance which day carries a large unlock so they can set reminders and size positions, and researchers who track sectors by calendar.",
+      tw: "持有或盯著待解鎖代幣的人：想提前知道哪天有大額解鎖、好安排提醒與倉位的投資者，以及按日曆做賽道跟蹤的研究者。",
+    },
+    take: {
+      zh: "解锁日历是用来提前设提醒的，不是用来提前跑路的：先看占比再看金额，占比小的解锁多数掀不起浪；真碰上 MON 这种占流通量翻倍的，先把两个口径都看清再做决定。",
+      en: "An unlock calendar is for setting reminders early, not for front-running the exit: read the share of circulating supply before the dollar figure — small-share unlocks rarely move anything. When you do meet a MON-sized one at over 100% of circulating, read both sources' readings before deciding anything.",
+      tw: "解鎖日曆是用來提前設提醒的，不是用來提前跑路的：先看佔比再看金額，佔比小的解鎖多數掀不起浪；真碰上 MON 這種佔流通量翻倍的，先把兩個口徑都看清再做決定。",
+    },
+  },
   {
     slug: "cashflow-daily",
     name: { zh: "每日加密现金流榜", en: "Daily Crypto Cash-Flow Board",
