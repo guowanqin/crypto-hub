@@ -149,6 +149,38 @@ def fetch_page(url: str) -> str:
         raise RuntimeError(f"fetch failed for {url}: {exc}") from exc
 
 
+TITLE_OVERRIDES_PATH = REPO_ROOT / "data" / "li18875786-titles.json"
+
+
+def load_title_overrides() -> dict:
+    """AI-polished SEO titles keyed by Quark id (maintained by Muse).
+
+    Items without an override fall back to clean_title(). The overrides
+    file lives in the repo so the daily Action keeps applying them.
+    """
+    try:
+        with open(TITLE_OVERRIDES_PATH, encoding="utf-8") as fh:
+            data = json.load(fh)
+        return {str(k): str(v) for k, v in data.items() if v}
+    except FileNotFoundError:
+        return {}
+    except Exception as exc:  # noqa: BLE001 - never let titles break the run
+        print(f"WARN: title overrides unreadable: {exc}", file=sys.stderr)
+        return {}
+
+
+_SIZE_RE = re.compile(r"[【\[][^】\]]*\d+(\.\d+)?\s*(GB|MB|G|M)[】\]]", re.I)
+_LEAD_JUNK_RE = re.compile(r"^[\s\u2600-\u27bf\U0001f300-\U0001faff✅🔥⭐✨]+")
+  
+
+def clean_title(title: str) -> str:
+    """Conservative cleanup for new items that have no AI override yet."""
+    t = _SIZE_RE.sub("", title)
+    t = _LEAD_JUNK_RE.sub("", t)
+    t = re.sub(r"\s+", " ", t).strip(" \t|｜·-—")
+    return t or title
+
+
 def parse_cards(page_html: str) -> list[dict]:
     """Extract raw cards: title + all outbound share links, in site order."""
     blocks = re.split(r'(?=<li class="card")', page_html)[1:]
@@ -166,6 +198,7 @@ def parse_cards(page_html: str) -> list[dict]:
 
 def build_items(cards: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
     """Keep one item per Quark id (site order); report skipped cards."""
+    overrides = load_title_overrides()
     seen: set[str] = set()
     items: list[dict] = []
     skipped: list[tuple[str, str]] = []
@@ -189,7 +222,7 @@ def build_items(cards: list[dict]) -> tuple[list[dict], list[tuple[str, str]]]:
         items.append(
             {
                 "id": quark_id,
-                "title": card["title"],
+                "title": overrides.get(quark_id) or clean_title(card["title"]),
                 "url": f"https://pan.quark.cn/s/{quark_id}",
                 "category": classify(card["title"]),
             }
