@@ -73,6 +73,7 @@ const DEDICATED_PAGES = new Set([
   "stablecoin-yields",
   "sidu-chishui",
   "english-typing",
+  "quark-resources",
 ]);
 
 export function generateStaticParams() {
