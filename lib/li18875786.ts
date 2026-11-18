@@ -5,9 +5,10 @@
 // 由 scripts/update-li18875786.py 每天拉取、清洗后写入 data/li18875786.json，
 // 经 GitHub Action 每天 10:00 CST 自动更新。本页不直连源站，只读快照数据。
 // 收录口径（页面公开）：每个夸克网盘链接一条，只有百度链接的条目不收；
-// 按夸克 ID 去重、保持目录原顺序（新在前）；标题用原文不改写；目录没有
-// 逐条日期，不编日期，数据集只记抓取日期；分类由解析器内的固定关键词
-// 表按标题自动归类。
+// 按夸克 ID 去重、保持目录原顺序（新在前）；标题为本站按 SEO 长尾规则
+// 改写的版本（对照表 data/li18875786-titles.json，更新脚本自动套用）；
+// 目录没有逐条日期，条目的 added 是本站首次收录日期，不编源站日期；
+// 分类由解析器内的固定关键词表按标题自动归类。
 
 import raw from "@/data/li18875786.json";
 
@@ -18,6 +19,8 @@ export interface Li18875786Item {
   /** 夸克网盘分享链接 https://pan.quark.cn/s/<id>。 */
   url: string;
   category: string;
+  /** 本站首次收录日期 YYYY-MM-DD（源站不提供逐条日期，这是本站口径）。 */
+  added: string;
 }
 
 export interface Li18875786Data {
