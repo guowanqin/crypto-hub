@@ -2806,6 +2806,37 @@ export const TOOLS: ToolDef[] = [
       en: "It really works in-site: building sentences forces active recall instead of multiple choice, wrong sentences go into the book and reviews follow a memory curve, and once you know a pattern you can build new sentences by swapping words. 96 sentences and 8 patterns built in; import your own to go further.",
     },
   },
+          {
+    slug: "quark-resources",
+    name: { zh: "夸克网盘资源", en: "Quark Drive Resources",
+    tw: "夸克網盤資源" },
+    url: "https://18btc.cc/tool/quark-resources",
+    tags: ["office"],
+    addedAt: "2026-11-17",
+    type: "own",
+    embedded: true,
+    image: "/tools/quark-resources.webp",
+    oneLiner: {
+      zh: "核心定位：每天更新的夸克网盘资源目录，课程资料分类筛选直达。",
+      en: "A daily-updated Quark Drive resource directory, filterable by category.",
+      tw: "核心定位：每天更新的夸克網盤資源目錄，課程資料分類篩選直達。",
+    },
+    detail: {
+      zh: "X 博主 @li18875786 把每天分享的付费课程与学习资料汇总在一个公开资源目录里，本页把其中带夸克网盘链接的条目一条一条搬进站内：AI 课程、编程开发、剪辑摄影、电商运营、自媒体、英语学习、中小学教辅、考试考证、职场财会、生活技能等分类齐全，支持搜索与分类筛选，点标题直达夸克网盘。每个夸克链接只收一条，只有百度链接的条目不收；标题用目录原文，分类按标题关键词自动归类，个别分得不准请以标题为准。本站每天 10:00 自动拉取目录更新。口径先说清：链接均为第三方分享，可能失效，版权归原作者所有，本页仅作目录索引、供学习交流，下载前请自行判断。",
+      en: "The X creator @li18875786 collects the paid courses and study materials they share into one public resource directory. This page brings every entry that carries a Quark Drive link into the site, one item per Quark link: AI courses, programming, video editing and photography, e-commerce, creator skills, English, school tutoring, exam prep, workplace and finance, life skills and more, with search and category filters — tap a title to open the Quark Drive share. Entries with only a Baidu link are not collected; titles are the directory's originals, and categories are assigned automatically from title keywords, so trust the title when a category looks off. This site re-fetches the directory automatically at 10:00 every day. Up front: every link is a third-party share and may stop working at any time; copyright belongs to the original authors, and this page is only an index for study and exchange — judge for yourself before downloading.",
+      tw: "X 博主 @li18875786 把每天分享的付費課程與學習資料彙總在一個公開資源目錄裡，本頁把其中帶夸克網盤連結的條目一條一條搬進站內：AI 課程、程式設計開發、剪輯攝影、電商運營、自媒體、英語學習、中小學教輔、考試考證、職場財會、生活技能等分類齊全，支援搜尋與分類篩選，點標題直達夸克網盤。每個夸克連結只收一條，只有百度連結的條目不收；標題用目錄原文，分類按標題關鍵詞自動歸類，個別分得不準請以標題為準。本站每天 10:00 自動拉取目錄更新。口徑先說清：連結均為第三方分享，可能失效，版權歸原作者所有，本頁僅作目錄索引、供學習交流，下載前請自行判斷。",
+    },
+    audience: {
+      zh: "爱囤课囤资料的人：想系统学一门技能、备考、给孩子找教辅，又不想满 X 翻帖子找链接的人。",
+      en: "Course and material collectors: anyone who wants to learn a skill systematically, prepare for an exam, or find tutoring materials for their kids without digging through X posts for links.",
+      tw: "愛囤課囤資料的人：想系統學一門技能、備考、給孩子找教輔，又不想滿 X 翻帖子找連結的人。",
+    },
+    take: {
+      zh: "目录是别人整理的，胜在全和更新快：先收藏本页按分类慢慢挑，链接失效是网盘分享的常态，重要资料下好自己存一份。",
+      en: "Someone else's directory, strong on coverage and update speed: bookmark this page and browse by category. Dead links are normal for drive shares — download and keep your own copy of anything important.",
+      tw: "目錄是別人整理的，勝在全和更新快：先收藏本頁按分類慢慢挑，連結失效是網盤分享的常態，重要資料下好自己存一份。",
+    },
+  },
 ];
 
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
