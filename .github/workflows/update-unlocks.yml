@@ -1,0 +1,38 @@
+name: update-unlocks
+
+# 每天 10:00 CST 调用 Tokenomist API 更新 data/unlocks.json（代币解锁日历榜
+# 的 7 天窗口）。key 从仓库 Secrets 的 TOKENOMIST_API_KEY 注入，仓库里不存 key。
+#
+# 上线还差一步（站长操作）：在 tokenomist.ai 申请免费试用拿到 API key 后，
+# 到 GitHub 仓库 Settings → Secrets and variables → Actions 里新增
+# TOKENOMIST_API_KEY，Action 即自动生效。没配 key 时脚本会非零退出、
+# Action 标红，页面继续用 data/unlocks.json 里的种子快照（旧数据不动）。
+# 免费试用口径（2026-11-18 查 docs.tokenomist.ai）：1,000 次/月、120 次/分、
+# 50 个试用代币、upcoming 只看未来 7 天；30 天逐条明细需升级套餐。
+on:
+  schedule:
+    - cron: "0 2 * * *" # 每天 10:00 CST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Update token unlocks (Tokenomist API)
+        env:
+          TOKENOMIST_API_KEY: ${{ secrets.TOKENOMIST_API_KEY }}
+        run: python3 scripts/update-unlocks.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/unlocks.json
+          git diff --cached --quiet || git commit -m "chore(data): update token unlocks $(date -u +%F)"
+          git push
