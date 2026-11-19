@@ -4,6 +4,9 @@
 // https://zy.zcw20241221.workers.dev/（公开静态页，无需登录、无需 key），
 // 由 scripts/update-li18875786.py 每天拉取、清洗后写入 data/li18875786.json，
 // 经 GitHub Action 每天 10:00 CST 自动更新。本页不直连源站，只读快照数据。
+// 第二来源（2026-11-19 并入）：@FLMdongtianfudi 的 Telegram 频道公开预览
+// （t.me/s/FLMdongtianfudi），同一脚本合并抓取、按夸克 ID 去重；
+// 过滤口径为站长所定：只过滤成人/色情内容，影视与破解游戏照常收录。
 // 收录口径（页面公开）：每个夸克网盘链接一条，只有百度链接的条目不收；
 // 按夸克 ID 去重、保持目录原顺序（新在前）；标题为本站按 SEO 长尾规则
 // 改写的版本（对照表 data/li18875786-titles.json，更新脚本自动套用）；
