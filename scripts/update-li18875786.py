@@ -3,6 +3,17 @@
 ('付费资源分享') at https://zy.zcw20241221.workers.dev/ and write
 data/li18875786.json for the 18btc.cc in-site tool 'quark-resources'.
 
+Second source (added 2026-11-19, site-owner decision): the Telegram
+channel of X account @FLMdongtianfudi (t.me/FLMdongtianfudi, public
+preview https://t.me/s/FLMdongtianfudi), where he actually posts his
+Quark shares — his X feed is mostly other promotions. Same board
+rules, plus one filter the owner set for this source: adult/erotic
+items are excluded (ADULT_BLOCKLIST below); films and cracked games
+are collected like any other item. His posts may wrap the Quark link
+in his own domain pan.fanglmshare.com/s/<id>, which redirects to the
+same pan.quark.cn share id. The TG source fails soft: if it cannot be
+fetched, the directory source still updates on its own.
+
 Stdlib only. No login, no API key — the directory page is a single
 static HTML file fetchable with a normal browser User-Agent.
 
@@ -44,6 +55,18 @@ UA = (
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 QUARK_RE = re.compile(r"pan\.quark\.cn/s/([A-Za-z0-9]+)")
+
+TG_URL = "https://t.me/s/FLMdongtianfudi"
+WRAPPED_RE = re.compile(r"fanglmshare\.com/s/([A-Za-z0-9]+)")
+
+# Adult/erotic filter for the TG source only (owner decision
+# 2026-11-19: filter adult content; films and cracked games are OK).
+# Matched against title + message text; first hit excludes the item.
+ADULT_BLOCKLIST = [
+    "成人", "少妇", "色情", "情色", "无码", "里番", "偷拍", "街拍",
+    "小姐姐", "约炮", "三级片", "毛片", "黄片", "擦边", "美女合集",
+    "福利姬", "onlyfans", "OnlyFans", "女优", "裸聊",
+]
 
 # --- auto-classification: ordered (category, keywords); first match wins.
 # Keywords are plain substrings of the title unless the entry is a regex
@@ -241,6 +264,107 @@ def build_items(
     return items, skipped
 
 
+def is_adult(text: str) -> bool:
+    return any(kw in text for kw in ADULT_BLOCKLIST)
+
+
+def parse_tg_messages(page_html: str) -> list[dict]:
+    """Extract channel messages: quark id + title + datetime.
+
+    t.me/s renders each message as a .tgme_widget_message block with
+    the text in .tgme_widget_message_text (<br> = line break; the
+    first line is the resource title) and a <time datetime=...> stamp.
+    Blocks are returned newest first.
+    """
+    blocks = re.split(r'(?=tgme_widget_message )', page_html)[1:]
+    out: list[dict] = []
+    for block in blocks:
+        m = QUARK_RE.search(block) or WRAPPED_RE.search(block)
+        if not m:
+            continue
+        tm = re.search(r'tgme_widget_message_text[^>]*>(.*?)</div>', block, re.S)
+        if not tm:
+            continue
+        raw = re.sub(r"<br\s*/?>", "\n", tm.group(1))
+        raw = html_mod.unescape(re.sub(r"<[^>]+>", "", raw))
+        lines = [ln.strip() for ln in raw.split("\n") if ln.strip()]
+        if not lines:
+            continue
+        title = lines[0]
+        # Drop a trailing link line that got merged into the title.
+        title = re.split(r"🔗|https?://", title)[0].strip()
+        dt = re.search(r'<time datetime="([^"]+)"', block)
+        out.append(
+            {
+                "id": m.group(1),
+                "title": title,
+                "text": " ".join(lines),
+                "datetime": dt.group(1) if dt else "",
+            }
+        )
+    out.reverse()  # page order is oldest first; we keep newest first
+    return out
+
+
+def build_tg_items(
+    messages: list[dict],
+    prev_added: dict,
+    today: str,
+) -> tuple[list[dict], list[tuple[str, str]]]:
+    """Turn TG messages into board items (adult filtered, deduped)."""
+    overrides = load_title_overrides()
+    seen: set[str] = set()
+    items: list[dict] = []
+    skipped: list[tuple[str, str]] = []
+    for msg in messages:
+        qid = msg["id"]
+        if qid in seen:
+            continue
+        seen.add(qid)
+        if is_adult(msg["title"] + " " + msg["text"]):
+            skipped.append((msg["title"], "成人内容过滤"))
+            continue
+        if not msg["title"]:
+            skipped.append((qid, "无标题"))
+            continue
+        items.append(
+            {
+                "id": qid,
+                "title": overrides.get(qid) or clean_title(msg["title"]),
+                "added": prev_added.get(qid) or today,
+                "url": f"https://pan.quark.cn/s/{qid}",
+                "category": classify(msg["title"]),
+            }
+        )
+    return items, skipped
+
+
+def fetch_tg_items(prev_added: dict, today: str):
+    """Fetch the TG channel (2 preview pages) and build items.
+
+    Fails soft: returns (items, skipped, error_or_None); on a fetch or
+    parse failure the caller proceeds with the directory source only.
+    """
+    try:
+        page1 = fetch_page(TG_URL)
+        messages = parse_tg_messages(page1)
+        # One extra page back, in case of a high-volume day.
+        ids = re.findall(r'data-post="FLMdongtianfudi/(\d+)"', page1)
+        if ids:
+            try:
+                page0 = fetch_page(f"{TG_URL}?before={min(int(i) for i in ids)}")
+                older = parse_tg_messages(page0)
+                known = {m["id"] for m in messages}
+                messages = messages + [m for m in older if m["id"] not in known]
+            except RuntimeError:
+                pass
+        if not messages:
+            return [], [], "TG preview parsed 0 quark messages"
+        items, skipped = build_tg_items(messages, prev_added, today)
+        return items, skipped, None
+    except RuntimeError as exc:
+        return [], [], str(exc)
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default="data/li18875786.json")
@@ -267,8 +391,9 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001 - dates are best-effort
             print(f"WARN: previous data unreadable: {exc}", file=sys.stderr)
 
+    today_str = time.strftime("%Y-%m-%d")
     cards = parse_cards(page_html)
-    items, skipped = build_items(cards, prev_added, time.strftime("%Y-%m-%d"))
+    items, skipped = build_items(cards, prev_added, today_str)
     if not items:
         print(
             f"ERROR: parsed {len(cards)} cards but kept 0 items; "
@@ -276,6 +401,35 @@ def main() -> int:
             file=sys.stderr,
         )
         return 1
+
+    # Second source: @FLMdongtianfudi's Telegram channel (fails soft).
+    tg_items, tg_skipped, tg_err = fetch_tg_items(prev_added, today_str)
+    if tg_err:
+        print(f"WARN: TG source skipped: {tg_err}", file=sys.stderr)
+    dir_ids = {it["id"] for it in items}
+    new_tg = [
+        it for it in tg_items if it["id"] not in prev_added and it["id"] not in dir_ids
+    ]
+    # Carry over previously collected TG items that are in neither the
+    # directory nor today's channel page, so nothing ever drops out.
+    merged_ids = dir_ids | {it["id"] for it in new_tg}
+    carry = []
+    if out_path.exists():
+        try:
+            prev = json.loads(out_path.read_text(encoding="utf-8"))
+            carry = [
+                it
+                for it in prev.get("items", [])
+                if it.get("id") and it["id"] not in merged_ids
+            ]
+        except Exception:  # noqa: BLE001 - carry-over is best-effort
+            carry = []
+    items = new_tg + items + carry
+    skipped = skipped + tg_skipped
+    print(
+        f"TG source: kept {len(tg_items)} items "
+        f"({len(new_tg)} new), skipped {len(tg_skipped)}, carried {len(carry)}"
+    )
 
     out_path = Path(args.out)
     if not out_path.is_absolute():
