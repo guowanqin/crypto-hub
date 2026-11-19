@@ -2898,9 +2898,39 @@ export const TOOLS: ToolDef[] = [
       en: "Someone else's directory, strong on coverage and update speed: bookmark this page and browse by category. Dead links are normal for drive shares — download and keep your own copy of anything important.",
       tw: "目錄是別人整理的，勝在全和更新快：先收藏本頁按分類慢慢挑，連結失效是網盤分享的常態，重要資料下好自己存一份。",
     },
+            },
+  {
+        slug: "github-picks",
+        name: { zh: "GitHub 开源精选", en: "GitHub Open-Source Picks",
+    tw: "GitHub 開源精選" },
+        url: "https://18btc.cc/tool/github-picks",
+        tags: ["office"],
+        addedAt: "2026-11-19",
+        type: "own",
+        embedded: true,
+        image: "/tools/github-picks.webp",
+        oneLiner: {
+                zh: "核心定位：每天同步 X 博主分享的 GitHub 开源项目，分类筛选直达仓库。",
+                en: "Daily picks: GitHub open-source projects shared by an X creator, checked via the GitHub API.",
+                tw: "核心定位：每天同步 X 博主分享的 GitHub 開源專案，分類篩選直達倉庫。",
+        },
+        detail: {
+                zh: "每天同步 X 博主 lumxss（@bkdgiffug）分享的 GitHub 开源项目，他长期每天发 4 到 5 条、专挑 AI 工具方向的开源仓库，本页把带 GitHub 仓库链接的项目帖一条一条搬进站内：AI 绘画设计、AI 编程开发、AI 模型接口、数据可视化、效率办公、学习资源等分类齐全，支持搜索与分类筛选，点标题直达 GitHub 仓库，并附原帖链接。收录口径先说清：只收带仓库链接的原创项目帖，纯推广、撸毛空投和没有仓库的帖子不收；同一仓库只收一次。每条的 Star 数、主要语言与开源协议在收录时经 GitHub 官方接口核对（博主帖子里的 Star 数常是旧数，以本页核对值为准，数字会随时间变化）；标题为本站按 SEO 长尾规则改写的版本，保留项目名与真实信息，不编造功能。分类按帖子与仓库说明关键词自动归类，个别分得不准请以标题和仓库为准。",
+                en: "A daily sync of the GitHub open-source projects shared by X creator lumxss (@bkdgiffug), who posts four to five AI-tool repositories a day. Every project post that carries a GitHub repo link is brought into this page: AI image and design, AI coding, model APIs, data visualization, productivity, study resources and more, with search and category filters — tap a title to open the GitHub repository, with a link to the original post attached. The rules up front: only original project posts with a repo link are collected; pure promotions, airdrop-farming posts and posts without a repository are skipped, and each repository is collected once. Every item’s star count, primary language and license were checked against the official GitHub API when collected (the star numbers in his posts are often stale; the checked values here win, and all numbers change over time). Titles are this site’s SEO long-tail rewrites that keep project names and factual details and invent nothing. Categories are assigned automatically from post and repo keywords, so trust the title and the repo when one looks off.",
+                tw: "每天同步 X 博主 lumxss（@bkdgiffug）分享的 GitHub 開源專案，他長期每天發 4 到 5條、專挑 AI 工具方向的開源倉庫，本頁把帶 GitHub 倉庫連結的專案帖一條一條搬進站內：AI 繪畫設計、AI 程式設計開發、AI 模型介面、資料視覺化、效率辦公、學習資源等分類齊全，支援搜尋與分類篩選，點標題直達 GitHub 倉庫，並附原帖連結。收錄口徑先說清：只收帶倉庫連結的原創專案帖，純推廣、擼毛空投和沒有倉庫的帖子不收；同一倉庫只收一次。每條的 Star 數、主要語言與開源協議在收錄時經 GitHub 官方介面核對（博主帖子裡的 Star 數常是舊數，以本頁核對值為準，數字會隨時間變化）；標題為本站按 SEO 長尾規則改寫的版本，保留專案名與真實資訊，不編造功能。分類按帖子與倉庫說明關鍵詞自動歸類，個別分得不準請以標題和倉庫為準。",
+        },
+        audience: {
+                zh: "爱逛 GitHub 找工具的人：做 AI 绘画、AI 编程、想白嫖开源工具和 Skill，又不想天天刷 X 才能挖到新项目的人。",
+                en: "People who love browsing GitHub for tools: anyone into AI image generation or AI coding who wants new open-source tools and skills daily without scrolling X all day.",
+                tw: "愛逛 GitHub 找工具的人：做 AI 繪畫、AI 程式設計、想白嫖開源工具和 Skill，又不想天天刷 X 才能挖到新專案的人。",
+        },
+        take: {
+                zh: "这位博主更新勤、选品偏 AI 工具，适合当每日逛 GitHub 的入口：先看 Star、协议和最近更新时间再决定收不收；免费通道类项目可用性看上游，别当长期依赖。",
+                en: "A prolific curator with an AI-tool bias — a good daily front door to GitHub: check stars, license and last update before adopting anything, and never build long-term plans on free-tier channels.",
+                tw: "這位博主更新勤、選品偏 AI 工具，適合當每日逛 GitHub 的入口：先看 Star、協議和最近更新時間再決定收不收；免費通道類專案可用性看上游，別當長期依賴。",
+        },
   },
-];
-
+  ];
 export const TOOL_MAP: Record<string, ToolDef> = Object.fromEntries(
   TOOLS.map((t) => [t.slug, t])
 );
