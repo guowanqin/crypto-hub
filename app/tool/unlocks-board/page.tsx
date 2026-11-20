@@ -15,7 +15,7 @@ const path = "/tool/unlocks-board";
 
 const TITLE = `代币解锁日历榜｜${SITE_NAME.zh}`;
 const DESCRIPTION =
-  "在 18btc 站内看代币解锁日历榜：未来 7 天与 30 天的代币悬崖解锁按日期排列，解锁量、美元估值、占流通量比例与归属方一栏看清，占流通量 ≥5% 或金额 ≥$2,000 万的提前标红，MON（Monad）等口径有分歧的条目置顶并把两个口径都标出来。数据由 Tokenomist API 免费试用每天自动更新 7 天窗口，未接入时用 DefiLlama 公开页标注日期的快照兜底；解锁是供给端的事实，不是涨跌预测，不构成投资建议。";
+  "在 18btc 站内看代币解锁日历榜：未来 7 天与 30 天的代币悬崖解锁按日期排列，解锁量、美元估值、占流通量比例与归属方一栏看清，占流通量 ≥5% 或金额 ≥$2,000 万的提前标红，MON（Monad）等口径有分歧的条目置顶并把两个口径都标出来。数据由 Tokenomist API 免费试用每天自动更新。";
 
 export const metadata: Metadata = {
   title: TITLE,
