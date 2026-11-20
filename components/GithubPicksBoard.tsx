@@ -113,14 +113,15 @@ const DICT: Record<Lang, BoardDict> = {
   // TW-END
 };
 
-const PAGE_SIZE = 24;
+const INITIAL_SHOWN = 6; // 首屏条数（站内列表分级展开规则）
+const STEP_SHOWN = 12; // 每次展开增量
 
 export default function GithubPicksBoard() {
   const { lang } = useLang();
   const d = DICT[lang];
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
-  const [shown, setShown] = useState(PAGE_SIZE);
+  const [shown, setShown] = useState(INITIAL_SHOWN);
 
   const categories = useMemo(() => githubPicksCategories(GITHUB_PICKS_ITEMS), []);
   // 「新」标记：数据更新日 7 天内发布的条目（首批整体收录的同一天条目不算新，
@@ -160,7 +161,7 @@ export default function GithubPicksBoard() {
             placeholder={d.searchPlaceholder}
             onChange={(e) => {
               setQuery(e.target.value);
-              setShown(PAGE_SIZE);
+              setShown(INITIAL_SHOWN);
             }}
             style={{ maxWidth: 260 }}
             aria-label={d.searchLabel}
@@ -174,7 +175,7 @@ export default function GithubPicksBoard() {
           className={`filter-chip${category === "" ? " on" : ""}`}
           onClick={() => {
             setCategory("");
-            setShown(PAGE_SIZE);
+            setShown(INITIAL_SHOWN);
           }}
           aria-pressed={category === ""}
         >
@@ -187,7 +188,7 @@ export default function GithubPicksBoard() {
             className={`filter-chip${category === c.name ? " on" : ""}`}
             onClick={() => {
               setCategory(category === c.name ? "" : c.name);
-              setShown(PAGE_SIZE);
+              setShown(INITIAL_SHOWN);
             }}
             aria-pressed={category === c.name}
           >
@@ -261,17 +262,17 @@ export default function GithubPicksBoard() {
               <button
                 type="button"
                 className="filter-chip"
-                onClick={() => setShown(shown + PAGE_SIZE)}
+                onClick={() => setShown(shown + STEP_SHOWN)}
               >
                 {d.showMore}（{d.left} {remaining}）
               </button>
             </p>
-          ) : visible.length > PAGE_SIZE ? (
+          ) : visible.length > INITIAL_SHOWN ? (
             <p style={{ marginTop: 12 }}>
               <button
                 type="button"
                 className="filter-chip"
-                onClick={() => setShown(PAGE_SIZE)}
+                onClick={() => setShown(INITIAL_SHOWN)}
               >
                 {d.collapse}
               </button>
