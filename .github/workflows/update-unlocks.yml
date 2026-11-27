@@ -10,6 +10,13 @@ name: update-unlocks
 # （旧数据不动）；配了 key 之后 API 出错仍由脚本非零退出、Action 标红。
 # 免费试用口径（2026-11-18 查 docs.tokenomist.ai）：1,000 次/月、120 次/分、
 # 50 个试用代币、upcoming 只看未来 7 天；30 天逐条明细需升级套餐。
+#
+# 注意（2026-11-27 修正）：secrets 上下文不能出现在 if 条件里——GitHub
+# 解析 workflow 时会以 "Unrecognized named-value: 'secrets'" 拒掉整个文件，
+# 一个 job 都不跑，表现就是 "No jobs were run" + 失败邮件（df75977 那版就
+# 是这么坏的，push 当分钟就收到失败邮件）。正确做法是把 secret 提升到
+# job 级 env，再用 env 判断（GitHub 官方 context 可用表：steps.if 可用
+# env，jobs.<job_id>.env 可用 secrets）。
 on:
   schedule:
     - cron: "0 2 * * *" # 每天 10:00 CST
@@ -21,24 +28,24 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      TOKENOMIST_API_KEY: ${{ secrets.TOKENOMIST_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Skip if no API key configured
-        if: ${{ secrets.TOKENOMIST_API_KEY == '' }}
+        if: ${{ env.TOKENOMIST_API_KEY == '' }}
         run: |
           echo "TOKENOMIST_API_KEY is not configured yet — skipping update."
           echo "Board keeps using data/unlocks.json (seed snapshot). Add the"
           echo "secret at Settings -> Secrets and variables -> Actions to enable daily updates."
       - name: Update token unlocks (Tokenomist API)
-        if: ${{ secrets.TOKENOMIST_API_KEY != '' }}
-        env:
-          TOKENOMIST_API_KEY: ${{ secrets.TOKENOMIST_API_KEY }}
+        if: ${{ env.TOKENOMIST_API_KEY != '' }}
         run: python3 scripts/update-unlocks.py
       - name: Commit if changed
-        if: ${{ secrets.TOKENOMIST_API_KEY != '' }}
+        if: ${{ env.TOKENOMIST_API_KEY != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
