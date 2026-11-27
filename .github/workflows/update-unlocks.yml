@@ -5,8 +5,9 @@ name: update-unlocks
 #
 # 上线还差一步（站长操作）：在 tokenomist.ai 申请免费试用拿到 API key 后，
 # 到 GitHub 仓库 Settings → Secrets and variables → Actions 里新增
-# TOKENOMIST_API_KEY，Action 即自动生效。没配 key 时脚本会非零退出、
-# Action 标红，页面继续用 data/unlocks.json 里的种子快照（旧数据不动）。
+# TOKENOMIST_API_KEY，Action 即自动生效。没配 key 时本 workflow 直接跳过
+# （绿灯、不发失败邮件），页面继续用 data/unlocks.json 里的种子快照
+# （旧数据不动）；配了 key 之后 API 出错仍由脚本非零退出、Action 标红。
 # 免费试用口径（2026-11-18 查 docs.tokenomist.ai）：1,000 次/月、120 次/分、
 # 50 个试用代币、upcoming 只看未来 7 天；30 天逐条明细需升级套餐。
 on:
@@ -25,11 +26,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Skip if no API key configured
+        if: ${{ secrets.TOKENOMIST_API_KEY == '' }}
+        run: |
+          echo "TOKENOMIST_API_KEY is not configured yet — skipping update."
+          echo "Board keeps using data/unlocks.json (seed snapshot). Add the"
+          echo "secret at Settings -> Secrets and variables -> Actions to enable daily updates."
       - name: Update token unlocks (Tokenomist API)
+        if: ${{ secrets.TOKENOMIST_API_KEY != '' }}
         env:
           TOKENOMIST_API_KEY: ${{ secrets.TOKENOMIST_API_KEY }}
         run: python3 scripts/update-unlocks.py
       - name: Commit if changed
+        if: ${{ secrets.TOKENOMIST_API_KEY != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
